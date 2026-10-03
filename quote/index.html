@@ -5,12 +5,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AI Quote Builder</title>
 <meta name="description" content="Trade 360 — the connected platform for trade and construction businesses, from first enquiry to final payment.">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#1C2130">
 </head>
 <body>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" integrity="sha384-JcnsjUPPylna1s1fvi1u12X5qjY5OL56iySh75FdtrwhO/SWXgMjoVqcKyIIWOLk" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <style>
   :root{
     --bg:#FFFFFF;
@@ -82,6 +87,7 @@
   .nav-links a:hover{ opacity:1; }
   .nav-links a::after{ content:""; position:absolute; left:0; right:100%; bottom:-6px; height:2px; background:var(--gold); transition:right .18s ease; }
   .nav-links a:hover::after{ right:0; }
+  .nav-links a.current::after{ right:0; }
   @media (min-width:960px){ .nav-links{ display:flex; } }
   .nav-right{ display:flex; align-items:center; gap:22px; }
   .login-link{ font-size:14.5px; font-weight:600; color:var(--navy); display:none; transition:opacity .15s ease; }
@@ -259,6 +265,7 @@
       <a href="/">Industries</a>
       <a href="/">Why Trade 360?</a>
       <a href="/pricing/">Pricing</a>
+      <a href="/quote/" class="current">AI Quote Builder</a>
     </div>
     <div class="nav-right">
       <a class="login-link" href="/">Log in</a>
@@ -275,6 +282,7 @@
     <a href="/">Industries</a>
     <a href="/">Why Trade 360?</a>
     <a href="/pricing/">Pricing</a>
+    <a href="/quote/">AI Quote Builder</a>
     <a href="/">Log in</a>
     <div class="mp-cta">
       <a class="btn btn-gold btn-block" href="/#demo">Book a demo
@@ -523,6 +531,7 @@
       <a href="/">Industries</a>
       <a href="/">Why Trade 360?</a>
       <a href="/pricing/">Pricing</a>
+      <a href="/quote/">AI Quote Builder</a>
       <a href="/#demo">Contact</a>
     </div>
     <div class="foot-brand">
