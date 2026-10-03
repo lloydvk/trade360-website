@@ -1,0 +1,1233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Quote Builder</title>
+<meta name="description" content="Trade 360 — the connected platform for trade and construction businesses, from first enquiry to final payment.">
+</head>
+<body>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<style>
+  :root{
+    --bg:#FFFFFF;
+    --bg-soft:#F7F8FB;
+    --navy:#1C2130;
+    --navy-2:#222933;
+    --ink:#1C2130;
+    --ink-soft:#5B6178;
+    --line:#E7E9EF;
+    --gold:#FCBD02;
+    --gold-2:#FDCB3C;
+    --shadow: 0 1px 2px rgba(20,20,30,.03), 0 10px 24px rgba(20,20,30,.05);
+    --good:#1E9E6B;
+    --good-bg:#E7F7EF;
+    --bad:#D14343;
+    --bad-bg:#FCEAEA;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#14161C; --bg-soft:#191C24; --navy:#0B0C10; --navy-2:#101319;
+      --ink:#F1F1F4; --ink-soft:#A5A9B8; --line:#2A2D36;
+      --shadow: 0 1px 2px rgba(0,0,0,.4), 0 16px 32px rgba(0,0,0,.45);
+      --good-bg:#123326; --bad-bg:#3A1E1E;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#14161C; --bg-soft:#191C24; --navy:#0B0C10; --navy-2:#101319;
+    --ink:#F1F1F4; --ink-soft:#A5A9B8; --line:#2A2D36;
+    --shadow: 0 1px 2px rgba(0,0,0,.4), 0 16px 32px rgba(0,0,0,.45);
+    --good-bg:#123326; --bad-bg:#3A1E1E;
+  }
+
+  *{ box-sizing:border-box; }
+  body{ margin:0; background:var(--bg); color:var(--ink); font-family:"Manrope",-apple-system,"Segoe UI",sans-serif; font-weight:400; -webkit-font-smoothing:antialiased; }
+  h1,h2,h3,h4{ font-family:"Manrope",sans-serif; font-weight:800; letter-spacing:-.01em; line-height:1.1; text-wrap:balance; margin:0; color:var(--ink); }
+  p{ margin:0; }
+  a{ color:inherit; text-decoration:none; }
+  .wrap{ max-width:1180px; margin:0 auto; padding-inline:24px; }
+  @media (max-width:640px){ .wrap{ padding-inline:18px; } }
+
+  /* ---------- buttons ---------- */
+  .btn{ display:inline-flex; align-items:center; justify-content:center; gap:7px; font-weight:600; font-size:14.5px; padding:13px 22px; border-radius:12px; border:1.5px solid transparent; cursor:pointer; white-space:nowrap; transition:transform .12s ease, background .15s ease, border-color .15s ease, opacity .15s ease; font-family:inherit; }
+  .btn:active{ transform:translateY(1px); }
+  .btn:disabled{ cursor:not-allowed; opacity:.55; transform:none; }
+  .btn-gold{ background:var(--gold); color:var(--navy); box-shadow:var(--shadow); }
+  .btn-gold:hover:not(:disabled){ background:var(--gold-2); }
+  .btn-navy{ background:var(--navy); color:#F6F6F8; }
+  .btn-navy:hover:not(:disabled){ opacity:.88; }
+  .btn-outline{ background:transparent; color:var(--ink); border-color:var(--line); }
+  .btn-outline:hover:not(:disabled){ border-color:var(--ink-soft); }
+  .btn-block{ width:100%; }
+
+  /* ---------- scroll progress + nav (matches the Trade 360 homepage) ---------- */
+  .scroll-progress{ position:fixed; top:0; left:0; height:3px; width:0%; background:var(--gold); z-index:1000; transition:width .1s linear; }
+  .nav{ position:sticky; top:env(safe-area-inset-top,0px); z-index:30; background:var(--bg); border-bottom:1px solid var(--line); transition:box-shadow .25s ease, background .25s ease; }
+  .nav.scrolled{ box-shadow:0 6px 20px rgba(20,20,30,.08); }
+  .nav .wrap{ display:flex; align-items:center; justify-content:space-between; height:72px; gap:18px; }
+  .brand-block{ display:flex; align-items:center; gap:0; flex:none; }
+  .brand-mark{ display:flex; align-items:center; flex:none; margin-right:4px; }
+  .brand-mark svg{ width:34px; height:34px; animation:brandSpin 14s linear infinite; }
+  @keyframes brandSpin{ from{ transform:rotate(0deg); } to{ transform:rotate(360deg); } }
+  @media (prefers-reduced-motion: reduce){ .brand-mark svg{ animation:none; } }
+  .brand{ display:flex; align-items:center; gap:9px; height:46px; padding:0 16px; border-radius:10px; border:1.5px dashed var(--line); font-weight:700; font-size:16px; color:var(--navy); }
+  .brand .n{ color:var(--gold); }
+  .brand-tagline{ font-size:11px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-soft); white-space:nowrap; padding-left:12px; border-left:1px solid var(--line); margin-left:12px; }
+  @media (max-width:560px){ .brand-tagline{ display:none; } }
+  .nav-links{ display:none; align-items:center; gap:30px; font-size:14.5px; font-weight:600; color:var(--navy); }
+  .nav-links a{ position:relative; color:var(--navy); opacity:.85; transition:opacity .15s ease; }
+  .nav-links a:hover{ opacity:1; }
+  .nav-links a::after{ content:""; position:absolute; left:0; right:100%; bottom:-6px; height:2px; background:var(--gold); transition:right .18s ease; }
+  .nav-links a:hover::after{ right:0; }
+  @media (min-width:960px){ .nav-links{ display:flex; } }
+  .nav-right{ display:flex; align-items:center; gap:22px; }
+  .login-link{ font-size:14.5px; font-weight:600; color:var(--navy); display:none; transition:opacity .15s ease; }
+  .login-link:hover{ opacity:.7; }
+  @media (min-width:720px){ .login-link{ display:inline; } }
+  @media (max-width:560px){ .nav-right .btn-gold{ display:none; } }
+  .nav-toggle{ display:flex; align-items:center; justify-content:center; width:38px; height:38px; border-radius:9px; border:1.5px solid var(--line); background:transparent; cursor:pointer; flex:none; }
+  .nav-toggle svg{ width:18px; height:18px; color:var(--navy); }
+  @media (min-width:960px){ .nav-toggle{ display:none; } }
+  .mobile-panel{ display:none; flex-direction:column; gap:2px; background:var(--bg); border-bottom:1px solid var(--line); max-height:0; overflow:hidden; transition:max-height .28s ease; }
+  .mobile-panel.open{ display:flex; max-height:400px; }
+  .mobile-panel a{ padding:14px 24px; font-size:14.5px; font-weight:600; color:var(--navy); border-top:1px solid var(--line); display:flex; align-items:center; justify-content:space-between; }
+  .mobile-panel .mp-cta{ padding:16px 24px 20px; }
+  @media (min-width:960px){ .mobile-panel{ display:none !important; } }
+
+  /* ---------- intro band ---------- */
+  .intro{ background:var(--navy-2); color:#fff; padding-block:44px; position:relative; overflow:hidden; }
+  .intro::before{
+    content:""; position:absolute; inset:0; z-index:0; pointer-events:none;
+    background: radial-gradient(circle at 88% 8%, rgba(252,189,2,.12), transparent 45%);
+  }
+  .intro .wrap{ position:relative; z-index:1; }
+  .intro .eyebrow{ font-size:12.5px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--gold); margin-bottom:12px; }
+  .intro h1{ font-size:clamp(28px,4vw,40px); color:#fff; max-width:18ch; }
+  .intro p{ font-size:15.5px; line-height:1.6; color:#A9AEC0; max-width:58ch; margin-top:14px; }
+  .intro-tags{ display:flex; flex-wrap:wrap; gap:10px; margin-top:22px; }
+  .intro-tag{ display:flex; align-items:center; gap:7px; font-size:12.5px; font-weight:600; color:#EDEEF3; background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.14); padding:7px 13px; border-radius:999px; }
+  .intro-tag svg{ width:13px; height:13px; color:var(--gold); flex:none; }
+
+  /* ---------- workbench ---------- */
+  .workbench{ padding-block:48px 60px; }
+  .workbench-grid{ display:grid; grid-template-columns:1fr 1fr; gap:28px; align-items:start; }
+  @media (max-width:980px){ .workbench-grid{ grid-template-columns:1fr; } }
+
+  .panel{ background:var(--bg); border:1px solid var(--line); border-radius:18px; box-shadow:var(--shadow); overflow:hidden; }
+  .panel-head{ padding:22px 26px; border-bottom:1px solid var(--line); }
+  .panel-head .eyebrow{ font-size:11.5px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-soft); }
+  .panel-head h2{ font-size:19px; margin-top:5px; }
+  .panel-body{ padding:24px 26px 26px; }
+
+  /* ---------- form ---------- */
+  .field-group{ display:flex; flex-direction:column; gap:16px; padding-block:18px; border-bottom:1px solid var(--line); }
+  .field-group:first-child{ padding-top:0; }
+  .field-group:last-of-type{ border-bottom:none; padding-bottom:4px; }
+  .field-group-label{ font-size:11px; font-weight:700; letter-spacing:.09em; text-transform:uppercase; color:var(--gold); }
+  .field-row{ display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+  @media (max-width:480px){ .field-row{ grid-template-columns:1fr; } }
+  .field{ display:flex; flex-direction:column; gap:6px; }
+  .field label{ font-size:12.5px; font-weight:700; color:var(--ink); }
+  .field .hint{ font-size:11px; color:var(--ink-soft); font-weight:500; }
+  .field input, .field textarea{
+    font-family:inherit; font-size:13.5px; color:var(--ink); background:var(--bg-soft); border:1.5px solid var(--line);
+    border-radius:10px; padding:11px 13px; resize:vertical; transition:border-color .15s ease;
+  }
+  .field input:focus, .field textarea:focus{ outline:none; border-color:var(--gold); }
+  .field textarea{ min-height:76px; line-height:1.5; }
+  .form-actions{ margin-top:20px; display:flex; flex-direction:column; gap:10px; }
+  .form-note{ font-size:12px; color:var(--ink-soft); line-height:1.5; }
+  .form-note.warn{ color:var(--bad); }
+
+  /* ---------- handwritten note upload ---------- */
+  .note-upload-block{ padding-bottom:20px; border-bottom:1px solid var(--line); }
+  .note-dropzone{
+    display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px; text-align:center;
+    padding:22px 16px; border:1.5px dashed var(--line); border-radius:12px; background:var(--bg-soft);
+    cursor:pointer; transition:border-color .15s ease, background .15s ease;
+  }
+  .note-dropzone:hover, .note-dropzone.drag{ border-color:var(--gold); background:rgba(252,189,2,.06); }
+  .note-dropzone svg{ width:22px; height:22px; color:var(--gold); }
+  .note-dropzone b{ font-size:13px; font-weight:700; color:var(--ink); }
+  .note-dropzone span{ font-size:11.5px; color:var(--ink-soft); }
+  .note-preview{ display:flex; align-items:center; gap:12px; padding:12px; border:1.5px solid var(--line); border-radius:12px; background:var(--bg-soft); }
+  .note-preview img{ width:52px; height:52px; border-radius:8px; object-fit:cover; flex:none; border:1px solid var(--line); }
+  .note-preview-info{ min-width:0; flex:1; display:flex; flex-direction:column; gap:2px; }
+  .note-preview-info b{ font-size:12.5px; font-weight:700; color:var(--ink); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .note-preview-remove{ font-size:11.5px; font-weight:700; color:var(--bad); background:none; border:none; padding:0; cursor:pointer; text-align:left; font-family:inherit; }
+  .note-upload-actions{ margin-top:12px; display:flex; flex-direction:column; gap:8px; }
+  .note-upload-divider{ display:flex; align-items:center; gap:12px; margin:20px 0 4px; font-size:11px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-soft); }
+  .note-upload-divider::before, .note-upload-divider::after{ content:""; flex:1; height:1px; background:var(--line); }
+
+  /* ---------- pipeline stepper ---------- */
+  .stepper{ display:flex; flex-direction:column; gap:2px; }
+  .step{ display:flex; align-items:flex-start; gap:14px; padding:13px 0; }
+  .step-dot{
+    width:30px; height:30px; border-radius:999px; flex:none; display:flex; align-items:center; justify-content:center;
+    background:var(--bg-soft); border:1.5px solid var(--line); color:var(--ink-soft); transition:background .2s ease, border-color .2s ease, color .2s ease;
+  }
+  .step-dot svg{ width:14px; height:14px; }
+  .step.active .step-dot{ background:var(--gold); border-color:var(--gold); color:var(--navy); animation:stepPulse 1.4s ease-in-out infinite; }
+  .step.done .step-dot{ background:var(--good-bg); border-color:var(--good); color:var(--good); animation:none; }
+  .step.error .step-dot{ background:var(--bad-bg); border-color:var(--bad); color:var(--bad); animation:none; }
+  @keyframes stepPulse{ 0%,100%{ box-shadow:0 0 0 0 rgba(252,189,2,.35); } 50%{ box-shadow:0 0 0 6px rgba(252,189,2,0); } }
+  @media (prefers-reduced-motion: reduce){ .step.active .step-dot{ animation:none; } }
+  .step-body b{ display:block; font-size:13.5px; font-weight:700; color:var(--ink); }
+  .step-body span{ display:block; font-size:12px; color:var(--ink-soft); margin-top:2px; line-height:1.4; }
+  .step-connector{ width:1.5px; height:16px; background:var(--line); margin-left:14.5px; }
+
+  /* ---------- quote preview ---------- */
+  .quote-preview{ margin-top:22px; border-top:1px solid var(--line); padding-top:20px; }
+  .quote-preview[hidden]{ display:none; }
+  .quote-preview .qp-title{ font-size:11px; font-weight:700; letter-spacing:.09em; text-transform:uppercase; color:var(--ink-soft); margin-bottom:10px; }
+  .quote-job-title{ font-size:17px; font-weight:800; color:var(--ink); }
+  .quote-summary{ font-size:13.5px; line-height:1.6; color:var(--ink-soft); margin-top:8px; }
+  .quote-scope{ margin-top:14px; padding-left:20px; }
+  .quote-scope li{ font-size:13px; line-height:1.6; color:var(--ink); margin-bottom:4px; }
+  .quote-table{ width:100%; border-collapse:collapse; margin-top:16px; font-size:12.5px; }
+  .quote-table th{ text-align:left; font-size:10.5px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-soft); padding:0 0 8px; border-bottom:1px solid var(--line); }
+  .quote-table th:last-child, .quote-table td:last-child{ text-align:right; }
+  .quote-table td{ padding:8px 0; border-bottom:1px solid var(--line); color:var(--ink); }
+  .quote-totals{ margin-top:12px; display:flex; flex-direction:column; gap:6px; }
+  .quote-totals-row{ display:flex; justify-content:space-between; font-size:13px; color:var(--ink-soft); }
+  .quote-totals-row.grand{ font-size:16px; font-weight:800; color:var(--ink); padding-top:8px; border-top:1px solid var(--line); }
+  .quote-terms{ font-size:12.5px; line-height:1.6; color:var(--ink-soft); margin-top:16px; padding-top:16px; border-top:1px solid var(--line); }
+  .quote-timeline{ font-size:12.5px; color:var(--ink-soft); margin-top:10px; }
+  .quote-timeline b{ color:var(--ink); }
+
+  .streaming-cursor{ display:inline-block; width:2px; height:1em; background:var(--gold); vertical-align:-2px; animation:cursorBlink 1s step-end infinite; margin-left:1px; }
+  @media (prefers-reduced-motion: reduce){ .streaming-cursor{ animation:none; } }
+  @keyframes cursorBlink{ 50%{ opacity:0; } }
+
+  .pdf-actions{ margin-top:22px; display:flex; flex-direction:column; gap:8px; }
+
+  /* ---------- explainer strip ---------- */
+  .explainer{ background:var(--bg-soft); border-block:1px solid var(--line); padding-block:56px; }
+  .explainer .section-head{ max-width:640px; margin-bottom:34px; }
+  .explainer .eyebrow{ font-size:12.5px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--gold); margin-bottom:12px; }
+  .explainer h2{ font-size:clamp(24px,3vw,32px); }
+  .explainer .sub{ font-size:15px; color:var(--ink-soft); margin-top:10px; line-height:1.5; }
+  .explainer-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+  @media (max-width:860px){ .explainer-grid{ grid-template-columns:1fr; } }
+  .explainer-card{ background:var(--bg); border:1px solid var(--line); border-radius:16px; padding:24px; box-shadow:var(--shadow); }
+  .explainer-card .num{ font-size:12px; font-weight:800; color:var(--gold); letter-spacing:.06em; }
+  .explainer-card h3{ font-size:16px; margin-top:10px; }
+  .explainer-card p{ font-size:13px; line-height:1.6; color:var(--ink-soft); margin-top:8px; }
+
+  .reveal{ opacity:0; transform:translateY(18px); transition:opacity .5s ease, transform .5s ease; }
+  .reveal.in-view{ opacity:1; transform:translateY(0); }
+  .reveal-group .reveal:nth-child(1){ transition-delay:.02s; }
+  .reveal-group .reveal:nth-child(2){ transition-delay:.08s; }
+  .reveal-group .reveal:nth-child(3){ transition-delay:.14s; }
+  @media (prefers-reduced-motion: reduce){ .reveal{ transition:none; opacity:1; transform:none; } }
+
+  /* ---------- footer (matches the Trade 360 homepage) ---------- */
+  footer{ background:var(--navy-2); color:#8B90A3; padding-block:34px; }
+  footer .wrap{ display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:18px; }
+  .foot-social{ display:flex; align-items:center; gap:14px; }
+  .foot-social-label{ font-size:12px; font-weight:700; color:#EDEEF3; }
+  .foot-social-icons{ display:flex; gap:8px; }
+  .foot-social-icon{ width:32px; height:32px; border-radius:999px; background:rgba(255,255,255,.08); display:flex; align-items:center; justify-content:center; color:#C7CAD6; transition:background .15s ease, color .15s ease; }
+  .foot-social-icon:hover{ background:var(--gold); color:var(--navy); }
+  .foot-social-icon svg{ width:15px; height:15px; }
+  .foot-links{ display:flex; flex-wrap:wrap; gap:22px; font-size:13px; font-weight:600; }
+  .foot-links a{ opacity:.85; transition:opacity .15s ease; }
+  .foot-links a:hover{ opacity:1; }
+  .foot-brand{ display:flex; flex-direction:column; gap:5px; }
+  .foot-brand .brand{ background:transparent; border-color:rgba(255,255,255,.16); color:#fff; }
+  .foot-brand .brand-tagline{ color:#8B90A3; border-left-color:rgba(255,255,255,.16); }
+  @media (max-width:720px){ footer .wrap{ flex-direction:column; align-items:flex-start; gap:24px; } }
+</style>
+
+<div class="scroll-progress" id="scrollProgress"></div>
+
+<!-- ================= NAV ================= -->
+<nav class="nav" id="siteNav">
+  <div class="wrap">
+    <div class="brand-block">
+      <div class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 40 40"><path fill="#FCBD02" d="M 12.11 3.82 A 18 18 0 0 1 27.89 3.82 L 24.82 10.11 A 11 11 0 0 0 15.18 10.11 Z"/><path fill="#FDCB3C" d="M 30.07 5.08 A 18 18 0 0 1 37.96 18.74 L 30.97 19.23 A 11 11 0 0 0 26.15 10.88 Z"/><path fill="#FDD972" d="M 37.96 21.26 A 18 18 0 0 1 30.07 34.92 L 26.15 29.12 A 11 11 0 0 0 30.97 20.77 Z"/><path fill="#FCDD85" d="M 27.89 36.18 A 18 18 0 0 1 12.11 36.18 L 15.18 29.89 A 11 11 0 0 0 24.82 29.89 Z"/><path fill="#FBE6A8" d="M 9.93 34.92 A 18 18 0 0 1 2.04 21.26 L 9.03 20.77 A 11 11 0 0 0 13.85 29.12 Z"/><path fill="#F5DFAF" d="M 2.04 18.74 A 18 18 0 0 1 9.93 5.08 L 13.85 10.88 A 11 11 0 0 0 9.03 19.23 Z"/></svg>
+      </div>
+      <div class="brand"><span class="t">Trade</span><span class="n">360</span></div>
+      <span class="brand-tagline">Lead to Profit</span>
+    </div>
+    <div class="nav-links">
+      <a href="/#platform">Solutions</a>
+      <a href="/">Industries</a>
+      <a href="/">Why Trade 360?</a>
+      <a href="/pricing/">Pricing</a>
+    </div>
+    <div class="nav-right">
+      <a class="login-link" href="/">Log in</a>
+      <a class="btn btn-gold" href="/#demo">Book a demo
+        <svg viewBox="0 0 16 16" fill="none" width="14" height="14"><path d="M4 12 12 4M12 4H6M12 4v6" stroke="#1C2130" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <button class="nav-toggle" id="navToggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobilePanel">
+        <svg id="navToggleIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+    </div>
+  </div>
+  <div class="mobile-panel" id="mobilePanel">
+    <a href="/#platform">Solutions</a>
+    <a href="/">Industries</a>
+    <a href="/">Why Trade 360?</a>
+    <a href="/pricing/">Pricing</a>
+    <a href="/">Log in</a>
+    <div class="mp-cta">
+      <a class="btn btn-gold btn-block" href="/#demo">Book a demo
+        <svg viewBox="0 0 16 16" fill="none" width="14" height="14"><path d="M4 12 12 4M12 4H6M12 4v6" stroke="#1C2130" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+  </div>
+</nav>
+
+<!-- ================= INTRO ================= -->
+<header class="intro">
+  <div class="wrap">
+    <div class="eyebrow">Product demo</div>
+    <h1>From site notes to a priced quote, in three AI steps.</h1>
+    <p>Jot down what the job needs the way you actually would on site. Trade 360's AI structures it, prices it, and writes it up — you'll watch it build the quote live below, then download it as a PDF.</p>
+    <div class="intro-tags">
+      <span class="intro-tag"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 4h12M2 8h12M2 12h8"/></svg>Structures your notes</span>
+      <span class="intro-tag"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 1.5v13M4 4.5h6a2 2 0 0 1 0 4H6a2 2 0 0 0 0 4h6"/></svg>Prices the job</span>
+      <span class="intro-tag"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 2.5h7l3 3v8a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-10a1 1 0 0 1 1-1Z"/><path d="M10 2.5v3h3"/></svg>Writes the quote</span>
+    </div>
+  </div>
+</header>
+
+<!-- ================= WORKBENCH ================= -->
+<section class="workbench">
+  <div class="wrap workbench-grid">
+
+    <!-- LEFT: structured notes form -->
+    <form class="panel" id="quoteForm">
+      <div class="panel-head">
+        <div class="eyebrow">Step 1</div>
+        <h2>Enter the job notes</h2>
+      </div>
+      <div class="panel-body">
+
+        <div class="note-upload-block" id="noteUploadBlock" hidden>
+          <div class="field-group-label" style="margin-bottom:12px;">Handwritten note (optional)</div>
+          <input type="file" id="qfNotePhoto" accept="image/*" hidden>
+          <label class="note-dropzone" for="qfNotePhoto" id="noteDropzone">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 16.5V6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v10.5"/><path d="M4 16.5 8.5 12a1.5 1.5 0 0 1 2.1 0L14 15.4l2-2a1.5 1.5 0 0 1 2.1 0L20 15.5"/><circle cx="9" cy="8.5" r="1.3"/><path d="M4 16.5v1.5a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-1.5"/></svg>
+            <b>Upload a photo of your handwritten job note</b>
+            <span>AI will read it and fill in the fields below for you</span>
+          </label>
+          <div class="note-preview" id="notePreview" hidden>
+            <img id="notePreviewImg" alt="">
+            <div class="note-preview-info">
+              <b id="notePreviewName"></b>
+              <button type="button" class="note-preview-remove" id="noteRemoveBtn">Remove photo</button>
+            </div>
+          </div>
+          <div class="note-upload-actions">
+            <button type="button" class="btn btn-outline btn-block" id="readNoteBtn" disabled>Read note with AI
+              <svg viewBox="0 0 16 16" fill="none" width="14" height="14"><path d="M8 1.5 9.4 5.6 13.5 7 9.4 8.4 8 12.5 6.6 8.4 2.5 7 6.6 5.6 8 1.5Z" fill="currentColor"/></svg>
+            </button>
+            <p class="form-note" id="noteStatus">Photos are read once, on demand — nothing is sent until you click.</p>
+          </div>
+        </div>
+        <div class="note-upload-divider" id="noteUploadDivider" hidden><span>Or fill in the details yourself</span></div>
+
+        <div class="field-group">
+          <div class="field-group-label">Client &amp; job</div>
+          <div class="field-row">
+            <div class="field">
+              <label for="qfClientName">Client name</label>
+              <input type="text" id="qfClientName" value="Mr &amp; Mrs Hargreaves">
+            </div>
+            <div class="field">
+              <label for="qfSiteAddress">Site address</label>
+              <input type="text" id="qfSiteAddress" value="14 Beech Grove, Alderley Edge">
+            </div>
+          </div>
+          <div class="field">
+            <label for="qfJobType">Job type / title</label>
+            <input type="text" id="qfJobType" value="Rear extension flat roof re-covering">
+          </div>
+        </div>
+
+        <div class="field-group">
+          <div class="field-group-label">Scope notes</div>
+          <div class="field">
+            <label for="qfScopeNotes">What does the job involve? <span class="hint">(write it the way you would on site)</span></label>
+            <textarea id="qfScopeNotes" rows="4">strip off old felt roof on single storey rear extension, approx 18sqm. bit of rot in one corner of the decking, will need replacing. fit new grp fibreglass roof, upstand trims against the house wall, new box gutter. customer also wants a couple of roof lights swapped while we're up there.</textarea>
+          </div>
+        </div>
+
+        <div class="field-group">
+          <div class="field-group-label">Materials</div>
+          <div class="field">
+            <label for="qfMaterials">Materials notes</label>
+            <textarea id="qfMaterials" rows="2">GRP fibreglass kit, WBP ply for decking repair, 2x roof lights (client supplied brand, we fit), trims and fixings</textarea>
+          </div>
+        </div>
+
+        <div class="field-group">
+          <div class="field-group-label">Labour &amp; timeline</div>
+          <div class="field-row">
+            <div class="field">
+              <label for="qfDayRate">Your day rate</label>
+              <input type="number" id="qfDayRate" value="280" min="0" step="10">
+            </div>
+            <div class="field">
+              <label for="qfLabourDays">Estimated labour</label>
+              <input type="number" id="qfLabourDays" value="3" min="0" step="0.5">
+            </div>
+          </div>
+        </div>
+
+        <div class="field-group">
+          <div class="field-group-label">Pricing guidance</div>
+          <div class="field-row">
+            <div class="field">
+              <label for="qfPriceMin">Target price — from</label>
+              <input type="number" id="qfPriceMin" value="1600" min="0" step="50">
+            </div>
+            <div class="field">
+              <label for="qfPriceMax">Target price — to</label>
+              <input type="number" id="qfPriceMax" value="2000" min="0" step="50">
+            </div>
+          </div>
+        </div>
+
+        <div class="field-group">
+          <div class="field-group-label">Access &amp; special requirements</div>
+          <div class="field">
+            <label for="qfAccessNotes">Anything the quote should flag?</label>
+            <textarea id="qfAccessNotes" rows="2">Narrow side access, no scaffold — will use a tower. Customer wants work done before their daughter's wedding in 6 weeks.</textarea>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="btn btn-gold btn-block" id="generateBtn">Generate quote with AI
+            <svg viewBox="0 0 16 16" fill="none" width="14" height="14"><path d="M8 1.5 9.4 5.6 13.5 7 9.4 8.4 8 12.5 6.6 8.4 2.5 7 6.6 5.6 8 1.5Z" fill="#1C2130"/></svg>
+          </button>
+          <p class="form-note" id="formNote">Uses your own Claude usage to run the AI. The first click will ask you to allow it.</p>
+        </div>
+      </div>
+    </form>
+
+    <!-- RIGHT: AI pipeline + quote preview -->
+    <div class="panel">
+      <div class="panel-head">
+        <div class="eyebrow">Steps 2–4</div>
+        <h2>Watch the AI build it</h2>
+      </div>
+      <div class="panel-body">
+
+        <div class="stepper" id="stepper">
+          <div class="step" id="step1" data-step="1">
+            <div class="step-dot"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 4h12M2 8h12M2 12h8"/></svg></div>
+            <div class="step-body"><b>Structuring the brief</b><span>Turns your notes into a clean job summary and scope list.</span></div>
+          </div>
+          <div class="step-connector"></div>
+          <div class="step" id="step2" data-step="2">
+            <div class="step-dot"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 1.5v13M4.5 4.5h6a2 2 0 0 1 0 4H6a2 2 0 0 0 0 4h6"/></svg></div>
+            <div class="step-body"><b>Estimating scope &amp; pricing</b><span>Builds a line-item breakdown from your day rate and materials.</span></div>
+          </div>
+          <div class="step-connector"></div>
+          <div class="step" id="step3" data-step="3">
+            <div class="step-dot"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 2.5h7l3 3v8a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-10a1 1 0 0 1 1-1Z"/><path d="M10 2.5v3h3"/></svg></div>
+            <div class="step-body"><b>Writing the quote</b><span>Drafts the customer-facing summary, scope and terms.</span></div>
+          </div>
+        </div>
+
+        <div class="quote-preview" id="quotePreview" hidden>
+          <div class="qp-title">Quote preview</div>
+          <div class="quote-job-title" id="qpJobTitle"></div>
+          <p class="quote-summary" id="qpSummary"></p>
+          <ul class="quote-scope" id="qpScopeList"></ul>
+
+          <table class="quote-table" id="qpTable" hidden>
+            <thead><tr><th>Description</th><th>Qty</th><th>Unit</th><th>Total</th></tr></thead>
+            <tbody id="qpTableBody"></tbody>
+          </table>
+          <div class="quote-totals" id="qpTotals" hidden>
+            <div class="quote-totals-row"><span>Subtotal</span><span id="qpSubtotal"></span></div>
+            <div class="quote-totals-row"><span>VAT (20%)</span><span id="qpVat"></span></div>
+            <div class="quote-totals-row grand"><span>Total</span><span id="qpGrandTotal"></span></div>
+          </div>
+          <p class="quote-timeline" id="qpTimeline" hidden></p>
+          <p class="quote-terms" id="qpTerms"></p>
+        </div>
+
+        <div class="pdf-actions">
+          <button type="button" class="btn btn-navy btn-block" id="downloadPdfBtn" disabled>Download quote as PDF
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M8 1.5v9M4.5 7 8 10.5 11.5 7"/><path d="M2.5 12.5v1a1 1 0 0 0 1 1h9a1 1 0 0 0 1-1v-1"/></svg>
+          </button>
+          <p class="form-note" id="pdfNote">Available once the AI has finished drafting your quote.</p>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ================= EXPLAINER ================= -->
+<section class="explainer">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Under the bonnet</div>
+      <h2>Three prompts, one finished quote.</h2>
+      <p class="sub">Each step hands its output to the next — the same chain runs inside Trade 360 whenever a job note comes in from the field.</p>
+    </div>
+    <div class="explainer-grid reveal-group">
+      <div class="explainer-card reveal">
+        <div class="num">01</div>
+        <h3>Structure the brief</h3>
+        <p>Your rough notes are turned into a clean job title, a client-ready summary, and a scope list — the same shape every time, whatever order you wrote them in.</p>
+      </div>
+      <div class="explainer-card reveal">
+        <div class="num">02</div>
+        <h3>Price the work</h3>
+        <p>Your day rate, labour estimate and materials notes become a realistic line-item breakdown, with VAT and a total calculated against your target price.</p>
+      </div>
+      <div class="explainer-card reveal">
+        <div class="num">03</div>
+        <h3>Write the quote</h3>
+        <p>The AI drafts the customer-facing copy — an opening paragraph, the scope in plain English, and your terms — ready to sit inside a branded PDF.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+  <div class="wrap">
+    <div class="foot-social">
+      <span class="foot-social-label">Stay connected</span>
+      <div class="foot-social-icons">
+        <a class="foot-social-icon" href="#" target="_blank" rel="noopener" aria-label="Facebook">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M15 8.5h2.5V5.2c-.4-.06-1.9-.2-3.6-.2-3.6 0-6 2.2-6 6.2v3.3H4.5v3.7H7.9V21h3.8v-2.8h3.4l.5-3.7h-3.9v-2.9c0-1.1.3-1.8 1.9-1.8Z"/></svg>
+        </a>
+        <a class="foot-social-icon" href="#" target="_blank" rel="noopener" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1" fill="currentColor" stroke="none"/></svg>
+        </a>
+        <a class="foot-social-icon" href="#" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><rect x="3" y="3" width="18" height="18" rx="3" fill="none" stroke="currentColor" stroke-width="1.7"/><circle cx="8.2" cy="8.6" r="1.3"/><rect x="7" y="11" width="2.4" height="7"/><path d="M12.5 11h2.3v1.1c.5-.8 1.4-1.3 2.5-1.3 2 0 3 1.3 3 3.8V18h-2.4v-3c0-1.1-.4-1.9-1.5-1.9-.8 0-1.3.5-1.5 1-.1.2-.1.5-.1.8V18h-2.3Z"/></svg>
+        </a>
+        <a class="foot-social-icon" href="#" target="_blank" rel="noopener" aria-label="X (Twitter)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M5 5l14 14M19 5 5 19"/></svg>
+        </a>
+      </div>
+    </div>
+    <div class="foot-links">
+      <a href="/#platform">Solutions</a>
+      <a href="/">Industries</a>
+      <a href="/">Why Trade 360?</a>
+      <a href="/pricing/">Pricing</a>
+      <a href="/#demo">Contact</a>
+    </div>
+    <div class="foot-brand">
+      <div class="brand-block">
+        <div class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 40 40"><path fill="#4A4535" d="M 12.11 3.82 A 18 18 0 0 1 27.89 3.82 L 24.82 10.11 A 11 11 0 0 0 15.18 10.11 Z"/><path fill="#6B5C3F" d="M 30.07 5.08 A 18 18 0 0 1 37.96 18.74 L 30.97 19.23 A 11 11 0 0 0 26.15 10.88 Z"/><path fill="#8F7440" d="M 37.96 21.26 A 18 18 0 0 1 30.07 34.92 L 26.15 29.12 A 11 11 0 0 0 30.97 20.77 Z"/><path fill="#B48D3A" d="M 27.89 36.18 A 18 18 0 0 1 12.11 36.18 L 15.18 29.89 A 11 11 0 0 0 24.82 29.89 Z"/><path fill="#D9A62A" d="M 9.93 34.92 A 18 18 0 0 1 2.04 21.26 L 9.03 20.77 A 11 11 0 0 0 13.85 29.12 Z"/><path fill="#FCBD02" d="M 2.04 18.74 A 18 18 0 0 1 9.93 5.08 L 13.85 10.88 A 11 11 0 0 0 9.03 19.23 Z"/></svg>
+        </div>
+        <div class="brand"><span class="t">Trade</span><span class="n">360</span></div>
+        <span class="brand-tagline">Lead to Profit</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+
+  // ---- sticky nav scroll shadow + progress bar ----
+  var nav = document.getElementById('siteNav');
+  function onScroll(){
+    if (!nav) return;
+    nav.classList.toggle('scrolled', window.scrollY > 8);
+    var bar = document.getElementById('scrollProgress');
+    if (bar){
+      var doc = document.documentElement;
+      var max = (doc.scrollHeight - window.innerHeight) || 1;
+      var pct = Math.min(100, Math.max(0, (window.scrollY / max) * 100));
+      bar.style.width = pct + '%';
+    }
+  }
+  window.addEventListener('scroll', onScroll, { passive:true });
+  onScroll();
+
+  // ---- mobile menu toggle ----
+  var toggle = document.getElementById('navToggle');
+  var panel = document.getElementById('mobilePanel');
+  var toggleIcon = document.getElementById('navToggleIcon');
+  if (toggle && panel){
+    toggle.addEventListener('click', function(){
+      var open = panel.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      toggleIcon.innerHTML = open
+        ? '<path d="M5 5l14 14M19 5 5 19"/>'
+        : '<path d="M3 6h18M3 12h18M3 18h18"/>';
+    });
+  }
+
+  // ---- scroll reveal ----
+  var revealEls = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window && revealEls.length){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if (entry.isIntersecting){ entry.target.classList.add('in-view'); io.unobserve(entry.target); }
+      });
+    }, { threshold:.15 });
+    revealEls.forEach(function(el){ io.observe(el); });
+    setTimeout(function(){ revealEls.forEach(function(el){ el.classList.add('in-view'); }); }, 1800);
+  } else {
+    revealEls.forEach(function(el){ el.classList.add('in-view'); });
+  }
+
+  // =========================================================
+  // AI quote pipeline
+  // =========================================================
+  var form = document.getElementById('quoteForm');
+  var generateBtn = document.getElementById('generateBtn');
+  var formNote = document.getElementById('formNote');
+  var downloadBtn = document.getElementById('downloadPdfBtn');
+  var pdfNote = document.getElementById('pdfNote');
+  var quotePreview = document.getElementById('quotePreview');
+
+  var stepEls = {
+    1: document.getElementById('step1'),
+    2: document.getElementById('step2'),
+    3: document.getElementById('step3')
+  };
+
+  function setStepState(n, state){
+    var el = stepEls[n];
+    if (!el) return;
+    el.classList.remove('active', 'done', 'error');
+    if (state) el.classList.add(state);
+  }
+  function resetSteps(){
+    [1,2,3].forEach(function(n){ setStepState(n, null); });
+  }
+
+  function gbp(n){
+    var v = Math.round(Number(n) || 0);
+    return '£' + v.toLocaleString('en-GB');
+  }
+
+  function escapeHtml(s){
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function(c){
+      return { '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c];
+    });
+  }
+
+  // Parses the INTRO / SCOPE / TERMS sections out of the step-3 plain-text answer.
+  function parseQuoteCopy(text){
+    var out = { intro:'', scope:'', terms:'' };
+    var markers = [['INTRO:', 'intro'], ['SCOPE:', 'scope'], ['TERMS:', 'terms']];
+    for (var i = 0; i < markers.length; i++){
+      var key = markers[i][0];
+      var start = text.indexOf(key);
+      if (start === -1) continue;
+      start += key.length;
+      var end = text.length;
+      for (var j = 0; j < markers.length; j++){
+        if (markers[j][0] === key) continue;
+        var idx = text.indexOf(markers[j][0], start);
+        if (idx !== -1 && idx < end) end = idx;
+      }
+      out[markers[i][1]] = text.slice(start, end).trim();
+    }
+    if (!out.intro && !out.scope && !out.terms) out.intro = text.trim();
+    return out;
+  }
+
+  var latestQuote = null; // holds everything needed to render the PDF
+
+  // =========================================================
+  // AI calling layer — environment-aware.
+  // Inside a Claude conversation, window.claude.use('sample') does the work.
+  // On the real site (trade360.ai), there is no window.claude, so these
+  // fall back to our own Netlify Function (netlify/functions/quote-ai.js),
+  // which calls the Anthropic API directly using your own API key.
+  // =========================================================
+  var AI_ENDPOINT = '/.netlify/functions/quote-ai';
+
+  function fileToBase64(file){
+    return new Promise(function(resolve, reject){
+      var reader = new FileReader();
+      reader.onload = function(){
+        var result = reader.result || '';
+        var comma = result.indexOf(',');
+        resolve(comma === -1 ? result : result.slice(comma + 1));
+      };
+      reader.onerror = function(){ reject(new Error('Could not read the photo')); };
+      reader.readAsDataURL(file);
+    });
+  }
+
+  async function getNativeSample(){
+    if (!window.claude || !window.claude.use) return null;
+    return window.claude.use('sample');
+  }
+
+  async function callBackendAI(mode, prompt, opts){
+    opts = opts || {};
+    var body = { mode: mode, prompt: prompt, modelTier: opts.modelTier || 'default' };
+    if (opts.file){
+      body.image = { data: await fileToBase64(opts.file), mediaType: opts.file.type || 'image/jpeg' };
+    }
+    var res = await fetch(AI_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body)
+    });
+    var data = await res.json().catch(function(){ return {}; });
+    if (!res.ok){
+      var e = new Error(data.message || 'AI request failed');
+      e.code = data.code || 'upstream_error';
+      throw e;
+    }
+    return data;
+  }
+
+  // Parsed JSON object — same shape sample.json() returns inside Claude.
+  async function aiJSON(prompt, opts){
+    opts = opts || {};
+    var sample = await getNativeSample();
+    if (sample){
+      return opts.file ? sample.json(prompt, { modelTier: opts.modelTier, images: opts.file })
+                        : sample.json(prompt, { modelTier: opts.modelTier });
+    }
+    var data = await callBackendAI('json', prompt, opts);
+    return data.json;
+  }
+
+  // { text, truncated } — same shape sample() returns inside Claude. Our own
+  // backend doesn't stream token-by-token, so onText fires once with the
+  // full answer instead of live word-by-word.
+  async function aiText(prompt, opts){
+    opts = opts || {};
+    var sample = await getNativeSample();
+    if (sample) return sample(prompt, { modelTier: opts.modelTier, onText: opts.onText });
+    var data = await callBackendAI('text', prompt, opts);
+    if (opts.onText) opts.onText({ text: data.text, delta: data.text });
+    return { text: data.text, truncated: !!data.truncated };
+  }
+
+  function readFormInputs(){
+    return {
+      clientName: document.getElementById('qfClientName').value.trim() || 'Client',
+      siteAddress: document.getElementById('qfSiteAddress').value.trim(),
+      jobType: document.getElementById('qfJobType').value.trim(),
+      scopeNotes: document.getElementById('qfScopeNotes').value.trim(),
+      materialsNotes: document.getElementById('qfMaterials').value.trim(),
+      dayRate: Number(document.getElementById('qfDayRate').value) || 0,
+      labourDays: Number(document.getElementById('qfLabourDays').value) || 0,
+      priceMin: Number(document.getElementById('qfPriceMin').value) || 0,
+      priceMax: Number(document.getElementById('qfPriceMax').value) || 0,
+      accessNotes: document.getElementById('qfAccessNotes').value.trim()
+    };
+  }
+
+  function errorCopy(code){
+    switch (code){
+      case 'not_granted': return "You'll need to allow this page to use Claude to run the live demo — nothing was sent.";
+      case 'sampling_disabled':
+      case 'not_declared':
+      case 'capability_disabled':
+      case 'capability_removed':
+        return 'The live AI demo is unavailable in this view.';
+      case 'rate_limited': return "That's a lot of quotes at once — wait a moment and try again.";
+      case 'session_expired': return 'Your session expired — sign in again and retry.';
+      case 'refused': return 'Claude declined that request. Try rephrasing the job notes.';
+      case 'empty_completion': return 'No answer came back — try again with a bit less detail.';
+      case 'invalid_json': return 'The AI reply came back in an unexpected shape — try again.';
+      case 'prompt_too_large': return 'Those notes are a little long — trim them and try again.';
+      case 'cancelled': return 'Cancelled.';
+      default: return 'Something went wrong reaching the AI — try again.';
+    }
+  }
+
+  // =========================================================
+  // Handwritten note upload + AI transcription
+  // =========================================================
+  var noteUploadBlock = document.getElementById('noteUploadBlock');
+  var noteUploadDivider = document.getElementById('noteUploadDivider');
+  var noteDropzone = document.getElementById('noteDropzone');
+  var notePhotoInput = document.getElementById('qfNotePhoto');
+  var notePreview = document.getElementById('notePreview');
+  var notePreviewImg = document.getElementById('notePreviewImg');
+  var notePreviewName = document.getElementById('notePreviewName');
+  var noteRemoveBtn = document.getElementById('noteRemoveBtn');
+  var readNoteBtn = document.getElementById('readNoteBtn');
+  var noteStatus = document.getElementById('noteStatus');
+  var selectedNoteFile = null;
+  var notePreviewUrl = null;
+
+  function noteErrorCopy(code){
+    switch (code){
+      case 'not_granted': return "You'll need to allow this page to use Claude to read the photo — nothing was sent.";
+      case 'images_unavailable': return "Reading photos isn't available in this view — fill the fields in below instead.";
+      case 'image_rejected': return "That photo couldn't be read — try a clearer photo (JPEG, PNG, WebP or GIF).";
+      case 'rate_limited': return "That's a lot of requests at once — wait a moment and try again.";
+      case 'session_expired': return 'Your session expired — sign in again and retry.';
+      case 'refused': return "Claude couldn't read that photo — try a clearer, well-lit shot.";
+      case 'empty_completion': return "Couldn't make out the note — try a clearer photo.";
+      case 'invalid_json': return 'The AI reply came back in an unexpected shape — try again.';
+      case 'cancelled': return 'Cancelled.';
+      default: return "Couldn't read the photo — try again.";
+    }
+  }
+
+  function clearNoteSelection(){
+    selectedNoteFile = null;
+    if (notePreviewUrl){ URL.revokeObjectURL(notePreviewUrl); notePreviewUrl = null; }
+    if (notePreview) notePreview.hidden = true;
+    if (noteDropzone) noteDropzone.hidden = false;
+    if (readNoteBtn) readNoteBtn.disabled = true;
+    if (notePhotoInput) notePhotoInput.value = '';
+  }
+
+  function setNoteSelection(file){
+    selectedNoteFile = file;
+    if (notePreviewUrl) URL.revokeObjectURL(notePreviewUrl);
+    notePreviewUrl = URL.createObjectURL(file);
+    notePreviewImg.src = notePreviewUrl;
+    notePreviewName.textContent = file.name || 'Photo selected';
+    notePreview.hidden = false;
+    noteDropzone.hidden = true;
+    readNoteBtn.disabled = false;
+    noteStatus.classList.remove('warn');
+    noteStatus.textContent = 'Photos are read once, on demand — nothing is sent until you click.';
+  }
+
+  if (notePhotoInput){
+    notePhotoInput.addEventListener('change', function(e){
+      var file = e.target.files && e.target.files[0];
+      if (file) setNoteSelection(file);
+    });
+  }
+  if (noteRemoveBtn){
+    noteRemoveBtn.addEventListener('click', function(){ clearNoteSelection(); });
+  }
+  if (noteDropzone){
+    ['dragover', 'dragenter'].forEach(function(evt){
+      noteDropzone.addEventListener(evt, function(e){ e.preventDefault(); noteDropzone.classList.add('drag'); });
+    });
+    ['dragleave', 'drop'].forEach(function(evt){
+      noteDropzone.addEventListener(evt, function(e){ e.preventDefault(); noteDropzone.classList.remove('drag'); });
+    });
+    noteDropzone.addEventListener('drop', function(e){
+      var file = e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files[0];
+      if (file && file.type && file.type.indexOf('image/') === 0) setNoteSelection(file);
+    });
+  }
+
+  async function readNoteWithAI(){
+    if (!selectedNoteFile) return;
+    readNoteBtn.disabled = true;
+    var originalLabel = readNoteBtn.innerHTML;
+    readNoteBtn.textContent = 'Reading your note…';
+    noteStatus.classList.remove('warn');
+    noteStatus.textContent = 'Reading the photo and filling in the fields below…';
+
+    var prompt =
+      'This photo is a UK tradesperson\'s handwritten note about a job, written on site. Read the handwriting and organise ' +
+      'what it says into the fields a customer quote is built from. Reply with ONLY a JSON object shaped exactly like this ' +
+      'example, no other text:\n' +
+      '{"jobType":"Rear extension flat roof re-covering","scopeNotes":"the scope of work, in the tradesperson\'s own words, ' +
+      'cleaned up but not rewritten into formal English","materialsNotes":"any materials mentioned, or empty string if none",' +
+      '"accessNotes":"any access, timing or special requirements mentioned, or empty string if none"}\n\n' +
+      'If a field is not mentioned in the note, use an empty string for it rather than inventing content. Do not include ' +
+      'anything that is not actually in the photo.';
+
+    try {
+      var result = await aiJSON(prompt, { modelTier: 'default', file: selectedNoteFile });
+      if (!result || typeof result !== 'object') throw { code: 'invalid_json', message: 'no result' };
+      if (result.jobType) document.getElementById('qfJobType').value = result.jobType;
+      if (result.scopeNotes) document.getElementById('qfScopeNotes').value = result.scopeNotes;
+      if (result.materialsNotes) document.getElementById('qfMaterials').value = result.materialsNotes;
+      if (result.accessNotes) document.getElementById('qfAccessNotes').value = result.accessNotes;
+      noteStatus.textContent = 'Note read — the fields below have been filled in. Review them, then generate your quote.';
+    } catch (err){
+      var code = (err && err.code) || 'upstream_error';
+      noteStatus.textContent = noteErrorCopy(code);
+      noteStatus.classList.add('warn');
+    } finally {
+      readNoteBtn.disabled = false;
+      readNoteBtn.innerHTML = originalLabel;
+    }
+  }
+
+  if (readNoteBtn){
+    readNoteBtn.addEventListener('click', function(){
+      readNoteWithAI().catch(function(err){ console.error('Note read error', err); });
+    });
+  }
+
+  // Show the upload block once we know this view can send images somewhere —
+  // either Claude's native capability, or (on the real site) our own backend.
+  (async function initNoteUpload(){
+    if (!noteUploadBlock) return;
+    if (window.claude && window.claude.use){
+      var sampleForCaps = await window.claude.use('sample');
+      if (!sampleForCaps) return;
+      try {
+        var caps = await sampleForCaps.limits();
+        if (caps && caps.images){
+          noteUploadBlock.hidden = false;
+          if (noteUploadDivider) noteUploadDivider.hidden = false;
+          if (caps.images.mediaTypes && caps.images.mediaTypes.length && notePhotoInput){
+            notePhotoInput.accept = caps.images.mediaTypes.join(',');
+          }
+        }
+      } catch (e){ /* leave hidden */ }
+    } else {
+      noteUploadBlock.hidden = false;
+      if (noteUploadDivider) noteUploadDivider.hidden = false;
+      if (notePhotoInput) notePhotoInput.accept = 'image/jpeg,image/png,image/webp,image/gif';
+    }
+  })();
+
+  if (form){
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      runPipeline().catch(function(err){
+        console.error('AI quote pipeline error', err);
+      });
+    });
+  }
+
+  async function runPipeline(){
+    generateBtn.disabled = true;
+    downloadBtn.disabled = true;
+    quotePreview.hidden = true;
+    document.getElementById('qpTable').hidden = true;
+    document.getElementById('qpTotals').hidden = true;
+    document.getElementById('qpTimeline').hidden = true;
+    formNote.classList.remove('warn');
+    resetSteps();
+    latestQuote = null;
+
+    var input = readFormInputs();
+
+    try {
+      // ---- Step 1: structure the brief ----
+      setStepState(1, 'active');
+      formNote.textContent = 'Structuring your notes…';
+      var briefPrompt =
+        'You are helping a UK tradesperson turn rough job notes into a structured brief for a customer quote. ' +
+        'Reply with ONLY a JSON object shaped exactly like this example, no other text:\n' +
+        '{"jobTitle":"New rear extension roof re-covering","clientSummary":"2-3 sentence professional summary of the job for a customer-facing quote.","scopeItems":["Strip and dispose of existing roof covering","Install new membrane and battens"],"risksOrNotes":["Any risks, access issues or assumptions worth flagging"]}\n\n' +
+        'Client: ' + input.clientName + '\n' +
+        'Site address: ' + input.siteAddress + '\n' +
+        'Job type: ' + input.jobType + '\n' +
+        'Job notes: ' + input.scopeNotes + '\n' +
+        'Materials mentioned: ' + input.materialsNotes + '\n' +
+        'Access / special requirements: ' + input.accessNotes;
+
+      var brief = await aiJSON(briefPrompt, { modelTier: 'quick' });
+      if (!brief || typeof brief !== 'object') throw { code:'invalid_json', message:'no brief' };
+      setStepState(1, 'done');
+
+      quotePreview.hidden = false;
+      document.getElementById('qpJobTitle').textContent = brief.jobTitle || input.jobType || 'Job quote';
+      document.getElementById('qpSummary').textContent = brief.clientSummary || '';
+      var scopeItems = Array.isArray(brief.scopeItems) ? brief.scopeItems : [];
+      var scopeListEl = document.getElementById('qpScopeList');
+      scopeListEl.innerHTML = scopeItems.map(function(s){ return '<li>' + escapeHtml(s) + '</li>'; }).join('');
+
+      // ---- Step 2: price the job ----
+      setStepState(2, 'active');
+      formNote.textContent = 'Pricing the work…';
+      var pricingPrompt =
+        'You are a quoting assistant for a UK trade business. Using the job brief and the tradesperson\'s own estimates below, ' +
+        'produce a realistic pricing breakdown. Reply with ONLY a JSON object shaped exactly like this example, no other text, no markdown fences:\n' +
+        '{"lineItems":[{"description":"Labour — strip and re-cover roof","quantity":3,"unit":"days","unitPrice":280,"total":840},{"description":"Materials — GRP kit and fixings","quantity":1,"unit":"job","unitPrice":650,"total":650}],"subtotal":1490,"vat":298,"total":1788,"suggestedTimeline":"3-4 working days, weather permitting"}\n' +
+        'Rules: quantities and unit prices should be realistic UK trade rates for 2026; subtotal = sum of all line item totals; ' +
+        'vat = 20% of subtotal, rounded to the nearest pound; total = subtotal + vat. Use 3 to 6 line items.\n\n' +
+        'Job: ' + (brief.jobTitle || input.jobType) + '\n' +
+        'Summary: ' + (brief.clientSummary || '') + '\n' +
+        'Scope: ' + scopeItems.join('; ') + '\n' +
+        'Day rate: £' + input.dayRate + '\n' +
+        'Estimated labour: ' + input.labourDays + ' days\n' +
+        'Materials notes: ' + input.materialsNotes + '\n' +
+        'Target price range: £' + input.priceMin + ' to £' + input.priceMax + ' (guidance only — aim close to this only if it is realistic for the scope)';
+
+      var pricing = await aiJSON(pricingPrompt, { modelTier: 'default' });
+      if (!pricing || !Array.isArray(pricing.lineItems)) throw { code:'invalid_json', message:'no pricing' };
+      setStepState(2, 'done');
+
+      var tbody = document.getElementById('qpTableBody');
+      tbody.innerHTML = pricing.lineItems.map(function(li){
+        return '<tr><td>' + escapeHtml(li.description) + '</td><td>' + escapeHtml(li.quantity) + '</td><td>' +
+          escapeHtml(li.unit) + '</td><td>' + gbp(li.total) + '</td></tr>';
+      }).join('');
+      document.getElementById('qpTable').hidden = false;
+      document.getElementById('qpSubtotal').textContent = gbp(pricing.subtotal);
+      document.getElementById('qpVat').textContent = gbp(pricing.vat);
+      document.getElementById('qpGrandTotal').textContent = gbp(pricing.total);
+      document.getElementById('qpTotals').hidden = false;
+      if (pricing.suggestedTimeline){
+        var tlEl = document.getElementById('qpTimeline');
+        tlEl.innerHTML = '<b>Suggested timeline:</b> ' + escapeHtml(pricing.suggestedTimeline);
+        tlEl.hidden = false;
+      }
+
+      // ---- Step 3: write the customer-facing copy (streamed) ----
+      setStepState(3, 'active');
+      formNote.textContent = 'Writing the quote…';
+      var termsEl = document.getElementById('qpTerms');
+      termsEl.innerHTML = '<span class="streaming-cursor"></span>';
+
+      var copyPrompt =
+        'Write the customer-facing text for a UK trade quote — professional, warm, no waffle. ' +
+        'Use exactly this structure, these three headings and nothing else (no markdown, no extra commentary):\n\n' +
+        'INTRO:\n<2-3 sentence opening paragraph thanking the client and confirming what the quote covers>\n\n' +
+        'SCOPE:\n<a short paragraph in plain English describing the work, based on the brief below — do not just repeat the bullet list verbatim>\n\n' +
+        'TERMS:\n<2-3 sentence closing paragraph covering: this quote is valid for 30 days, payment is 50% deposit with the balance due on completion, and next steps to confirm the booking>\n\n' +
+        'Brief:\n' + (brief.jobTitle || input.jobType) + '\n' + (brief.clientSummary || '') + '\n' +
+        'Scope items: ' + scopeItems.join('; ') + '\n' +
+        'Price: ' + gbp(pricing.total) + ' inc. VAT\n' +
+        'Timeline: ' + (pricing.suggestedTimeline || 'to be confirmed');
+
+      var copyResult = await aiText(copyPrompt, {
+        modelTier: 'default',
+        onText: function(update){
+          var parsed = parseQuoteCopy(update.text);
+          termsEl.innerHTML = escapeHtml(parsed.terms || update.text) + '<span class="streaming-cursor"></span>';
+        }
+      });
+      var finalCopy = parseQuoteCopy(copyResult.text);
+      document.getElementById('qpSummary').textContent = finalCopy.intro || brief.clientSummary || '';
+      if (finalCopy.scope){
+        var scopeP = document.createElement('p');
+        scopeP.className = 'quote-summary';
+        scopeP.textContent = finalCopy.scope;
+        scopeListEl.insertAdjacentElement('afterend', scopeP);
+      }
+      termsEl.textContent = finalCopy.terms || '';
+      setStepState(3, 'done');
+
+      formNote.textContent = 'Quote ready. Review it above, then download the PDF.';
+
+      latestQuote = {
+        input: input,
+        brief: brief,
+        pricing: pricing,
+        copy: finalCopy
+      };
+      downloadBtn.disabled = false;
+      pdfNote.textContent = 'Builds a branded PDF from everything above.';
+
+    } catch (err){
+      var code = (err && err.code) || 'upstream_error';
+      [1,2,3].forEach(function(n){
+        if (stepEls[n].classList.contains('active')) setStepState(n, 'error');
+      });
+      formNote.textContent = errorCopy(code);
+      formNote.classList.add('warn');
+    } finally {
+      generateBtn.disabled = false;
+    }
+  }
+
+  // ---- PDF generation ----
+  if (downloadBtn){
+    downloadBtn.addEventListener('click', async function(){
+      if (!latestQuote) return;
+      downloadBtn.disabled = true;
+      var originalLabel = downloadBtn.innerHTML;
+      downloadBtn.textContent = 'Building PDF…';
+      try {
+        var blob = buildQuotePdf(latestQuote);
+        var downloads = await (window.claude && window.claude.use ? window.claude.use('downloads') : Promise.resolve(null));
+        if (downloads){
+          var res = await downloads.save({ filename: 'trade360-quote.pdf', data: blob });
+          pdfNote.textContent = res.status === 'saved' ? 'Saved.' : 'Sent to your chosen destination.';
+        } else {
+          // Plain browser download — works on any real host, no special capability needed.
+          var blobUrl = URL.createObjectURL(blob);
+          var a = document.createElement('a');
+          a.href = blobUrl;
+          a.download = 'trade360-quote.pdf';
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          setTimeout(function(){ URL.revokeObjectURL(blobUrl); }, 4000);
+          pdfNote.textContent = 'Downloaded.';
+        }
+        pdfNote.classList.remove('warn');
+      } catch (err){
+        var code = (err && err.code) || 'unavailable';
+        pdfNote.textContent = code === 'declined' ? 'No problem — download it whenever you\'re ready.' : 'Could not save the PDF — try again.';
+        pdfNote.classList.add(code === 'declined' ? '' : 'warn');
+      } finally {
+        downloadBtn.disabled = false;
+        downloadBtn.innerHTML = originalLabel;
+      }
+    });
+  }
+
+  function buildQuotePdf(q){
+    var jsPDFCtor = window.jspdf && window.jspdf.jsPDF;
+    var doc = new jsPDFCtor({ unit: 'pt', format: 'a4' });
+    var pageW = doc.internal.pageSize.getWidth();
+    var margin = 48;
+    var navy = [28, 33, 48];
+    var gold = [252, 189, 2];
+    var inkSoft = [91, 97, 120];
+    var line = [231, 233, 239];
+    var y = 0;
+
+    // header band
+    doc.setFillColor(navy[0], navy[1], navy[2]);
+    doc.rect(0, 0, pageW, 92, 'F');
+    doc.setTextColor(255,255,255);
+    doc.setFont('helvetica', 'bold'); doc.setFontSize(20);
+    doc.text('Trade', margin, 42);
+    var tradeWidth = doc.getTextWidth('Trade');
+    doc.setTextColor(gold[0], gold[1], gold[2]);
+    doc.text('360', margin + tradeWidth, 42);
+    doc.setTextColor(200, 204, 216);
+    doc.setFont('helvetica', 'normal'); doc.setFontSize(9);
+    doc.text('LEAD TO PROFIT', margin, 58);
+
+    doc.setTextColor(255,255,255);
+    doc.setFont('helvetica', 'bold'); doc.setFontSize(15);
+    doc.text('QUOTE', pageW - margin, 42, { align:'right' });
+    doc.setFont('helvetica', 'normal'); doc.setFontSize(9);
+    doc.setTextColor(200,204,216);
+    var today = new Date();
+    var dateStr = today.toLocaleDateString('en-GB', { day:'2-digit', month:'short', year:'numeric' });
+    doc.text('Date: ' + dateStr, pageW - margin, 58, { align:'right' });
+    doc.text('Ref: T360-' + today.getFullYear() + '-' + String(today.getMonth()+1).padStart(2,'0') + String(today.getDate()).padStart(2,'0'), pageW - margin, 70, { align:'right' });
+
+    y = 130;
+    doc.setTextColor(navy[0], navy[1], navy[2]);
+    doc.setFont('helvetica', 'bold'); doc.setFontSize(10);
+    doc.text('CLIENT', margin, y);
+    doc.text('SITE ADDRESS', margin + 260, y);
+    doc.setFont('helvetica', 'normal'); doc.setFontSize(11);
+    doc.text(q.input.clientName || '-', margin, y + 16);
+    doc.text(doc.splitTextToSize(q.input.siteAddress || '-', 230), margin + 260, y + 16);
+
+    y += 56;
+    doc.setDrawColor(line[0], line[1], line[2]);
+    doc.line(margin, y, pageW - margin, y);
+    y += 26;
+
+    doc.setFont('helvetica', 'bold'); doc.setFontSize(15);
+    doc.setTextColor(navy[0], navy[1], navy[2]);
+    var jobTitle = (q.brief && q.brief.jobTitle) || q.input.jobType || 'Job quote';
+    doc.text(doc.splitTextToSize(jobTitle, pageW - margin*2), margin, y);
+    y += 22;
+
+    doc.setFont('helvetica', 'normal'); doc.setFontSize(10.5);
+    doc.setTextColor(inkSoft[0], inkSoft[1], inkSoft[2]);
+    var introText = (q.copy && q.copy.intro) || (q.brief && q.brief.clientSummary) || '';
+    var introLines = doc.splitTextToSize(introText, pageW - margin*2);
+    doc.text(introLines, margin, y);
+    y += introLines.length * 14 + 16;
+
+    if (q.copy && q.copy.scope){
+      doc.setFont('helvetica', 'bold'); doc.setFontSize(11);
+      doc.setTextColor(navy[0], navy[1], navy[2]);
+      doc.text('Scope of work', margin, y);
+      y += 16;
+      doc.setFont('helvetica', 'normal'); doc.setFontSize(10.5);
+      doc.setTextColor(inkSoft[0], inkSoft[1], inkSoft[2]);
+      var scopeLines = doc.splitTextToSize(q.copy.scope, pageW - margin*2);
+      doc.text(scopeLines, margin, y);
+      y += scopeLines.length * 14 + 18;
+    }
+
+    // pricing table
+    doc.setFont('helvetica', 'bold'); doc.setFontSize(11);
+    doc.setTextColor(navy[0], navy[1], navy[2]);
+    doc.text('Price breakdown', margin, y);
+    y += 14;
+
+    var col1 = margin, col2 = pageW - margin - 190, col3 = pageW - margin - 120, col4 = pageW - margin;
+    doc.setDrawColor(line[0], line[1], line[2]);
+    doc.line(margin, y, pageW - margin, y);
+    y += 14;
+    doc.setFont('helvetica', 'bold'); doc.setFontSize(9);
+    doc.setTextColor(inkSoft[0], inkSoft[1], inkSoft[2]);
+    doc.text('DESCRIPTION', col1, y);
+    doc.text('QTY', col2, y);
+    doc.text('UNIT', col3, y);
+    doc.text('TOTAL', col4, y, { align:'right' });
+    y += 10;
+    doc.line(margin, y, pageW - margin, y);
+    y += 16;
+
+    var lineItems = (q.pricing && q.pricing.lineItems) || [];
+    doc.setFont('helvetica', 'normal'); doc.setFontSize(10);
+    lineItems.forEach(function(li){
+      doc.setTextColor(28,33,48);
+      var descLines = doc.splitTextToSize(String(li.description || ''), col2 - col1 - 10);
+      doc.text(descLines, col1, y);
+      doc.text(String(li.quantity != null ? li.quantity : ''), col2, y);
+      doc.text(String(li.unit || ''), col3, y);
+      doc.text('£' + Math.round(li.total || 0).toLocaleString('en-GB'), col4, y, { align:'right' });
+      y += Math.max(descLines.length, 1) * 13 + 6;
+    });
+
+    y += 6;
+    doc.line(margin, y, pageW - margin, y);
+    y += 18;
+
+    function totalsRow(label, value, bold){
+      doc.setFont('helvetica', bold ? 'bold' : 'normal');
+      doc.setFontSize(bold ? 12 : 10);
+      doc.setTextColor(bold ? navy[0] : inkSoft[0], bold ? navy[1] : inkSoft[1], bold ? navy[2] : inkSoft[2]);
+      doc.text(label, col3, y);
+      doc.text('£' + Math.round(value || 0).toLocaleString('en-GB'), col4, y, { align:'right' });
+      y += bold ? 18 : 15;
+    }
+    totalsRow('Subtotal', q.pricing.subtotal, false);
+    totalsRow('VAT (20%)', q.pricing.vat, false);
+    totalsRow('Total', q.pricing.total, true);
+
+    if (q.pricing && q.pricing.suggestedTimeline){
+      y += 6;
+      doc.setFont('helvetica', 'bold'); doc.setFontSize(10);
+      doc.setTextColor(navy[0], navy[1], navy[2]);
+      doc.text('Suggested timeline: ', margin, y);
+      var tlLabelW = doc.getTextWidth('Suggested timeline: ');
+      doc.setFont('helvetica', 'normal');
+      doc.setTextColor(inkSoft[0], inkSoft[1], inkSoft[2]);
+      doc.text(String(q.pricing.suggestedTimeline), margin + tlLabelW, y);
+      y += 22;
+    }
+
+    if (q.copy && q.copy.terms){
+      doc.setDrawColor(line[0], line[1], line[2]);
+      doc.line(margin, y, pageW - margin, y);
+      y += 18;
+      doc.setFont('helvetica', 'normal'); doc.setFontSize(9.5);
+      doc.setTextColor(inkSoft[0], inkSoft[1], inkSoft[2]);
+      var termsLines = doc.splitTextToSize(q.copy.terms, pageW - margin*2);
+      doc.text(termsLines, margin, y);
+      y += termsLines.length * 13;
+    }
+
+    // footer band
+    var pageH = doc.internal.pageSize.getHeight();
+    doc.setFillColor(navy[0], navy[1], navy[2]);
+    doc.rect(0, pageH - 40, pageW, 40, 'F');
+    doc.setFont('helvetica', 'normal'); doc.setFontSize(8.5);
+    doc.setTextColor(150, 155, 170);
+    doc.text('Trade 360 · Lead to Profit · Quote drafted with Trade 360 AI for demonstration purposes', margin, pageH - 16);
+
+    return doc.output('blob');
+  }
+
+})();
+</script>
+
+</body>
+</html>
