@@ -1347,6 +1347,52 @@
     var videoTeaserDismissed = false;
     try { videoTeaserDismissed = localStorage.getItem('trade360VideoTeaserDismissed') === '1'; } catch(e){}
     if (videoTeaserDismissed) videoTeaser.classList.add('hidden');
+
+    // Keep clear of the cookie banner and (on the homepage hero) the
+    // floating feature badge, whichever is lowest/most visible right now,
+    // instead of a hardcoded offset that only works for one layout.
+    var vtDefaultBottom = parseFloat(getComputedStyle(videoTeaser).bottom) || 20;
+    var vtRectsOverlap = function(a, b){
+      return a.right > b.left && a.left < b.right && a.bottom > b.top && a.top < b.bottom;
+    };
+    var repositionVideoTeaser = function(){
+      if (videoTeaser.classList.contains('hidden')) return;
+      var gap = 14, vh = window.innerHeight;
+      // Measure at the default position first -- only push the teaser up when
+      // another fixed/floating element actually intersects it there, never
+      // just because that element exists somewhere else on the page.
+      videoTeaser.style.bottom = vtDefaultBottom + 'px';
+      var vtRect = videoTeaser.getBoundingClientRect();
+      var bottom = vtDefaultBottom;
+      var cb = document.getElementById('cookieBanner');
+      if (cb && !cb.classList.contains('hidden')){
+        var cbRect = cb.getBoundingClientRect();
+        if (cbRect.height > 0 && vtRectsOverlap(vtRect, cbRect)){
+          var need = (vh - cbRect.top) + gap;
+          if (need > bottom) bottom = need;
+        }
+      }
+      var fc = document.querySelector('.float-card');
+      if (fc){
+        var fcRect = fc.getBoundingClientRect();
+        if (vtRectsOverlap(vtRect, fcRect)){
+          // Clear above the badge rather than below it -- there's reliably
+          // open space higher up the hero, whereas below it is often a tight
+          // squeeze against the cookie banner.
+          var need2 = (vh - fcRect.top) + gap;
+          if (need2 > bottom) bottom = need2;
+        }
+      }
+      // Never push it high enough to clip the top of a very short viewport.
+      var maxBottom = vh - vtRect.height - 8;
+      if (bottom > maxBottom) bottom = Math.max(maxBottom, 8);
+      videoTeaser.style.bottom = bottom + 'px';
+    };
+    repositionVideoTeaser();
+    window.addEventListener('resize', repositionVideoTeaser);
+    window.addEventListener('scroll', repositionVideoTeaser, { passive: true });
+    var cookieAcceptBtn = document.getElementById('cookieAccept');
+    if (cookieAcceptBtn) cookieAcceptBtn.addEventListener('click', function(){ setTimeout(repositionVideoTeaser, 0); });
     if (videoTeaserClose){
       videoTeaserClose.addEventListener('click', function(e){
         e.stopPropagation();
