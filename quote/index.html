@@ -77,6 +77,8 @@
   .brand-link{ display:flex; align-items:center; color:inherit; text-decoration:none; }
   .brand-mark{ display:flex; align-items:center; flex:none; margin-right:4px; }
   .brand-mark svg{ width:34px; height:34px; animation:brandSpin 14s linear infinite; }
+  .brand-wordmark-img{ height:28px; width:auto; display:block; }
+  .foot-brand .brand-wordmark-img{ height:24px; }
   @keyframes brandSpin{ from{ transform:rotate(0deg); } to{ transform:rotate(360deg); } }
   @media (prefers-reduced-motion: reduce){ .brand-mark svg{ animation:none; } }
   .brand{ display:flex; align-items:center; gap:9px; height:46px; padding:0 16px; border-radius:10px; border:1.5px dashed var(--line); font-weight:700; font-size:16px; color:var(--navy); }
@@ -259,7 +261,7 @@
       <div class="brand-mark" aria-hidden="true">
         <svg viewBox="0 0 40 40"><path fill="#FCBD02" d="M 12.11 3.82 A 18 18 0 0 1 27.89 3.82 L 24.82 10.11 A 11 11 0 0 0 15.18 10.11 Z"/><path fill="#FDCB3C" d="M 30.07 5.08 A 18 18 0 0 1 37.96 18.74 L 30.97 19.23 A 11 11 0 0 0 26.15 10.88 Z"/><path fill="#FDD972" d="M 37.96 21.26 A 18 18 0 0 1 30.07 34.92 L 26.15 29.12 A 11 11 0 0 0 30.97 20.77 Z"/><path fill="#FCDD85" d="M 27.89 36.18 A 18 18 0 0 1 12.11 36.18 L 15.18 29.89 A 11 11 0 0 0 24.82 29.89 Z"/><path fill="#FBE6A8" d="M 9.93 34.92 A 18 18 0 0 1 2.04 21.26 L 9.03 20.77 A 11 11 0 0 0 13.85 29.12 Z"/><path fill="#F5DFAF" d="M 2.04 18.74 A 18 18 0 0 1 9.93 5.08 L 13.85 10.88 A 11 11 0 0 0 9.03 19.23 Z"/></svg>
       </div>
-      <div class="brand"><span class="t">Trade</span><span class="n">360</span></div>
+      <img class="brand-wordmark-img" src="/assets/images/header-logo.png" alt="Trade360">
       </a>
       <span class="brand-tagline">Lead to Profit</span>
     </div>
@@ -539,7 +541,7 @@
         <div class="brand-mark" aria-hidden="true">
           <svg viewBox="0 0 40 40"><path fill="#4A4535" d="M 12.11 3.82 A 18 18 0 0 1 27.89 3.82 L 24.82 10.11 A 11 11 0 0 0 15.18 10.11 Z"/><path fill="#6B5C3F" d="M 30.07 5.08 A 18 18 0 0 1 37.96 18.74 L 30.97 19.23 A 11 11 0 0 0 26.15 10.88 Z"/><path fill="#8F7440" d="M 37.96 21.26 A 18 18 0 0 1 30.07 34.92 L 26.15 29.12 A 11 11 0 0 0 30.97 20.77 Z"/><path fill="#B48D3A" d="M 27.89 36.18 A 18 18 0 0 1 12.11 36.18 L 15.18 29.89 A 11 11 0 0 0 24.82 29.89 Z"/><path fill="#D9A62A" d="M 9.93 34.92 A 18 18 0 0 1 2.04 21.26 L 9.03 20.77 A 11 11 0 0 0 13.85 29.12 Z"/><path fill="#FCBD02" d="M 2.04 18.74 A 18 18 0 0 1 9.93 5.08 L 13.85 10.88 A 11 11 0 0 0 9.03 19.23 Z"/></svg>
         </div>
-        <div class="brand"><span class="t">Trade</span><span class="n">360</span></div>
+        <img class="brand-wordmark-img foot-logo" src="/assets/images/footer-logo.png" alt="Trade360">
         <span class="brand-tagline">Lead to Profit</span>
       </div>
     </div>

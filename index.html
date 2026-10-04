@@ -111,6 +111,8 @@
   @media (max-width:560px){ .brand-tagline{ display:none; } }
   .brand-mark{ display:flex; align-items:center; flex:none; margin-right:4px; }
   .brand-mark svg{ width:34px; height:34px; animation:brandSpin 14s linear infinite; }
+  .brand-wordmark-img{ height:28px; width:auto; display:block; }
+  .foot-brand .brand-wordmark-img{ height:24px; }
   @keyframes brandSpin{ from{ transform:rotate(0deg); } to{ transform:rotate(360deg); } }
   @media (prefers-reduced-motion: reduce){ .brand-mark svg{ animation:none; } }
   .nav-links{ display:none; align-items:center; gap:30px; font-size:14.5px; font-weight:600; color:var(--navy); }
@@ -510,6 +512,7 @@
   .ph.readonly{ cursor:default; }
   .ph.readonly input[type="file"]{ display:none; }
   .ph.readonly:hover{ border-color:var(--ph-border); }
+  .ph.readonly .edit-overlay{ display:none; }
   .logo-lockup.ph.has-image{ min-width:120px; }
   .logo-mark.ph.has-image{ border-radius:20px; }
   .avatar.ph.has-image{ border-radius:999px; }
@@ -760,7 +763,7 @@
       <div class="brand-mark" aria-hidden="true">
         <svg viewBox="0 0 40 40"><path fill="#F5DFAF" d="M 12.11 3.82 A 18 18 0 0 1 27.89 3.82 L 24.82 10.11 A 11 11 0 0 0 15.18 10.11 Z"/><path fill="#FBE6A8" d="M 30.07 5.08 A 18 18 0 0 1 37.96 18.74 L 30.97 19.23 A 11 11 0 0 0 26.15 10.88 Z"/><path fill="#FCDD85" d="M 37.96 21.26 A 18 18 0 0 1 30.07 34.92 L 26.15 29.12 A 11 11 0 0 0 30.97 20.77 Z"/><path fill="#FDD972" d="M 27.89 36.18 A 18 18 0 0 1 12.11 36.18 L 15.18 29.89 A 11 11 0 0 0 24.82 29.89 Z"/><path fill="#FDCB3C" d="M 9.93 34.92 A 18 18 0 0 1 2.04 21.26 L 9.03 20.77 A 11 11 0 0 0 13.85 29.12 Z"/><path fill="#FCBD02" d="M 2.04 18.74 A 18 18 0 0 1 9.93 5.08 L 13.85 10.88 A 11 11 0 0 0 9.03 19.23 Z"/></svg>
       </div>
-      <div class="brand"><span class="t">Trade</span><span class="n">360</span></div>
+      <img class="brand-wordmark-img" src="/assets/images/header-logo.png" alt="Trade360">
       </a>
       <span class="brand-tagline">Lead to Profit</span>
     </div>
@@ -780,23 +783,23 @@
           <div class="dropdown-panel-inner">
             <div class="dd-heading">Browse by industry</div>
           <a class="dd-row" href="#">
-            <div class="dd-img ph" data-slot="industry-roofing" title="Upload: Roofing image"><svg viewBox="0 0 24 24" fill="none"><rect x="2.5" y="4.5" width="19" height="15" rx="2" stroke="currentColor" stroke-width="1.6"/><circle cx="8" cy="10" r="1.8" stroke="currentColor" stroke-width="1.4"/><path d="M4 17 9 12l3 3 4-5 4 6" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/></svg></div>
+            <div class="dd-img ph has-image" data-slot="industry-roofing" style="background-image:url('/assets/images/industry-roofing.jpg')"></div>
             <span class="dd-copy"><b>Roofing</b></span>
           </a>
           <a class="dd-row" href="#">
-            <div class="dd-img ph" data-slot="industry-glazing" title="Upload: Glazing image"><svg viewBox="0 0 24 24" fill="none"><rect x="2.5" y="4.5" width="19" height="15" rx="2" stroke="currentColor" stroke-width="1.6"/><circle cx="8" cy="10" r="1.8" stroke="currentColor" stroke-width="1.4"/><path d="M4 17 9 12l3 3 4-5 4 6" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/></svg></div>
+            <div class="dd-img ph has-image" data-slot="industry-glazing" style="background-image:url('/assets/images/industry-glazing.jpg')"></div>
             <span class="dd-copy"><b>Glazing</b></span>
           </a>
           <a class="dd-row" href="#">
-            <div class="dd-img ph" data-slot="industry-landscaping" title="Upload: Landscaping image"><svg viewBox="0 0 24 24" fill="none"><rect x="2.5" y="4.5" width="19" height="15" rx="2" stroke="currentColor" stroke-width="1.6"/><circle cx="8" cy="10" r="1.8" stroke="currentColor" stroke-width="1.4"/><path d="M4 17 9 12l3 3 4-5 4 6" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/></svg></div>
+            <div class="dd-img ph has-image" data-slot="industry-landscaping" style="background-image:url('/assets/images/industry-landscaping.jpg')"></div>
             <span class="dd-copy"><b>Landscaping</b></span>
           </a>
           <a class="dd-row" href="#">
-            <div class="dd-img ph" data-slot="industry-construction" title="Upload: Construction image"><svg viewBox="0 0 24 24" fill="none"><rect x="2.5" y="4.5" width="19" height="15" rx="2" stroke="currentColor" stroke-width="1.6"/><circle cx="8" cy="10" r="1.8" stroke="currentColor" stroke-width="1.4"/><path d="M4 17 9 12l3 3 4-5 4 6" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/></svg></div>
+            <div class="dd-img ph has-image" data-slot="industry-construction" style="background-image:url('/assets/images/industry-construction.jpg')"></div>
             <span class="dd-copy"><b>Construction</b></span>
           </a>
           <a class="dd-row" href="#">
-            <div class="dd-img ph" data-slot="industry-garden-rooms" title="Upload: Garden rooms image"><svg viewBox="0 0 24 24" fill="none"><rect x="2.5" y="4.5" width="19" height="15" rx="2" stroke="currentColor" stroke-width="1.6"/><circle cx="8" cy="10" r="1.8" stroke="currentColor" stroke-width="1.4"/><path d="M4 17 9 12l3 3 4-5 4 6" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/></svg></div>
+            <div class="dd-img ph has-image" data-slot="industry-garden-rooms" style="background-image:url('/assets/images/industry-garden-rooms.jpg')"></div>
             <span class="dd-copy"><b>Garden rooms</b></span>
           </a>
           </div>
@@ -832,11 +835,7 @@
 <!-- ================= HERO ================= -->
 <header class="hero">
   <div class="hero-photo-wrap">
-    <div class="ph on-dark" data-slot="hero-photo" title="Upload: tradesperson at their desk, laptop showing the Trade360 dashboard">
-      <svg viewBox="0 0 24 24" fill="none"><rect x="2.5" y="4.5" width="19" height="15" rx="2" stroke="currentColor" stroke-width="1.6"/><circle cx="8" cy="10" r="1.8" stroke="currentColor" stroke-width="1.4"/><path d="M4 17 9 12l3 3 4-5 4 6" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/></svg>
-      <div class="lbl">Photo placeholder</div>
-      <div class="sub">Upload: tradesperson at their desk, laptop showing the Trade360 dashboard</div>
-    </div>
+    <div class="ph on-dark has-image" data-slot="hero-photo" style="background-image:url('/assets/images/hero-photo.jpg')"></div>
     <div class="float-card" id="pillarFloatCard">
       <div class="ok"><svg viewBox="0 0 16 16" fill="none"><path d="M3.5 8.5 6.5 11.5 12.5 4.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
       <div class="fc-body"><b id="pillarFloatTitle">Marketing</b><span id="pillarFloatText">Capture every enquiry automatically</span></div>
@@ -1025,11 +1024,7 @@
 <!-- ================= AI SPLIT ================= -->
 <section class="ai-split">
   <div class="ai-visual-wrap">
-    <div class="ai-visual ph on-dark" data-slot="ai-split-photo" title="Upload: installers fitting a garden room">
-      <svg viewBox="0 0 24 24" fill="none"><rect x="2.5" y="4.5" width="19" height="15" rx="2" stroke="currentColor" stroke-width="1.6"/><circle cx="8" cy="10" r="1.8" stroke="currentColor" stroke-width="1.4"/><path d="M4 17 9 12l3 3 4-5 4 6" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/></svg>
-      <div class="lbl">Photo placeholder</div>
-      <div class="sub">Upload: installers fitting a garden room</div>
-    </div>
+    <div class="ai-visual ph on-dark has-image" data-slot="ai-split-photo" style="background-image:url('/assets/images/ai-split-photo.jpg')"></div>
   </div>
   <div class="ai-text">
     <div class="eyebrow">Intelligence that follows the job</div>
@@ -1104,10 +1099,7 @@
   <div class="wrap">
     <div class="video-grid">
       <div class="video-thumb-wrap">
-        <div class="ph" data-slot="package-video-thumb" title="Upload: video thumbnail — finding your package">
-          <svg viewBox="0 0 24 24" fill="none"><rect x="2.5" y="4.5" width="19" height="15" rx="2" stroke="currentColor" stroke-width="1.6"/><circle cx="8" cy="10" r="1.8" stroke="currentColor" stroke-width="1.4"/><path d="M4 17 9 12l3 3 4-5 4 6" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/></svg>
-          <div class="lbl">Video thumbnail placeholder</div>
-        </div>
+        <div class="ph has-image" data-slot="package-video-thumb" style="background-image:url('/assets/images/package-video-thumb.jpg')"></div>
         <div class="play-btn" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none"><path d="M9 7.5v9l7.5-4.5L9 7.5Z"/></svg>
         </div>
@@ -1119,7 +1111,7 @@
           <p>Short videos walking through what's included in each Trade 360 package, so you know exactly which one fits your business before you book a call.</p>
         </div>
         <div class="presenter">
-          <div class="avatar ph small" data-slot="package-presenter" title="Upload: presenter photo"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="9" r="3.6" stroke="currentColor" stroke-width="1.6"/><path d="M4.5 19.5c1.6-3.2 4.4-4.8 7.5-4.8s5.9 1.6 7.5 4.8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></div>
+          <div class="avatar ph small has-image contain" data-slot="package-presenter" style="background-image:url('/assets/images/package-presenter.jpg')"></div>
           <div class="line"><b>Zara</b> <span>· Research and Marketing</span></div>
         </div>
         <a class="btn btn-gold" href="#demo">Find your package
@@ -1137,23 +1129,23 @@
     <div class="sub">Trusted by trade businesses across every specialism.</div>
     <div class="logo-row reveal-group">
       <div class="logo-item reveal">
-        <div class="logo-mark ph" data-slot="client-logo-1" title="Upload: Northline Glazing logo"><svg viewBox="0 0 24 24" fill="none"><rect x="2.5" y="4.5" width="19" height="15" rx="2" stroke="currentColor" stroke-width="1.6"/><circle cx="8" cy="10" r="1.8" stroke="currentColor" stroke-width="1.4"/><path d="M4 17 9 12l3 3 4-5 4 6" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/></svg></div>
+        <div class="logo-mark ph has-image contain" data-slot="client-logo-1" style="background-image:url('/assets/images/client-logo-1.png')"></div>
         <div class="name">Glazing</div>
       </div>
       <div class="logo-item reveal">
-        <div class="logo-mark ph" data-slot="client-logo-3" title="Upload: Apex Roofing logo"><svg viewBox="0 0 24 24" fill="none"><rect x="2.5" y="4.5" width="19" height="15" rx="2" stroke="currentColor" stroke-width="1.6"/><circle cx="8" cy="10" r="1.8" stroke="currentColor" stroke-width="1.4"/><path d="M4 17 9 12l3 3 4-5 4 6" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/></svg></div>
+        <div class="logo-mark ph has-image contain" data-slot="client-logo-3" style="background-image:url('/assets/images/client-logo-3.png')"></div>
         <div class="name">Roofing</div>
       </div>
       <div class="logo-item reveal">
-        <div class="logo-mark ph" data-slot="client-logo-4" title="Upload: Greenfield Landscapes logo"><svg viewBox="0 0 24 24" fill="none"><rect x="2.5" y="4.5" width="19" height="15" rx="2" stroke="currentColor" stroke-width="1.6"/><circle cx="8" cy="10" r="1.8" stroke="currentColor" stroke-width="1.4"/><path d="M4 17 9 12l3 3 4-5 4 6" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/></svg></div>
+        <div class="logo-mark ph has-image contain" data-slot="client-logo-4" style="background-image:url('/assets/images/client-logo-4.png')"></div>
         <div class="name">Landscaping</div>
       </div>
       <div class="logo-item reveal">
-        <div class="logo-mark ph" data-slot="client-logo-5" title="Upload: Craft Build logo"><svg viewBox="0 0 24 24" fill="none"><rect x="2.5" y="4.5" width="19" height="15" rx="2" stroke="currentColor" stroke-width="1.6"/><circle cx="8" cy="10" r="1.8" stroke="currentColor" stroke-width="1.4"/><path d="M4 17 9 12l3 3 4-5 4 6" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/></svg></div>
+        <div class="logo-mark ph has-image contain" data-slot="client-logo-5" style="background-image:url('/assets/images/client-logo-5.png')"></div>
         <div class="name">Construction</div>
       </div>
       <div class="logo-item reveal">
-        <div class="logo-mark ph" data-slot="client-logo-6" title="Upload: Room &amp; Root logo"><svg viewBox="0 0 24 24" fill="none"><rect x="2.5" y="4.5" width="19" height="15" rx="2" stroke="currentColor" stroke-width="1.6"/><circle cx="8" cy="10" r="1.8" stroke="currentColor" stroke-width="1.4"/><path d="M4 17 9 12l3 3 4-5 4 6" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/></svg></div>
+        <div class="logo-mark ph has-image contain" data-slot="client-logo-6" style="background-image:url('/assets/images/client-logo-6.png')"></div>
         <div class="name">Garden rooms</div>
       </div>
     </div>
@@ -1172,7 +1164,7 @@
         <svg class="quote" viewBox="0 0 32 26" fill="currentColor"><path d="M12 0c-4 0-7 3-7 7.5S8 14 12 14v-4c-2 0-3-1.2-3-3.5h3V0Zm12 0c-4 0-7 3-7 7.5S20 14 24 14v-4c-2 0-3-1.2-3-3.5h3V0Z"/></svg>
         <p>"Having enquiries, quotes and jobs all in one place has taken so much guesswork out of the week for our whole team."</p>
         <div class="testi-who">
-          <div class="avatar ph small" data-slot="testimonial-1" title="Upload: Alex headshot"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="9" r="3.6" stroke="currentColor" stroke-width="1.6"/><path d="M4.5 19.5c1.6-3.2 4.4-4.8 7.5-4.8s5.9 1.6 7.5 4.8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></div>
+          <div class="avatar ph small has-image contain" data-slot="testimonial-1" style="background-image:url('/assets/images/testimonial-1.jpg')"></div>
           <div class="line"><b>Alex</b> <span>· Northline</span></div>
         </div>
       </div>
@@ -1180,7 +1172,7 @@
         <svg class="quote" viewBox="0 0 32 26" fill="currentColor"><path d="M12 0c-4 0-7 3-7 7.5S8 14 12 14v-4c-2 0-3-1.2-3-3.5h3V0Zm12 0c-4 0-7 3-7 7.5S20 14 24 14v-4c-2 0-3-1.2-3-3.5h3V0Z"/></svg>
         <p>"We can see exactly where every job stands without ringing round for updates — it's made a real difference as we've grown."</p>
         <div class="testi-who">
-          <div class="avatar ph small" data-slot="testimonial-2" title="Upload: Sam headshot"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="9" r="3.6" stroke="currentColor" stroke-width="1.6"/><path d="M4.5 19.5c1.6-3.2 4.4-4.8 7.5-4.8s5.9 1.6 7.5 4.8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></div>
+          <div class="avatar ph small has-image contain" data-slot="testimonial-2" style="background-image:url('/assets/images/testimonial-2.jpg')"></div>
           <div class="line"><b>Sam</b> <span>· Greenfield</span></div>
         </div>
       </div>
@@ -1188,7 +1180,7 @@
         <svg class="quote" viewBox="0 0 32 26" fill="currentColor"><path d="M12 0c-4 0-7 3-7 7.5S8 14 12 14v-4c-2 0-3-1.2-3-3.5h3V0Zm12 0c-4 0-7 3-7 7.5S20 14 24 14v-4c-2 0-3-1.2-3-3.5h3V0Z"/></svg>
         <p>"Knowing what a job's actually making while it's still on site, not weeks later, has changed how we quote the next one."</p>
         <div class="testi-who">
-          <div class="avatar ph small" data-slot="testimonial-3" title="Upload: Chris headshot"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="9" r="3.6" stroke="currentColor" stroke-width="1.6"/><path d="M4.5 19.5c1.6-3.2 4.4-4.8 7.5-4.8s5.9 1.6 7.5 4.8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></div>
+          <div class="avatar ph small has-image contain" data-slot="testimonial-3" style="background-image:url('/assets/images/testimonial-3.jpg')"></div>
           <div class="line"><b>Chris</b> <span>· Craft Build</span></div>
         </div>
       </div>
@@ -1205,23 +1197,23 @@
     <div class="sub">One system, working for your industry.</div>
     <div class="tile-row reveal-group">
       <div class="tile reveal">
-        <div class="tile-photo"><div class="ph" data-slot="industry-roofing" title="Upload: Roofing image"><svg viewBox="0 0 24 24" fill="none"><rect x="2.5" y="4.5" width="19" height="15" rx="2" stroke="currentColor" stroke-width="1.6"/><circle cx="8" cy="10" r="1.8" stroke="currentColor" stroke-width="1.4"/><path d="M4 17 9 12l3 3 4-5 4 6" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/></svg></div></div>
+        <div class="tile-photo"><div class="ph has-image" data-slot="industry-roofing" style="background-image:url('/assets/images/industry-roofing.jpg')"></div></div>
         <span>Roofing</span>
       </div>
       <div class="tile reveal">
-        <div class="tile-photo"><div class="ph" data-slot="industry-glazing" title="Upload: Glazing image"><svg viewBox="0 0 24 24" fill="none"><rect x="2.5" y="4.5" width="19" height="15" rx="2" stroke="currentColor" stroke-width="1.6"/><circle cx="8" cy="10" r="1.8" stroke="currentColor" stroke-width="1.4"/><path d="M4 17 9 12l3 3 4-5 4 6" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/></svg></div></div>
+        <div class="tile-photo"><div class="ph has-image" data-slot="industry-glazing" style="background-image:url('/assets/images/industry-glazing.jpg')"></div></div>
         <span>Glazing</span>
       </div>
       <div class="tile reveal">
-        <div class="tile-photo"><div class="ph" data-slot="industry-landscaping" title="Upload: Landscaping image"><svg viewBox="0 0 24 24" fill="none"><rect x="2.5" y="4.5" width="19" height="15" rx="2" stroke="currentColor" stroke-width="1.6"/><circle cx="8" cy="10" r="1.8" stroke="currentColor" stroke-width="1.4"/><path d="M4 17 9 12l3 3 4-5 4 6" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/></svg></div></div>
+        <div class="tile-photo"><div class="ph has-image" data-slot="industry-landscaping" style="background-image:url('/assets/images/industry-landscaping.jpg')"></div></div>
         <span>Landscaping</span>
       </div>
       <div class="tile reveal">
-        <div class="tile-photo"><div class="ph" data-slot="industry-construction" title="Upload: Construction image"><svg viewBox="0 0 24 24" fill="none"><rect x="2.5" y="4.5" width="19" height="15" rx="2" stroke="currentColor" stroke-width="1.6"/><circle cx="8" cy="10" r="1.8" stroke="currentColor" stroke-width="1.4"/><path d="M4 17 9 12l3 3 4-5 4 6" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/></svg></div></div>
+        <div class="tile-photo"><div class="ph has-image" data-slot="industry-construction" style="background-image:url('/assets/images/industry-construction.jpg')"></div></div>
         <span>Construction</span>
       </div>
       <div class="tile reveal">
-        <div class="tile-photo"><div class="ph" data-slot="industry-garden-rooms" title="Upload: Garden rooms image"><svg viewBox="0 0 24 24" fill="none"><rect x="2.5" y="4.5" width="19" height="15" rx="2" stroke="currentColor" stroke-width="1.6"/><circle cx="8" cy="10" r="1.8" stroke="currentColor" stroke-width="1.4"/><path d="M4 17 9 12l3 3 4-5 4 6" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/></svg></div></div>
+        <div class="tile-photo"><div class="ph has-image" data-slot="industry-garden-rooms" style="background-image:url('/assets/images/industry-garden-rooms.jpg')"></div></div>
         <span>Garden rooms</span>
       </div>
     </div>
@@ -1260,7 +1252,7 @@
         </div>
       </div>
       <div class="social-post reveal">
-        <div class="social-photo-wrap"><div class="ph" data-slot="social-post-2" title="Upload: Facebook post image 2"><svg viewBox="0 0 24 24" fill="none"><rect x="2.5" y="4.5" width="19" height="15" rx="2" stroke="currentColor" stroke-width="1.6"/><circle cx="8" cy="10" r="1.8" stroke="currentColor" stroke-width="1.4"/><path d="M4 17 9 12l3 3 4-5 4 6" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/></svg></div></div>
+        <div class="social-photo-wrap"><div class="ph has-image" data-slot="social-post-2" style="background-image:url('/assets/images/social-post-2.jpg')"></div></div>
         <div class="social-body">
           <div class="social-meta">
             <span class="fb-icon"><svg viewBox="0 0 24 24" fill="none" width="12" height="12"><path d="M15 8.5h2.5V5.2c-.4-.06-1.9-.2-3.6-.2-3.6 0-6 2.2-6 6.2v3.3H4.5v3.7H7.9V21h3.8v-2.8h3.4l.5-3.7h-3.9v-2.9c0-1.1.3-1.8 1.9-1.8Z" fill="#fff"/></svg></span>
@@ -1274,7 +1266,7 @@
         </div>
       </div>
       <div class="social-post reveal">
-        <div class="social-photo-wrap"><div class="ph" data-slot="social-post-3" title="Upload: Facebook post image 3"><svg viewBox="0 0 24 24" fill="none"><rect x="2.5" y="4.5" width="19" height="15" rx="2" stroke="currentColor" stroke-width="1.6"/><circle cx="8" cy="10" r="1.8" stroke="currentColor" stroke-width="1.4"/><path d="M4 17 9 12l3 3 4-5 4 6" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/></svg></div></div>
+        <div class="social-photo-wrap"><div class="ph has-image" data-slot="social-post-3" style="background-image:url('/assets/images/social-post-3.jpg')"></div></div>
         <div class="social-body">
           <div class="social-meta">
             <span class="fb-icon"><svg viewBox="0 0 24 24" fill="none" width="12" height="12"><path d="M15 8.5h2.5V5.2c-.4-.06-1.9-.2-3.6-.2-3.6 0-6 2.2-6 6.2v3.3H4.5v3.7H7.9V21h3.8v-2.8h3.4l.5-3.7h-3.9v-2.9c0-1.1.3-1.8 1.9-1.8Z" fill="#fff"/></svg></span>
@@ -1302,7 +1294,7 @@
           <p>Got questions about pricing, features or which package fits your business? Book time with the team — no pressure, just straight answers.</p>
         </div>
         <div class="presenter">
-          <div class="avatar ph small" data-slot="sales-rep-photo" title="Upload: photo — Lloyd"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="9" r="3.6" stroke="currentColor" stroke-width="1.6"/><path d="M4.5 19.5c1.6-3.2 4.4-4.8 7.5-4.8s5.9 1.6 7.5 4.8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></div>
+          <div class="avatar ph small has-image contain" data-slot="sales-rep-photo" style="background-image:url('/assets/images/sales-rep-photo.jpg')"></div>
           <div class="line"><b>Lloyd</b> <span>· Sales and Onboarding</span></div>
         </div>
         <div class="rep-contact">
@@ -1381,7 +1373,7 @@
         <div class="brand-mark" aria-hidden="true">
           <svg viewBox="0 0 40 40"><path fill="#4A4535" d="M 12.11 3.82 A 18 18 0 0 1 27.89 3.82 L 24.82 10.11 A 11 11 0 0 0 15.18 10.11 Z"/><path fill="#6B5C3F" d="M 30.07 5.08 A 18 18 0 0 1 37.96 18.74 L 30.97 19.23 A 11 11 0 0 0 26.15 10.88 Z"/><path fill="#8F7440" d="M 37.96 21.26 A 18 18 0 0 1 30.07 34.92 L 26.15 29.12 A 11 11 0 0 0 30.97 20.77 Z"/><path fill="#B48D3A" d="M 27.89 36.18 A 18 18 0 0 1 12.11 36.18 L 15.18 29.89 A 11 11 0 0 0 24.82 29.89 Z"/><path fill="#D9A62A" d="M 9.93 34.92 A 18 18 0 0 1 2.04 21.26 L 9.03 20.77 A 11 11 0 0 0 13.85 29.12 Z"/><path fill="#FCBD02" d="M 2.04 18.74 A 18 18 0 0 1 9.93 5.08 L 13.85 10.88 A 11 11 0 0 0 9.03 19.23 Z"/></svg>
         </div>
-        <div class="b">Trade<span>360</span></div>
+        <img class="brand-wordmark-img foot-logo" src="/assets/images/footer-logo.png" alt="Trade360">
         <span class="brand-tagline">Lead to Profit</span>
       </div>
     </div>
