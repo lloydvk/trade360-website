@@ -410,7 +410,29 @@
   .social-feed .section-head .head-copy{ max-width:62ch; }
   .fb-follow{ display:inline-flex; align-items:center; gap:8px; flex:none; }
   .social-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-top:32px; }
-  @media (max-width:860px){ .social-grid{ grid-template-columns:1fr; } }
+  .social-carousel{ position:relative; }
+  .social-arrow{ display:none; }
+  @media (max-width:860px){
+    .social-grid{
+      display:flex; flex-wrap:nowrap; gap:18px;
+      overflow-x:auto; scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch;
+      scrollbar-width:none;
+    }
+    .social-grid::-webkit-scrollbar{ display:none; }
+    .social-post{ flex:0 0 100%; scroll-snap-align:center; }
+    .social-arrow{
+      display:flex; align-items:center; justify-content:center;
+      position:absolute; top:50%; transform:translateY(-50%);
+      width:36px; height:36px; border-radius:999px; border:1px solid var(--line);
+      background:var(--bg); color:var(--ink); box-shadow:0 10px 24px rgba(20,20,30,.16);
+      cursor:pointer; z-index:2; padding:0;
+    }
+    .social-arrow-prev{ left:8px; }
+    .social-arrow-next{ right:8px; }
+    .social-arrow svg{ width:16px; height:16px; }
+    .social-arrow:disabled{ opacity:.3; cursor:default; }
+    @media (prefers-reduced-motion: reduce){ .social-grid{ scroll-behavior:auto; } }
+  }
   .social-post{ background:var(--bg); border:1px solid var(--line); border-radius:14px; overflow:hidden; display:flex; flex-direction:column; transition:transform .2s ease, box-shadow .2s ease; }
   .social-post:hover{ transform:translateY(-4px); box-shadow:0 16px 30px rgba(20,20,30,.08); }
   .social-photo-wrap{ position:relative; overflow:hidden; aspect-ratio:4/3; }
@@ -550,7 +572,7 @@
   }
   .tile:hover span{ color:var(--gold-5,#B8860B); }
   .tile span{ transition:color .18s ease; }
-  .video-thumb-wrap{ cursor:pointer; }
+  .video-thumb-wrap{ cursor:pointer; border:none; margin:0; padding:0; background:none; font-family:inherit; text-align:left; display:block; width:100%; }
   .play-btn{ transition:transform .2s ease, background .18s ease; }
   .play-btn svg path{ transition:fill .18s ease; }
   .video-thumb-wrap:hover .play-btn{ transform:translate(-50%,-50%) scale(1.08); background:rgba(18,20,28,.72); }
@@ -1161,16 +1183,16 @@
 <section class="video-help" id="pricing">
   <div class="wrap">
     <div class="video-grid">
-      <div class="video-thumb-wrap">
-        <div class="ph has-image" data-slot="package-video-thumb" style="background-image:url('/assets/images/package-video-thumb.jpg')"></div>
+      <button class="video-thumb-wrap" id="packageVideoOpen" type="button" aria-haspopup="dialog" aria-controls="videoLightbox">
+        <div class="ph has-image" data-slot="package-video-thumb" style="background-image:url('/assets/images/video-poster-zara.jpg')"></div>
         <div class="play-btn" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none"><path d="M9 7.5v9l7.5-4.5L9 7.5Z"/></svg>
         </div>
-      </div>
+      </button>
       <div class="video-copy">
         <div class="section-head">
           <div class="eyebrow">Not sure where to start?</div>
-          <h2>Watch and find the solution that's right for you.</h2>
+          <h2>Why choose Trade 360?</h2>
           <p>Short videos walking through what's included in each Trade 360 package, so you know exactly which one fits your business before you book a call.</p>
         </div>
         <div class="presenter">
@@ -1299,9 +1321,13 @@
         Like our Page
       </a>
     </div>
-    <div class="social-grid reveal-group">
+    <div class="social-carousel">
+      <button class="social-arrow social-arrow-prev" id="socialPrev" type="button" aria-label="Previous post">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M15 6l-6 6 6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="social-grid reveal-group" id="socialGrid">
       <div class="social-post reveal">
-        <div class="social-photo-wrap"><div class="ph" data-slot="social-post-1" title="Upload: Facebook post image 1"><svg viewBox="0 0 24 24" fill="none"><rect x="2.5" y="4.5" width="19" height="15" rx="2" stroke="currentColor" stroke-width="1.6"/><circle cx="8" cy="10" r="1.8" stroke="currentColor" stroke-width="1.4"/><path d="M4 17 9 12l3 3 4-5 4 6" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/></svg></div></div>
+        <div class="social-photo-wrap"><div class="ph has-image" data-slot="social-post-1" style="background-image:url('/assets/images/social-post-1.jpg')"></div></div>
         <div class="social-body">
           <div class="social-meta">
             <span class="fb-icon"><svg viewBox="0 0 24 24" fill="none" width="12" height="12"><path d="M15 8.5h2.5V5.2c-.4-.06-1.9-.2-3.6-.2-3.6 0-6 2.2-6 6.2v3.3H4.5v3.7H7.9V21h3.8v-2.8h3.4l.5-3.7h-3.9v-2.9c0-1.1.3-1.8 1.9-1.8Z" fill="#fff"/></svg></span>
@@ -1342,6 +1368,10 @@
           </div>
         </div>
       </div>
+      </div>
+      <button class="social-arrow social-arrow-next" id="socialNext" type="button" aria-label="Next post">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
     </div>
   </div>
 </section>
@@ -2047,6 +2077,28 @@
       }
     };
     videoTeaserOpen.addEventListener('click', openVideoLightbox);
+    var packageVideoOpen = document.getElementById('packageVideoOpen');
+    if (packageVideoOpen) packageVideoOpen.addEventListener('click', openVideoLightbox);
+
+    // ---- Facebook posts carousel (mobile) ----
+    var socialGrid = document.getElementById('socialGrid');
+    var socialPrev = document.getElementById('socialPrev');
+    var socialNext = document.getElementById('socialNext');
+    if (socialGrid && socialPrev && socialNext){
+      var scrollSocial = function(dir){
+        socialGrid.scrollBy({ left: dir * socialGrid.clientWidth, behavior: 'smooth' });
+      };
+      socialPrev.addEventListener('click', function(){ scrollSocial(-1); });
+      socialNext.addEventListener('click', function(){ scrollSocial(1); });
+      var updateSocialArrows = function(){
+        var maxScroll = socialGrid.scrollWidth - socialGrid.clientWidth;
+        socialPrev.disabled = socialGrid.scrollLeft <= 4;
+        socialNext.disabled = maxScroll <= 4 || socialGrid.scrollLeft >= maxScroll - 4;
+      };
+      socialGrid.addEventListener('scroll', updateSocialArrows, { passive: true });
+      window.addEventListener('resize', updateSocialArrows);
+      updateSocialArrows();
+    }
     if (videoLightboxClose) videoLightboxClose.addEventListener('click', closeVideoLightbox);
     if (videoLightbox){
       videoLightbox.addEventListener('click', function(e){
