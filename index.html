@@ -737,6 +737,64 @@
     cursor:pointer; font-size:14px; line-height:1; padding:0;
   }
   @media (max-width:560px){ .newsletter-bubble{ left:16px; bottom:16px; } .newsletter-form{ width:calc(100vw - 32px); } }
+
+  /* ---------- video teaser (fixed, bottom-right) ---------- */
+  .video-teaser{
+    position:fixed; right:20px; bottom:108px; z-index:1150; width:216px;
+    border-radius:16px; overflow:hidden; background:var(--navy-2);
+    box-shadow:0 14px 34px rgba(20,20,30,.28);
+    transition:transform .18s ease, box-shadow .18s ease, opacity .2s ease, visibility .2s;
+  }
+  .video-teaser:hover{ transform:translateY(-3px); box-shadow:0 18px 40px rgba(20,20,30,.34); }
+  .video-teaser.hidden{ opacity:0; visibility:hidden; pointer-events:none; }
+  .video-teaser .vt-open{ display:block; width:100%; border:none; margin:0; padding:0; background:none; cursor:pointer; text-align:left; font-family:inherit; }
+  .video-teaser .vt-thumb{ display:block; width:100%; position:relative; aspect-ratio:16/10; background-size:cover; background-position:center; }
+  .video-teaser .vt-play{
+    position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+    width:44px; height:44px; border-radius:999px; background:var(--gold);
+    display:flex; align-items:center; justify-content:center; box-shadow:0 8px 18px rgba(0,0,0,.32);
+    transition:transform .18s ease;
+  }
+  .video-teaser:hover .vt-play{ transform:translate(-50%,-50%) scale(1.08); }
+  .video-teaser .vt-play svg{ width:15px; height:15px; margin-left:2px; }
+  .video-teaser .vt-play svg path{ fill:var(--navy); }
+  .video-teaser .vt-close{
+    position:absolute; top:8px; right:8px; width:24px; height:24px; border-radius:999px;
+    background:rgba(18,20,28,.6); color:#fff; border:none; display:flex; align-items:center; justify-content:center;
+    cursor:pointer; z-index:2; transition:background .15s ease;
+  }
+  .video-teaser .vt-close:hover{ background:rgba(18,20,28,.85); }
+  .video-teaser .vt-close svg{ width:10px; height:10px; }
+  .video-teaser .vt-caption{ padding:10px 12px; font-size:10.5px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:#9AA0B4; }
+  .video-teaser .vt-caption b{ color:#fff; }
+  @media (max-width:640px){ .video-teaser{ right:14px; width:168px; } }
+  @media (prefers-reduced-motion: reduce){ .video-teaser{ transition:none; } }
+
+  /* ---------- video lightbox ---------- */
+  .video-lightbox{
+    position:fixed; inset:0; z-index:1500; display:flex; align-items:center; justify-content:center; padding:24px;
+    background:rgba(11,12,16,.86); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);
+    opacity:0; visibility:hidden; transition:opacity .22s ease, visibility .22s;
+  }
+  .video-lightbox.open{ opacity:1; visibility:visible; }
+  .video-lightbox-inner{
+    position:relative; width:100%; max-width:720px; background:var(--navy-2); border-radius:18px; overflow:hidden;
+    box-shadow:0 30px 70px rgba(0,0,0,.5); transform:scale(.96); transition:transform .22s ease;
+  }
+  .video-lightbox.open .video-lightbox-inner{ transform:scale(1); }
+  .video-lightbox video{ width:100%; display:block; aspect-ratio:16/9; background:#000; }
+  .video-lightbox-caption{ display:flex; align-items:center; justify-content:space-between; gap:16px; padding:18px 22px; flex-wrap:wrap; }
+  .video-lightbox-caption h3{ color:#fff; font-size:18px; font-weight:800; }
+  .video-lightbox-caption p{ color:#A9AEC0; font-size:12.5px; margin-top:3px; }
+  .video-lightbox-close{
+    position:absolute; top:14px; right:14px; width:36px; height:36px; border-radius:999px;
+    background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.22); color:#fff;
+    display:flex; align-items:center; justify-content:center; cursor:pointer; z-index:2; transition:background .15s ease;
+  }
+  .video-lightbox-close:hover{ background:rgba(255,255,255,.22); }
+  .video-lightbox-close svg{ width:14px; height:14px; }
+  @media (max-width:560px){ .video-lightbox-caption{ padding:16px; } .video-lightbox-caption .btn{ width:100%; justify-content:center; } }
+  @media (prefers-reduced-motion: reduce){ .video-lightbox, .video-lightbox-inner{ transition:none; } }
 </style>
 
 <!-- ================= PROMO BANNER ================= -->
@@ -1381,6 +1439,39 @@
 </footer>
 
 <!-- ================= COOKIE BANNER (fixed, bottom-right) ================= -->
+<!-- ================= VIDEO TEASER + LIGHTBOX ================= -->
+<div class="video-teaser" id="videoTeaser">
+  <button class="vt-close" id="videoTeaserClose" type="button" aria-label="Dismiss video">
+    <svg viewBox="0 0 16 16" fill="none"><path d="M3 3l10 10M13 3 3 13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+  </button>
+  <button class="vt-open" id="videoTeaserOpen" type="button" aria-haspopup="dialog" aria-controls="videoLightbox">
+    <span class="vt-thumb" style="background-image:url('/assets/images/video-poster-zara.jpg')">
+      <span class="vt-play" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M9 7.5v9l7.5-4.5L9 7.5Z"/></svg></span>
+    </span>
+    <span class="vt-caption">Zara on <b>Trade360</b> &middot; 33s</span>
+  </button>
+</div>
+
+<div class="video-lightbox" id="videoLightbox" role="dialog" aria-modal="true" aria-label="Why choose Trade 360?">
+  <div class="video-lightbox-inner">
+    <button class="video-lightbox-close" id="videoLightboxClose" type="button" aria-label="Close video">
+      <svg viewBox="0 0 16 16" fill="none"><path d="M3 3l10 10M13 3 3 13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+    </button>
+    <video id="videoLightboxPlayer" controls playsinline preload="none" poster="/assets/images/video-poster-zara.jpg">
+      <source src="/assets/video/why-choose-trade360.mp4" type="video/mp4">
+    </video>
+    <div class="video-lightbox-caption">
+      <div>
+        <h3>Why choose Trade 360?</h3>
+        <p>Open the video</p>
+      </div>
+      <a class="btn btn-gold" href="#demo">Book a demo
+        <svg viewBox="0 0 16 16" fill="none" width="14" height="14"><path d="M4 12 12 4M12 4H6M12 4v6" stroke="#1C2130" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+  </div>
+</div>
+
 <div class="cookie-banner" id="cookieBanner">
   <p>We use cookies to improve your experience on this site.</p>
   <button class="btn btn-gold" id="cookieAccept" type="button">Accept</button>
@@ -1867,6 +1958,50 @@
         setTimeout(swap, 250);
       }
     }, 5000);
+  }
+
+  // ---- video teaser + lightbox ----
+  var videoTeaser = document.getElementById('videoTeaser');
+  var videoTeaserOpen = document.getElementById('videoTeaserOpen');
+  var videoTeaserClose = document.getElementById('videoTeaserClose');
+  var videoLightbox = document.getElementById('videoLightbox');
+  var videoLightboxClose = document.getElementById('videoLightboxClose');
+  var videoLightboxPlayer = document.getElementById('videoLightboxPlayer');
+  if (videoTeaser && videoTeaserOpen){
+    var videoTeaserDismissed = false;
+    try { videoTeaserDismissed = localStorage.getItem('trade360VideoTeaserDismissed') === '1'; } catch(e){}
+    if (videoTeaserDismissed) videoTeaser.classList.add('hidden');
+    if (videoTeaserClose){
+      videoTeaserClose.addEventListener('click', function(e){
+        e.stopPropagation();
+        videoTeaser.classList.add('hidden');
+        try { localStorage.setItem('trade360VideoTeaserDismissed', '1'); } catch(e){}
+      });
+    }
+    var openVideoLightbox = function(){
+      if (!videoLightbox) return;
+      videoLightbox.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    };
+    var closeVideoLightbox = function(){
+      if (!videoLightbox) return;
+      videoLightbox.classList.remove('open');
+      document.body.style.overflow = '';
+      if (videoLightboxPlayer){
+        videoLightboxPlayer.pause();
+        videoLightboxPlayer.currentTime = 0;
+      }
+    };
+    videoTeaserOpen.addEventListener('click', openVideoLightbox);
+    if (videoLightboxClose) videoLightboxClose.addEventListener('click', closeVideoLightbox);
+    if (videoLightbox){
+      videoLightbox.addEventListener('click', function(e){
+        if (e.target === videoLightbox) closeVideoLightbox();
+      });
+    }
+    document.addEventListener('keydown', function(e){
+      if (e.key === 'Escape' && videoLightbox && videoLightbox.classList.contains('open')) closeVideoLightbox();
+    });
   }
 })();
 </script>
