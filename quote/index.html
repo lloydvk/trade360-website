@@ -248,7 +248,10 @@
   .foot-brand{ display:flex; flex-direction:column; gap:5px; }
   .foot-brand .brand{ background:transparent; border-color:rgba(255,255,255,.16); color:#fff; }
   .foot-brand .brand-tagline{ color:#8B90A3; border-left-color:rgba(255,255,255,.16); }
-  @media (max-width:720px){ footer .wrap{ flex-direction:column; align-items:flex-start; gap:24px; } }
+  @media (max-width:720px){
+    footer .wrap{ flex-direction:column; align-items:flex-start; gap:24px; }
+    .foot-links{ flex-direction:column; align-items:flex-start; gap:14px; }
+  }
 
   /* ---------- video teaser (fixed, bottom-right) ---------- */
   .video-teaser{

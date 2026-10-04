@@ -518,7 +518,10 @@
   }
   .foot-social-icon svg{ width:16px; height:16px; }
   .foot-social-icon:hover{ background:var(--gold); color:var(--navy); transform:translateY(-2px); }
-  @media (max-width:720px){ footer .wrap{ flex-direction:column; align-items:flex-start; gap:24px; } }
+  @media (max-width:720px){
+    footer .wrap{ flex-direction:column; align-items:flex-start; gap:24px; }
+    .foot-links{ flex-direction:column; align-items:flex-start; gap:14px; }
+  }
 
   /* shared ring-icon svg fragment used inline via <use> is avoided for CSP simplicity; defined per-instance below */
 
@@ -752,7 +755,8 @@
   @media (max-width:560px){ .cookie-banner{ left:16px; right:16px; max-width:none; bottom:16px; } }
 
   /* ---------- newsletter bubble (fixed, bottom-left) ---------- */
-  .newsletter-bubble{ position:fixed; left:20px; bottom:20px; z-index:1200; }
+  .newsletter-bubble{ position:fixed; left:20px; bottom:20px; z-index:1200; transition:opacity .2s ease; }
+  .newsletter-bubble.footer-gated{ opacity:0; visibility:hidden; pointer-events:none; }
   .newsletter-toggle{
     display:inline-flex; align-items:center; gap:8px; background:var(--navy); color:#fff;
     font-weight:700; font-size:13.5px; padding:13px 18px; border-radius:999px; border:none; cursor:pointer;
@@ -1826,6 +1830,32 @@
         });
       });
     }
+  }
+
+  // On mobile, hide the newsletter bubble once the footer scrolls into
+  // view so it doesn't sit on top of the footer content; bring it back
+  // if the visitor scrolls back up away from the footer.
+  var newsletterBubbleEl = document.getElementById('newsletterBubble');
+  var footerGateEl = document.querySelector('footer');
+  var isMobileNewsletter = function(){ return window.matchMedia('(max-width: 640px)').matches; };
+  if (newsletterBubbleEl && footerGateEl && 'IntersectionObserver' in window){
+    var footerGateObserver = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if (!isMobileNewsletter()){
+          newsletterBubbleEl.classList.remove('footer-gated');
+          return;
+        }
+        if (entry.isIntersecting){
+          newsletterBubbleEl.classList.add('footer-gated');
+        } else {
+          newsletterBubbleEl.classList.remove('footer-gated');
+        }
+      });
+    }, { threshold: 0 });
+    footerGateObserver.observe(footerGateEl);
+    window.addEventListener('resize', function(){
+      if (!isMobileNewsletter()) newsletterBubbleEl.classList.remove('footer-gated');
+    });
   }
 
   // ---- inline newsletter form (speak to a sales rep section) ----
