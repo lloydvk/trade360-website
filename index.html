@@ -768,7 +768,7 @@
     transition:transform .18s ease, box-shadow .18s ease, opacity .2s ease, visibility .2s;
   }
   .video-teaser:hover{ transform:translateY(-3px); box-shadow:0 18px 40px rgba(20,20,30,.24); }
-  .video-teaser.hidden{ opacity:0; visibility:hidden; pointer-events:none; }
+  .video-teaser.hidden, .video-teaser.scroll-gated{ opacity:0; visibility:hidden; pointer-events:none; }
   .video-teaser .vt-open{ display:block; width:100%; border:none; margin:0; padding:0; background:none; cursor:pointer; text-align:left; font-family:inherit; }
   .video-teaser .vt-thumb{ display:block; width:100%; position:relative; aspect-ratio:16/10; background-size:cover; background-position:center; }
   .video-teaser .vt-play{
@@ -2035,7 +2035,7 @@
       return a.right > b.left && a.left < b.right && a.bottom > b.top && a.top < b.bottom;
     };
     var repositionVideoTeaser = function(){
-      if (videoTeaser.classList.contains('hidden')) return;
+      if (videoTeaser.classList.contains('hidden') || videoTeaser.classList.contains('scroll-gated')) return;
       var gap = 14, vh = window.innerHeight;
       // Measure at the default position first -- only push the teaser up when
       // another fixed/floating element actually intersects it there, never
@@ -2072,6 +2072,36 @@
     window.addEventListener('scroll', repositionVideoTeaser, { passive: true });
     var cookieAcceptBtn = document.getElementById('cookieAccept');
     if (cookieAcceptBtn) cookieAcceptBtn.addEventListener('click', function(){ setTimeout(repositionVideoTeaser, 0); });
+
+    // On mobile, don't show the teaser over the top section -- wait until
+    // the visitor has scrolled past it, in either direction.
+    var heroGateEl = document.querySelector('.hero, .intro');
+    var isMobileTeaser = function(){ return window.matchMedia('(max-width: 640px)').matches; };
+    if (heroGateEl && !videoTeaserDismissed){
+      if (isMobileTeaser()) videoTeaser.classList.add('scroll-gated');
+      if ('IntersectionObserver' in window){
+        var heroGateObserver = new IntersectionObserver(function(entries){
+          entries.forEach(function(entry){
+            if (!isMobileTeaser()){
+              videoTeaser.classList.remove('scroll-gated');
+              return;
+            }
+            if (entry.isIntersecting){
+              videoTeaser.classList.add('scroll-gated');
+            } else {
+              videoTeaser.classList.remove('scroll-gated');
+              repositionVideoTeaser();
+            }
+          });
+        }, { threshold: 0 });
+        heroGateObserver.observe(heroGateEl);
+      } else {
+        videoTeaser.classList.remove('scroll-gated');
+      }
+      window.addEventListener('resize', function(){
+        if (!isMobileTeaser()) videoTeaser.classList.remove('scroll-gated');
+      });
+    }
     if (videoTeaserClose){
       videoTeaserClose.addEventListener('click', function(e){
         e.stopPropagation();
