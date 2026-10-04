@@ -79,6 +79,7 @@
   .brand-mark svg{ width:34px; height:34px; animation:brandSpin 14s linear infinite; }
   .brand-wordmark-img{ height:46px; width:auto; display:block; }
   .foot-brand .brand-wordmark-img{ height:68px; }
+  @media (max-width:640px){ .foot-brand .brand-wordmark-img{ height:46px; } }
   @keyframes brandSpin{ from{ transform:rotate(0deg); } to{ transform:rotate(360deg); } }
   @media (prefers-reduced-motion: reduce){ .brand-mark svg{ animation:none; } }
   .brand{ display:flex; align-items:center; gap:9px; height:46px; padding:0 16px; border-radius:10px; border:1.5px dashed var(--line); font-weight:700; font-size:16px; color:var(--navy); }
