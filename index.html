@@ -809,7 +809,19 @@
     box-shadow:0 30px 70px rgba(0,0,0,.5); transform:scale(.96); transition:transform .22s ease;
   }
   .video-lightbox.open .video-lightbox-inner{ transform:scale(1); }
+  .video-lightbox-media{ position:relative; }
   .video-lightbox video{ width:100%; display:block; aspect-ratio:16/9; background:#000; }
+  .video-lightbox-play{
+    position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+    width:64px; height:64px; border-radius:999px; background:var(--gold); border:none;
+    display:flex; align-items:center; justify-content:center; cursor:pointer;
+    box-shadow:0 12px 30px rgba(0,0,0,.45); transition:transform .18s ease, opacity .18s ease, visibility .18s;
+  }
+  .video-lightbox-play:hover{ transform:translate(-50%,-50%) scale(1.08); }
+  .video-lightbox-play svg{ width:24px; height:24px; margin-left:3px; }
+  .video-lightbox-play svg path{ fill:var(--navy); }
+  .video-lightbox-play.hidden{ opacity:0; visibility:hidden; pointer-events:none; }
+  @media (prefers-reduced-motion: reduce){ .video-lightbox-play{ transition:none; } }
   .video-lightbox-caption{ display:flex; align-items:center; justify-content:space-between; gap:16px; padding:18px 22px; flex-wrap:wrap; }
   .video-lightbox-caption h3{ color:#fff; font-size:18px; font-weight:800; }
   .video-lightbox-caption p{ color:#A9AEC0; font-size:12.5px; margin-top:3px; }
@@ -1495,13 +1507,18 @@
     <button class="video-lightbox-close" id="videoLightboxClose" type="button" aria-label="Close video">
       <svg viewBox="0 0 16 16" fill="none"><path d="M3 3l10 10M13 3 3 13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
     </button>
-    <video id="videoLightboxPlayer" controls playsinline preload="none" poster="/assets/images/video-poster-zara.jpg">
-      <source src="/assets/video/why-choose-trade360.mp4" type="video/mp4">
-    </video>
+    <div class="video-lightbox-media">
+      <video id="videoLightboxPlayer" controls playsinline preload="none" poster="/assets/images/video-poster-zara.jpg">
+        <source src="/assets/video/why-choose-trade360.mp4" type="video/mp4">
+      </video>
+      <button class="video-lightbox-play" id="videoLightboxPlay" type="button" aria-label="Play video">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M9 7.5v9l7.5-4.5L9 7.5Z"/></svg>
+      </button>
+    </div>
     <div class="video-lightbox-caption">
       <div>
         <h3>Why choose Trade 360?</h3>
-        <p>Open the video</p>
+        <p>Zara &middot; 33s intro</p>
       </div>
       <a class="btn btn-gold" href="#demo">Book a demo
         <svg viewBox="0 0 16 16" fill="none" width="14" height="14"><path d="M4 12 12 4M12 4H6M12 4v6" stroke="#1C2130" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -2077,6 +2094,12 @@
       }
     };
     videoTeaserOpen.addEventListener('click', openVideoLightbox);
+    var videoLightboxPlay = document.getElementById('videoLightboxPlay');
+    if (videoLightboxPlay && videoLightboxPlayer){
+      videoLightboxPlay.addEventListener('click', function(){ videoLightboxPlayer.play(); });
+      videoLightboxPlayer.addEventListener('play', function(){ videoLightboxPlay.classList.add('hidden'); });
+      videoLightboxPlayer.addEventListener('pause', function(){ videoLightboxPlay.classList.remove('hidden'); });
+    }
     var packageVideoOpen = document.getElementById('packageVideoOpen');
     if (packageVideoOpen) packageVideoOpen.addEventListener('click', openVideoLightbox);
 
