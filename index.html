@@ -375,7 +375,29 @@
   .testi h2{ font-weight:800; }
   .testi .sub{ font-size:12px; color:var(--ink-soft); margin-top:6px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; }
   .testi-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-top:32px; }
-  @media (max-width:860px){ .testi-grid{ grid-template-columns:1fr; } }
+  .testi-carousel{ position:relative; }
+  .testi-arrow{ display:none; }
+  @media (max-width:860px){
+    .testi-grid{
+      display:flex; flex-wrap:nowrap; grid-template-columns:none; gap:18px;
+      overflow-x:auto; scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch;
+      scrollbar-width:none;
+    }
+    .testi-grid::-webkit-scrollbar{ display:none; }
+    .testi-card{ flex:0 0 100%; scroll-snap-align:center; }
+    .testi-arrow{
+      display:flex; align-items:center; justify-content:center;
+      position:absolute; top:50%; transform:translateY(-50%);
+      width:36px; height:36px; border-radius:999px; border:1px solid var(--line);
+      background:var(--bg); color:var(--ink); box-shadow:0 10px 24px rgba(20,20,30,.16);
+      cursor:pointer; z-index:2; padding:0;
+    }
+    .testi-arrow-prev{ left:-6px; }
+    .testi-arrow-next{ right:-6px; }
+    .testi-arrow svg{ width:16px; height:16px; }
+    .testi-arrow:disabled{ opacity:.3; cursor:default; }
+    @media (prefers-reduced-motion: reduce){ .testi-grid{ scroll-behavior:auto; } }
+  }
   .testi-card{ background:var(--bg); border:1px solid var(--line); border-radius:12px; padding:20px 22px 22px; }
   .testi-card svg.quote{ width:26px; height:21px; color:var(--gold); }
   .testi-card p{ font-size:14px; line-height:1.5; margin-top:8px; color:var(--ink); font-weight:500; }
@@ -1294,7 +1316,11 @@
   <div class="wrap">
     <h2>Built around real businesses.</h2>
     <div class="sub">Illustrative testimonials — example copy and portraits</div>
-    <div class="testi-grid reveal-group">
+    <div class="testi-carousel">
+      <button class="testi-arrow testi-arrow-prev" id="testiPrev" type="button" aria-label="Previous testimonial">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M15 6l-6 6 6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="testi-grid reveal-group" id="testiGrid">
       <div class="testi-card reveal">
         <svg class="quote" viewBox="0 0 32 26" fill="currentColor"><path d="M12 0c-4 0-7 3-7 7.5S8 14 12 14v-4c-2 0-3-1.2-3-3.5h3V0Zm12 0c-4 0-7 3-7 7.5S20 14 24 14v-4c-2 0-3-1.2-3-3.5h3V0Z"/></svg>
         <p>"Having enquiries, quotes and jobs all in one place has taken so much guesswork out of the week for our whole team."</p>
@@ -1319,6 +1345,10 @@
           <div class="line"><b>Chris</b> <span>· Craft Build</span></div>
         </div>
       </div>
+      </div>
+      <button class="testi-arrow testi-arrow-next" id="testiNext" type="button" aria-label="Next testimonial">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
     </div>
   </div>
 </section>
@@ -2215,6 +2245,26 @@
       socialGrid.addEventListener('scroll', updateSocialArrows, { passive: true });
       window.addEventListener('resize', updateSocialArrows);
       updateSocialArrows();
+    }
+
+    // ---- Testimonials carousel (mobile) ----
+    var testiGrid = document.getElementById('testiGrid');
+    var testiPrev = document.getElementById('testiPrev');
+    var testiNext = document.getElementById('testiNext');
+    if (testiGrid && testiPrev && testiNext){
+      var scrollTesti = function(dir){
+        testiGrid.scrollBy({ left: dir * testiGrid.clientWidth, behavior: 'smooth' });
+      };
+      testiPrev.addEventListener('click', function(){ scrollTesti(-1); });
+      testiNext.addEventListener('click', function(){ scrollTesti(1); });
+      var updateTestiArrows = function(){
+        var maxScroll = testiGrid.scrollWidth - testiGrid.clientWidth;
+        testiPrev.disabled = testiGrid.scrollLeft <= 4;
+        testiNext.disabled = maxScroll <= 4 || testiGrid.scrollLeft >= maxScroll - 4;
+      };
+      testiGrid.addEventListener('scroll', updateTestiArrows, { passive: true });
+      window.addEventListener('resize', updateTestiArrows);
+      updateTestiArrows();
     }
     if (videoLightboxClose) videoLightboxClose.addEventListener('click', closeVideoLightbox);
     if (videoLightbox){
