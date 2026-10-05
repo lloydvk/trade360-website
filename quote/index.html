@@ -115,7 +115,8 @@
   .nav-links a:hover{ opacity:1; }
   .nav-links a::after{ content:""; position:absolute; left:0; right:100%; bottom:-6px; height:2px; background:var(--gold); transition:right .18s ease; }
   .nav-links a:hover::after{ right:0; }
-  #solutionsNavItem .dd-trigger::after, #solutionsNavItem .dropdown-panel a::after{ content:none; }
+  #solutionsNavItem .dd-trigger::after, #solutionsNavItem .dropdown-panel a::after,
+  #industriesNavItem .dd-trigger::after, #industriesNavItem .dropdown-panel a::after{ content:none; }
   .nav-links a.current::after{ right:0; }
   @media (min-width:960px){ .nav-links{ display:flex; } }
   .nav-links svg{ width:11px; height:11px; opacity:.7; }
