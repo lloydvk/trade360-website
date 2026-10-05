@@ -122,7 +122,8 @@ something that can be set from the code):
 
 1. Netlify → your site → **Site configuration → Forms → Form notifications**.
 2. **Add notification → Email notification.**
-3. Enter the email address you want submissions sent to, and save.
+3. Enter **`lloyd@bmbifoldingdoors.co.uk`** (the inbox to use for now) as the
+   address, and save.
 4. Repeat step 2 for each form you want emailed separately — there are two:
    - **`newsletter`** — every "Subscribe" button (homepage footer-area
      signup and the floating bubble) submits here, with just an email
@@ -131,8 +132,8 @@ something that can be set from the code):
      scrolls to the form in the gold band near the bottom of the homepage,
      which submits here with name, company, email, phone and an optional
      message.
-   (You can point both at the same inbox, or two different ones — your
-   call.)
+   (Both are set to the same inbox above for now — easy to point either one
+   somewhere else later from this same screen.)
 5. Submit each form once yourself (see the checklist below) to confirm the
    email actually arrives — spam/junk folders are worth a check the first
    time.
