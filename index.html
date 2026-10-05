@@ -236,14 +236,18 @@
   }
   @keyframes heroScrollCuePulse{ 0%,100%{ transform:translateX(-50%) translateY(0); opacity:.8; } 50%{ transform:translateX(-50%) translateY(7px); opacity:1; } }
   @media (prefers-reduced-motion: reduce){ .hero-scroll-cue{ animation:none; } }
-  .float-card .ok{ width:26px; height:26px; border-radius:999px; background:var(--gold); display:flex; align-items:center; justify-content:center; flex:none; }
-  .float-card .ok svg{ width:14px; height:14px; }
+  .float-card .ok{ width:32px; height:32px; border-radius:999px; background:#fff; box-shadow:0 2px 6px rgba(28,33,48,.16); display:flex; align-items:center; justify-content:center; flex:none; }
+  .float-card .ok svg{ width:23px; height:23px; animation:brandSpin 14s linear infinite; }
   .float-card .fc-body{ min-width:0; flex:1; }
   .float-card b{ display:block; font-size:12.5px; font-weight:700; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; transition:opacity .25s ease, transform .25s ease; }
   .float-card span{ display:block; font-size:11px; color:#7A7E8E; line-height:1.35; margin-top:2px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; transition:opacity .25s ease, transform .25s ease; }
-  @media (max-width:940px){ .float-card{ top:auto; bottom:14px; right:14px; width:50%; } }
+  @media (max-width:940px){
+    .float-card{ top:auto; bottom:14px; right:14px; width:58%; height:auto; min-height:60px; }
+    .float-card b{ white-space:normal; font-size:11.5px; line-height:1.25; }
+  }
+  @media (max-width:420px){ .float-card{ width:66%; } }
   .float-card.swap b, .float-card.swap span{ opacity:0; transform:translateY(3px); }
-  @media (prefers-reduced-motion: reduce){ .float-card b, .float-card span{ transition:none; } }
+  @media (prefers-reduced-motion: reduce){ .float-card b, .float-card span{ transition:none; } .float-card .ok svg{ animation:none; } }
 
   /* ---------- trust strip ---------- */
   .strip{ border-bottom:1px solid var(--line); }
@@ -1058,8 +1062,8 @@
   <div class="hero-photo-wrap">
     <div class="ph on-dark has-image" data-slot="hero-photo" style="background-image:url('/assets/images/hero-photo.jpg')"></div>
     <div class="float-card" id="pillarFloatCard">
-      <div class="ok"><svg viewBox="0 0 16 16" fill="none"><path d="M3.5 8.5 6.5 11.5 12.5 4.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-      <div class="fc-body"><b id="pillarFloatTitle">Marketing</b><span id="pillarFloatText">Capture every enquiry automatically</span></div>
+      <div class="ok" id="pillarFloatIcon"><svg class="ring" viewBox="0 0 40 40"><path fill="var(--gold)" d="M 12.11 3.82 A 18 18 0 0 1 27.89 3.82 L 24.82 10.11 A 11 11 0 0 0 15.18 10.11 Z"/><path fill="var(--ring-pale)" d="M 30.07 5.08 A 18 18 0 0 1 37.96 18.74 L 30.97 19.23 A 11 11 0 0 0 26.15 10.88 Z"/><path fill="var(--ring-pale)" d="M 37.96 21.26 A 18 18 0 0 1 30.07 34.92 L 26.15 29.12 A 11 11 0 0 0 30.97 20.77 Z"/><path fill="var(--ring-pale)" d="M 27.89 36.18 A 18 18 0 0 1 12.11 36.18 L 15.18 29.89 A 11 11 0 0 0 24.82 29.89 Z"/><path fill="var(--ring-pale)" d="M 9.93 34.92 A 18 18 0 0 1 2.04 21.26 L 9.03 20.77 A 11 11 0 0 0 13.85 29.12 Z"/><path fill="var(--ring-pale)" d="M 2.04 18.74 A 18 18 0 0 1 9.93 5.08 L 13.85 10.88 A 11 11 0 0 0 9.03 19.23 Z"/></svg></div>
+      <div class="fc-body"><b id="pillarFloatTitle">One AI. Start to finish.</b><span id="pillarFloatText">Marketing</span></div>
     </div>
     <button class="hero-scroll-cue" id="heroScrollCue" type="button" aria-label="Scroll down to read more">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
@@ -2256,19 +2260,22 @@
     });
   });
 
-  // ---- hero floating card: cycle through the pillars ----
+  // ---- hero floating card: the title stays fixed ("One AI. Start to
+  // finish."); the line beneath cycles through the six pillar names, with
+  // each pillar's own progress-ring icon swapping in alongside it (the ring
+  // spins slowly and continuously via CSS, independent of this cycle) ----
   var floatCard = document.getElementById('pillarFloatCard');
-  var floatTitle = document.getElementById('pillarFloatTitle');
+  var floatIcon = document.getElementById('pillarFloatIcon');
   var floatText = document.getElementById('pillarFloatText');
-  if (floatCard && floatTitle && floatText && pillarData.length){
+  if (floatCard && floatIcon && floatText && pillarData.length){
     var pillarIdx = 0;
     var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     setInterval(function(){
       pillarIdx = (pillarIdx + 1) % pillarData.length;
       var next = pillarData[pillarIdx];
       var swap = function(){
-        floatTitle.textContent = next.title;
-        floatText.textContent = next.text;
+        floatText.textContent = next.title;
+        if (next.ringHTML) floatIcon.innerHTML = next.ringHTML;
         floatCard.classList.remove('swap');
       };
       if (reduceMotion){
