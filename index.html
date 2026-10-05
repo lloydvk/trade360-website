@@ -540,7 +540,7 @@
 
   /* ---------- footer ---------- */
   footer{ background:var(--navy-2); color:#8B90A3; padding-block:34px; }
-  footer .wrap{ display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:18px; }
+  footer .wrap{ display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:18px; position:relative; z-index:1; }
   .foot-brand{ display:flex; flex-direction:column; gap:5px; }
   .foot-brand .b{ display:flex; align-items:center; gap:9px; font-weight:800; font-size:19px; color:#fff; }
   .foot-brand .b span{ color:var(--gold); }
@@ -587,8 +587,10 @@
   .hero-photo-wrap .ph.has-image{
     transform-origin:center;
     animation:heroPhotoZoom 17s ease-in-out infinite alternate;
-    transition:border-color .18s ease;
+    transition:border-color .18s ease, scale .6s ease;
+    scale:1;
   }
+  .hero-photo-wrap .ph.has-image:hover{ scale:1.12; }
   @keyframes heroPhotoZoom{
     from{ transform:scale(1); }
     to{ transform:scale(1.055); }
@@ -597,6 +599,7 @@
     .ai-visual.has-image, .video-thumb-wrap .ph.has-image{ transition:border-color .18s ease; }
     .ai-visual.has-image:hover, .video-thumb-wrap .ph.has-image:hover{ transform:none; }
     .hero-photo-wrap .ph.has-image{ animation:none; }
+    .hero-photo-wrap .ph.has-image:hover{ scale:1; }
   }
   .ph.uploading{ pointer-events:none; }
   .ph.uploading::after{
@@ -705,11 +708,13 @@
   }
 
   footer{ position:relative; }
-  footer::before{
-    content:""; position:absolute; inset:0; pointer-events:none;
-    background-image:radial-gradient(circle, rgba(255,255,255,.05) 1px, transparent 1.4px);
-    background-size:22px 22px;
-  }
+  footer::before{ content:""; position:absolute; inset:0; z-index:0; pointer-events:none; background:
+      radial-gradient(circle at 88% 8%, rgba(252,189,2,.10), transparent 45%),
+      radial-gradient(280px 280px at 78% 82%, rgba(252,189,2,.10), transparent 70%),
+      repeating-linear-gradient(0deg, rgba(255,255,255,.02) 0 1px, transparent 1px 64px),
+      repeating-linear-gradient(90deg, rgba(255,255,255,.02) 0 1px, transparent 1px 64px);
+      animation:driftGlow 16s ease-in-out infinite alternate; }
+  @media (prefers-reduced-motion: reduce){ footer::before{ animation:none; } }
 
   /* ---------- scroll reveal ---------- */
   .reveal{ opacity:0; transform:translateY(22px); transition:opacity .6s ease, transform .6s ease; }
