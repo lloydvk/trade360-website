@@ -584,11 +584,21 @@
   .ph.has-image.contain{ background-size:contain; background-repeat:no-repeat; background-position:center; }
   .presenter .avatar.ph.has-image.contain{ background-size:cover; }
   .ph:not(.has-image) .edit-overlay{ display:none; }
-  .hero-photo-wrap .ph.has-image, .ai-visual.has-image, .video-thumb-wrap .ph.has-image{ transition:transform .7s ease, border-color .18s ease; }
-  .hero-photo-wrap .ph.has-image:hover, .ai-visual.has-image:hover, .video-thumb-wrap .ph.has-image:hover{ transform:scale(1.08); }
+  .ai-visual.has-image, .video-thumb-wrap .ph.has-image{ transition:transform .7s ease, border-color .18s ease; }
+  .ai-visual.has-image:hover, .video-thumb-wrap .ph.has-image:hover{ transform:scale(1.08); }
+  .hero-photo-wrap .ph.has-image{
+    transform-origin:center;
+    animation:heroPhotoZoom 17s ease-in-out infinite alternate;
+    transition:border-color .18s ease;
+  }
+  @keyframes heroPhotoZoom{
+    from{ transform:scale(1); }
+    to{ transform:scale(1.055); }
+  }
   @media (prefers-reduced-motion: reduce){
-    .hero-photo-wrap .ph.has-image, .ai-visual.has-image, .video-thumb-wrap .ph.has-image{ transition:border-color .18s ease; }
-    .hero-photo-wrap .ph.has-image:hover, .ai-visual.has-image:hover, .video-thumb-wrap .ph.has-image:hover{ transform:none; }
+    .ai-visual.has-image, .video-thumb-wrap .ph.has-image{ transition:border-color .18s ease; }
+    .ai-visual.has-image:hover, .video-thumb-wrap .ph.has-image:hover{ transform:none; }
+    .hero-photo-wrap .ph.has-image{ animation:none; }
   }
   .ph.uploading{ pointer-events:none; }
   .ph.uploading::after{
