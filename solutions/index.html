@@ -1,0 +1,1185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trade 360 Solutions &amp; Plan Comparison</title>
+<meta name="description" content="See exactly which Trade 360 features come with Foundation, Growth and Pro — every pillar, every plan, compared in one table.">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#1C2130">
+</head>
+<body>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#FFFFFF;
+    --bg-soft:#F7F8FB;
+    --navy:#1C2130;
+    --navy-2:#222933;
+    --ink:#1C2130;
+    --ink-soft:#5B6178;
+    --line:#E7E9EF;
+    --gold:#FCBD02;
+    --gold-2:#FDCB3C;
+    --shadow: 0 1px 2px rgba(20,20,30,.03), 0 10px 24px rgba(20,20,30,.05);
+    --good:#1E9E6B;
+    --good-bg:#E7F7EF;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#14161C; --bg-soft:#191C24; --navy:#0B0C10; --navy-2:#101319;
+      --ink:#F1F1F4; --ink-soft:#A5A9B8; --line:#2A2D36;
+      --shadow: 0 1px 2px rgba(0,0,0,.4), 0 16px 32px rgba(0,0,0,.45);
+      --good-bg:#123326;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#14161C; --bg-soft:#191C24; --navy:#0B0C10; --navy-2:#101319;
+    --ink:#F1F1F4; --ink-soft:#A5A9B8; --line:#2A2D36;
+    --shadow: 0 1px 2px rgba(0,0,0,.4), 0 16px 32px rgba(0,0,0,.45);
+    --good-bg:#123326;
+  }
+
+  *{ box-sizing:border-box; }
+  body{ margin:0; background:var(--bg); color:var(--ink); font-family:"Manrope",-apple-system,"Segoe UI",sans-serif; font-weight:400; -webkit-font-smoothing:antialiased; }
+  h1,h2,h3,h4{ font-family:"Manrope",sans-serif; font-weight:800; letter-spacing:-.01em; line-height:1.1; text-wrap:balance; margin:0; color:var(--ink); }
+  p{ margin:0; }
+  a{ color:inherit; text-decoration:none; }
+  .wrap{ max-width:1180px; margin:0 auto; padding-inline:24px; }
+  @media (max-width:640px){ .wrap{ padding-inline:18px; } }
+
+  /* ---------- buttons ---------- */
+  .btn{ display:inline-flex; align-items:center; justify-content:center; gap:7px; font-weight:600; font-size:14.5px; padding:13px 22px; border-radius:12px; border:1.5px solid transparent; cursor:pointer; white-space:nowrap; transition:transform .12s ease, background .15s ease, border-color .15s ease, opacity .15s ease; font-family:inherit; }
+  .btn:active{ transform:translateY(1px); }
+  .btn-gold{ background:var(--gold); color:var(--navy); box-shadow:var(--shadow); }
+  .btn-gold:hover{ background:var(--gold-2); transform:translateY(-2px); box-shadow:0 10px 22px rgba(252,189,2,.32); }
+  .btn-navy{ background:var(--navy); color:#F6F6F8; }
+  .btn-navy:hover{ opacity:.88; transform:translateY(-2px); }
+  .btn-outline{ background:transparent; color:var(--ink); border-color:var(--line); }
+  .btn-outline:hover{ border-color:var(--ink-soft); }
+  .btn-block{ width:100%; justify-content:center; }
+
+  /* ---------- scroll progress + nav (matches the Trade 360 homepage) ---------- */
+  .scroll-progress{ position:fixed; top:0; left:0; height:3px; width:0%; background:var(--gold); z-index:1000; transition:width .1s linear; }
+  .nav{ position:sticky; top:env(safe-area-inset-top,0px); z-index:30; background:var(--bg); border-bottom:1px solid var(--line); transition:box-shadow .25s ease, background .25s ease; }
+  .nav.scrolled{ box-shadow:0 6px 20px rgba(20,20,30,.08); }
+  .nav .wrap{ display:flex; align-items:center; justify-content:space-between; height:72px; gap:18px; }
+  .brand-block{ display:flex; align-items:center; gap:0; flex:none; }
+  .brand-link{ display:flex; align-items:center; color:inherit; text-decoration:none; }
+  .brand-mark{ display:flex; align-items:center; flex:none; margin-right:4px; }
+  .brand-mark svg{ width:34px; height:34px; animation:brandSpin 14s linear infinite; }
+  .brand-wordmark-img{ height:46px; width:auto; display:block; }
+  .foot-brand .brand-wordmark-img{ height:68px; }
+  @media (max-width:640px){ .foot-brand .brand-wordmark-img{ height:46px; } }
+  @keyframes brandSpin{ from{ transform:rotate(0deg); } to{ transform:rotate(360deg); } }
+  @media (prefers-reduced-motion: reduce){ .brand-mark svg{ animation:none; } }
+  .brand{ display:flex; align-items:center; gap:9px; height:46px; padding:0 16px; border-radius:10px; border:1.5px dashed var(--line); font-weight:700; font-size:16px; color:var(--navy); }
+  .brand .n{ color:var(--gold); }
+  .brand-tagline{ font-size:11px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-soft); white-space:nowrap; padding-left:12px; border-left:1px solid var(--line); margin-left:12px; }
+  @media (max-width:560px){ .brand-tagline{ display:none; } }
+  .nav-links{ display:none; align-items:center; gap:30px; font-size:14.5px; font-weight:600; color:var(--navy); }
+  .nav-links a{ position:relative; color:var(--navy); opacity:.85; transition:opacity .15s ease; }
+  .nav-links a:hover{ opacity:1; }
+  .nav-links a::after{ content:""; position:absolute; left:0; right:100%; bottom:-6px; height:2px; background:var(--gold); transition:right .18s ease; }
+  .nav-links a:hover::after{ right:0; }
+  .nav-links a.current::after{ right:0; }
+  @media (min-width:960px){ .nav-links{ display:flex; } }
+  .nav-right{ display:flex; align-items:center; gap:22px; }
+  .login-link{ font-size:14.5px; font-weight:600; color:var(--navy); display:none; transition:opacity .15s ease; }
+  .login-link:hover{ opacity:.7; }
+  @media (min-width:720px){ .login-link{ display:inline; } }
+  @media (max-width:560px){ .nav-right .btn-gold{ display:none; } }
+  .nav-toggle{ display:flex; align-items:center; justify-content:center; width:38px; height:38px; border-radius:9px; border:1.5px solid var(--line); background:transparent; cursor:pointer; flex:none; }
+  .nav-toggle svg{ width:18px; height:18px; color:var(--navy); }
+  @media (min-width:960px){ .nav-toggle{ display:none; } }
+  .mobile-panel{ display:none; flex-direction:column; gap:2px; background:var(--bg); border-bottom:1px solid var(--line); max-height:0; overflow:hidden; transition:max-height .28s ease; }
+  .mobile-panel.open{ display:flex; max-height:400px; }
+  .mobile-panel a{ padding:14px 24px; font-size:14.5px; font-weight:600; color:var(--navy); border-top:1px solid var(--line); display:flex; align-items:center; justify-content:space-between; }
+  .mobile-panel .mp-cta{ padding:16px 24px 20px; }
+  @media (min-width:960px){ .mobile-panel{ display:none !important; } }
+
+  /* ---------- intro band ---------- */
+  .intro{ background:var(--navy-2); color:#fff; padding-block:48px; position:relative; overflow:hidden; }
+  .intro::before{ content:""; position:absolute; inset:0; z-index:0; pointer-events:none; background:
+      radial-gradient(circle at 88% 8%, rgba(252,189,2,.10), transparent 45%),
+      radial-gradient(280px 280px at 78% 82%, rgba(252,189,2,.10), transparent 70%),
+      repeating-linear-gradient(0deg, rgba(255,255,255,.02) 0 1px, transparent 1px 64px),
+      repeating-linear-gradient(90deg, rgba(255,255,255,.02) 0 1px, transparent 1px 64px);
+      animation:driftGlow 16s ease-in-out infinite alternate; }
+  .intro::after{
+    content:""; position:absolute; inset:0; z-index:0; pointer-events:none; overflow:hidden;
+    background: radial-gradient(360px 360px at 18% 46%, rgba(252,189,2,.22), transparent 70%);
+    animation:pulseGlow 4.2s ease-in-out infinite;
+    transform-origin:18% 46%;
+  }
+  @keyframes driftGlow{
+    0%{ transform:translate(0,0) scale(1); }
+    100%{ transform:translate(3%,-2%) scale(1.06); }
+  }
+  @keyframes pulseGlow{
+    0%,100%{ opacity:.55; transform:scale(1); }
+    50%{ opacity:1; transform:scale(1.12); }
+  }
+  @media (prefers-reduced-motion: reduce){ .intro::before, .intro::after{ animation:none; } }
+  .intro .wrap{ position:relative; z-index:1; }
+  .intro .eyebrow{ font-size:12.5px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--gold); margin-bottom:12px; }
+  .intro h1{ font-size:clamp(28px,4vw,42px); color:#fff; max-width:20ch; }
+  .intro p{ font-size:15.5px; line-height:1.6; color:#A9AEC0; max-width:60ch; margin-top:14px; }
+  .intro-tags{ display:flex; flex-wrap:wrap; gap:10px; margin-top:22px; }
+  .intro-tag{ display:flex; align-items:center; gap:7px; font-size:12.5px; font-weight:600; color:#EDEEF3; background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.14); padding:7px 13px; border-radius:999px; }
+  .intro-tag svg{ width:13px; height:13px; color:var(--gold); flex:none; }
+
+  /* ---------- billing toggle ---------- */
+  .billing-toggle-row{ display:flex; align-items:center; justify-content:center; gap:14px; margin:44px 0 34px; }
+  .billing-toggle-row span{ font-size:13.5px; font-weight:700; color:var(--ink-soft); }
+  .billing-toggle-row span.active{ color:var(--ink); }
+  .billing-switch{ position:relative; width:50px; height:28px; border-radius:999px; background:var(--line); border:none; cursor:pointer; flex:none; padding:0; }
+  .billing-switch::after{ content:""; position:absolute; top:3px; left:3px; width:22px; height:22px; border-radius:999px; background:#fff; box-shadow:0 2px 6px rgba(20,20,30,.25); transition:transform .2s ease; }
+  .billing-switch.on{ background:var(--gold); }
+  .billing-switch.on::after{ transform:translateX(22px); }
+  .billing-save-pill{ font-size:11px; font-weight:800; color:var(--good); background:var(--good-bg); padding:4px 10px; border-radius:999px; }
+
+  /* ---------- tier cards ---------- */
+  .tiers{ padding-block:0 60px; }
+  .tier-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:20px; align-items:stretch; }
+  @media (max-width:940px){ .tier-grid{ grid-template-columns:1fr; max-width:440px; margin-inline:auto; } }
+  .tier-card{ background:var(--bg); border:1.5px solid var(--line); border-radius:18px; padding:28px 24px; box-shadow:var(--shadow); display:flex; flex-direction:column; position:relative; }
+  .tier-card.featured{ border-color:var(--gold); box-shadow:0 18px 40px rgba(252,189,2,.16); }
+  .tier-badge{ position:absolute; top:-13px; left:24px; background:var(--gold); color:var(--navy); font-size:11px; font-weight:800; letter-spacing:.04em; text-transform:uppercase; padding:5px 12px; border-radius:999px; }
+  .tier-name{ font-size:19px; font-weight:800; }
+  .tier-tagline{ font-size:12.5px; color:var(--ink-soft); margin-top:4px; }
+  .tier-price-row{ margin-top:18px; display:flex; align-items:baseline; gap:6px; }
+  .tier-price{ font-size:clamp(30px,4vw,36px); font-weight:800; color:var(--ink); font-variant-numeric:tabular-nums; }
+  .tier-price-unit{ font-size:13px; color:var(--ink-soft); font-weight:600; }
+  .tier-billed-note{ font-size:11.5px; color:var(--ink-soft); margin-top:4px; min-height:15px; }
+  .tier-onboarding{ font-size:12px; color:var(--ink-soft); margin-top:10px; padding-top:10px; border-top:1px dashed var(--line); }
+  .tier-stats{ margin-top:16px; display:flex; flex-direction:column; gap:8px; }
+  .tier-stat{ display:flex; align-items:center; justify-content:space-between; font-size:12.5px; }
+  .tier-stat span:first-child{ color:var(--ink-soft); }
+  .tier-stat b{ color:var(--ink); font-weight:700; font-variant-numeric:tabular-nums; }
+  .tier-note{ font-size:11.5px; color:var(--ink-soft); margin-top:12px; line-height:1.5; }
+  .tier-card .btn{ margin-top:20px; }
+
+  /* ---------- feature matrix ---------- */
+  .matrix{ padding-block:56px; background:var(--bg-soft); }
+  .section-head{ max-width:70ch; margin:0 auto; text-align:center; }
+  .section-head .eyebrow{ font-size:12.5px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--gold); filter:brightness(.82); margin-bottom:12px; }
+  .section-head h2{ font-size:clamp(24px,3.4vw,32px); }
+  .section-head p{ font-size:15px; color:var(--ink-soft); margin-top:12px; line-height:1.6; }
+  .section-head.wide{ max-width:min(92ch, 100%); }
+  .sr-only{ position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+
+  /* ---------- jump nav ---------- */
+  .jump-nav{ background:var(--bg); border-bottom:1px solid var(--line); position:sticky; top:calc(72px + env(safe-area-inset-top,0px)); z-index:20; }
+  .jump-nav .wrap{ display:flex; align-items:center; gap:14px; padding-block:12px; overflow-x:auto; -webkit-overflow-scrolling:touch; scrollbar-width:none; }
+  .jump-nav .wrap::-webkit-scrollbar{ display:none; }
+  .jump-nav-label{ font-size:11.5px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; color:var(--ink-soft); flex:none; }
+  .jump-nav-row{ display:flex; gap:8px; flex:none; }
+  .jump-nav-row a{
+    font-size:13px; font-weight:700; color:var(--navy); background:var(--bg-soft); border:1px solid var(--line);
+    padding:7px 14px; border-radius:999px; white-space:nowrap; transition:background .15s ease, border-color .15s ease;
+  }
+  .jump-nav-row a:hover{ background:#fff; border-color:var(--gold); }
+
+  /* ---------- compare table ---------- */
+  .compare-scroll-hint{ display:none; font-size:12px; color:var(--ink-soft); font-weight:600; margin-top:28px; }
+  @media (max-width:760px){ .compare-scroll-hint{ display:block; } }
+  .compare-wrap{
+    margin-top:12px; overflow-x:auto; -webkit-overflow-scrolling:touch;
+    border:1px solid var(--line); border-radius:16px; box-shadow:var(--shadow); background:var(--bg);
+  }
+  @media (min-width:761px){ .compare-wrap{ margin-top:28px; } }
+  table.compare{ width:100%; min-width:680px; border-collapse:collapse; }
+  .compare-feature-col{ width:34%; text-align:left; }
+  .compare-tier-col{ width:22%; min-width:150px; vertical-align:top; background:var(--bg-soft); border-left:1px solid var(--line); }
+  .compare-tier-col.featured{ background:#FFFBEE; }
+  .compare-tier-head{ display:flex; flex-direction:column; align-items:center; gap:4px; padding:20px 14px; text-align:center; }
+  .compare-tier-badge{
+    background:var(--gold); color:var(--navy); font-size:10px; font-weight:800; letter-spacing:.04em; text-transform:uppercase;
+    padding:3px 10px; border-radius:999px; margin-bottom:2px;
+  }
+  .compare-tier-name{ font-size:15.5px; font-weight:800; color:var(--navy); }
+  .compare-tier-price{ font-size:19px; font-weight:800; color:var(--ink); font-variant-numeric:tabular-nums; }
+  .compare-tier-price small{ font-size:11px; font-weight:600; color:var(--ink-soft); }
+  .compare-tier-head .btn{ margin-top:6px; font-size:12px; padding:8px 14px; }
+  table.compare thead th{
+    border-bottom:1.5px solid var(--line);
+    position:sticky; top:calc(127px + env(safe-area-inset-top,0px)); z-index:10;
+  }
+  table.compare thead th.compare-tier-col{ background:var(--bg-soft); }
+  table.compare thead th.compare-tier-col.featured{ background:#FFFBEE; }
+  @media (max-width:760px){ table.compare thead th{ position:static; } }
+  .compare-group-row{ scroll-margin-top:150px; }
+  .compare-group-row th{
+    text-align:left; background:var(--bg-soft); padding:14px 20px; border-top:1px solid var(--line); border-bottom:1px solid var(--line);
+  }
+  .compare-group-row:first-child th{ border-top:none; }
+  .compare-group-head{ display:flex; align-items:center; gap:12px; position:sticky; left:20px; width:max-content; }
+  .compare-group-head svg.ring{ width:30px; height:30px; flex:none; }
+  .compare-group-head b{ display:block; font-size:14.5px; color:var(--navy); }
+  .compare-group-head small{ display:block; font-size:11.5px; color:var(--ink-soft); font-weight:600; margin-top:1px; }
+  table.compare tbody tr:not(.compare-group-row){ border-bottom:1px solid var(--line); }
+  table.compare tbody tr:last-child{ border-bottom:none; }
+  table.compare tbody tr:not(.compare-group-row) td:nth-child(3){ background:#FFFBEE; }
+  .compare-feature{ padding:12px 20px; font-size:13.5px; font-weight:600; color:var(--ink); }
+  td.yes, td.no{ text-align:center; padding:12px 14px; border-left:1px solid var(--line); }
+  td.no span[aria-hidden]{ color:var(--ink-soft); font-size:15px; }
+  .compare-tick{
+    display:inline-flex; align-items:center; justify-content:center; width:22px; height:22px; border-radius:999px;
+    background:var(--gold);
+  }
+  .compare-tick svg{ width:11px; height:11px; }
+  .compare-feature-col, td.compare-feature{
+    position:sticky; left:0; background:var(--bg); z-index:1; border-right:1px solid var(--line);
+  }
+  .compare-group-row th.compare-feature-col, .compare-group-row th{ background:var(--bg-soft); }
+  .compare-foot-note{ font-size:12.5px; color:var(--ink-soft); margin-top:18px; line-height:1.6; max-width:70ch; }
+  .compare-foot-note a{ color:var(--navy); font-weight:700; text-decoration:underline; text-underline-offset:2px; }
+
+  /* ---------- bolt-ons ---------- */
+  .boltons{ padding-block:56px; }
+  .bolton-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-top:36px; }
+  @media (max-width:860px){ .bolton-grid{ grid-template-columns:1fr; } }
+  .bolton-card{ background:var(--bg); border:1px solid var(--line); border-radius:16px; padding:22px 22px 20px; box-shadow:var(--shadow); }
+  .bolton-card h3{ font-size:15.5px; }
+  .bolton-card .sub{ font-size:12px; color:var(--ink-soft); margin-top:5px; line-height:1.5; }
+  .bolton-rows{ margin-top:16px; display:flex; flex-direction:column; gap:2px; }
+  .bolton-row{ display:flex; align-items:center; justify-content:space-between; padding-block:10px; border-top:1px solid var(--line); font-size:13px; }
+  .bolton-row:first-child{ border-top:none; }
+  .bolton-row span{ color:var(--ink-soft); }
+  .bolton-row b{ color:var(--ink); font-weight:700; font-variant-numeric:tabular-nums; }
+
+  /* ---------- policy strip ---------- */
+  .policy-strip{ border-block:1px solid var(--line); background:var(--bg-soft); }
+  .policy-strip .wrap{ display:grid; grid-template-columns:repeat(3,1fr); }
+  @media (max-width:760px){ .policy-strip .wrap{ grid-template-columns:1fr; } }
+  .policy-item{ display:flex; align-items:flex-start; gap:14px; padding-block:28px; border-left:1px solid var(--line); padding-left:26px; }
+  .policy-item:first-child{ border-left:none; padding-left:0; }
+  @media (max-width:760px){ .policy-item{ border-left:none; border-top:1px solid var(--line); padding-left:0; } .policy-item:first-child{ border-top:none; } }
+  .policy-item svg{ width:26px; height:26px; flex:none; color:var(--gold); margin-top:2px; }
+  .policy-item b{ display:block; font-size:14px; font-weight:800; color:var(--navy); }
+  .policy-item span{ font-size:13px; color:var(--ink-soft); line-height:1.5; display:block; margin-top:3px; max-width:32ch; }
+
+  /* ---------- bespoke ---------- */
+  .bespoke{ padding-block:56px; }
+  .bespoke-card{ background:var(--navy-2); color:#fff; border-radius:20px; padding:40px; position:relative; overflow:hidden; }
+  .bespoke-card::before{ content:""; position:absolute; inset:0; z-index:0; pointer-events:none; background: radial-gradient(circle at 85% 15%, rgba(252,189,2,.14), transparent 50%); }
+  .bespoke-card > *{ position:relative; z-index:1; }
+  @media (max-width:640px){ .bespoke-card{ padding:30px 24px; } }
+  .bespoke-grid{ display:grid; grid-template-columns:1.1fr 1fr; gap:36px; align-items:center; }
+  @media (max-width:860px){ .bespoke-grid{ grid-template-columns:1fr; gap:26px; } }
+  .bespoke-card .eyebrow{ color:var(--gold); font-size:12.5px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; margin-bottom:10px; }
+  .bespoke-card h2{ color:#fff; font-size:clamp(22px,3vw,28px); }
+  .bespoke-card p{ color:#A9AEC0; font-size:14.5px; line-height:1.65; margin-top:12px; max-width:48ch; }
+  .bespoke-list{ display:flex; flex-direction:column; gap:14px; }
+  .bespoke-list-item{ background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.12); border-radius:12px; padding:14px 16px; }
+  .bespoke-list-item b{ display:block; font-size:13.5px; color:#fff; }
+  .bespoke-list-item span{ display:block; font-size:12px; color:#A9AEC0; margin-top:3px; }
+
+  /* ---------- cta band ---------- */
+  .cta-band{
+    position:relative; overflow:hidden;
+    background:var(--gold);
+    background-image:repeating-linear-gradient(-45deg, rgba(28,33,48,.05) 0 2px, transparent 2px 16px);
+  }
+  .cta-band .wrap{ display:flex; align-items:center; justify-content:space-between; gap:24px; padding-block:40px; flex-wrap:wrap; }
+  .cta-band h2{ font-size:clamp(20px,3.2vw,28px); color:var(--navy); font-weight:800; }
+  .cta-band-actions{ display:flex; gap:12px; flex-wrap:wrap; }
+
+  /* ---------- footer (matches the Trade 360 homepage) ---------- */
+  footer{ background:var(--navy-2); color:#8B90A3; padding-block:34px; }
+  footer .wrap{ display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:18px; }
+  .foot-social{ display:flex; align-items:center; gap:14px; }
+  .foot-social-label{ font-size:12px; font-weight:700; color:#EDEEF3; }
+  .foot-social-icons{ display:flex; gap:8px; }
+  .foot-social-icon{ width:32px; height:32px; border-radius:999px; background:rgba(255,255,255,.08); display:flex; align-items:center; justify-content:center; color:#C7CAD6; transition:background .15s ease, color .15s ease; }
+  .foot-social-icon:hover{ background:var(--gold); color:var(--navy); }
+  .foot-social-icon svg{ width:15px; height:15px; }
+  .foot-links{ display:flex; flex-wrap:wrap; gap:22px; font-size:13px; font-weight:600; }
+  .foot-links a{ opacity:.85; transition:opacity .15s ease; }
+  .foot-links a:hover{ opacity:1; }
+  .foot-brand{ display:flex; flex-direction:column; gap:5px; }
+  .foot-brand .brand{ background:transparent; border-color:rgba(255,255,255,.16); color:#fff; }
+  .foot-brand .brand-tagline{ color:#8B90A3; border-left-color:rgba(255,255,255,.16); }
+  @media (max-width:720px){
+    footer .wrap{ flex-direction:column; align-items:flex-start; gap:24px; }
+    .foot-links{ flex-direction:column; align-items:flex-start; gap:14px; }
+  }
+
+  /* ---------- scroll reveal ---------- */
+  .reveal{ opacity:0; transform:translateY(18px); transition:opacity .5s ease, transform .5s ease; }
+  .reveal.in-view{ opacity:1; transform:translateY(0); }
+  @media (prefers-reduced-motion: reduce){ .reveal{ transition:none; opacity:1; transform:none; } }
+
+  /* ---------- video teaser (fixed, bottom-right) ---------- */
+  .video-teaser{
+    position:fixed; right:20px; bottom:20px; z-index:1150; width:220px;
+    border-radius:16px; overflow:hidden; background:var(--bg); border:1px solid var(--line);
+    box-shadow:0 14px 34px rgba(20,20,30,.18);
+    transition:transform .18s ease, box-shadow .18s ease, opacity .2s ease, visibility .2s;
+  }
+  .video-teaser:hover{ transform:translateY(-3px); box-shadow:0 18px 40px rgba(20,20,30,.24); }
+  .video-teaser.hidden, .video-teaser.scroll-gated{ opacity:0; visibility:hidden; pointer-events:none; }
+  .video-teaser .vt-open{ display:block; width:100%; border:none; margin:0; padding:0; background:none; cursor:pointer; text-align:left; font-family:inherit; }
+  .video-teaser .vt-thumb{ display:block; width:100%; position:relative; aspect-ratio:16/10; background-size:cover; background-position:center; }
+  .video-teaser .vt-play{
+    position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+    width:42px; height:42px; border-radius:999px; background:var(--gold);
+    display:flex; align-items:center; justify-content:center; box-shadow:0 8px 18px rgba(0,0,0,.32);
+    transition:transform .18s ease;
+  }
+  .video-teaser:hover .vt-play{ transform:translate(-50%,-50%) scale(1.08); }
+  .video-teaser .vt-play svg{ width:14px; height:14px; margin-left:2px; }
+  .video-teaser .vt-play svg path{ fill:var(--navy); }
+  .video-teaser .vt-close{
+    position:absolute; top:8px; right:8px; width:24px; height:24px; border-radius:999px;
+    background:rgba(18,20,28,.55); color:#fff; border:none; display:flex; align-items:center; justify-content:center;
+    cursor:pointer; z-index:2; transition:background .15s ease;
+  }
+  .video-teaser .vt-close:hover{ background:rgba(18,20,28,.8); }
+  .video-teaser .vt-close svg{ width:10px; height:10px; }
+  .video-teaser .vt-info{ display:flex; align-items:center; gap:10px; padding:11px 12px; }
+  .video-teaser .vt-info-icon{ width:26px; height:26px; border-radius:999px; background:var(--gold); display:flex; align-items:center; justify-content:center; flex:none; }
+  .video-teaser .vt-info-icon svg{ width:10px; height:10px; margin-left:1px; }
+  .video-teaser .vt-info-icon svg path{ fill:var(--navy); }
+  .video-teaser .vt-info-body{ min-width:0; flex:1; }
+  .video-teaser .vt-info-body b{ display:block; font-size:12.5px; font-weight:700; color:var(--ink); line-height:1.3; }
+  .video-teaser .vt-info-body span{ display:block; font-size:11px; color:var(--ink-soft); line-height:1.35; margin-top:2px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  @media (max-width:640px){ .video-teaser{ right:14px; width:168px; } }
+  @media (prefers-reduced-motion: reduce){ .video-teaser{ transition:none; } }
+
+  /* ---------- video lightbox ---------- */
+  .video-lightbox{
+    position:fixed; inset:0; z-index:1500; display:flex; align-items:center; justify-content:center; padding:24px;
+    background:rgba(11,12,16,.86); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);
+    opacity:0; visibility:hidden; transition:opacity .22s ease, visibility .22s;
+  }
+  .video-lightbox.open{ opacity:1; visibility:visible; }
+  .video-lightbox-inner{
+    position:relative; width:100%; max-width:720px; background:var(--navy-2); border-radius:18px; overflow:hidden;
+    box-shadow:0 30px 70px rgba(0,0,0,.5); transform:scale(.96); transition:transform .22s ease;
+  }
+  .video-lightbox.open .video-lightbox-inner{ transform:scale(1); }
+  .video-lightbox-media{ position:relative; }
+  .video-lightbox video{ width:100%; display:block; aspect-ratio:16/9; background:#000; }
+  .video-lightbox-play{
+    position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+    width:64px; height:64px; border-radius:999px; background:var(--gold); border:none;
+    display:flex; align-items:center; justify-content:center; cursor:pointer;
+    box-shadow:0 12px 30px rgba(0,0,0,.45); transition:transform .18s ease, opacity .18s ease, visibility .18s;
+  }
+  .video-lightbox-play:hover{ transform:translate(-50%,-50%) scale(1.08); }
+  .video-lightbox-play svg{ width:24px; height:24px; margin-left:3px; }
+  .video-lightbox-play svg path{ fill:var(--navy); }
+  .video-lightbox-play.hidden{ opacity:0; visibility:hidden; pointer-events:none; }
+  @media (prefers-reduced-motion: reduce){ .video-lightbox-play{ transition:none; } }
+  .video-lightbox-caption{ display:flex; align-items:center; justify-content:space-between; gap:16px; padding:18px 22px; flex-wrap:wrap; }
+  .video-lightbox-caption h3{ color:#fff; font-size:18px; font-weight:800; }
+  .video-lightbox-caption p{ color:#A9AEC0; font-size:12.5px; margin-top:3px; }
+  .video-lightbox-close{
+    position:absolute; top:14px; right:14px; width:36px; height:36px; border-radius:999px;
+    background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.22); color:#fff;
+    display:flex; align-items:center; justify-content:center; cursor:pointer; z-index:2; transition:background .15s ease;
+  }
+  .video-lightbox-close:hover{ background:rgba(255,255,255,.22); }
+  .video-lightbox-close svg{ width:14px; height:14px; }
+  @media (max-width:560px){ .video-lightbox-caption{ padding:16px; } .video-lightbox-caption .btn{ width:100%; justify-content:center; } }
+  @media (prefers-reduced-motion: reduce){ .video-lightbox, .video-lightbox-inner{ transition:none; } }
+</style>
+
+<div class="scroll-progress" id="scrollProgress"></div>
+
+<!-- ================= NAV ================= -->
+<nav class="nav" id="siteNav">
+  <div class="wrap">
+    <div class="brand-block">
+      <a href="/" class="brand-link" aria-label="Trade 360 — go to homepage">
+      <div class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 40 40"><path fill="#FCBD02" d="M 12.11 3.82 A 18 18 0 0 1 27.89 3.82 L 24.82 10.11 A 11 11 0 0 0 15.18 10.11 Z"/><path fill="#FDCB3C" d="M 30.07 5.08 A 18 18 0 0 1 37.96 18.74 L 30.97 19.23 A 11 11 0 0 0 26.15 10.88 Z"/><path fill="#FDD972" d="M 37.96 21.26 A 18 18 0 0 1 30.07 34.92 L 26.15 29.12 A 11 11 0 0 0 30.97 20.77 Z"/><path fill="#FCDD85" d="M 27.89 36.18 A 18 18 0 0 1 12.11 36.18 L 15.18 29.89 A 11 11 0 0 0 24.82 29.89 Z"/><path fill="#FBE6A8" d="M 9.93 34.92 A 18 18 0 0 1 2.04 21.26 L 9.03 20.77 A 11 11 0 0 0 13.85 29.12 Z"/><path fill="#F5DFAF" d="M 2.04 18.74 A 18 18 0 0 1 9.93 5.08 L 13.85 10.88 A 11 11 0 0 0 9.03 19.23 Z"/></svg>
+      </div>
+      <img class="brand-wordmark-img" src="/assets/images/header-logo.png" alt="Trade360">
+      </a>
+      <span class="brand-tagline">Lead to Profit</span>
+    </div>
+    <div class="nav-links">
+      <a href="/solutions/" class="current">Solutions</a>
+      <a href="/">Industries</a>
+      <a href="/">Why Trade 360?</a>
+      <a href="/pricing/">Pricing</a>
+    </div>
+    <div class="nav-right">
+      <a class="login-link" href="/">Log in</a>
+      <a class="btn btn-gold" href="#demo">Start free trial
+        <svg viewBox="0 0 16 16" fill="none" width="14" height="14"><path d="M4 12 12 4M12 4H6M12 4v6" stroke="#1C2130" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <button class="nav-toggle" id="navToggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobilePanel">
+        <svg id="navToggleIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+    </div>
+  </div>
+  <div class="mobile-panel" id="mobilePanel">
+    <a href="/solutions/">Solutions</a>
+    <a href="/">Industries</a>
+    <a href="/">Why Trade 360?</a>
+    <a href="/pricing/">Pricing</a>
+    <a href="/">Log in</a>
+    <div class="mp-cta">
+      <a class="btn btn-gold btn-block" href="#demo">Start free trial
+        <svg viewBox="0 0 16 16" fill="none" width="14" height="14"><path d="M4 12 12 4M12 4H6M12 4v6" stroke="#1C2130" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+  </div>
+</nav>
+
+<!-- ================= INTRO ================= -->
+<header class="intro">
+  <div class="wrap">
+    <div class="eyebrow">Solutions</div>
+    <h1>One platform.<br>Here's what's in each plan.</h1>
+    <p>Every Trade 360 plan ships all six pillars — Marketing, Leads, Sales, Projects, Accounts and People. Nothing is hidden behind a higher tier; Growth and Pro just add more depth to the pillars you already have. The table below shows exactly which feature comes with which plan.</p>
+    <div class="intro-tags">
+      <span class="intro-tag"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 4v4l2.5 2.5"/><circle cx="8" cy="8" r="6.5"/></svg>30-day free trial</span>
+      <span class="intro-tag"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 8h12M8 2v12"/></svg>Rolling monthly contract</span>
+      <span class="intro-tag"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="5.5" cy="5.5" r="2"/><circle cx="11.5" cy="11.5" r="2"/><path d="M7 6.5 10 10"/></svg>Refer a business, get a free month</span>
+    </div>
+  </div>
+</header>
+
+<!-- ================= JUMP NAV ================= -->
+<div class="jump-nav">
+  <div class="wrap">
+    <span class="jump-nav-label">Jump to:</span>
+    <div class="jump-nav-row">
+      <a href="#marketing">Marketing</a>
+      <a href="#leads">Leads</a>
+      <a href="#sales">Sales</a>
+      <a href="#projects">Projects</a>
+      <a href="#accounts">Accounts</a>
+      <a href="#people">People</a>
+    </div>
+  </div>
+</div>
+
+<!-- ================= FEATURE MATRIX ================= -->
+<section class="matrix" id="compare">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Every feature, every plan</div>
+      <h2>The full comparison.</h2>
+      <p>No plan hides a part of the platform from you. Foundation covers the essentials in all six pillars; Growth and Pro add more depth to those same pillars as your team grows. Every tick below carries up — a feature in Growth is also in Pro.</p>
+    </div>
+
+    <div class="compare-scroll-hint">Scroll sideways to see Growth &amp; Pro &#8594;</div>
+    <div class="compare-wrap reveal">
+      <table class="compare">
+        <thead>
+          <tr>
+            <th class="compare-feature-col"><span class="sr-only">Feature</span></th>
+            <th class="compare-tier-col">
+              <div class="compare-tier-head">
+                <span class="compare-tier-name">Foundation</span>
+                <span class="compare-tier-price">&pound;99<small>/mo</small></span>
+                <a class="btn btn-outline" href="/pricing/">View pricing</a>
+              </div>
+            </th>
+            <th class="compare-tier-col featured">
+              <div class="compare-tier-head">
+                <span class="compare-tier-badge">Most popular</span>
+                <span class="compare-tier-name">Growth</span>
+                <span class="compare-tier-price">&pound;249<small>/mo</small></span>
+                <a class="btn btn-gold" href="/pricing/">View pricing</a>
+              </div>
+            </th>
+            <th class="compare-tier-col">
+              <div class="compare-tier-head">
+                <span class="compare-tier-name">Pro</span>
+                <span class="compare-tier-price">&pound;499<small>/mo</small></span>
+                <a class="btn btn-outline" href="/pricing/">View pricing</a>
+              </div>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="compare-group-row" id="marketing">
+            <th colspan="4"><span class="compare-group-head"><svg class="ring" viewBox="0 0 40 40"><path fill="#FCBD02" d="M 12.11 3.82 A 18 18 0 0 1 27.89 3.82 L 24.82 10.11 A 11 11 0 0 0 15.18 10.11 Z"/><path fill="#FCE7B0" d="M 30.07 5.08 A 18 18 0 0 1 37.96 18.74 L 30.97 19.23 A 11 11 0 0 0 26.15 10.88 Z"/><path fill="#FCE7B0" d="M 37.96 21.26 A 18 18 0 0 1 30.07 34.92 L 26.15 29.12 A 11 11 0 0 0 30.97 20.77 Z"/><path fill="#FCE7B0" d="M 27.89 36.18 A 18 18 0 0 1 12.11 36.18 L 15.18 29.89 A 11 11 0 0 0 24.82 29.89 Z"/><path fill="#FCE7B0" d="M 9.93 34.92 A 18 18 0 0 1 2.04 21.26 L 9.03 20.77 A 11 11 0 0 0 13.85 29.12 Z"/><path fill="#FCE7B0" d="M 2.04 18.74 A 18 18 0 0 1 9.93 5.08 L 13.85 10.88 A 11 11 0 0 0 9.03 19.23 Z"/></svg><span><b>Marketing</b><small>Attract. Nurture. Convert.</small></span></span></th>
+          </tr>
+          <tr>
+            <td class="compare-feature">Lead Capture</td>
+            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
+            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
+            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
+          </tr>
+          <tr>
+            <td class="compare-feature">Brochure Automation</td>
+            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
+            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
+            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
+          </tr>
+          <tr>
+            <td class="compare-feature">Campaign Builder</td>
+            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
+            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
+            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
+          </tr>
+          <tr>
+            <td class="compare-feature">AI Content</td>
+            <td class="no"><span aria-hidden="true">&#8211;</span><span class="sr-only">Not included</span></td>
+            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
+            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
+          </tr>
+          <tr>
+            <td class="compare-feature">Ad Tracking</td>
+            <td class="no"><span aria-hidden="true">&#8211;</span><span class="sr-only">Not included</span></td>
+            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
+            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
+          </tr>
+          <tr>
+            <td class="compare-feature">Referral Programme</td>
+            <td class="no"><span aria-hidden="true">&#8211;</span><span class="sr-only">Not included</span></td>
+            <td class="no"><span aria-hidden="true">&#8211;</span><span class="sr-only">Not included</span></td>
+            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
+          </tr>
+          <tr class="compare-group-row" id="leads">
+            <th colspan="4"><span class="compare-group-head"><svg class="ring" viewBox="0 0 40 40"><path fill="#FCBD02" d="M 12.11 3.82 A 18 18 0 0 1 27.89 3.82 L 24.82 10.11 A 11 11 0 0 0 15.18 10.11 Z"/><path fill="#FDCB3C" d="M 30.07 5.08 A 18 18 0 0 1 37.96 18.74 L 30.97 19.23 A 11 11 0 0 0 26.15 10.88 Z"/><path fill="#FCE7B0" d="M 37.96 21.26 A 18 18 0 0 1 30.07 34.92 L 26.15 29.12 A 11 11 0 0 0 30.97 20.77 Z"/><path fill="#FCE7B0" d="M 27.89 36.18 A 18 18 0 0 1 12.11 36.18 L 15.18 29.89 A 11 11 0 0 0 24.82 29.89 Z"/><path fill="#FCE7B0" d="M 9.93 34.92 A 18 18 0 0 1 2.04 21.26 L 9.03 20.77 A 11 11 0 0 0 13.85 29.12 Z"/><path fill="#FCE7B0" d="M 2.04 18.74 A 18 18 0 0 1 9.93 5.08 L 13.85 10.88 A 11 11 0 0 0 9.03 19.23 Z"/></svg><span><b>Leads</b><small>Capture. Qualify. Prioritise.</small></span></span></th>
+          </tr>
+          <tr>
+            <td class="compare-feature">Centralised Inbox</td>
+            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
+            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
+            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
+          </tr>
+          <tr>
+            <td class="compare-feature">Lead Scoring</td>
+            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
+            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
+            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
+          </tr>
+          <tr>
+            <td class="compare-feature">Smart Follow-Up</td>
+            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
+            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
+            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
+          </tr>
+          <tr>
+            <td class="compare-feature">Call Transcription</td>
+            <td class="no"><span aria-hidden="true">&#8211;</span><span class="sr-only">Not included</span></td>
+            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
+            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
+          </tr>
+          <tr>
+            <td class="compare-feature">Readiness Scoring</td>
+            <td class="no"><span aria-hidden="true">&#8211;</span><span class="sr-only">Not included</span></td>
+            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
+            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
+          </tr>
+          <tr>
+            <td class="compare-feature">AI Chat Capture</td>
+            <td class="no"><span aria-hidden="true">&#8211;</span><span class="sr-only">Not included</span></td>
+            <td class="no"><span aria-hidden="true">&#8211;</span><span class="sr-only">Not included</span></td>
+            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
+          </tr>
+          <tr class="compare-group-row" id="sales">
+            <th colspan="4"><span class="compare-group-head"><svg class="ring" viewBox="0 0 40 40"><path fill="#FCBD02" d="M 12.11 3.82 A 18 18 0 0 1 27.89 3.82 L 24.82 10.11 A 11 11 0 0 0 15.18 10.11 Z"/><path fill="#FDCB3C" d="M 30.07 5.08 A 18 18 0 0 1 37.96 18.74 L 30.97 19.23 A 11 11 0 0 0 26.15 10.88 Z"/><path fill="#FCBD02" d="M 37.96 21.26 A 18 18 0 0 1 30.07 34.92 L 26.15 29.12 A 11 11 0 0 0 30.97 20.77 Z"/><path fill="#FCE7B0" d="M 27.89 36.18 A 18 18 0 0 1 12.11 36.18 L 15.18 29.89 A 11 11 0 0 0 24.82 29.89 Z"/><path fill="#FCE7B0" d="M 9.93 34.92 A 18 18 0 0 1 2.04 21.26 L 9.03 20.77 A 11 11 0 0 0 13.85 29.12 Z"/><path fill="#FCE7B0" d="M 2.04 18.74 A 18 18 0 0 1 9.93 5.08 L 13.85 10.88 A 11 11 0 0 0 9.03 19.23 Z"/></svg><span><b>Sales</b><small>Quote. Present. Win.</small></span></span></th>
+          </tr>
+          <tr>
+            <td class="compare-feature">AI Quote Builder</td>
+            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
+            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
+            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
+          </tr>
+          <tr>
+            <td class="compare-feature">AI Insight</td>
+            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
+            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
+            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
+          </tr>
+          <tr>
+            <td class="compare-feature">Quote Configurator</td>
+            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
+            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
+            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
+          </tr>
+          <tr>
+            <td class="compare-feature">eSign Contracts</td>
+            <td class="no"><span aria-hidden="true">&#8211;</span><span class="sr-only">Not included</span></td>
+            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
+            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
+          </tr>
+          <tr>
+            <td class="compare-feature">Pipeline Forecasting</td>
+            <td class="no"><span aria-hidden="true">&#8211;</span><span class="sr-only">Not included</span></td>
+            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
+            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
+          </tr>
+          <tr>
+            <td class="compare-feature">Win/Loss Tracking</td>
+            <td class="no"><span aria-hidden="true">&#8211;</span><span class="sr-only">Not included</span></td>
+            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
+            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
+          </tr>
+          <tr>
+            <td class="compare-feature">3D Visualisation</td>
+            <td class="no"><span aria-hidden="true">&#8211;</span><span class="sr-only">Not included</span></td>
+            <td class="no"><span aria-hidden="true">&#8211;</span><span class="sr-only">Not included</span></td>
+            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
+          </tr>
+          <tr>
+            <td class="compare-feature">Commission Tracking</td>
+            <td class="no"><span aria-hidden="true">&#8211;</span><span class="sr-only">Not included</span></td>
+            <td class="no"><span aria-hidden="true">&#8211;</span><span class="sr-only">Not included</span></td>
+            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
+          </tr>
+          <tr class="compare-group-row" id="projects">
+            <th colspan="4"><span class="compare-group-head"><svg class="ring" viewBox="0 0 40 40"><path fill="#FCBD02" d="M 12.11 3.82 A 18 18 0 0 1 27.89 3.82 L 24.82 10.11 A 11 11 0 0 0 15.18 10.11 Z"/><path fill="#FDCB3C" d="M 30.07 5.08 A 18 18 0 0 1 37.96 18.74 L 30.97 19.23 A 11 11 0 0 0 26.15 10.88 Z"/><path fill="#FCBD02" d="M 37.96 21.26 A 18 18 0 0 1 30.07 34.92 L 26.15 29.12 A 11 11 0 0 0 30.97 20.77 Z"/><path fill="#FDCB3C" d="M 27.89 36.18 A 18 18 0 0 1 12.11 36.18 L 15.18 29.89 A 11 11 0 0 0 24.82 29.89 Z"/><path fill="#FCE7B0" d="M 9.93 34.92 A 18 18 0 0 1 2.04 21.26 L 9.03 20.77 A 11 11 0 0 0 13.85 29.12 Z"/><path fill="#FCE7B0" d="M 2.04 18.74 A 18 18 0 0 1 9.93 5.08 L 13.85 10.88 A 11 11 0 0 0 9.03 19.23 Z"/></svg><span><b>Projects</b><small>Plan. Schedule. Deliver.</small></span></span></th>
+          </tr>
+          <tr>
+            <td class="compare-feature">Order Management</td>
+            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
+            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
+            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
+          </tr>
+          <tr>
+            <td class="compare-feature">Smart Scheduling</td>
+            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
+            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
+            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
+          </tr>
+          <tr>
+            <td class="compare-feature">Document Matching</td>
+            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
+            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
+            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
+          </tr>
+          <tr>
+            <td class="compare-feature">Capacity Planning</td>
+            <td class="no"><span aria-hidden="true">&#8211;</span><span class="sr-only">Not included</span></td>
+            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
+            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
+          </tr>
+          <tr>
+            <td class="compare-feature">Customer Portal</td>
+            <td class="no"><span aria-hidden="true">&#8211;</span><span class="sr-only">Not included</span></td>
+            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
+            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
+          </tr>
+          <tr>
+            <td class="compare-feature">Materials Tracking</td>
+            <td class="no"><span aria-hidden="true">&#8211;</span><span class="sr-only">Not included</span></td>
+            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
+            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
+          </tr>
+          <tr>
+            <td class="compare-feature">Field Mobile App</td>
+            <td class="no"><span aria-hidden="true">&#8211;</span><span class="sr-only">Not included</span></td>
+            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
+            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
+          </tr>
+          <tr>
+            <td class="compare-feature">Snagging &amp; Aftercare</td>
+            <td class="no"><span aria-hidden="true">&#8211;</span><span class="sr-only">Not included</span></td>
+            <td class="no"><span aria-hidden="true">&#8211;</span><span class="sr-only">Not included</span></td>
+            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
+          </tr>
+          <tr class="compare-group-row" id="accounts">
+            <th colspan="4"><span class="compare-group-head"><svg class="ring" viewBox="0 0 40 40"><path fill="#FCBD02" d="M 12.11 3.82 A 18 18 0 0 1 27.89 3.82 L 24.82 10.11 A 11 11 0 0 0 15.18 10.11 Z"/><path fill="#FDCB3C" d="M 30.07 5.08 A 18 18 0 0 1 37.96 18.74 L 30.97 19.23 A 11 11 0 0 0 26.15 10.88 Z"/><path fill="#FCBD02" d="M 37.96 21.26 A 18 18 0 0 1 30.07 34.92 L 26.15 29.12 A 11 11 0 0 0 30.97 20.77 Z"/><path fill="#FDCB3C" d="M 27.89 36.18 A 18 18 0 0 1 12.11 36.18 L 15.18 29.89 A 11 11 0 0 0 24.82 29.89 Z"/><path fill="#FCBD02" d="M 9.93 34.92 A 18 18 0 0 1 2.04 21.26 L 9.03 20.77 A 11 11 0 0 0 13.85 29.12 Z"/><path fill="#FCE7B0" d="M 2.04 18.74 A 18 18 0 0 1 9.93 5.08 L 13.85 10.88 A 11 11 0 0 0 9.03 19.23 Z"/></svg><span><b>Accounts</b><small>Track. Report. Profit.</small></span></span></th>
+          </tr>
+          <tr>
+            <td class="compare-feature">Flexible Invoicing</td>
+            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
+            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
+            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
+          </tr>
+          <tr>
+            <td class="compare-feature">Online Payments</td>
+            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
+            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
+            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
+          </tr>
+          <tr>
+            <td class="compare-feature">Cost Tracking</td>
+            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
+            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
+            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
+          </tr>
+          <tr>
+            <td class="compare-feature">Accounting Sync</td>
+            <td class="no"><span aria-hidden="true">&#8211;</span><span class="sr-only">Not included</span></td>
+            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
+            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
+          </tr>
+          <tr>
+            <td class="compare-feature">Live Profitability</td>
+            <td class="no"><span aria-hidden="true">&#8211;</span><span class="sr-only">Not included</span></td>
+            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
+            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
+          </tr>
+          <tr>
+            <td class="compare-feature">Profit Calculator</td>
+            <td class="no"><span aria-hidden="true">&#8211;</span><span class="sr-only">Not included</span></td>
+            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
+            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
+          </tr>
+          <tr>
+            <td class="compare-feature">Payment Reminders</td>
+            <td class="no"><span aria-hidden="true">&#8211;</span><span class="sr-only">Not included</span></td>
+            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
+            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
+          </tr>
+          <tr>
+            <td class="compare-feature">Cash-Flow Forecast</td>
+            <td class="no"><span aria-hidden="true">&#8211;</span><span class="sr-only">Not included</span></td>
+            <td class="no"><span aria-hidden="true">&#8211;</span><span class="sr-only">Not included</span></td>
+            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
+          </tr>
+          <tr>
+            <td class="compare-feature">Financial Reporting</td>
+            <td class="no"><span aria-hidden="true">&#8211;</span><span class="sr-only">Not included</span></td>
+            <td class="no"><span aria-hidden="true">&#8211;</span><span class="sr-only">Not included</span></td>
+            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
+          </tr>
+          <tr class="compare-group-row" id="people">
+            <th colspan="4"><span class="compare-group-head"><svg class="ring" viewBox="0 0 40 40"><path fill="#FCBD02" d="M 12.11 3.82 A 18 18 0 0 1 27.89 3.82 L 24.82 10.11 A 11 11 0 0 0 15.18 10.11 Z"/><path fill="#FDCB3C" d="M 30.07 5.08 A 18 18 0 0 1 37.96 18.74 L 30.97 19.23 A 11 11 0 0 0 26.15 10.88 Z"/><path fill="#FCBD02" d="M 37.96 21.26 A 18 18 0 0 1 30.07 34.92 L 26.15 29.12 A 11 11 0 0 0 30.97 20.77 Z"/><path fill="#FDCB3C" d="M 27.89 36.18 A 18 18 0 0 1 12.11 36.18 L 15.18 29.89 A 11 11 0 0 0 24.82 29.89 Z"/><path fill="#FCBD02" d="M 9.93 34.92 A 18 18 0 0 1 2.04 21.26 L 9.03 20.77 A 11 11 0 0 0 13.85 29.12 Z"/><path fill="#FDCB3C" d="M 2.04 18.74 A 18 18 0 0 1 9.93 5.08 L 13.85 10.88 A 11 11 0 0 0 9.03 19.23 Z"/></svg><span><b>People</b><small>Schedule. Perform. Reward.</small></span></span></th>
+          </tr>
+          <tr>
+            <td class="compare-feature">Field Mobile App</td>
+            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
+            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
+            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
+          </tr>
+          <tr>
+            <td class="compare-feature">Expense Logging</td>
+            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
+            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
+            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
+          </tr>
+          <tr>
+            <td class="compare-feature">Payroll Costing</td>
+            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
+            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
+            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
+          </tr>
+          <tr>
+            <td class="compare-feature">HR Records</td>
+            <td class="no"><span aria-hidden="true">&#8211;</span><span class="sr-only">Not included</span></td>
+            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
+            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
+          </tr>
+          <tr>
+            <td class="compare-feature">Leave Management</td>
+            <td class="no"><span aria-hidden="true">&#8211;</span><span class="sr-only">Not included</span></td>
+            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
+            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
+          </tr>
+          <tr>
+            <td class="compare-feature">Certification Tracking</td>
+            <td class="no"><span aria-hidden="true">&#8211;</span><span class="sr-only">Not included</span></td>
+            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
+            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
+          </tr>
+          <tr>
+            <td class="compare-feature">Roles &amp; Permissions</td>
+            <td class="no"><span aria-hidden="true">&#8211;</span><span class="sr-only">Not included</span></td>
+            <td class="no"><span aria-hidden="true">&#8211;</span><span class="sr-only">Not included</span></td>
+            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
+          </tr>
+          <tr>
+            <td class="compare-feature">Performance Tracking</td>
+            <td class="no"><span aria-hidden="true">&#8211;</span><span class="sr-only">Not included</span></td>
+            <td class="no"><span aria-hidden="true">&#8211;</span><span class="sr-only">Not included</span></td>
+            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+
+    <p class="compare-foot-note">Prices shown are monthly, billed monthly. Pay annually instead and get two months free &mdash; see the <a href="/pricing/">pricing page</a> for full billing details, AI credit and email allowances, and bolt-ons.</p>
+  </div>
+</section>
+
+<!-- ================= BOLT-ONS ================= -->
+<section class="boltons">
+  <div class="wrap">
+    <div class="section-head wide reveal">
+      <div class="eyebrow">Need more headroom?</div>
+      <h2>Top up AI credits, emails or seats any time.</h2>
+      <p>Available on any plan, billed monthly alongside it — cancel a bolt-on whenever you no longer need it.</p>
+    </div>
+    <div class="bolton-grid reveal-group">
+      <div class="bolton-card reveal">
+        <h3>AI credit top-ups</h3>
+        <div class="sub">Bigger bundles cost less per credit.</div>
+        <div class="bolton-rows">
+          <div class="bolton-row"><span>+250 credits</span><b>£15/month</b></div>
+          <div class="bolton-row"><span>+750 credits</span><b>£40/month</b></div>
+          <div class="bolton-row"><span>+2,000 credits</span><b>£95/month</b></div>
+        </div>
+      </div>
+      <div class="bolton-card reveal">
+        <h3>Email top-ups</h3>
+        <div class="sub">Bigger bundles cost less per email.</div>
+        <div class="bolton-rows">
+          <div class="bolton-row"><span>+1,000 emails</span><b>£9/month</b></div>
+          <div class="bolton-row"><span>+5,000 emails</span><b>£35/month</b></div>
+          <div class="bolton-row"><span>+20,000 emails</span><b>£110/month</b></div>
+        </div>
+      </div>
+      <div class="bolton-card reveal">
+        <h3>Extra users</h3>
+        <div class="sub">One flat price per extra user.</div>
+        <div class="bolton-rows">
+          <div class="bolton-row"><span>Foundation</span><b>£15/user/month</b></div>
+          <div class="bolton-row"><span>Growth</span><b>£12/user/month</b></div>
+          <div class="bolton-row"><span>Pro</span><b>£9/user/month</b></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= POLICY STRIP ================= -->
+<div class="policy-strip">
+  <div class="wrap">
+    <div class="policy-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6v6l4 2"/><circle cx="12" cy="12" r="9"/></svg>
+      <div><b>30-day free trial</b><span>Full Growth-level access from day one. Card required to start, nothing charged until day 31, and onboarding fees only apply once you convert.</span></div>
+    </div>
+    <div class="policy-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M8 2v4M16 2v4M3 10h18"/></svg>
+      <div><b>Rolling monthly contract</b><span>No minimum term on any plan or bolt-on. Cancel, upgrade or downgrade any time. Pay annually instead and get two months free.</span></div>
+    </div>
+    <div class="policy-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M17 20a5 5 0 0 0-10 0"/><circle cx="12" cy="10" r="4"/></svg>
+      <div><b>Referral scheme</b><span>Get a free month of your plan for every business you refer that becomes a paying customer. They get a 45-day trial instead of 30. No cap.</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ================= BESPOKE ================= -->
+<section class="bespoke">
+  <div class="wrap">
+    <div class="bespoke-card reveal">
+      <div class="bespoke-grid">
+        <div>
+          <div class="eyebrow">Something specific to your business?</div>
+          <h2>Bespoke work, quoted individually.</h2>
+          <p>If your business needs an integration, workflow or report that isn't in the standard platform, we scope and price it separately — on top of whichever plan you're on.</p>
+        </div>
+        <div class="bespoke-list">
+          <div class="bespoke-list-item"><b>Custom integrations &amp; workflow builds</b><span>From £750, scoped after a short discovery call.</span></div>
+          <div class="bespoke-list-item"><b>Dedicated implementation manager</b><span>+£150/month, any plan.</span></div>
+          <div class="bespoke-list-item"><b>White-label &amp; custom domain branding</b><span>+£49/month, Pro only.</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CTA BAND ================= -->
+<section class="cta-band" id="demo">
+  <div class="wrap">
+    <h2>Try Trade 360 free for 30 days.</h2>
+    <div class="cta-band-actions">
+      <a class="btn btn-navy" href="#demo">Start free trial
+        <svg viewBox="0 0 16 16" fill="none" width="14" height="14"><path d="M4 12 12 4M12 4H6M12 4v6" stroke="#F6F6F8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <a class="btn btn-outline" href="/#demo" style="background:transparent;border-color:rgba(28,33,48,.35);">Book a demo</a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+  <div class="wrap">
+    <div class="foot-social">
+      <span class="foot-social-label">Stay connected</span>
+      <div class="foot-social-icons">
+        <a class="foot-social-icon" href="#" target="_blank" rel="noopener" aria-label="Facebook">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M15 8.5h2.5V5.2c-.4-.06-1.9-.2-3.6-.2-3.6 0-6 2.2-6 6.2v3.3H4.5v3.7H7.9V21h3.8v-2.8h3.4l.5-3.7h-3.9v-2.9c0-1.1.3-1.8 1.9-1.8Z"/></svg>
+        </a>
+        <a class="foot-social-icon" href="#" target="_blank" rel="noopener" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1" fill="currentColor" stroke="none"/></svg>
+        </a>
+        <a class="foot-social-icon" href="#" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><rect x="3" y="3" width="18" height="18" rx="3" fill="none" stroke="currentColor" stroke-width="1.7"/><circle cx="8.2" cy="8.6" r="1.3"/><rect x="7" y="11" width="2.4" height="7"/><path d="M12.5 11h2.3v1.1c.5-.8 1.4-1.3 2.5-1.3 2 0 3 1.3 3 3.8V18h-2.4v-3c0-1.1-.4-1.9-1.5-1.9-.8 0-1.3.5-1.5 1-.1.2-.1.5-.1.8V18h-2.3Z"/></svg>
+        </a>
+        <a class="foot-social-icon" href="#" target="_blank" rel="noopener" aria-label="X (Twitter)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M5 5l14 14M19 5 5 19"/></svg>
+        </a>
+      </div>
+    </div>
+    <div class="foot-links">
+      <a href="/solutions/">Solutions</a>
+      <a href="/">Industries</a>
+      <a href="/">Why Trade 360?</a>
+      <a href="/pricing/">Pricing</a>
+      <a href="/#demo">Contact</a>
+    </div>
+    <div class="foot-brand">
+      <div class="brand-block">
+        <div class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 40 40"><path fill="#4A4535" d="M 12.11 3.82 A 18 18 0 0 1 27.89 3.82 L 24.82 10.11 A 11 11 0 0 0 15.18 10.11 Z"/><path fill="#6B5C3F" d="M 30.07 5.08 A 18 18 0 0 1 37.96 18.74 L 30.97 19.23 A 11 11 0 0 0 26.15 10.88 Z"/><path fill="#8F7440" d="M 37.96 21.26 A 18 18 0 0 1 30.07 34.92 L 26.15 29.12 A 11 11 0 0 0 30.97 20.77 Z"/><path fill="#B48D3A" d="M 27.89 36.18 A 18 18 0 0 1 12.11 36.18 L 15.18 29.89 A 11 11 0 0 0 24.82 29.89 Z"/><path fill="#D9A62A" d="M 9.93 34.92 A 18 18 0 0 1 2.04 21.26 L 9.03 20.77 A 11 11 0 0 0 13.85 29.12 Z"/><path fill="#FCBD02" d="M 2.04 18.74 A 18 18 0 0 1 9.93 5.08 L 13.85 10.88 A 11 11 0 0 0 9.03 19.23 Z"/></svg>
+        </div>
+        <img class="brand-wordmark-img foot-logo" src="/assets/images/footer-logo.png" alt="Trade360">
+        <span class="brand-tagline">Lead to Profit</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ================= VIDEO TEASER + LIGHTBOX ================= -->
+<div class="video-teaser" id="videoTeaser">
+  <button class="vt-close" id="videoTeaserClose" type="button" aria-label="Dismiss video">
+    <svg viewBox="0 0 16 16" fill="none"><path d="M3 3l10 10M13 3 3 13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+  </button>
+  <button class="vt-open" id="videoTeaserOpen" type="button" aria-haspopup="dialog" aria-controls="videoLightbox">
+    <span class="vt-thumb" style="background-image:url('/assets/images/video-poster-zara.jpg')">
+      <span class="vt-play" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M9 7.5v9l7.5-4.5L9 7.5Z"/></svg></span>
+    </span>
+    <span class="vt-info">
+      <span class="vt-info-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M9 7.5v9l7.5-4.5L9 7.5Z"/></svg></span>
+      <span class="vt-info-body"><b>Why choose Trade 360?</b><span>Zara &middot; 33s intro</span></span>
+    </span>
+  </button>
+</div>
+
+<div class="video-lightbox" id="videoLightbox" role="dialog" aria-modal="true" aria-label="Why choose Trade 360?">
+  <div class="video-lightbox-inner">
+    <button class="video-lightbox-close" id="videoLightboxClose" type="button" aria-label="Close video">
+      <svg viewBox="0 0 16 16" fill="none"><path d="M3 3l10 10M13 3 3 13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+    </button>
+    <div class="video-lightbox-media">
+      <video id="videoLightboxPlayer" controls playsinline preload="none" poster="/assets/images/video-poster-zara.jpg">
+        <source src="/assets/video/why-choose-trade360.mp4" type="video/mp4">
+      </video>
+      <button class="video-lightbox-play" id="videoLightboxPlay" type="button" aria-label="Play video">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M9 7.5v9l7.5-4.5L9 7.5Z"/></svg>
+      </button>
+    </div>
+    <div class="video-lightbox-caption">
+      <div>
+        <h3>Why choose Trade 360?</h3>
+        <p>Zara &middot; 33s intro</p>
+      </div>
+      <a class="btn btn-gold" href="/#demo">Book a demo
+        <svg viewBox="0 0 16 16" fill="none" width="14" height="14"><path d="M4 12 12 4M12 4H6M12 4v6" stroke="#1C2130" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  // ---- sticky nav scroll shadow + progress bar ----
+  var nav = document.getElementById('siteNav');
+  function onScroll(){
+    if (!nav) return;
+    nav.classList.toggle('scrolled', window.scrollY > 8);
+    var bar = document.getElementById('scrollProgress');
+    if (bar){
+      var doc = document.documentElement;
+      var max = (doc.scrollHeight - window.innerHeight) || 1;
+      var pct = Math.min(100, Math.max(0, (window.scrollY / max) * 100));
+      bar.style.width = pct + '%';
+    }
+  }
+  window.addEventListener('scroll', onScroll, { passive:true });
+  onScroll();
+
+  // ---- mobile menu toggle ----
+  var toggle = document.getElementById('navToggle');
+  var panel = document.getElementById('mobilePanel');
+  var toggleIcon = document.getElementById('navToggleIcon');
+  if (toggle && panel){
+    toggle.addEventListener('click', function(){
+      var open = panel.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      toggleIcon.innerHTML = open
+        ? '<path d="M5 5l14 14M19 5 5 19"/>'
+        : '<path d="M3 6h18M3 12h18M3 18h18"/>';
+    });
+  }
+
+  // ---- scroll reveal ----
+  var revealEls = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window && revealEls.length){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if (entry.isIntersecting){ entry.target.classList.add('in-view'); io.unobserve(entry.target); }
+      });
+    }, { threshold:.15 });
+    revealEls.forEach(function(el){ io.observe(el); });
+    setTimeout(function(){ revealEls.forEach(function(el){ el.classList.add('in-view'); }); }, 1800);
+  } else {
+    revealEls.forEach(function(el){ el.classList.add('in-view'); });
+  }
+
+  // ---- billing toggle (monthly / annual) ----
+  var billingSwitch = document.getElementById('billingSwitch');
+  var labelMonthly = document.getElementById('labelMonthly');
+  var labelAnnual = document.getElementById('labelAnnual');
+  var tierCards = document.querySelectorAll('.tier-card');
+  var gbp = function(n){ return '£' + Number(n).toLocaleString('en-GB'); };
+
+  function applyBilling(annual){
+    tierCards.forEach(function(card){
+      var priceEl = card.querySelector('.tier-price');
+      var noteEl = card.querySelector('.tier-billed-note');
+      if (annual){
+        priceEl.textContent = gbp(card.getAttribute('data-annual'));
+        noteEl.textContent = 'billed ' + gbp(card.getAttribute('data-billed')) + '/year';
+      } else {
+        priceEl.textContent = gbp(card.getAttribute('data-monthly'));
+        noteEl.textContent = '';
+      }
+    });
+    labelMonthly.classList.toggle('active', !annual);
+    labelAnnual.classList.toggle('active', annual);
+  }
+
+  if (billingSwitch){
+    billingSwitch.addEventListener('click', function(){
+      var annual = !billingSwitch.classList.contains('on');
+      billingSwitch.classList.toggle('on', annual);
+      billingSwitch.setAttribute('aria-checked', annual ? 'true' : 'false');
+      applyBilling(annual);
+    });
+  }
+
+  // ---- video teaser + lightbox ----
+  var videoTeaser = document.getElementById('videoTeaser');
+  var videoTeaserOpen = document.getElementById('videoTeaserOpen');
+  var videoTeaserClose = document.getElementById('videoTeaserClose');
+  var videoLightbox = document.getElementById('videoLightbox');
+  var videoLightboxClose = document.getElementById('videoLightboxClose');
+  var videoLightboxPlayer = document.getElementById('videoLightboxPlayer');
+  if (videoTeaser && videoTeaserOpen){
+    var videoTeaserDismissed = false;
+    try { videoTeaserDismissed = localStorage.getItem('trade360VideoTeaserDismissed') === '1'; } catch(e){}
+    if (videoTeaserDismissed) videoTeaser.classList.add('hidden');
+
+    // Keep clear of the cookie banner and (on the homepage hero) the
+    // floating feature badge, whichever is lowest/most visible right now,
+    // instead of a hardcoded offset that only works for one layout.
+    var vtDefaultBottom = parseFloat(getComputedStyle(videoTeaser).bottom) || 20;
+    var vtRectsOverlap = function(a, b){
+      return a.right > b.left && a.left < b.right && a.bottom > b.top && a.top < b.bottom;
+    };
+    var repositionVideoTeaser = function(){
+      if (videoTeaser.classList.contains('hidden') || videoTeaser.classList.contains('scroll-gated')) return;
+      var gap = 14, vh = window.innerHeight;
+      // Measure at the default position first -- only push the teaser up when
+      // another fixed/floating element actually intersects it there, never
+      // just because that element exists somewhere else on the page.
+      videoTeaser.style.bottom = vtDefaultBottom + 'px';
+      var vtRect = videoTeaser.getBoundingClientRect();
+      var bottom = vtDefaultBottom;
+      var cb = document.getElementById('cookieBanner');
+      if (cb && !cb.classList.contains('hidden')){
+        var cbRect = cb.getBoundingClientRect();
+        if (cbRect.height > 0 && vtRectsOverlap(vtRect, cbRect)){
+          var need = (vh - cbRect.top) + gap;
+          if (need > bottom) bottom = need;
+        }
+      }
+      var fc = document.querySelector('.float-card');
+      if (fc){
+        var fcRect = fc.getBoundingClientRect();
+        if (vtRectsOverlap(vtRect, fcRect)){
+          // Clear above the badge rather than below it -- there's reliably
+          // open space higher up the hero, whereas below it is often a tight
+          // squeeze against the cookie banner.
+          var need2 = (vh - fcRect.top) + gap;
+          if (need2 > bottom) bottom = need2;
+        }
+      }
+      // Never push it high enough to clip the top of a very short viewport.
+      var maxBottom = vh - vtRect.height - 8;
+      if (bottom > maxBottom) bottom = Math.max(maxBottom, 8);
+      videoTeaser.style.bottom = bottom + 'px';
+    };
+    repositionVideoTeaser();
+    window.addEventListener('resize', repositionVideoTeaser);
+    window.addEventListener('scroll', repositionVideoTeaser, { passive: true });
+    var cookieAcceptBtn = document.getElementById('cookieAccept');
+    if (cookieAcceptBtn) cookieAcceptBtn.addEventListener('click', function(){ setTimeout(repositionVideoTeaser, 0); });
+
+    // On mobile, don't show the teaser over the top section -- wait until
+    // the visitor has scrolled past it, in either direction.
+    var heroGateEl = document.querySelector('.hero, .intro');
+    var isMobileTeaser = function(){ return window.matchMedia('(max-width: 640px)').matches; };
+    if (heroGateEl && !videoTeaserDismissed){
+      if (isMobileTeaser()) videoTeaser.classList.add('scroll-gated');
+      if ('IntersectionObserver' in window){
+        var heroGateObserver = new IntersectionObserver(function(entries){
+          entries.forEach(function(entry){
+            if (!isMobileTeaser()){
+              videoTeaser.classList.remove('scroll-gated');
+              return;
+            }
+            if (entry.isIntersecting){
+              videoTeaser.classList.add('scroll-gated');
+            } else {
+              videoTeaser.classList.remove('scroll-gated');
+              repositionVideoTeaser();
+            }
+          });
+        }, { threshold: 0 });
+        heroGateObserver.observe(heroGateEl);
+      } else {
+        videoTeaser.classList.remove('scroll-gated');
+      }
+      window.addEventListener('resize', function(){
+        if (!isMobileTeaser()) videoTeaser.classList.remove('scroll-gated');
+      });
+    }
+    if (videoTeaserClose){
+      videoTeaserClose.addEventListener('click', function(e){
+        e.stopPropagation();
+        videoTeaser.classList.add('hidden');
+        try { localStorage.setItem('trade360VideoTeaserDismissed', '1'); } catch(e){}
+      });
+    }
+    var openVideoLightbox = function(){
+      if (!videoLightbox) return;
+      videoLightbox.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    };
+    var closeVideoLightbox = function(){
+      if (!videoLightbox) return;
+      videoLightbox.classList.remove('open');
+      document.body.style.overflow = '';
+      if (videoLightboxPlayer){
+        videoLightboxPlayer.pause();
+        videoLightboxPlayer.currentTime = 0;
+      }
+    };
+    videoTeaserOpen.addEventListener('click', openVideoLightbox);
+    var videoLightboxPlay = document.getElementById('videoLightboxPlay');
+    if (videoLightboxPlay && videoLightboxPlayer){
+      videoLightboxPlay.addEventListener('click', function(){ videoLightboxPlayer.play(); });
+      videoLightboxPlayer.addEventListener('play', function(){ videoLightboxPlay.classList.add('hidden'); });
+      videoLightboxPlayer.addEventListener('pause', function(){ videoLightboxPlay.classList.remove('hidden'); });
+    }
+    if (videoLightboxClose) videoLightboxClose.addEventListener('click', closeVideoLightbox);
+    if (videoLightbox){
+      videoLightbox.addEventListener('click', function(e){
+        if (e.target === videoLightbox) closeVideoLightbox();
+      });
+    }
+    document.addEventListener('keydown', function(e){
+      if (e.key === 'Escape' && videoLightbox && videoLightbox.classList.contains('open')) closeVideoLightbox();
+    });
+  }
+})();
+</script>
+
+</body>
+</html>

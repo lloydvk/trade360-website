@@ -158,6 +158,12 @@
   .dd-img svg{ width:15px; height:15px; }
   .dd-icon{ width:36px; height:36px; border-radius:9px; flex:none; display:flex; align-items:center; justify-content:center; background:var(--bg-2,#F5F5F8); }
   .dd-icon svg{ width:19px; height:19px; }
+  .dd-foot{
+    display:flex; align-items:center; justify-content:space-between; gap:8px;
+    margin-top:4px; padding:10px 8px 2px; border-top:1px solid var(--line);
+    font-size:12.5px; font-weight:700; color:var(--navy); opacity:1 !important;
+  }
+  .dd-foot svg{ width:12px; height:12px; flex:none; color:var(--ink-soft); }
   @media (prefers-reduced-motion: reduce){ .dropdown-panel, .dropdown-panel-inner, .nav-item .dd-trigger svg{ transition:none; } }
   .nav-right{ display:flex; align-items:center; gap:22px; }
   .login-link{ font-size:14.5px; font-weight:600; color:var(--navy); display:none; }
@@ -912,11 +918,14 @@
     </div>
     <div class="nav-links">
       <div class="nav-item" id="solutionsNavItem">
-        <a href="#platform" class="dd-trigger" aria-haspopup="true" aria-expanded="false">Solutions <svg viewBox="0 0 12 12" fill="none"><path d="M2.5 4.5 6 8l3.5-3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></a>
+        <a href="/solutions/" class="dd-trigger" aria-haspopup="true" aria-expanded="false">Solutions <svg viewBox="0 0 12 12" fill="none"><path d="M2.5 4.5 6 8l3.5-3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></a>
         <div class="dropdown-panel">
           <div class="dropdown-panel-inner">
             <div class="dd-heading">The six pillars</div>
             <div id="solutionsDropdownList"><!-- populated from the pillar cards below, so this list can't drift out of sync --></div>
+            <a class="dd-foot" href="/solutions/">Compare what's in each plan
+              <svg viewBox="0 0 12 12" fill="none"><path d="M2.5 6h7M6 2.5 9.5 6 6 9.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
           </div>
         </div>
       </div>
@@ -962,7 +971,7 @@
     </div>
   </div>
   <div class="mobile-panel" id="mobilePanel">
-    <a href="#">Solutions</a>
+    <a href="/solutions/">Solutions</a>
     <a href="#">Industries</a>
     <a href="#">Why Trade 360?</a>
     <a href="/pricing/">Pricing</a>
@@ -1535,7 +1544,7 @@
       </div>
     </div>
     <div class="foot-links">
-      <a href="#platform">Solutions</a>
+      <a href="/solutions/">Solutions</a>
       <a href="#">Industries</a>
       <a href="#">Why Trade 360?</a>
       <a href="/pricing/">Pricing</a>
@@ -2057,7 +2066,7 @@
   var solutionsList = document.getElementById('solutionsDropdownList');
   if (solutionsList && pillarData.length){
     solutionsList.innerHTML = pillarData.map(function(p){
-      return '<a class="dd-row" href="#platform">' +
+      return '<a class="dd-row" href="/solutions/#' + p.title.toLowerCase() + '">' +
         '<span class="dd-icon">' + p.ringHTML + '</span>' +
         '<span class="dd-copy"><b>' + p.title + '</b><small>' + p.tag + '</small></span>' +
       '</a>';
