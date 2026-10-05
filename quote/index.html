@@ -85,6 +85,18 @@
   /* ---------- scroll progress + nav (matches the Trade 360 homepage) ---------- */
   .scroll-progress{ position:fixed; top:0; left:0; height:3px; width:0%; background:var(--gold); z-index:1000; transition:width .1s linear; }
   .nav{ position:sticky; top:env(safe-area-inset-top,0px); z-index:30; background:var(--bg); border-bottom:1px solid var(--line); transition:box-shadow .25s ease, background .25s ease; }
+  /* a faint, slow-breathing warmth behind the nav content so the bar isn't flat white;
+     z-index:-1 keeps it painted above the nav's own background but under every real
+     descendant (logo, links, dropdowns) without disturbing any of their own stacking */
+  .nav::after{
+    content:""; position:absolute; inset:0; z-index:-1; pointer-events:none;
+    background:
+      radial-gradient(460px 160px at 14% 50%, rgba(139,145,163,.11), transparent 72%),
+      linear-gradient(115deg, rgba(139,145,163,.045) 0%, transparent 32%, transparent 68%, rgba(28,33,48,.025) 100%);
+    animation: navGlow 7s ease-in-out infinite;
+  }
+  @keyframes navGlow{ 0%, 100%{ opacity:.65; } 50%{ opacity:1; } }
+  @media (prefers-reduced-motion: reduce){ .nav::after{ animation:none; } }
   .nav.scrolled{ box-shadow:0 6px 20px rgba(20,20,30,.08); }
   .nav .wrap{ display:flex; align-items:center; justify-content:space-between; height:72px; gap:18px; }
   .brand-block{ display:flex; align-items:center; gap:0; flex:none; }
@@ -92,8 +104,6 @@
   .brand-mark{ display:flex; align-items:center; flex:none; margin-right:4px; }
   .brand-mark svg{ width:34px; height:34px; animation:brandSpin 14s linear infinite; }
   .brand-wordmark-img{ height:46px; width:auto; display:block; }
-  .foot-brand .brand-wordmark-img{ height:68px; }
-  @media (max-width:640px){ .foot-brand .brand-wordmark-img{ height:46px; } }
   @keyframes brandSpin{ from{ transform:rotate(0deg); } to{ transform:rotate(360deg); } }
   @media (prefers-reduced-motion: reduce){ .brand-mark svg{ animation:none; } }
   .brand{ display:flex; align-items:center; gap:9px; height:46px; padding:0 16px; border-radius:10px; border:1.5px dashed var(--line); font-weight:700; font-size:16px; color:var(--navy); }
@@ -107,6 +117,46 @@
   .nav-links a:hover::after{ right:0; }
   .nav-links a.current::after{ right:0; }
   @media (min-width:960px){ .nav-links{ display:flex; } }
+  .nav-links svg{ width:11px; height:11px; opacity:.7; }
+
+  /* ---------- nav dropdowns (Solutions / Industries) ---------- */
+  .nav-item{ position:relative; }
+  .nav-item .dd-trigger svg{ transition:transform .18s ease; }
+  .nav-item.open .dd-trigger svg, .nav-item:hover .dd-trigger svg, .nav-item:focus-within .dd-trigger svg{ transform:rotate(180deg); }
+  .dropdown-panel{
+    position:absolute; top:100%; left:0; padding-top:12px; z-index:40;
+    opacity:0; visibility:hidden; pointer-events:none;
+    transition:opacity .18s ease, visibility .18s;
+  }
+  .nav-item:hover .dropdown-panel, .nav-item:focus-within .dropdown-panel, .nav-item.open .dropdown-panel{
+    opacity:1; visibility:visible; pointer-events:auto;
+  }
+  .dropdown-panel-inner{
+    width:278px; background:#fff; border:1px solid var(--line); border-radius:14px;
+    box-shadow:0 18px 40px rgba(20,20,30,.14); padding:12px;
+    display:flex; flex-direction:column; gap:2px;
+    transform:translateY(6px); transition:transform .18s ease;
+  }
+  .nav-item:hover .dropdown-panel-inner, .nav-item:focus-within .dropdown-panel-inner, .nav-item.open .dropdown-panel-inner{
+    transform:translateY(0);
+  }
+  .dd-heading{ font-size:10.5px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-soft); padding:2px 8px 8px; }
+  .dd-row{ display:flex; align-items:center; gap:11px; padding:7px 8px; border-radius:10px; color:var(--navy); opacity:1 !important; transition:background .15s ease; }
+  .dd-row:hover{ background:var(--bg-2,#F5F5F8); }
+  .dd-row .dd-copy{ display:flex; flex-direction:column; gap:1px; min-width:0; }
+  .dd-row .dd-copy b{ font-weight:700; font-size:13px; color:var(--navy); }
+  .dd-row .dd-copy small{ font-weight:500; font-size:11px; color:var(--ink-soft); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .dd-img{ width:36px; height:36px; border-radius:9px; flex:none; padding:0; gap:0; border-width:1.5px; }
+  .dd-img svg{ width:15px; height:15px; }
+  .dd-icon{ width:36px; height:36px; border-radius:9px; flex:none; display:flex; align-items:center; justify-content:center; background:var(--bg-2,#F5F5F8); }
+  .dd-icon svg{ width:19px; height:19px; }
+  .dd-foot{
+    display:flex; align-items:center; justify-content:space-between; gap:8px;
+    margin-top:4px; padding:10px 8px 2px; border-top:1px solid var(--line);
+    font-size:12.5px; font-weight:700; color:var(--navy); opacity:1 !important;
+  }
+  .dd-foot svg{ width:12px; height:12px; flex:none; color:var(--ink-soft); }
+  @media (prefers-reduced-motion: reduce){ .dropdown-panel, .dropdown-panel-inner, .nav-item .dd-trigger svg{ transition:none; } }
   .nav-right{ display:flex; align-items:center; gap:22px; }
   .login-link{ font-size:14.5px; font-weight:600; color:var(--navy); display:none; transition:opacity .15s ease; }
   .login-link:hover{ opacity:.7; }
@@ -248,21 +298,35 @@
   .reveal-group .reveal:nth-child(3){ transition-delay:.14s; }
   @media (prefers-reduced-motion: reduce){ .reveal{ transition:none; opacity:1; transform:none; } }
 
+    @keyframes driftGlow{
+    0%{ transform:translate(0,0) scale(1); }
+    100%{ transform:translate(3%,-2%) scale(1.06); }
+  }
   /* ---------- footer (matches the Trade 360 homepage) ---------- */
-  footer{ background:var(--navy-2); color:#8B90A3; padding-block:34px; }
-  footer .wrap{ display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:18px; }
-  .foot-social{ display:flex; align-items:center; gap:14px; }
-  .foot-social-label{ font-size:12px; font-weight:700; color:#EDEEF3; }
-  .foot-social-icons{ display:flex; gap:8px; }
-  .foot-social-icon{ width:32px; height:32px; border-radius:999px; background:rgba(255,255,255,.08); display:flex; align-items:center; justify-content:center; color:#C7CAD6; transition:background .15s ease, color .15s ease; }
-  .foot-social-icon:hover{ background:var(--gold); color:var(--navy); }
-  .foot-social-icon svg{ width:15px; height:15px; }
-  .foot-links{ display:flex; flex-wrap:wrap; gap:22px; font-size:13px; font-weight:600; }
-  .foot-links a{ opacity:.85; transition:opacity .15s ease; }
-  .foot-links a:hover{ opacity:1; }
+  footer{ background:var(--navy-2); color:#8B90A3; padding-block:34px; position:relative; }
+  footer .wrap{ display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:18px; position:relative; z-index:1; }
   .foot-brand{ display:flex; flex-direction:column; gap:5px; }
-  .foot-brand .brand{ background:transparent; border-color:rgba(255,255,255,.16); color:#fff; }
   .foot-brand .brand-tagline{ color:#8B90A3; border-left-color:rgba(255,255,255,.16); }
+  .foot-links{ display:flex; gap:26px; font-size:13.5px; font-weight:600; }
+  .foot-links a{ transition:color .15s ease; }
+  .foot-links a:hover{ color:#fff; }
+  .foot-social{ display:flex; flex-direction:column; align-items:flex-start; gap:11px; }
+  .foot-social-label{ font-size:11px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:#7B7F92; }
+  .foot-social-icons{ display:flex; align-items:center; gap:10px; }
+  .foot-social-icon{
+    width:36px; height:36px; border-radius:999px; background:rgba(255,255,255,.08);
+    display:flex; align-items:center; justify-content:center; color:#fff; flex:none;
+    transition:background .18s ease, transform .18s ease, color .18s ease;
+  }
+  .foot-social-icon svg{ width:16px; height:16px; }
+  .foot-social-icon:hover{ background:var(--gold); color:var(--navy); transform:translateY(-2px); }
+  footer::before{ content:""; position:absolute; inset:0; z-index:0; pointer-events:none; background:
+      radial-gradient(circle at 88% 8%, rgba(252,189,2,.10), transparent 45%),
+      radial-gradient(280px 280px at 78% 82%, rgba(252,189,2,.10), transparent 70%),
+      repeating-linear-gradient(0deg, rgba(255,255,255,.02) 0 1px, transparent 1px 64px),
+      repeating-linear-gradient(90deg, rgba(255,255,255,.02) 0 1px, transparent 1px 64px);
+      animation:driftGlow 16s ease-in-out infinite alternate; }
+  @media (prefers-reduced-motion: reduce){ footer::before{ animation:none; } }
   @media (max-width:720px){
     footer .wrap{ flex-direction:column; align-items:flex-start; gap:24px; }
     .foot-links{ flex-direction:column; align-items:flex-start; gap:14px; }
@@ -352,20 +416,58 @@
     <div class="brand-block">
       <a href="/" class="brand-link" aria-label="Trade 360 — go to homepage">
       <div class="brand-mark" aria-hidden="true">
-        <svg viewBox="0 0 40 40"><path fill="#FCBD02" d="M 12.11 3.82 A 18 18 0 0 1 27.89 3.82 L 24.82 10.11 A 11 11 0 0 0 15.18 10.11 Z"/><path fill="#FDCB3C" d="M 30.07 5.08 A 18 18 0 0 1 37.96 18.74 L 30.97 19.23 A 11 11 0 0 0 26.15 10.88 Z"/><path fill="#FDD972" d="M 37.96 21.26 A 18 18 0 0 1 30.07 34.92 L 26.15 29.12 A 11 11 0 0 0 30.97 20.77 Z"/><path fill="#FCDD85" d="M 27.89 36.18 A 18 18 0 0 1 12.11 36.18 L 15.18 29.89 A 11 11 0 0 0 24.82 29.89 Z"/><path fill="#FBE6A8" d="M 9.93 34.92 A 18 18 0 0 1 2.04 21.26 L 9.03 20.77 A 11 11 0 0 0 13.85 29.12 Z"/><path fill="#F5DFAF" d="M 2.04 18.74 A 18 18 0 0 1 9.93 5.08 L 13.85 10.88 A 11 11 0 0 0 9.03 19.23 Z"/></svg>
+        <svg viewBox="0 0 40 40"><path fill="#F5DFAF" d="M 12.11 3.82 A 18 18 0 0 1 27.89 3.82 L 24.82 10.11 A 11 11 0 0 0 15.18 10.11 Z"/><path fill="#FBE6A8" d="M 30.07 5.08 A 18 18 0 0 1 37.96 18.74 L 30.97 19.23 A 11 11 0 0 0 26.15 10.88 Z"/><path fill="#FCDD85" d="M 37.96 21.26 A 18 18 0 0 1 30.07 34.92 L 26.15 29.12 A 11 11 0 0 0 30.97 20.77 Z"/><path fill="#FDD972" d="M 27.89 36.18 A 18 18 0 0 1 12.11 36.18 L 15.18 29.89 A 11 11 0 0 0 24.82 29.89 Z"/><path fill="#FDCB3C" d="M 9.93 34.92 A 18 18 0 0 1 2.04 21.26 L 9.03 20.77 A 11 11 0 0 0 13.85 29.12 Z"/><path fill="#FCBD02" d="M 2.04 18.74 A 18 18 0 0 1 9.93 5.08 L 13.85 10.88 A 11 11 0 0 0 9.03 19.23 Z"/></svg>
       </div>
       <img class="brand-wordmark-img" src="/assets/images/header-logo.png" alt="Trade360">
       </a>
       <span class="brand-tagline">Lead to Profit</span>
     </div>
     <div class="nav-links">
-      <a href="/solutions/">Solutions</a>
-      <a href="/">Industries</a>
-      <a href="/">Why Trade 360?</a>
+      <div class="nav-item" id="solutionsNavItem">
+        <a href="/solutions/" class="dd-trigger" aria-haspopup="true" aria-expanded="false">Solutions <svg viewBox="0 0 12 12" fill="none"><path d="M2.5 4.5 6 8l3.5-3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></a>
+        <div class="dropdown-panel">
+          <div class="dropdown-panel-inner">
+            <div class="dd-heading">The six pillars</div>
+            <div id="solutionsDropdownList"><a class="dd-row" href="/solutions/#marketing"><span class="dd-icon"><svg class="ring" viewBox="0 0 40 40"><path fill="var(--gold)" d="M 12.11 3.82 A 18 18 0 0 1 27.89 3.82 L 24.82 10.11 A 11 11 0 0 0 15.18 10.11 Z"></path><path fill="var(--ring-pale)" d="M 30.07 5.08 A 18 18 0 0 1 37.96 18.74 L 30.97 19.23 A 11 11 0 0 0 26.15 10.88 Z"></path><path fill="var(--ring-pale)" d="M 37.96 21.26 A 18 18 0 0 1 30.07 34.92 L 26.15 29.12 A 11 11 0 0 0 30.97 20.77 Z"></path><path fill="var(--ring-pale)" d="M 27.89 36.18 A 18 18 0 0 1 12.11 36.18 L 15.18 29.89 A 11 11 0 0 0 24.82 29.89 Z"></path><path fill="var(--ring-pale)" d="M 9.93 34.92 A 18 18 0 0 1 2.04 21.26 L 9.03 20.77 A 11 11 0 0 0 13.85 29.12 Z"></path><path fill="var(--ring-pale)" d="M 2.04 18.74 A 18 18 0 0 1 9.93 5.08 L 13.85 10.88 A 11 11 0 0 0 9.03 19.23 Z"></path></svg></span><span class="dd-copy"><b>Marketing</b><small>Attract. Nurture. Convert.</small></span></a><a class="dd-row" href="/solutions/#leads"><span class="dd-icon"><svg class="ring" viewBox="0 0 40 40"><path fill="var(--gold)" d="M 12.11 3.82 A 18 18 0 0 1 27.89 3.82 L 24.82 10.11 A 11 11 0 0 0 15.18 10.11 Z"></path><path fill="var(--gold-2)" d="M 30.07 5.08 A 18 18 0 0 1 37.96 18.74 L 30.97 19.23 A 11 11 0 0 0 26.15 10.88 Z"></path><path fill="var(--ring-pale)" d="M 37.96 21.26 A 18 18 0 0 1 30.07 34.92 L 26.15 29.12 A 11 11 0 0 0 30.97 20.77 Z"></path><path fill="var(--ring-pale)" d="M 27.89 36.18 A 18 18 0 0 1 12.11 36.18 L 15.18 29.89 A 11 11 0 0 0 24.82 29.89 Z"></path><path fill="var(--ring-pale)" d="M 9.93 34.92 A 18 18 0 0 1 2.04 21.26 L 9.03 20.77 A 11 11 0 0 0 13.85 29.12 Z"></path><path fill="var(--ring-pale)" d="M 2.04 18.74 A 18 18 0 0 1 9.93 5.08 L 13.85 10.88 A 11 11 0 0 0 9.03 19.23 Z"></path></svg></span><span class="dd-copy"><b>Leads</b><small>Capture. Qualify. Prioritise.</small></span></a><a class="dd-row" href="/solutions/#sales"><span class="dd-icon"><svg class="ring" viewBox="0 0 40 40"><path fill="var(--gold)" d="M 12.11 3.82 A 18 18 0 0 1 27.89 3.82 L 24.82 10.11 A 11 11 0 0 0 15.18 10.11 Z"></path><path fill="var(--gold-2)" d="M 30.07 5.08 A 18 18 0 0 1 37.96 18.74 L 30.97 19.23 A 11 11 0 0 0 26.15 10.88 Z"></path><path fill="var(--gold)" d="M 37.96 21.26 A 18 18 0 0 1 30.07 34.92 L 26.15 29.12 A 11 11 0 0 0 30.97 20.77 Z"></path><path fill="var(--ring-pale)" d="M 27.89 36.18 A 18 18 0 0 1 12.11 36.18 L 15.18 29.89 A 11 11 0 0 0 24.82 29.89 Z"></path><path fill="var(--ring-pale)" d="M 9.93 34.92 A 18 18 0 0 1 2.04 21.26 L 9.03 20.77 A 11 11 0 0 0 13.85 29.12 Z"></path><path fill="var(--ring-pale)" d="M 2.04 18.74 A 18 18 0 0 1 9.93 5.08 L 13.85 10.88 A 11 11 0 0 0 9.03 19.23 Z"></path></svg></span><span class="dd-copy"><b>Sales</b><small>Quote. Present. Win.</small></span></a><a class="dd-row" href="/solutions/#projects"><span class="dd-icon"><svg class="ring" viewBox="0 0 40 40"><path fill="var(--gold)" d="M 12.11 3.82 A 18 18 0 0 1 27.89 3.82 L 24.82 10.11 A 11 11 0 0 0 15.18 10.11 Z"></path><path fill="var(--gold-2)" d="M 30.07 5.08 A 18 18 0 0 1 37.96 18.74 L 30.97 19.23 A 11 11 0 0 0 26.15 10.88 Z"></path><path fill="var(--gold)" d="M 37.96 21.26 A 18 18 0 0 1 30.07 34.92 L 26.15 29.12 A 11 11 0 0 0 30.97 20.77 Z"></path><path fill="var(--gold-2)" d="M 27.89 36.18 A 18 18 0 0 1 12.11 36.18 L 15.18 29.89 A 11 11 0 0 0 24.82 29.89 Z"></path><path fill="var(--ring-pale)" d="M 9.93 34.92 A 18 18 0 0 1 2.04 21.26 L 9.03 20.77 A 11 11 0 0 0 13.85 29.12 Z"></path><path fill="var(--ring-pale)" d="M 2.04 18.74 A 18 18 0 0 1 9.93 5.08 L 13.85 10.88 A 11 11 0 0 0 9.03 19.23 Z"></path></svg></span><span class="dd-copy"><b>Projects</b><small>Plan. Schedule. Deliver.</small></span></a><a class="dd-row" href="/solutions/#accounts"><span class="dd-icon"><svg class="ring" viewBox="0 0 40 40"><path fill="var(--gold)" d="M 12.11 3.82 A 18 18 0 0 1 27.89 3.82 L 24.82 10.11 A 11 11 0 0 0 15.18 10.11 Z"></path><path fill="var(--gold-2)" d="M 30.07 5.08 A 18 18 0 0 1 37.96 18.74 L 30.97 19.23 A 11 11 0 0 0 26.15 10.88 Z"></path><path fill="var(--gold)" d="M 37.96 21.26 A 18 18 0 0 1 30.07 34.92 L 26.15 29.12 A 11 11 0 0 0 30.97 20.77 Z"></path><path fill="var(--gold-2)" d="M 27.89 36.18 A 18 18 0 0 1 12.11 36.18 L 15.18 29.89 A 11 11 0 0 0 24.82 29.89 Z"></path><path fill="var(--gold)" d="M 9.93 34.92 A 18 18 0 0 1 2.04 21.26 L 9.03 20.77 A 11 11 0 0 0 13.85 29.12 Z"></path><path fill="var(--ring-pale)" d="M 2.04 18.74 A 18 18 0 0 1 9.93 5.08 L 13.85 10.88 A 11 11 0 0 0 9.03 19.23 Z"></path></svg></span><span class="dd-copy"><b>Accounts</b><small>Track. Report. Profit.</small></span></a><a class="dd-row" href="/solutions/#people"><span class="dd-icon"><svg class="ring" viewBox="0 0 40 40"><path fill="var(--gold)" d="M 12.11 3.82 A 18 18 0 0 1 27.89 3.82 L 24.82 10.11 A 11 11 0 0 0 15.18 10.11 Z"></path><path fill="var(--gold-2)" d="M 30.07 5.08 A 18 18 0 0 1 37.96 18.74 L 30.97 19.23 A 11 11 0 0 0 26.15 10.88 Z"></path><path fill="var(--gold)" d="M 37.96 21.26 A 18 18 0 0 1 30.07 34.92 L 26.15 29.12 A 11 11 0 0 0 30.97 20.77 Z"></path><path fill="var(--gold-2)" d="M 27.89 36.18 A 18 18 0 0 1 12.11 36.18 L 15.18 29.89 A 11 11 0 0 0 24.82 29.89 Z"></path><path fill="var(--gold)" d="M 9.93 34.92 A 18 18 0 0 1 2.04 21.26 L 9.03 20.77 A 11 11 0 0 0 13.85 29.12 Z"></path><path fill="var(--gold-2)" d="M 2.04 18.74 A 18 18 0 0 1 9.93 5.08 L 13.85 10.88 A 11 11 0 0 0 9.03 19.23 Z"></path></svg></span><span class="dd-copy"><b>People</b><small>Schedule. Perform. Reward.</small></span></a></div>
+            <a class="dd-foot" href="/solutions/">Compare what's in each plan
+              <svg viewBox="0 0 12 12" fill="none"><path d="M2.5 6h7M6 2.5 9.5 6 6 9.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="nav-item" id="industriesNavItem">
+        <a href="#" class="dd-trigger" aria-haspopup="true" aria-expanded="false">Industries <svg viewBox="0 0 12 12" fill="none"><path d="M2.5 4.5 6 8l3.5-3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></a>
+        <div class="dropdown-panel">
+          <div class="dropdown-panel-inner">
+            <div class="dd-heading">Browse by industry</div>
+          <a class="dd-row" href="#">
+            <div class="dd-img ph has-image" data-slot="industry-roofing" style="background-image:url('/assets/images/industry-roofing.jpg')"></div>
+            <span class="dd-copy"><b>Roofing</b></span>
+          </a>
+          <a class="dd-row" href="#">
+            <div class="dd-img ph has-image" data-slot="industry-glazing" style="background-image:url('/assets/images/industry-glazing.jpg')"></div>
+            <span class="dd-copy"><b>Glazing</b></span>
+          </a>
+          <a class="dd-row" href="#">
+            <div class="dd-img ph has-image" data-slot="industry-landscaping" style="background-image:url('/assets/images/industry-landscaping.jpg')"></div>
+            <span class="dd-copy"><b>Landscaping</b></span>
+          </a>
+          <a class="dd-row" href="#">
+            <div class="dd-img ph has-image" data-slot="industry-construction" style="background-image:url('/assets/images/industry-construction.jpg')"></div>
+            <span class="dd-copy"><b>Construction</b></span>
+          </a>
+          <a class="dd-row" href="#">
+            <div class="dd-img ph has-image" data-slot="industry-garden-rooms" style="background-image:url('/assets/images/industry-garden-rooms.jpg')"></div>
+            <span class="dd-copy"><b>Garden rooms</b></span>
+          </a>
+          </div>
+        </div>
+      </div>
+      <a href="#">Why Trade 360?</a>
       <a href="/pricing/">Pricing</a>
     </div>
     <div class="nav-right">
-      <a class="login-link" href="/">Log in</a>
+      <a class="login-link" href="#">Log in</a>
       <a class="btn btn-gold" href="/#demo">Book a demo
         <svg viewBox="0 0 16 16" fill="none" width="14" height="14"><path d="M4 12 12 4M12 4H6M12 4v6" stroke="#1C2130" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </a>
@@ -376,12 +478,12 @@
   </div>
   <div class="mobile-panel" id="mobilePanel">
     <a href="/solutions/">Solutions</a>
-    <a href="/">Industries</a>
-    <a href="/">Why Trade 360?</a>
+    <a href="#">Industries</a>
+    <a href="#">Why Trade 360?</a>
     <a href="/pricing/">Pricing</a>
-    <a href="/">Log in</a>
+    <a href="#">Log in</a>
     <div class="mp-cta">
-      <a class="btn btn-gold btn-block" href="/#demo">Book a demo
+      <a class="btn btn-gold" href="/#demo" style="width:100%; justify-content:center;">Book a demo
         <svg viewBox="0 0 16 16" fill="none" width="14" height="14"><path d="M4 12 12 4M12 4H6M12 4v6" stroke="#1C2130" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </a>
     </div>
@@ -624,8 +726,8 @@
     </div>
     <div class="foot-links">
       <a href="/solutions/">Solutions</a>
-      <a href="/">Industries</a>
-      <a href="/">Why Trade 360?</a>
+      <a href="#">Industries</a>
+      <a href="#">Why Trade 360?</a>
       <a href="/pricing/">Pricing</a>
       <a href="/#demo">Contact</a>
     </div>
@@ -713,6 +815,38 @@
       toggleIcon.innerHTML = open
         ? '<path d="M5 5l14 14M19 5 5 19"/>'
         : '<path d="M3 6h18M3 12h18M3 18h18"/>';
+    });
+  }
+
+  // ---- nav dropdowns (Solutions / Industries): click/tap toggle, closing the
+  // other one, with hover still handled by CSS for pointer users ----
+  var navDropdowns = Array.prototype.map.call(document.querySelectorAll('.nav-item'), function(item){
+    return { item: item, trigger: item.querySelector('.dd-trigger') };
+  }).filter(function(d){ return d.trigger; });
+
+  function closeAllDropdowns(except){
+    navDropdowns.forEach(function(d){
+      if (d.item === except) return;
+      d.item.classList.remove('open');
+      d.trigger.setAttribute('aria-expanded', 'false');
+    });
+  }
+
+  navDropdowns.forEach(function(d){
+    d.trigger.addEventListener('click', function(e){
+      e.preventDefault();
+      var open = d.item.classList.toggle('open');
+      d.trigger.setAttribute('aria-expanded', open ? 'true' : 'false');
+      closeAllDropdowns(open ? d.item : null);
+    });
+  });
+  if (navDropdowns.length){
+    document.addEventListener('click', function(e){
+      var insideAny = navDropdowns.some(function(d){ return d.item.contains(e.target); });
+      if (!insideAny) closeAllDropdowns(null);
+    });
+    document.addEventListener('keydown', function(e){
+      if (e.key === 'Escape') closeAllDropdowns(null);
     });
   }
 
