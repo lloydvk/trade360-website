@@ -470,11 +470,10 @@
   .video-copy .presenter .line span{ color:var(--ink-soft); }
   .video-copy .btn{ margin-top:26px; }
 
-  /* ---------- social feed ---------- */
+  /* ---------- blog feed (homepage) + blog cards, shared with /blog/ ---------- */
   .social-feed{ padding-block:56px 60px; }
   .social-feed .section-head{ display:flex; align-items:flex-end; justify-content:space-between; gap:24px; max-width:none; flex-wrap:wrap; }
   .social-feed .section-head .head-copy{ max-width:62ch; }
-  .fb-follow{ display:inline-flex; align-items:center; gap:8px; flex:none; }
   .social-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-top:32px; }
   .social-carousel{ position:relative; }
   .social-arrow{ display:none; }
@@ -485,7 +484,7 @@
       scrollbar-width:none;
     }
     .social-grid::-webkit-scrollbar{ display:none; }
-    .social-post{ flex:0 0 100%; scroll-snap-align:center; }
+    .blog-card{ flex:0 0 100%; scroll-snap-align:center; }
     .social-arrow{
       display:flex; align-items:center; justify-content:center;
       position:absolute; top:50%; transform:translateY(-50%);
@@ -499,22 +498,22 @@
     .social-arrow:disabled{ opacity:.3; cursor:default; }
     @media (prefers-reduced-motion: reduce){ .social-grid{ scroll-behavior:auto; } }
   }
-  .social-post{ background:var(--bg); border:1px solid var(--line); border-radius:14px; overflow:hidden; display:flex; flex-direction:column; transition:transform .2s ease, box-shadow .2s ease; }
-  .social-post:hover{ transform:translateY(-4px); box-shadow:0 16px 30px rgba(20,20,30,.08); }
-  .social-photo-wrap{ position:relative; overflow:hidden; aspect-ratio:4/3; }
-  .social-photo-wrap .ph{ position:absolute; inset:0; border-radius:0; transition:transform .7s ease, border-color .18s ease; }
-  .social-photo-wrap .ph.has-image:hover{ transform:scale(1.08); }
-  @media (prefers-reduced-motion: reduce){ .social-photo-wrap .ph.has-image:hover{ transform:none; } }
-  .social-body{ padding:16px 18px 20px; }
-  .social-meta{ display:flex; align-items:center; gap:9px; }
-  .social-meta .fb-icon{ width:22px; height:22px; border-radius:999px; background:#1877F2; display:flex; align-items:center; justify-content:center; flex:none; }
-  .social-meta .fb-icon svg{ width:12px; height:12px; }
-  .social-meta b{ font-size:13px; color:var(--navy); }
-  .social-meta span{ font-size:11.5px; color:var(--ink-soft); display:block; }
-  .social-caption{ font-size:13px; color:var(--ink); line-height:1.5; margin-top:10px; }
-  .social-stats{ display:flex; align-items:center; gap:16px; margin-top:14px; padding-top:12px; border-top:1px solid var(--line); font-size:12px; color:var(--ink-soft); font-weight:600; }
-  .social-stats span{ display:inline-flex; align-items:center; gap:5px; }
-  .social-stats svg{ width:14px; height:14px; }
+  .blog-card{ background:var(--bg); border:1px solid var(--line); border-radius:14px; overflow:hidden; display:flex; flex-direction:column; transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease; }
+  .blog-card:hover{ transform:translateY(-4px); box-shadow:0 16px 30px rgba(20,20,30,.08); border-color:var(--gold-2); }
+  .blog-card-photo{ position:relative; overflow:hidden; aspect-ratio:4/3; }
+  .blog-card-photo .ph{ position:absolute; inset:0; border-radius:0; transition:transform .7s ease, border-color .18s ease; }
+  .blog-card-photo .ph.has-image:hover{ transform:scale(1.08); }
+  @media (prefers-reduced-motion: reduce){ .blog-card-photo .ph.has-image:hover{ transform:none; } }
+  .blog-card-body{ padding:16px 18px 20px; display:flex; flex-direction:column; flex:1; }
+  .blog-meta{ display:flex; align-items:center; gap:9px; }
+  .blog-tag{ font-size:11px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; color:var(--navy); background:var(--ring-pale); padding:4px 9px; border-radius:999px; flex:none; }
+  .blog-meta span:last-child{ font-size:11.5px; color:var(--ink-soft); }
+  .blog-title{ font-size:16px; font-weight:800; color:var(--navy); line-height:1.3; margin-top:11px; }
+  .blog-excerpt{ font-size:13px; color:var(--ink-soft); line-height:1.5; margin-top:7px; }
+  .blog-more{ margin-top:auto; padding-top:14px; color:var(--gold); font-weight:700; font-size:13px; display:inline-flex; align-items:center; gap:6px; filter:brightness(.82); }
+  .blog-more svg{ transition:transform .18s ease; }
+  .blog-card:hover .blog-more svg{ transform:translateX(3px); }
+  @media (prefers-reduced-motion: reduce){ .blog-more svg, .blog-card{ transition:none; } }
 
   /* ---------- speak to a sales rep ---------- */
   .sales-rep{ padding-block:58px 64px; background:var(--bg-soft); }
@@ -1077,7 +1076,7 @@
           </a>
           <a class="dd-row" href="#">
             <div class="dd-img ph has-image" data-slot="industry-garden-rooms" style="background-image:url('/assets/images/industry-garden-rooms.jpg')"></div>
-            <span class="dd-copy"><b>Garden rooms</b></span>
+            <span class="dd-copy"><b>Garden Rooms</b></span>
           </a>
           </div>
         </div>
@@ -1513,7 +1512,7 @@
       </div>
       <div class="tile reveal">
         <div class="tile-photo"><div class="ph has-image" data-slot="industry-garden-rooms" style="background-image:url('/assets/images/industry-garden-rooms.jpg')"></div></div>
-        <span>Garden rooms</span>
+        <span>Garden Rooms</span>
       </div>
     </div>
   </div>
@@ -1521,18 +1520,18 @@
 
 <div class="section-divider"><div class="wrap"></div></div>
 
-<!-- ================= SOCIAL FEED ================= -->
+<!-- ================= BLOG ================= -->
 <section class="social-feed">
   <div class="wrap">
     <div class="section-head reveal">
       <div class="head-copy">
-        <div class="eyebrow">Follow along</div>
-        <h2>See what we're up to on Facebook.</h2>
-        <p>Real jobs, real results — tips, case studies and behind-the-scenes from trade businesses running on Trade 360.</p>
+        <div class="eyebrow">From the blog</div>
+        <h2>Tips, case studies and what's new at Trade 360.</h2>
+        <p>Real jobs, real results — stories and advice from trade businesses running on Trade 360.</p>
       </div>
-      <a class="btn btn-navy fb-follow" href="#" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24" fill="none" width="15" height="15"><path d="M15 8.5h2.5V5.2c-.4-.06-1.9-.2-3.6-.2-3.6 0-6 2.2-6 6.2v3.3H4.5v3.7H7.9V21h3.8v-2.8h3.4l.5-3.7h-3.9v-2.9c0-1.1.3-1.8 1.9-1.8Z" fill="#fff"/></svg>
-        Like our Page
+      <a class="btn btn-navy" href="/blog/">
+        View all posts
+        <svg viewBox="0 0 16 16" fill="none" width="14" height="14"><path d="M3 8h10M9 4l4 4-4 4" stroke="#F6F6F8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </a>
     </div>
     <div class="social-carousel">
@@ -1540,48 +1539,39 @@
         <svg viewBox="0 0 24 24" fill="none"><path d="M15 6l-6 6 6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </button>
       <div class="social-grid reveal-group" id="socialGrid">
-      <div class="social-post reveal">
-        <div class="social-photo-wrap"><div class="ph has-image" data-slot="social-post-1" style="background-image:url('/assets/images/social-post-1.jpg')"></div></div>
-        <div class="social-body">
-          <div class="social-meta">
-            <span class="fb-icon"><svg viewBox="0 0 24 24" fill="none" width="12" height="12"><path d="M15 8.5h2.5V5.2c-.4-.06-1.9-.2-3.6-.2-3.6 0-6 2.2-6 6.2v3.3H4.5v3.7H7.9V21h3.8v-2.8h3.4l.5-3.7h-3.9v-2.9c0-1.1.3-1.8 1.9-1.8Z" fill="#fff"/></svg></span>
-            <div><b>Trade 360</b><span>2 days ago</span></div>
-          </div>
-          <p class="social-caption">Another roof wrapped up this week. From first enquiry to final invoice, the whole job ran through Trade 360 — no chasing paperwork, no guesswork.</p>
-          <div class="social-stats">
-            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 22h-2a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h2M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3H14Z"/></svg> 48</span>
-            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.4 8.4 0 0 1-3.8-.9L3 21l1.9-5.7a8.4 8.4 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.4 8.4 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5Z"/></svg> 12</span>
-          </div>
+      <a class="blog-card reveal" href="/blog/post-1/">
+        <div class="blog-card-photo"><div class="ph has-image" data-slot="social-post-1" style="background-image:url('/assets/images/social-post-1.jpg')"></div></div>
+        <div class="blog-card-body">
+          <div class="blog-meta"><span class="blog-tag">Case study</span><span>Coming soon</span></div>
+          <h3 class="blog-title">Add your first blog post title here</h3>
+          <p class="blog-excerpt">Placeholder text — swap this for your post's excerpt once it's written.</p>
+          <span class="blog-more">Read article
+            <svg viewBox="0 0 16 16" fill="none" width="13" height="13"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
         </div>
-      </div>
-      <div class="social-post reveal">
-        <div class="social-photo-wrap"><div class="ph has-image" data-slot="social-post-2" style="background-image:url('/assets/images/social-post-2.jpg')"></div></div>
-        <div class="social-body">
-          <div class="social-meta">
-            <span class="fb-icon"><svg viewBox="0 0 24 24" fill="none" width="12" height="12"><path d="M15 8.5h2.5V5.2c-.4-.06-1.9-.2-3.6-.2-3.6 0-6 2.2-6 6.2v3.3H4.5v3.7H7.9V21h3.8v-2.8h3.4l.5-3.7h-3.9v-2.9c0-1.1.3-1.8 1.9-1.8Z" fill="#fff"/></svg></span>
-            <div><b>Trade 360</b><span>5 days ago</span></div>
-          </div>
-          <p class="social-caption">Ask our customers what changed when they switched to Trade 360 and you'll hear the same thing: no more juggling five different tools to run one job.</p>
-          <div class="social-stats">
-            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 22h-2a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h2M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3H14Z"/></svg> 76</span>
-            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.4 8.4 0 0 1-3.8-.9L3 21l1.9-5.7a8.4 8.4 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.4 8.4 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5Z"/></svg> 19</span>
-          </div>
+      </a>
+      <a class="blog-card reveal" href="/blog/post-2/">
+        <div class="blog-card-photo"><div class="ph has-image" data-slot="social-post-2" style="background-image:url('/assets/images/social-post-2.jpg')"></div></div>
+        <div class="blog-card-body">
+          <div class="blog-meta"><span class="blog-tag">Customer stories</span><span>Coming soon</span></div>
+          <h3 class="blog-title">Add your second blog post title here</h3>
+          <p class="blog-excerpt">Placeholder text — swap this for your post's excerpt once it's written.</p>
+          <span class="blog-more">Read article
+            <svg viewBox="0 0 16 16" fill="none" width="13" height="13"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
         </div>
-      </div>
-      <div class="social-post reveal">
-        <div class="social-photo-wrap"><div class="ph has-image" data-slot="social-post-3" style="background-image:url('/assets/images/social-post-3.jpg')"></div></div>
-        <div class="social-body">
-          <div class="social-meta">
-            <span class="fb-icon"><svg viewBox="0 0 24 24" fill="none" width="12" height="12"><path d="M15 8.5h2.5V5.2c-.4-.06-1.9-.2-3.6-.2-3.6 0-6 2.2-6 6.2v3.3H4.5v3.7H7.9V21h3.8v-2.8h3.4l.5-3.7h-3.9v-2.9c0-1.1.3-1.8 1.9-1.8Z" fill="#fff"/></svg></span>
-            <div><b>Trade 360</b><span>1 week ago</span></div>
-          </div>
-          <p class="social-caption">Where's your profit really going? AI Insight flags a job slipping on margin before it's too late — so you can act on it, not find out months later.</p>
-          <div class="social-stats">
-            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 22h-2a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h2M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3H14Z"/></svg> 33</span>
-            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.4 8.4 0 0 1-3.8-.9L3 21l1.9-5.7a8.4 8.4 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.4 8.4 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5Z"/></svg> 7</span>
-          </div>
+      </a>
+      <a class="blog-card reveal" href="/blog/post-3/">
+        <div class="blog-card-photo"><div class="ph has-image" data-slot="social-post-3" style="background-image:url('/assets/images/social-post-3.jpg')"></div></div>
+        <div class="blog-card-body">
+          <div class="blog-meta"><span class="blog-tag">Product</span><span>Coming soon</span></div>
+          <h3 class="blog-title">Add your third blog post title here</h3>
+          <p class="blog-excerpt">Placeholder text — swap this for your post's excerpt once it's written.</p>
+          <span class="blog-more">Read article
+            <svg viewBox="0 0 16 16" fill="none" width="13" height="13"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
         </div>
-      </div>
+      </a>
       </div>
       <button class="social-arrow social-arrow-next" id="socialNext" type="button" aria-label="Next post">
         <svg viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -2628,7 +2618,7 @@
     var packageVideoOpen = document.getElementById('packageVideoOpen');
     if (packageVideoOpen) packageVideoOpen.addEventListener('click', openVideoLightbox);
 
-    // ---- Facebook posts carousel (mobile) ----
+    // ---- Blog posts carousel (mobile) ----
     var socialGrid = document.getElementById('socialGrid');
     var socialPrev = document.getElementById('socialPrev');
     var socialNext = document.getElementById('socialNext');

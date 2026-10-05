@@ -3,20 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Trade 360 Solutions &amp; Plan Comparison</title>
-<meta name="description" content="See exactly which Trade 360 features come with Foundation, Growth and Pro — every pillar, every plan, compared in one table.">
+<title>Add your third blog post title here | Trade 360 Blog</title>
+<meta name="description" content="Placeholder text — swap this for your post's excerpt once it's written.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Trade 360">
-<meta property="og:url" content="https://trade360.ai/solutions/">
-<meta property="og:title" content="Trade 360 Solutions &amp; Plan Comparison">
-<meta property="og:description" content="See exactly which Trade 360 features come with Foundation, Growth and Pro — every pillar, every plan, compared in one table.">
+<meta property="og:url" content="https://trade360.ai/blog/post-3/">
+<meta property="og:title" content="Add your third blog post title here">
+<meta property="og:description" content="Placeholder text — swap this for your post's excerpt once it's written.">
 <meta property="og:image" content="https://trade360.ai/assets/images/og-image.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Trade 360 - Lead to Profit.">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Trade 360 Solutions &amp; Plan Comparison">
-<meta name="twitter:description" content="See exactly which Trade 360 features come with Foundation, Growth and Pro — every pillar, every plan, compared in one table.">
+<meta name="twitter:title" content="Add your third blog post title here">
+<meta name="twitter:description" content="Placeholder text — swap this for your post's excerpt once it's written.">
 <meta name="twitter:image" content="https://trade360.ai/assets/images/og-image.jpg">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
@@ -237,74 +237,29 @@
   .section-head h2{ font-size:clamp(24px,3.4vw,32px); }
   .section-head p{ font-size:15px; color:var(--ink-soft); margin-top:12px; line-height:1.6; }
   .section-head.wide{ max-width:min(92ch, 100%); }
-  .sr-only{ position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
-
-  /* ---------- jump nav ---------- */
-  .jump-nav{ background:var(--bg); border-bottom:1px solid var(--line); position:sticky; top:calc(72px + env(safe-area-inset-top,0px)); z-index:20; }
-  .jump-nav .wrap{ display:flex; align-items:center; gap:14px; padding-block:12px; overflow-x:auto; -webkit-overflow-scrolling:touch; scrollbar-width:none; }
-  .jump-nav .wrap::-webkit-scrollbar{ display:none; }
-  .jump-nav-label{ font-size:11.5px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; color:var(--ink-soft); flex:none; }
-  .jump-nav-row{ display:flex; gap:8px; flex:none; }
-  .jump-nav-row a{
-    font-size:13px; font-weight:700; color:var(--navy); background:var(--bg-soft); border:1px solid var(--line);
-    padding:7px 14px; border-radius:999px; white-space:nowrap; transition:background .15s ease, border-color .15s ease;
+  .pillar-matrix-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:16px; margin-top:40px; }
+  @media (max-width:780px){ .pillar-matrix-grid{ grid-template-columns:1fr; } }
+  .pillar-matrix-card{ background:var(--bg); border:1px solid var(--line); border-radius:16px; padding:22px 24px; box-shadow:var(--shadow); }
+  .pillar-matrix-head{ display:flex; align-items:center; gap:12px; }
+  .pillar-matrix-head svg.ring{ width:38px; height:38px; flex:none; }
+  .pillar-matrix-card:hover .pillar-matrix-head svg.ring{ animation:ringSpin 1.1s ease; }
+  @keyframes ringSpin{
+    0%{ transform:rotate(0deg); }
+    100%{ transform:rotate(360deg); }
   }
-  .jump-nav-row a:hover{ background:#fff; border-color:var(--gold); }
-
-  /* ---------- compare table ---------- */
-  .compare-scroll-hint{ display:none; font-size:12px; color:var(--ink-soft); font-weight:600; margin-top:28px; }
-  @media (max-width:760px){ .compare-scroll-hint{ display:block; } }
-  .compare-wrap{
-    margin-top:12px; overflow-x:auto; -webkit-overflow-scrolling:touch;
-    border:1px solid var(--line); border-radius:16px; box-shadow:var(--shadow); background:var(--bg);
-  }
-  @media (min-width:761px){ .compare-wrap{ margin-top:28px; } }
-  table.compare{ width:100%; min-width:680px; border-collapse:collapse; }
-  .compare-feature-col{ width:34%; text-align:left; }
-  .compare-tier-col{ width:22%; min-width:150px; vertical-align:top; background:var(--bg-soft); border-left:1px solid var(--line); }
-  .compare-tier-col.featured{ background:#FFFBEE; }
-  .compare-tier-head{ display:flex; flex-direction:column; align-items:center; gap:4px; padding:20px 14px; text-align:center; }
-  .compare-tier-badge{
-    background:var(--gold); color:var(--navy); font-size:10px; font-weight:800; letter-spacing:.04em; text-transform:uppercase;
-    padding:3px 10px; border-radius:999px; margin-bottom:2px;
-  }
-  .compare-tier-name{ font-size:15.5px; font-weight:800; color:var(--navy); }
-  .compare-tier-price{ font-size:19px; font-weight:800; color:var(--ink); font-variant-numeric:tabular-nums; }
-  .compare-tier-price small{ font-size:11px; font-weight:600; color:var(--ink-soft); }
-  .compare-tier-head .btn{ margin-top:6px; font-size:12px; padding:8px 14px; }
-  table.compare thead th{
-    border-bottom:1.5px solid var(--line);
-    position:sticky; top:calc(127px + env(safe-area-inset-top,0px)); z-index:10;
-  }
-  table.compare thead th.compare-tier-col{ background:var(--bg-soft); }
-  table.compare thead th.compare-tier-col.featured{ background:#FFFBEE; }
-  @media (max-width:760px){ table.compare thead th{ position:static; } }
-  .compare-group-row{ scroll-margin-top:150px; }
-  .compare-group-row th{
-    text-align:left; background:var(--bg-soft); padding:14px 20px; border-top:1px solid var(--line); border-bottom:1px solid var(--line);
-  }
-  .compare-group-row:first-child th{ border-top:none; }
-  .compare-group-head{ display:flex; align-items:center; gap:12px; position:sticky; left:20px; width:max-content; }
-  .compare-group-head svg.ring{ width:30px; height:30px; flex:none; }
-  .compare-group-head b{ display:block; font-size:14.5px; color:var(--navy); }
-  .compare-group-head small{ display:block; font-size:11.5px; color:var(--ink-soft); font-weight:600; margin-top:1px; }
-  table.compare tbody tr:not(.compare-group-row){ border-bottom:1px solid var(--line); }
-  table.compare tbody tr:last-child{ border-bottom:none; }
-  table.compare tbody tr:not(.compare-group-row) td:nth-child(3){ background:#FFFBEE; }
-  .compare-feature{ padding:12px 20px; font-size:13.5px; font-weight:600; color:var(--ink); }
-  td.yes, td.no{ text-align:center; padding:12px 14px; border-left:1px solid var(--line); }
-  td.no span[aria-hidden]{ color:var(--ink-soft); font-size:15px; }
-  .compare-tick{
-    display:inline-flex; align-items:center; justify-content:center; width:22px; height:22px; border-radius:999px;
-    background:var(--gold);
-  }
-  .compare-tick svg{ width:11px; height:11px; }
-  .compare-feature-col, td.compare-feature{
-    position:sticky; left:0; background:var(--bg); z-index:1; border-right:1px solid var(--line);
-  }
-  .compare-group-row th.compare-feature-col, .compare-group-row th{ background:var(--bg-soft); }
-  .compare-foot-note{ font-size:12.5px; color:var(--ink-soft); margin-top:18px; line-height:1.6; max-width:70ch; }
-  .compare-foot-note a{ color:var(--navy); font-weight:700; text-decoration:underline; text-underline-offset:2px; }
+  @media (prefers-reduced-motion: reduce){ .pillar-matrix-card:hover .pillar-matrix-head svg.ring{ animation:none; } }
+  .pillar-matrix-head h3{ font-size:16.5px; }
+  .tier-feature-row{ margin-top:14px; padding-top:12px; border-top:1px solid var(--line); }
+  .tier-feature-row:first-of-type{ margin-top:16px; }
+  .tier-feature-label{ display:flex; align-items:center; gap:7px; font-size:10.5px; font-weight:800; letter-spacing:.06em; text-transform:uppercase; margin-bottom:6px; }
+  .tier-feature-label.starter{ color:var(--ink-soft); }
+  .tier-feature-label.growth{ color:#B8860B; }
+  .tier-feature-label.pro{ color:var(--navy); }
+  .tier-feature-label .dot{ width:7px; height:7px; border-radius:999px; flex:none; }
+  .tier-feature-label.starter .dot{ background:var(--ink-soft); }
+  .tier-feature-label.growth .dot{ background:var(--gold); }
+  .tier-feature-label.pro .dot{ background:var(--navy); }
+  .tier-feature-list{ font-size:13px; color:var(--ink); line-height:1.7; }
 
   /* ---------- bolt-ons ---------- */
   .boltons{ padding-block:56px; }
@@ -501,6 +456,47 @@
   .demo-modal .thanks{ font-size:16px; font-weight:700; color:var(--navy); text-align:center; padding:30px 4px; }
   @media (max-width:520px){ .demo-form-row{ flex-direction:column; gap:0; } .demo-modal-inner{ padding:26px 22px; } }
   @media (prefers-reduced-motion: reduce){ .demo-modal, .demo-modal-inner{ transition:none; } }
+
+  /* ---------- blog cards (shared with the homepage's "From the blog") ---------- */
+  .blog-card{ background:var(--bg); border:1px solid var(--line); border-radius:14px; overflow:hidden; display:flex; flex-direction:column; transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease; }
+  .blog-card:hover{ transform:translateY(-4px); box-shadow:0 16px 30px rgba(20,20,30,.08); border-color:var(--gold-2); }
+  .blog-card-photo{ position:relative; overflow:hidden; aspect-ratio:4/3; }
+  .blog-card-photo .ph{ position:absolute; inset:0; border-radius:0; transition:transform .7s ease, border-color .18s ease; }
+  .blog-card-photo .ph.has-image:hover{ transform:scale(1.08); }
+  @media (prefers-reduced-motion: reduce){ .blog-card-photo .ph.has-image:hover{ transform:none; } }
+  .blog-card-body{ padding:16px 18px 20px; display:flex; flex-direction:column; flex:1; }
+  .blog-meta{ display:flex; align-items:center; gap:9px; }
+  .blog-tag{ font-size:11px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; color:var(--navy); background:var(--ring-pale); padding:4px 9px; border-radius:999px; flex:none; }
+  .blog-meta span:last-child{ font-size:11.5px; color:var(--ink-soft); }
+  .blog-title{ font-size:16px; font-weight:800; color:var(--navy); line-height:1.3; margin-top:11px; }
+  .blog-excerpt{ font-size:13px; color:var(--ink-soft); line-height:1.5; margin-top:7px; }
+  .blog-more{ margin-top:auto; padding-top:14px; color:var(--gold); font-weight:700; font-size:13px; display:inline-flex; align-items:center; gap:6px; filter:brightness(.82); }
+  .blog-more svg{ transition:transform .18s ease; }
+  .blog-card:hover .blog-more svg{ transform:translateX(3px); }
+  @media (prefers-reduced-motion: reduce){ .blog-more svg, .blog-card{ transition:none; } }
+
+  /* ---------- blog listing (/blog/) ---------- */
+  .blog-intro{ padding-block:56px 36px; }
+  .blog-intro .eyebrow{ color:var(--gold); font-size:12.5px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; margin-bottom:14px; filter:brightness(.82); }
+  .blog-intro h1{ font-size:clamp(30px,4.5vw,44px); font-weight:800; color:var(--navy); line-height:1.15; max-width:16ch; }
+  .blog-intro p{ font-size:16px; color:var(--ink-soft); margin-top:14px; max-width:60ch; }
+  .blog-list{ padding-block:0 64px; }
+  .blog-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
+  @media (max-width:860px){ .blog-grid{ grid-template-columns:1fr; max-width:420px; margin-inline:auto; } }
+
+  /* ---------- blog article (/blog/<slug>/) ---------- */
+  .blog-post-head{ padding-block:40px 0; }
+  .blog-back{ display:inline-flex; align-items:center; gap:7px; font-size:13px; font-weight:600; color:var(--ink-soft); }
+  .blog-back:hover{ color:var(--navy); }
+  .blog-post-head .blog-tag{ margin-top:22px; }
+  .blog-post-head h1{ font-size:clamp(26px,4vw,40px); font-weight:800; color:var(--navy); line-height:1.2; margin-top:16px; max-width:20ch; }
+  .blog-post-meta{ display:flex; align-items:center; gap:10px; margin-top:16px; font-size:13px; color:var(--ink-soft); }
+  .blog-post-photo{ position:relative; overflow:hidden; aspect-ratio:16/8; border-radius:16px; margin-top:32px; }
+  .blog-post-photo .ph{ position:absolute; inset:0; border-radius:0; }
+  .blog-post-body{ max-width:68ch; margin-inline:auto; padding-block:40px 64px; font-size:16px; line-height:1.7; color:var(--ink); }
+  .blog-post-body p{ margin-bottom:20px; }
+  .blog-post-body .placeholder-note{ background:var(--bg-soft); border:1.5px dashed var(--line); border-radius:12px; padding:18px 20px; font-size:14px; color:var(--ink-soft); }
+  @media (max-width:640px){ .blog-post-photo{ aspect-ratio:4/3; } }
 </style>
 
 <div class="scroll-progress" id="scrollProgress"></div>
@@ -519,7 +515,7 @@
     </div>
     <div class="nav-links">
       <div class="nav-item" id="solutionsNavItem">
-        <a href="/solutions/" class="dd-trigger current" aria-haspopup="true" aria-expanded="false">Solutions <svg viewBox="0 0 12 12" fill="none"><path d="M2.5 4.5 6 8l3.5-3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></a>
+        <a href="/solutions/" class="dd-trigger" aria-haspopup="true" aria-expanded="false">Solutions <svg viewBox="0 0 12 12" fill="none"><path d="M2.5 4.5 6 8l3.5-3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></a>
         <div class="dropdown-panel">
           <div class="dropdown-panel-inner">
             <div class="dd-heading">The six pillars</div>
@@ -585,462 +581,27 @@
   </div>
 </nav>
 
-<!-- ================= INTRO ================= -->
-<header class="intro">
-  <div class="wrap">
-    <div class="eyebrow">Solutions</div>
-    <h1>One platform.<br>Here's what's in each plan.</h1>
-    <p>Every Trade 360 plan ships all six pillars — Marketing, Leads, Sales, Projects, Accounts and People. Nothing is hidden behind a higher tier; Growth and Pro just add more depth to the pillars you already have. The table below shows exactly which feature comes with which plan.</p>
-    <div class="intro-tags">
-      <span class="intro-tag"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 4v4l2.5 2.5"/><circle cx="8" cy="8" r="6.5"/></svg>30-day free trial</span>
-      <span class="intro-tag"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 8h12M8 2v12"/></svg>Rolling monthly contract</span>
-      <span class="intro-tag"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="5.5" cy="5.5" r="2"/><circle cx="11.5" cy="11.5" r="2"/><path d="M7 6.5 10 10"/></svg>Refer a business, get a free month</span>
-    </div>
-  </div>
-</header>
-
-<!-- ================= JUMP NAV ================= -->
-<div class="jump-nav">
-  <div class="wrap">
-    <span class="jump-nav-label">Jump to:</span>
-    <div class="jump-nav-row">
-      <a href="#marketing">Marketing</a>
-      <a href="#leads">Leads</a>
-      <a href="#sales">Sales</a>
-      <a href="#projects">Projects</a>
-      <a href="#accounts">Accounts</a>
-      <a href="#people">People</a>
-    </div>
-  </div>
-</div>
-
-<!-- ================= FEATURE MATRIX ================= -->
-<section class="matrix" id="compare">
-  <div class="wrap">
-    <div class="section-head reveal">
-      <div class="eyebrow">Every feature, every plan</div>
-      <h2>The full comparison.</h2>
-      <p>No plan hides a part of the platform from you. Foundation covers the essentials in all six pillars; Growth and Pro add more depth to those same pillars as your team grows. Every tick below carries up — a feature in Growth is also in Pro.</p>
-    </div>
-
-    <div class="compare-scroll-hint">Scroll sideways to see Growth &amp; Pro &#8594;</div>
-    <div class="compare-wrap reveal">
-      <table class="compare">
-        <thead>
-          <tr>
-            <th class="compare-feature-col"><span class="sr-only">Feature</span></th>
-            <th class="compare-tier-col">
-              <div class="compare-tier-head">
-                <span class="compare-tier-name">Foundation</span>
-                <span class="compare-tier-price">&pound;99<small>/mo</small></span>
-                <a class="btn btn-outline" href="/pricing/">View pricing</a>
-              </div>
-            </th>
-            <th class="compare-tier-col featured">
-              <div class="compare-tier-head">
-                <span class="compare-tier-badge">Most popular</span>
-                <span class="compare-tier-name">Growth</span>
-                <span class="compare-tier-price">&pound;249<small>/mo</small></span>
-                <a class="btn btn-gold" href="/pricing/">View pricing</a>
-              </div>
-            </th>
-            <th class="compare-tier-col">
-              <div class="compare-tier-head">
-                <span class="compare-tier-name">Pro</span>
-                <span class="compare-tier-price">&pound;499<small>/mo</small></span>
-                <a class="btn btn-outline" href="/pricing/">View pricing</a>
-              </div>
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr class="compare-group-row" id="marketing">
-            <th colspan="4"><span class="compare-group-head"><svg class="ring" viewBox="0 0 40 40"><path fill="#FCBD02" d="M 12.11 3.82 A 18 18 0 0 1 27.89 3.82 L 24.82 10.11 A 11 11 0 0 0 15.18 10.11 Z"/><path fill="#FCE7B0" d="M 30.07 5.08 A 18 18 0 0 1 37.96 18.74 L 30.97 19.23 A 11 11 0 0 0 26.15 10.88 Z"/><path fill="#FCE7B0" d="M 37.96 21.26 A 18 18 0 0 1 30.07 34.92 L 26.15 29.12 A 11 11 0 0 0 30.97 20.77 Z"/><path fill="#FCE7B0" d="M 27.89 36.18 A 18 18 0 0 1 12.11 36.18 L 15.18 29.89 A 11 11 0 0 0 24.82 29.89 Z"/><path fill="#FCE7B0" d="M 9.93 34.92 A 18 18 0 0 1 2.04 21.26 L 9.03 20.77 A 11 11 0 0 0 13.85 29.12 Z"/><path fill="#FCE7B0" d="M 2.04 18.74 A 18 18 0 0 1 9.93 5.08 L 13.85 10.88 A 11 11 0 0 0 9.03 19.23 Z"/></svg><span><b>Marketing</b><small>Attract. Nurture. Convert.</small></span></span></th>
-          </tr>
-          <tr>
-            <td class="compare-feature">Lead Capture</td>
-            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
-            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
-            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
-          </tr>
-          <tr>
-            <td class="compare-feature">Brochure Automation</td>
-            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
-            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
-            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
-          </tr>
-          <tr>
-            <td class="compare-feature">Campaign Builder</td>
-            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
-            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
-            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
-          </tr>
-          <tr>
-            <td class="compare-feature">AI Content</td>
-            <td class="no"><span aria-hidden="true">&#8211;</span><span class="sr-only">Not included</span></td>
-            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
-            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
-          </tr>
-          <tr>
-            <td class="compare-feature">Ad Tracking</td>
-            <td class="no"><span aria-hidden="true">&#8211;</span><span class="sr-only">Not included</span></td>
-            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
-            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
-          </tr>
-          <tr>
-            <td class="compare-feature">Referral Programme</td>
-            <td class="no"><span aria-hidden="true">&#8211;</span><span class="sr-only">Not included</span></td>
-            <td class="no"><span aria-hidden="true">&#8211;</span><span class="sr-only">Not included</span></td>
-            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
-          </tr>
-          <tr class="compare-group-row" id="leads">
-            <th colspan="4"><span class="compare-group-head"><svg class="ring" viewBox="0 0 40 40"><path fill="#FCBD02" d="M 12.11 3.82 A 18 18 0 0 1 27.89 3.82 L 24.82 10.11 A 11 11 0 0 0 15.18 10.11 Z"/><path fill="#FDCB3C" d="M 30.07 5.08 A 18 18 0 0 1 37.96 18.74 L 30.97 19.23 A 11 11 0 0 0 26.15 10.88 Z"/><path fill="#FCE7B0" d="M 37.96 21.26 A 18 18 0 0 1 30.07 34.92 L 26.15 29.12 A 11 11 0 0 0 30.97 20.77 Z"/><path fill="#FCE7B0" d="M 27.89 36.18 A 18 18 0 0 1 12.11 36.18 L 15.18 29.89 A 11 11 0 0 0 24.82 29.89 Z"/><path fill="#FCE7B0" d="M 9.93 34.92 A 18 18 0 0 1 2.04 21.26 L 9.03 20.77 A 11 11 0 0 0 13.85 29.12 Z"/><path fill="#FCE7B0" d="M 2.04 18.74 A 18 18 0 0 1 9.93 5.08 L 13.85 10.88 A 11 11 0 0 0 9.03 19.23 Z"/></svg><span><b>Leads</b><small>Capture. Qualify. Prioritise.</small></span></span></th>
-          </tr>
-          <tr>
-            <td class="compare-feature">Centralised Inbox</td>
-            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
-            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
-            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
-          </tr>
-          <tr>
-            <td class="compare-feature">Lead Scoring</td>
-            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
-            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
-            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
-          </tr>
-          <tr>
-            <td class="compare-feature">Smart Follow-Up</td>
-            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
-            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
-            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
-          </tr>
-          <tr>
-            <td class="compare-feature">Call Transcription</td>
-            <td class="no"><span aria-hidden="true">&#8211;</span><span class="sr-only">Not included</span></td>
-            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
-            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
-          </tr>
-          <tr>
-            <td class="compare-feature">Readiness Scoring</td>
-            <td class="no"><span aria-hidden="true">&#8211;</span><span class="sr-only">Not included</span></td>
-            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
-            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
-          </tr>
-          <tr>
-            <td class="compare-feature">AI Chat Capture</td>
-            <td class="no"><span aria-hidden="true">&#8211;</span><span class="sr-only">Not included</span></td>
-            <td class="no"><span aria-hidden="true">&#8211;</span><span class="sr-only">Not included</span></td>
-            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
-          </tr>
-          <tr class="compare-group-row" id="sales">
-            <th colspan="4"><span class="compare-group-head"><svg class="ring" viewBox="0 0 40 40"><path fill="#FCBD02" d="M 12.11 3.82 A 18 18 0 0 1 27.89 3.82 L 24.82 10.11 A 11 11 0 0 0 15.18 10.11 Z"/><path fill="#FDCB3C" d="M 30.07 5.08 A 18 18 0 0 1 37.96 18.74 L 30.97 19.23 A 11 11 0 0 0 26.15 10.88 Z"/><path fill="#FCBD02" d="M 37.96 21.26 A 18 18 0 0 1 30.07 34.92 L 26.15 29.12 A 11 11 0 0 0 30.97 20.77 Z"/><path fill="#FCE7B0" d="M 27.89 36.18 A 18 18 0 0 1 12.11 36.18 L 15.18 29.89 A 11 11 0 0 0 24.82 29.89 Z"/><path fill="#FCE7B0" d="M 9.93 34.92 A 18 18 0 0 1 2.04 21.26 L 9.03 20.77 A 11 11 0 0 0 13.85 29.12 Z"/><path fill="#FCE7B0" d="M 2.04 18.74 A 18 18 0 0 1 9.93 5.08 L 13.85 10.88 A 11 11 0 0 0 9.03 19.23 Z"/></svg><span><b>Sales</b><small>Quote. Present. Win.</small></span></span></th>
-          </tr>
-          <tr>
-            <td class="compare-feature">AI Quote Builder</td>
-            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
-            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
-            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
-          </tr>
-          <tr>
-            <td class="compare-feature">AI Insight</td>
-            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
-            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
-            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
-          </tr>
-          <tr>
-            <td class="compare-feature">Quote Configurator</td>
-            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
-            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
-            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
-          </tr>
-          <tr>
-            <td class="compare-feature">eSign Contracts</td>
-            <td class="no"><span aria-hidden="true">&#8211;</span><span class="sr-only">Not included</span></td>
-            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
-            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
-          </tr>
-          <tr>
-            <td class="compare-feature">Pipeline Forecasting</td>
-            <td class="no"><span aria-hidden="true">&#8211;</span><span class="sr-only">Not included</span></td>
-            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
-            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
-          </tr>
-          <tr>
-            <td class="compare-feature">Win/Loss Tracking</td>
-            <td class="no"><span aria-hidden="true">&#8211;</span><span class="sr-only">Not included</span></td>
-            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
-            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
-          </tr>
-          <tr>
-            <td class="compare-feature">3D Visualisation</td>
-            <td class="no"><span aria-hidden="true">&#8211;</span><span class="sr-only">Not included</span></td>
-            <td class="no"><span aria-hidden="true">&#8211;</span><span class="sr-only">Not included</span></td>
-            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
-          </tr>
-          <tr>
-            <td class="compare-feature">Commission Tracking</td>
-            <td class="no"><span aria-hidden="true">&#8211;</span><span class="sr-only">Not included</span></td>
-            <td class="no"><span aria-hidden="true">&#8211;</span><span class="sr-only">Not included</span></td>
-            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
-          </tr>
-          <tr class="compare-group-row" id="projects">
-            <th colspan="4"><span class="compare-group-head"><svg class="ring" viewBox="0 0 40 40"><path fill="#FCBD02" d="M 12.11 3.82 A 18 18 0 0 1 27.89 3.82 L 24.82 10.11 A 11 11 0 0 0 15.18 10.11 Z"/><path fill="#FDCB3C" d="M 30.07 5.08 A 18 18 0 0 1 37.96 18.74 L 30.97 19.23 A 11 11 0 0 0 26.15 10.88 Z"/><path fill="#FCBD02" d="M 37.96 21.26 A 18 18 0 0 1 30.07 34.92 L 26.15 29.12 A 11 11 0 0 0 30.97 20.77 Z"/><path fill="#FDCB3C" d="M 27.89 36.18 A 18 18 0 0 1 12.11 36.18 L 15.18 29.89 A 11 11 0 0 0 24.82 29.89 Z"/><path fill="#FCE7B0" d="M 9.93 34.92 A 18 18 0 0 1 2.04 21.26 L 9.03 20.77 A 11 11 0 0 0 13.85 29.12 Z"/><path fill="#FCE7B0" d="M 2.04 18.74 A 18 18 0 0 1 9.93 5.08 L 13.85 10.88 A 11 11 0 0 0 9.03 19.23 Z"/></svg><span><b>Projects</b><small>Plan. Schedule. Deliver.</small></span></span></th>
-          </tr>
-          <tr>
-            <td class="compare-feature">Order Management</td>
-            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
-            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
-            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
-          </tr>
-          <tr>
-            <td class="compare-feature">Smart Scheduling</td>
-            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
-            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
-            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
-          </tr>
-          <tr>
-            <td class="compare-feature">Document Matching</td>
-            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
-            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
-            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
-          </tr>
-          <tr>
-            <td class="compare-feature">Capacity Planning</td>
-            <td class="no"><span aria-hidden="true">&#8211;</span><span class="sr-only">Not included</span></td>
-            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
-            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
-          </tr>
-          <tr>
-            <td class="compare-feature">Customer Portal</td>
-            <td class="no"><span aria-hidden="true">&#8211;</span><span class="sr-only">Not included</span></td>
-            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
-            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
-          </tr>
-          <tr>
-            <td class="compare-feature">Materials Tracking</td>
-            <td class="no"><span aria-hidden="true">&#8211;</span><span class="sr-only">Not included</span></td>
-            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
-            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
-          </tr>
-          <tr>
-            <td class="compare-feature">Field Mobile App</td>
-            <td class="no"><span aria-hidden="true">&#8211;</span><span class="sr-only">Not included</span></td>
-            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
-            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
-          </tr>
-          <tr>
-            <td class="compare-feature">Snagging &amp; Aftercare</td>
-            <td class="no"><span aria-hidden="true">&#8211;</span><span class="sr-only">Not included</span></td>
-            <td class="no"><span aria-hidden="true">&#8211;</span><span class="sr-only">Not included</span></td>
-            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
-          </tr>
-          <tr class="compare-group-row" id="accounts">
-            <th colspan="4"><span class="compare-group-head"><svg class="ring" viewBox="0 0 40 40"><path fill="#FCBD02" d="M 12.11 3.82 A 18 18 0 0 1 27.89 3.82 L 24.82 10.11 A 11 11 0 0 0 15.18 10.11 Z"/><path fill="#FDCB3C" d="M 30.07 5.08 A 18 18 0 0 1 37.96 18.74 L 30.97 19.23 A 11 11 0 0 0 26.15 10.88 Z"/><path fill="#FCBD02" d="M 37.96 21.26 A 18 18 0 0 1 30.07 34.92 L 26.15 29.12 A 11 11 0 0 0 30.97 20.77 Z"/><path fill="#FDCB3C" d="M 27.89 36.18 A 18 18 0 0 1 12.11 36.18 L 15.18 29.89 A 11 11 0 0 0 24.82 29.89 Z"/><path fill="#FCBD02" d="M 9.93 34.92 A 18 18 0 0 1 2.04 21.26 L 9.03 20.77 A 11 11 0 0 0 13.85 29.12 Z"/><path fill="#FCE7B0" d="M 2.04 18.74 A 18 18 0 0 1 9.93 5.08 L 13.85 10.88 A 11 11 0 0 0 9.03 19.23 Z"/></svg><span><b>Accounts</b><small>Track. Report. Profit.</small></span></span></th>
-          </tr>
-          <tr>
-            <td class="compare-feature">Flexible Invoicing</td>
-            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
-            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
-            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
-          </tr>
-          <tr>
-            <td class="compare-feature">Online Payments</td>
-            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
-            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
-            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
-          </tr>
-          <tr>
-            <td class="compare-feature">Cost Tracking</td>
-            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
-            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
-            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
-          </tr>
-          <tr>
-            <td class="compare-feature">Accounting Sync</td>
-            <td class="no"><span aria-hidden="true">&#8211;</span><span class="sr-only">Not included</span></td>
-            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
-            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
-          </tr>
-          <tr>
-            <td class="compare-feature">Live Profitability</td>
-            <td class="no"><span aria-hidden="true">&#8211;</span><span class="sr-only">Not included</span></td>
-            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
-            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
-          </tr>
-          <tr>
-            <td class="compare-feature">Profit Calculator</td>
-            <td class="no"><span aria-hidden="true">&#8211;</span><span class="sr-only">Not included</span></td>
-            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
-            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
-          </tr>
-          <tr>
-            <td class="compare-feature">Payment Reminders</td>
-            <td class="no"><span aria-hidden="true">&#8211;</span><span class="sr-only">Not included</span></td>
-            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
-            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
-          </tr>
-          <tr>
-            <td class="compare-feature">Cash-Flow Forecast</td>
-            <td class="no"><span aria-hidden="true">&#8211;</span><span class="sr-only">Not included</span></td>
-            <td class="no"><span aria-hidden="true">&#8211;</span><span class="sr-only">Not included</span></td>
-            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
-          </tr>
-          <tr>
-            <td class="compare-feature">Financial Reporting</td>
-            <td class="no"><span aria-hidden="true">&#8211;</span><span class="sr-only">Not included</span></td>
-            <td class="no"><span aria-hidden="true">&#8211;</span><span class="sr-only">Not included</span></td>
-            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
-          </tr>
-          <tr class="compare-group-row" id="people">
-            <th colspan="4"><span class="compare-group-head"><svg class="ring" viewBox="0 0 40 40"><path fill="#FCBD02" d="M 12.11 3.82 A 18 18 0 0 1 27.89 3.82 L 24.82 10.11 A 11 11 0 0 0 15.18 10.11 Z"/><path fill="#FDCB3C" d="M 30.07 5.08 A 18 18 0 0 1 37.96 18.74 L 30.97 19.23 A 11 11 0 0 0 26.15 10.88 Z"/><path fill="#FCBD02" d="M 37.96 21.26 A 18 18 0 0 1 30.07 34.92 L 26.15 29.12 A 11 11 0 0 0 30.97 20.77 Z"/><path fill="#FDCB3C" d="M 27.89 36.18 A 18 18 0 0 1 12.11 36.18 L 15.18 29.89 A 11 11 0 0 0 24.82 29.89 Z"/><path fill="#FCBD02" d="M 9.93 34.92 A 18 18 0 0 1 2.04 21.26 L 9.03 20.77 A 11 11 0 0 0 13.85 29.12 Z"/><path fill="#FDCB3C" d="M 2.04 18.74 A 18 18 0 0 1 9.93 5.08 L 13.85 10.88 A 11 11 0 0 0 9.03 19.23 Z"/></svg><span><b>People</b><small>Schedule. Perform. Reward.</small></span></span></th>
-          </tr>
-          <tr>
-            <td class="compare-feature">Field Mobile App</td>
-            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
-            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
-            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
-          </tr>
-          <tr>
-            <td class="compare-feature">Expense Logging</td>
-            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
-            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
-            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
-          </tr>
-          <tr>
-            <td class="compare-feature">Payroll Costing</td>
-            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
-            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
-            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
-          </tr>
-          <tr>
-            <td class="compare-feature">HR Records</td>
-            <td class="no"><span aria-hidden="true">&#8211;</span><span class="sr-only">Not included</span></td>
-            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
-            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
-          </tr>
-          <tr>
-            <td class="compare-feature">Leave Management</td>
-            <td class="no"><span aria-hidden="true">&#8211;</span><span class="sr-only">Not included</span></td>
-            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
-            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
-          </tr>
-          <tr>
-            <td class="compare-feature">Certification Tracking</td>
-            <td class="no"><span aria-hidden="true">&#8211;</span><span class="sr-only">Not included</span></td>
-            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
-            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
-          </tr>
-          <tr>
-            <td class="compare-feature">Roles &amp; Permissions</td>
-            <td class="no"><span aria-hidden="true">&#8211;</span><span class="sr-only">Not included</span></td>
-            <td class="no"><span aria-hidden="true">&#8211;</span><span class="sr-only">Not included</span></td>
-            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
-          </tr>
-          <tr>
-            <td class="compare-feature">Performance Tracking</td>
-            <td class="no"><span aria-hidden="true">&#8211;</span><span class="sr-only">Not included</span></td>
-            <td class="no"><span aria-hidden="true">&#8211;</span><span class="sr-only">Not included</span></td>
-            <td class="yes"><span class="compare-tick"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="#1C2130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr-only">Included</span></td>
-          </tr>
-
-        </tbody>
-      </table>
-    </div>
-
-    <p class="compare-foot-note">Prices shown are monthly, billed monthly. Pay annually instead and get two months free &mdash; see the <a href="/pricing/">pricing page</a> for full billing details, AI credit and email allowances, and bolt-ons.</p>
-  </div>
-</section>
-
-<!-- ================= BOLT-ONS ================= -->
-<section class="boltons">
-  <div class="wrap">
-    <div class="section-head wide reveal">
-      <div class="eyebrow">Need more headroom?</div>
-      <h2>Top up AI credits, emails or seats any time.</h2>
-      <p>Available on any plan, billed monthly alongside it — cancel a bolt-on whenever you no longer need it.</p>
-    </div>
-    <div class="bolton-grid reveal-group">
-      <div class="bolton-card reveal">
-        <h3>AI credit top-ups</h3>
-        <div class="sub">Bigger bundles cost less per credit.</div>
-        <div class="bolton-rows">
-          <div class="bolton-row"><span>+250 credits</span><b>£15/month</b></div>
-          <div class="bolton-row"><span>+750 credits</span><b>£40/month</b></div>
-          <div class="bolton-row"><span>+2,000 credits</span><b>£95/month</b></div>
-        </div>
-      </div>
-      <div class="bolton-card reveal">
-        <h3>Email top-ups</h3>
-        <div class="sub">Bigger bundles cost less per email.</div>
-        <div class="bolton-rows">
-          <div class="bolton-row"><span>+1,000 emails</span><b>£9/month</b></div>
-          <div class="bolton-row"><span>+5,000 emails</span><b>£35/month</b></div>
-          <div class="bolton-row"><span>+20,000 emails</span><b>£110/month</b></div>
-        </div>
-      </div>
-      <div class="bolton-card reveal">
-        <h3>Extra users</h3>
-        <div class="sub">One flat price per extra user.</div>
-        <div class="bolton-rows">
-          <div class="bolton-row"><span>Foundation</span><b>£15/user/month</b></div>
-          <div class="bolton-row"><span>Growth</span><b>£12/user/month</b></div>
-          <div class="bolton-row"><span>Pro</span><b>£9/user/month</b></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ================= POLICY STRIP ================= -->
-<div class="policy-strip">
-  <div class="wrap">
-    <div class="policy-item">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6v6l4 2"/><circle cx="12" cy="12" r="9"/></svg>
-      <div><b>30-day free trial</b><span>Full Growth-level access from day one. Card required to start, nothing charged until day 31, and onboarding fees only apply once you convert.</span></div>
-    </div>
-    <div class="policy-item">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M8 2v4M16 2v4M3 10h18"/></svg>
-      <div><b>Rolling monthly contract</b><span>No minimum term on any plan or bolt-on. Cancel, upgrade or downgrade any time. Pay annually instead and get two months free.</span></div>
-    </div>
-    <div class="policy-item">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M17 20a5 5 0 0 0-10 0"/><circle cx="12" cy="10" r="4"/></svg>
-      <div><b>Referral scheme</b><span>Get a free month of your plan for every business you refer that becomes a paying customer. They get a 45-day trial instead of 30. No cap.</span></div>
-    </div>
-  </div>
-</div>
-
-<!-- ================= BESPOKE ================= -->
-<section class="bespoke">
-  <div class="wrap">
-    <div class="bespoke-card reveal">
-      <div class="bespoke-grid">
-        <div>
-          <div class="eyebrow">Something specific to your business?</div>
-          <h2>Bespoke work, quoted individually.</h2>
-          <p>If your business needs an integration, workflow or report that isn't in the standard platform, we scope and price it separately — on top of whichever plan you're on.</p>
-        </div>
-        <div class="bespoke-list">
-          <div class="bespoke-list-item"><b>Custom integrations &amp; workflow builds</b><span>From £750, scoped after a short discovery call.</span></div>
-          <div class="bespoke-list-item"><b>Dedicated implementation manager</b><span>+£150/month, any plan.</span></div>
-          <div class="bespoke-list-item"><b>White-label &amp; custom domain branding</b><span>+£49/month, Pro only.</span></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ================= CTA BAND ================= -->
-<section class="cta-band" id="demo">
-  <div class="wrap">
-    <h2>Try Trade 360 free for 30 days.</h2>
-    <div class="cta-band-actions">
-      <a class="btn btn-navy" href="#demo">Start free trial
-        <svg viewBox="0 0 16 16" fill="none" width="14" height="14"><path d="M4 12 12 4M12 4H6M12 4v6" stroke="#F6F6F8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+<!-- ================= BLOG POST ================= -->
+<article>
+  <header class="blog-post-head">
+    <div class="wrap">
+      <a class="blog-back" href="/blog/">
+        <svg viewBox="0 0 16 16" fill="none" width="13" height="13"><path d="M9.5 3 4 8l5.5 5M4 8h8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Back to blog
       </a>
-      <a class="btn btn-outline js-book-demo" href="/#demo" style="background:transparent;border-color:rgba(28,33,48,.35);">Book a demo</a>
+      <div class="blog-tag">Product</div>
+      <h1>Add your third blog post title here</h1>
+      <div class="blog-post-meta"><span>Coming soon</span><span>&middot;</span><span>Trade 360 team</span></div>
+    </div>
+  </header>
+  <div class="wrap">
+    <div class="blog-post-photo"><div class="ph has-image" data-slot="social-post-3" style="background-image:url('/assets/images/social-post-3.jpg')"></div></div>
+    <div class="blog-post-body">
+      <p class="placeholder-note">This post is a placeholder — the full write-up goes here once it's ready. Everything above and below (title, tag, image, body copy) can be swapped for the real thing without touching the rest of the site.</p>
+      <p>Placeholder text — swap this for your post's excerpt once it's written.</p>
     </div>
   </div>
-</section>
+</article>
 
 <!-- ================= FOOTER ================= -->
 <footer>
@@ -1244,38 +805,6 @@
     setTimeout(function(){ revealEls.forEach(function(el){ el.classList.add('in-view'); }); }, 1800);
   } else {
     revealEls.forEach(function(el){ el.classList.add('in-view'); });
-  }
-
-  // ---- billing toggle (monthly / annual) ----
-  var billingSwitch = document.getElementById('billingSwitch');
-  var labelMonthly = document.getElementById('labelMonthly');
-  var labelAnnual = document.getElementById('labelAnnual');
-  var tierCards = document.querySelectorAll('.tier-card');
-  var gbp = function(n){ return '£' + Number(n).toLocaleString('en-GB'); };
-
-  function applyBilling(annual){
-    tierCards.forEach(function(card){
-      var priceEl = card.querySelector('.tier-price');
-      var noteEl = card.querySelector('.tier-billed-note');
-      if (annual){
-        priceEl.textContent = gbp(card.getAttribute('data-annual'));
-        noteEl.textContent = 'billed ' + gbp(card.getAttribute('data-billed')) + '/year';
-      } else {
-        priceEl.textContent = gbp(card.getAttribute('data-monthly'));
-        noteEl.textContent = '';
-      }
-    });
-    labelMonthly.classList.toggle('active', !annual);
-    labelAnnual.classList.toggle('active', annual);
-  }
-
-  if (billingSwitch){
-    billingSwitch.addEventListener('click', function(){
-      var annual = !billingSwitch.classList.contains('on');
-      billingSwitch.classList.toggle('on', annual);
-      billingSwitch.setAttribute('aria-checked', annual ? 'true' : 'false');
-      applyBilling(annual);
-    });
   }
 
   // ---- video teaser + lightbox ----
