@@ -111,6 +111,38 @@ especially in the first few days after going live.
 
 ---
 
+## Required: turn on email notifications for your forms
+
+Every "Book a demo", "Book a call" and "Subscribe" button on the site now
+submits a real, working form (handled by **Netlify Forms** — no server of
+your own needed). Netlify always stores every submission under your site →
+**Forms** in the dashboard, but it does **not** email you by default — that
+one toggle has to be switched on once, by hand, in the dashboard (it isn't
+something that can be set from the code):
+
+1. Netlify → your site → **Site configuration → Forms → Form notifications**.
+2. **Add notification → Email notification.**
+3. Enter the email address you want submissions sent to, and save.
+4. Repeat step 2 for each form you want emailed separately — there are two:
+   - **`newsletter`** — every "Subscribe" button (homepage footer-area
+     signup and the floating bubble) submits here, with just an email
+     address.
+   - **`demo-request`** — every "Book a demo" and "Book a call" button
+     scrolls to the form in the gold band near the bottom of the homepage,
+     which submits here with name, company, email, phone and an optional
+     message.
+   (You can point both at the same inbox, or two different ones — your
+   call.)
+5. Submit each form once yourself (see the checklist below) to confirm the
+   email actually arrives — spam/junk folders are worth a check the first
+   time.
+
+Netlify's free tier includes 100 form submissions a month; past that it's a
+small add-on. The two forms above both have a honeypot field already wired
+in to filter out basic bots.
+
+---
+
 ## Finish connecting your domain
 
 You'd already started adding `trade360.ai` as a custom domain on the Netlify
@@ -138,7 +170,10 @@ site earlier. Once this deploy is live:
 - [ ] Click "Download PDF" on a generated quote — a PDF should download
 - [ ] Submit the homepage newsletter form — you should see a "thanks"
       message, and the submission should appear under Netlify → your site →
-      **Forms**
+      **Forms**, and (once notifications are set up above) land in your inbox
+- [ ] Click any "Book a demo" or "Book a call" button, fill in the form that
+      appears near the bottom of the homepage and submit it — same checks:
+      "thanks" message, shows up under **Forms**, arrives by email
 - [ ] Open the site on a phone (or narrow your browser) and check the mobile
       menu, hero, and pricing toggle all still work
 
