@@ -769,6 +769,20 @@
   .reveal-group .reveal:nth-child(6){ transition-delay:.32s; }
   @media (prefers-reduced-motion: reduce){ .reveal{ transition:none; opacity:1; transform:none; } }
 
+  /* ---------- pillar cards: reveal one by one while scrolling ---------- */
+  .pillar-card{
+    opacity:0;
+    transform:translateY(34px) scale(.97);
+    transition:opacity .6s ease, transform .6s cubic-bezier(.22,.9,.3,1), box-shadow .2s ease, border-color .2s ease;
+  }
+  .pillar-card.in-view{ opacity:1; transform:none; }
+  .pillar-grid .pillar-card:nth-child(2){ transition-delay:.08s; }
+  .pillar-grid .pillar-card:nth-child(3){ transition-delay:.16s; }
+  .pillar-grid .pillar-card:nth-child(4){ transition-delay:.05s; }
+  .pillar-grid .pillar-card:nth-child(5){ transition-delay:.13s; }
+  .pillar-grid .pillar-card:nth-child(6){ transition-delay:.21s; }
+  @media (prefers-reduced-motion: reduce){ .pillar-card{ transition:none; opacity:1; transform:none; } }
+
   /* ---------- sticky nav scroll state ---------- */
   .nav{ transition:box-shadow .25s ease, background .25s ease; }
   .nav.scrolled{ box-shadow:0 6px 20px rgba(20,20,30,.08); }
@@ -1161,8 +1175,8 @@
       <p>From the first enquiry to the final payment — with everything in one place.</p>
     </div>
 
-    <div class="grid reveal-group">
-      <div class="card reveal">
+    <div class="grid pillar-grid">
+      <div class="card pillar-card">
         <div class="card-head">
           <svg class="ring" viewBox="0 0 40 40"><path fill="var(--gold)" d="M 12.11 3.82 A 18 18 0 0 1 27.89 3.82 L 24.82 10.11 A 11 11 0 0 0 15.18 10.11 Z"/><path fill="var(--ring-pale)" d="M 30.07 5.08 A 18 18 0 0 1 37.96 18.74 L 30.97 19.23 A 11 11 0 0 0 26.15 10.88 Z"/><path fill="var(--ring-pale)" d="M 37.96 21.26 A 18 18 0 0 1 30.07 34.92 L 26.15 29.12 A 11 11 0 0 0 30.97 20.77 Z"/><path fill="var(--ring-pale)" d="M 27.89 36.18 A 18 18 0 0 1 12.11 36.18 L 15.18 29.89 A 11 11 0 0 0 24.82 29.89 Z"/><path fill="var(--ring-pale)" d="M 9.93 34.92 A 18 18 0 0 1 2.04 21.26 L 9.03 20.77 A 11 11 0 0 0 13.85 29.12 Z"/><path fill="var(--ring-pale)" d="M 2.04 18.74 A 18 18 0 0 1 9.93 5.08 L 13.85 10.88 A 11 11 0 0 0 9.03 19.23 Z"/></svg>
           <div><h3>Marketing</h3><div class="tag">Attract. Nurture. Convert.</div></div>
@@ -1180,7 +1194,7 @@
         <button class="card-foot" type="button" aria-expanded="false"><span class="cf-label"></span><span class="cf-icon"><svg viewBox="0 0 16 16" fill="none"><path d="M8 3v10M3 8h10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span></button>
       </div>
 
-      <div class="card reveal">
+      <div class="card pillar-card">
         <div class="card-head">
           <svg class="ring" viewBox="0 0 40 40"><path fill="var(--gold)" d="M 12.11 3.82 A 18 18 0 0 1 27.89 3.82 L 24.82 10.11 A 11 11 0 0 0 15.18 10.11 Z"/><path fill="var(--gold-2)" d="M 30.07 5.08 A 18 18 0 0 1 37.96 18.74 L 30.97 19.23 A 11 11 0 0 0 26.15 10.88 Z"/><path fill="var(--ring-pale)" d="M 37.96 21.26 A 18 18 0 0 1 30.07 34.92 L 26.15 29.12 A 11 11 0 0 0 30.97 20.77 Z"/><path fill="var(--ring-pale)" d="M 27.89 36.18 A 18 18 0 0 1 12.11 36.18 L 15.18 29.89 A 11 11 0 0 0 24.82 29.89 Z"/><path fill="var(--ring-pale)" d="M 9.93 34.92 A 18 18 0 0 1 2.04 21.26 L 9.03 20.77 A 11 11 0 0 0 13.85 29.12 Z"/><path fill="var(--ring-pale)" d="M 2.04 18.74 A 18 18 0 0 1 9.93 5.08 L 13.85 10.88 A 11 11 0 0 0 9.03 19.23 Z"/></svg>
           <div><h3>Leads</h3><div class="tag">Capture. Qualify. Prioritise.</div></div>
@@ -1198,7 +1212,7 @@
         <button class="card-foot" type="button" aria-expanded="false"><span class="cf-label"></span><span class="cf-icon"><svg viewBox="0 0 16 16" fill="none"><path d="M8 3v10M3 8h10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span></button>
       </div>
 
-      <div class="card reveal">
+      <div class="card pillar-card">
         <div class="card-head">
           <svg class="ring" viewBox="0 0 40 40"><path fill="var(--gold)" d="M 12.11 3.82 A 18 18 0 0 1 27.89 3.82 L 24.82 10.11 A 11 11 0 0 0 15.18 10.11 Z"/><path fill="var(--gold-2)" d="M 30.07 5.08 A 18 18 0 0 1 37.96 18.74 L 30.97 19.23 A 11 11 0 0 0 26.15 10.88 Z"/><path fill="var(--gold)" d="M 37.96 21.26 A 18 18 0 0 1 30.07 34.92 L 26.15 29.12 A 11 11 0 0 0 30.97 20.77 Z"/><path fill="var(--ring-pale)" d="M 27.89 36.18 A 18 18 0 0 1 12.11 36.18 L 15.18 29.89 A 11 11 0 0 0 24.82 29.89 Z"/><path fill="var(--ring-pale)" d="M 9.93 34.92 A 18 18 0 0 1 2.04 21.26 L 9.03 20.77 A 11 11 0 0 0 13.85 29.12 Z"/><path fill="var(--ring-pale)" d="M 2.04 18.74 A 18 18 0 0 1 9.93 5.08 L 13.85 10.88 A 11 11 0 0 0 9.03 19.23 Z"/></svg>
           <div><h3>Sales</h3><div class="tag">Quote. Present. Win.</div></div>
@@ -1218,7 +1232,7 @@
         <button class="card-foot" type="button" aria-expanded="false"><span class="cf-label"></span><span class="cf-icon"><svg viewBox="0 0 16 16" fill="none"><path d="M8 3v10M3 8h10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span></button>
       </div>
 
-      <div class="card reveal">
+      <div class="card pillar-card">
         <div class="card-head">
           <svg class="ring" viewBox="0 0 40 40"><path fill="var(--gold)" d="M 12.11 3.82 A 18 18 0 0 1 27.89 3.82 L 24.82 10.11 A 11 11 0 0 0 15.18 10.11 Z"/><path fill="var(--gold-2)" d="M 30.07 5.08 A 18 18 0 0 1 37.96 18.74 L 30.97 19.23 A 11 11 0 0 0 26.15 10.88 Z"/><path fill="var(--gold)" d="M 37.96 21.26 A 18 18 0 0 1 30.07 34.92 L 26.15 29.12 A 11 11 0 0 0 30.97 20.77 Z"/><path fill="var(--gold-2)" d="M 27.89 36.18 A 18 18 0 0 1 12.11 36.18 L 15.18 29.89 A 11 11 0 0 0 24.82 29.89 Z"/><path fill="var(--ring-pale)" d="M 9.93 34.92 A 18 18 0 0 1 2.04 21.26 L 9.03 20.77 A 11 11 0 0 0 13.85 29.12 Z"/><path fill="var(--ring-pale)" d="M 2.04 18.74 A 18 18 0 0 1 9.93 5.08 L 13.85 10.88 A 11 11 0 0 0 9.03 19.23 Z"/></svg>
           <div><h3>Projects</h3><div class="tag">Plan. Schedule. Deliver.</div></div>
@@ -1238,7 +1252,7 @@
         <button class="card-foot" type="button" aria-expanded="false"><span class="cf-label"></span><span class="cf-icon"><svg viewBox="0 0 16 16" fill="none"><path d="M8 3v10M3 8h10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span></button>
       </div>
 
-      <div class="card reveal">
+      <div class="card pillar-card">
         <div class="card-head">
           <svg class="ring" viewBox="0 0 40 40"><path fill="var(--gold)" d="M 12.11 3.82 A 18 18 0 0 1 27.89 3.82 L 24.82 10.11 A 11 11 0 0 0 15.18 10.11 Z"/><path fill="var(--gold-2)" d="M 30.07 5.08 A 18 18 0 0 1 37.96 18.74 L 30.97 19.23 A 11 11 0 0 0 26.15 10.88 Z"/><path fill="var(--gold)" d="M 37.96 21.26 A 18 18 0 0 1 30.07 34.92 L 26.15 29.12 A 11 11 0 0 0 30.97 20.77 Z"/><path fill="var(--gold-2)" d="M 27.89 36.18 A 18 18 0 0 1 12.11 36.18 L 15.18 29.89 A 11 11 0 0 0 24.82 29.89 Z"/><path fill="var(--gold)" d="M 9.93 34.92 A 18 18 0 0 1 2.04 21.26 L 9.03 20.77 A 11 11 0 0 0 13.85 29.12 Z"/><path fill="var(--ring-pale)" d="M 2.04 18.74 A 18 18 0 0 1 9.93 5.08 L 13.85 10.88 A 11 11 0 0 0 9.03 19.23 Z"/></svg>
           <div><h3>Accounts</h3><div class="tag">Track. Report. Profit.</div></div>
@@ -1259,7 +1273,7 @@
         <button class="card-foot" type="button" aria-expanded="false"><span class="cf-label"></span><span class="cf-icon"><svg viewBox="0 0 16 16" fill="none"><path d="M8 3v10M3 8h10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span></button>
       </div>
 
-      <div class="card reveal">
+      <div class="card pillar-card">
         <div class="card-head">
           <svg class="ring" viewBox="0 0 40 40"><path fill="var(--gold)" d="M 12.11 3.82 A 18 18 0 0 1 27.89 3.82 L 24.82 10.11 A 11 11 0 0 0 15.18 10.11 Z"/><path fill="var(--gold-2)" d="M 30.07 5.08 A 18 18 0 0 1 37.96 18.74 L 30.97 19.23 A 11 11 0 0 0 26.15 10.88 Z"/><path fill="var(--gold)" d="M 37.96 21.26 A 18 18 0 0 1 30.07 34.92 L 26.15 29.12 A 11 11 0 0 0 30.97 20.77 Z"/><path fill="var(--gold-2)" d="M 27.89 36.18 A 18 18 0 0 1 12.11 36.18 L 15.18 29.89 A 11 11 0 0 0 24.82 29.89 Z"/><path fill="var(--gold)" d="M 9.93 34.92 A 18 18 0 0 1 2.04 21.26 L 9.03 20.77 A 11 11 0 0 0 13.85 29.12 Z"/><path fill="var(--gold-2)" d="M 2.04 18.74 A 18 18 0 0 1 9.93 5.08 L 13.85 10.88 A 11 11 0 0 0 9.03 19.23 Z"/></svg>
           <div><h3>People</h3><div class="tag">Schedule. Perform. Reward.</div></div>
@@ -1936,6 +1950,33 @@
     }, 1800);
   } else {
     revealEls.forEach(function(el){ el.classList.add('in-view'); });
+  }
+
+  // ---- pillar cards: reveal one at a time as the page scrolls ----
+  // Uses its own observer (rather than the generic .reveal one above) with a
+  // deeper bottom margin, so a card only lights up once it's genuinely been
+  // scrolled into view, instead of the whole 3x2 grid flashing in together
+  // the moment the section first touches the viewport.
+  var pillarEls = document.querySelectorAll('.pillar-card');
+  if ('IntersectionObserver' in window && pillarEls.length){
+    var pillarIo = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if (entry.isIntersecting){
+          entry.target.classList.add('in-view');
+          pillarIo.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2, rootMargin: '0px 0px -160px 0px' });
+    pillarEls.forEach(function(el){ pillarIo.observe(el); });
+    // Longer safety-net delay than the generic .reveal fallback above: this
+    // section sits further down the page, so a visitor may genuinely still
+    // be reading the hero when the generic 1.8s fallback would fire. Give
+    // scrolling a real chance to drive the reveal before forcing it.
+    setTimeout(function(){
+      pillarEls.forEach(function(el){ el.classList.add('in-view'); });
+    }, 6000);
+  } else {
+    pillarEls.forEach(function(el){ el.classList.add('in-view'); });
   }
 
   // ---- sticky nav scroll shadow ----
