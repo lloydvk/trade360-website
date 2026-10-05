@@ -2432,16 +2432,33 @@
   }
 
   // ---- Solutions dropdown content: one row per pillar, icon + title + tagline ----
-  // The icon is always the same footer-palette ring (not the pillar card's own
-  // progressive gold/pale version, which only makes sense in the "1 of 6 ... 6
-  // of 6" context of the pillar grid itself) on a charcoal badge, spinning
-  // slowly via the .dd-icon svg CSS rule above.
-  var DD_RING_SVG = '<svg viewBox="0 0 40 40"><path fill="#4A4535" d="M 12.11 3.82 A 18 18 0 0 1 27.89 3.82 L 24.82 10.11 A 11 11 0 0 0 15.18 10.11 Z"/><path fill="#6B5C3F" d="M 30.07 5.08 A 18 18 0 0 1 37.96 18.74 L 30.97 19.23 A 11 11 0 0 0 26.15 10.88 Z"/><path fill="#8F7440" d="M 37.96 21.26 A 18 18 0 0 1 30.07 34.92 L 26.15 29.12 A 11 11 0 0 0 30.97 20.77 Z"/><path fill="#B48D3A" d="M 27.89 36.18 A 18 18 0 0 1 12.11 36.18 L 15.18 29.89 A 11 11 0 0 0 24.82 29.89 Z"/><path fill="#D9A62A" d="M 9.93 34.92 A 18 18 0 0 1 2.04 21.26 L 9.03 20.77 A 11 11 0 0 0 13.85 29.12 Z"/><path fill="#FCBD02" d="M 2.04 18.74 A 18 18 0 0 1 9.93 5.08 L 13.85 10.88 A 11 11 0 0 0 9.03 19.23 Z"/></svg>';
+  // Same "N of 6 lit" idea as the pillar cards on the homepage (Marketing = 1
+  // segment lit, People = all 6), just recoloured for the icon's charcoal
+  // badge here: lit segments are gold, unlit ones are a dim bronze rather
+  // than the pale cream the cards use on a white background. Spins slowly
+  // via the .dd-icon svg CSS rule above.
+  var DD_RING_PATHS = [
+    'M 12.11 3.82 A 18 18 0 0 1 27.89 3.82 L 24.82 10.11 A 11 11 0 0 0 15.18 10.11 Z',
+    'M 30.07 5.08 A 18 18 0 0 1 37.96 18.74 L 30.97 19.23 A 11 11 0 0 0 26.15 10.88 Z',
+    'M 37.96 21.26 A 18 18 0 0 1 30.07 34.92 L 26.15 29.12 A 11 11 0 0 0 30.97 20.77 Z',
+    'M 27.89 36.18 A 18 18 0 0 1 12.11 36.18 L 15.18 29.89 A 11 11 0 0 0 24.82 29.89 Z',
+    'M 9.93 34.92 A 18 18 0 0 1 2.04 21.26 L 9.03 20.77 A 11 11 0 0 0 13.85 29.12 Z',
+    'M 2.04 18.74 A 18 18 0 0 1 9.93 5.08 L 13.85 10.88 A 11 11 0 0 0 9.03 19.23 Z'
+  ];
+  var DD_RING_LIT = ['#FCBD02', '#FDCB3C'];
+  var DD_RING_UNLIT = '#4A4535';
+  function ddRingSVG(litCount){
+    var paths = DD_RING_PATHS.map(function(d, i){
+      var fill = i < litCount ? DD_RING_LIT[i % 2] : DD_RING_UNLIT;
+      return '<path fill="' + fill + '" d="' + d + '"/>';
+    }).join('');
+    return '<svg viewBox="0 0 40 40">' + paths + '</svg>';
+  }
   var solutionsList = document.getElementById('solutionsDropdownList');
   if (solutionsList && pillarData.length){
-    solutionsList.innerHTML = pillarData.map(function(p){
+    solutionsList.innerHTML = pillarData.map(function(p, i){
       return '<a class="dd-row" href="/solutions/#' + p.title.toLowerCase() + '">' +
-        '<span class="dd-icon">' + DD_RING_SVG + '</span>' +
+        '<span class="dd-icon">' + ddRingSVG(i + 1) + '</span>' +
         '<span class="dd-copy"><b>' + p.title + '</b><small>' + p.tag + '</small></span>' +
       '</a>';
     }).join('');
