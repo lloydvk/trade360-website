@@ -913,6 +913,48 @@
   .video-lightbox-close svg{ width:14px; height:14px; }
   @media (max-width:560px){ .video-lightbox-caption{ padding:16px; } .video-lightbox-caption .btn{ width:100%; justify-content:center; } }
   @media (prefers-reduced-motion: reduce){ .video-lightbox, .video-lightbox-inner{ transition:none; } }
+
+  /* ---------- exit-intent popup ---------- */
+  .exit-popup{
+    position:fixed; inset:0; z-index:1600; display:flex; align-items:center; justify-content:center; padding:20px;
+    background:rgba(11,12,16,.72); backdrop-filter:blur(4px); -webkit-backdrop-filter:blur(4px);
+    opacity:0; visibility:hidden; transition:opacity .25s ease, visibility .25s;
+  }
+  .exit-popup.open{ opacity:1; visibility:visible; }
+  .exit-popup-inner{
+    position:relative; width:100%; max-width:440px; background:#fff; border-radius:18px; overflow:hidden;
+    box-shadow:0 30px 70px rgba(0,0,0,.45); transform:scale(.94) translateY(8px); transition:transform .25s ease;
+  }
+  .exit-popup.open .exit-popup-inner{ transform:scale(1) translateY(0); }
+  .exit-popup-band{ background:linear-gradient(90deg, #E1342E, #C41E3A); padding:24px 30px 20px; color:#fff; position:relative; overflow:hidden; }
+  .exit-popup-band::after{
+    content:""; position:absolute; inset:0; pointer-events:none;
+    background:linear-gradient(100deg, transparent 20%, rgba(255,255,255,.18) 35%, transparent 50%);
+    background-size:220% 100%; animation:promoShimmer 5s ease-in-out infinite;
+  }
+  .exit-popup-eyebrow{ font-size:11.5px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; opacity:.9; position:relative; }
+  .exit-popup-band h3{ font-size:25px; font-weight:800; margin-top:7px; position:relative; line-height:1.2; }
+  .exit-popup-body{ padding:24px 30px 28px; }
+  .exit-popup-body p{ font-size:14.5px; color:var(--ink-soft); line-height:1.55; }
+  .exit-popup-actions{ display:flex; align-items:center; justify-content:center; gap:16px; margin-top:22px; flex-wrap:wrap; }
+  .exit-popup-actions .btn{ flex:1; justify-content:center; }
+  .exit-popup-dismiss{ appearance:none; background:none; border:none; padding:13px 6px; margin:0; font:inherit; font-size:13px; font-weight:700; color:var(--ink-soft); white-space:nowrap; cursor:pointer; text-decoration:underline; text-underline-offset:3px; transition:color .15s ease; }
+  .exit-popup-dismiss:hover{ color:var(--ink); }
+  .exit-popup-close{
+    position:absolute; top:14px; right:14px; width:32px; height:32px; border-radius:999px;
+    background:rgba(255,255,255,.16); border:none; color:#fff;
+    display:flex; align-items:center; justify-content:center; cursor:pointer; z-index:2; transition:background .15s ease;
+  }
+  .exit-popup-close:hover{ background:rgba(255,255,255,.3); }
+  .exit-popup-close svg{ width:12px; height:12px; }
+  @media (max-width:480px){
+    .exit-popup-band{ padding:22px 22px 18px; }
+    .exit-popup-band h3{ font-size:21px; }
+    .exit-popup-body{ padding:20px 22px 24px; }
+    .exit-popup-actions{ flex-direction:column; align-items:stretch; }
+    .exit-popup-dismiss{ text-align:center; }
+  }
+  @media (prefers-reduced-motion: reduce){ .exit-popup, .exit-popup-inner, .exit-popup-band::after{ transition:none; animation:none; } }
 </style>
 
 <!-- ================= PROMO BANNER ================= -->
@@ -1631,6 +1673,27 @@
   </div>
 </div>
 
+<div class="exit-popup" id="exitPopup" role="dialog" aria-modal="true" aria-labelledby="exitPopupHeading">
+  <div class="exit-popup-inner">
+    <button class="exit-popup-close" id="exitPopupClose" type="button" aria-label="Close">
+      <svg viewBox="0 0 16 16" fill="none"><path d="M3 3l10 10M13 3 3 13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+    </button>
+    <div class="exit-popup-band">
+      <div class="exit-popup-eyebrow">Limited time</div>
+      <h3 id="exitPopupHeading">Before you go &mdash; get a 30-day free trial.</h3>
+    </div>
+    <div class="exit-popup-body">
+      <p>Sign up today for a 30-day free trial. No long contracts, and you can cancel any time.</p>
+      <div class="exit-popup-actions">
+        <a class="btn btn-gold" href="#demo" id="exitPopupCta">Start free trial
+          <svg viewBox="0 0 16 16" fill="none" width="14" height="14"><path d="M4 12 12 4M12 4H6M12 4v6" stroke="#1C2130" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <button class="exit-popup-dismiss" id="exitPopupDismiss" type="button">No thanks</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="cookie-banner" id="cookieBanner">
   <p>We use cookies to improve your experience on this site.</p>
   <button class="btn btn-gold" id="cookieAccept" type="button">Accept</button>
@@ -1814,6 +1877,78 @@
       promoBanner.classList.add('hidden');
     });
   }
+
+  // ---- exit-intent popup (triggers on a hard upward scroll) ----
+  (function(){
+    var exitPopup = document.getElementById('exitPopup');
+    var exitPopupClose = document.getElementById('exitPopupClose');
+    var exitPopupDismiss = document.getElementById('exitPopupDismiss');
+    var exitPopupCta = document.getElementById('exitPopupCta');
+    if (!exitPopup) return;
+
+    var SHOWN_KEY = 'trade360ExitPopupShown';
+    var alreadyShown = false;
+    try { alreadyShown = sessionStorage.getItem(SHOWN_KEY) === '1'; } catch(e){}
+    if (alreadyShown) return;
+
+    var pageLoadTime = Date.now();
+    var lastY = window.scrollY || window.pageYOffset || 0;
+    var lastT = pageLoadTime;
+    var armed = false; // true once the visitor has scrolled down a meaningful amount
+    var popupOpen = false;
+    var lastFocused = null;
+
+    function openPopup(){
+      if (popupOpen) return;
+      popupOpen = true;
+      try { sessionStorage.setItem(SHOWN_KEY, '1'); } catch(e){}
+      lastFocused = document.activeElement;
+      exitPopup.classList.add('open');
+      document.addEventListener('keydown', onKeydown);
+      if (exitPopupClose) exitPopupClose.focus();
+    }
+
+    function closePopup(){
+      if (!popupOpen) return;
+      popupOpen = false;
+      exitPopup.classList.remove('open');
+      document.removeEventListener('keydown', onKeydown);
+      if (lastFocused && typeof lastFocused.focus === 'function') lastFocused.focus();
+    }
+
+    function onKeydown(e){
+      if (e.key === 'Escape') closePopup();
+    }
+
+    function onScroll(){
+      var now = Date.now();
+      var y = window.scrollY || window.pageYOffset || 0;
+
+      if (!armed){
+        if (y > 400) armed = true;
+        lastY = y; lastT = now;
+        return;
+      }
+
+      var deltaY = lastY - y; // positive = scrolled up
+      var deltaT = now - lastT;
+
+      if (!popupOpen && deltaY > 120 && deltaT > 0 && deltaT < 350 && (now - pageLoadTime) > 2500){
+        openPopup();
+      }
+
+      lastY = y; lastT = now;
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    if (exitPopupClose) exitPopupClose.addEventListener('click', closePopup);
+    if (exitPopupDismiss) exitPopupDismiss.addEventListener('click', closePopup);
+    if (exitPopupCta) exitPopupCta.addEventListener('click', closePopup);
+    exitPopup.addEventListener('click', function(e){
+      if (e.target === exitPopup) closePopup();
+    });
+  })();
 
   // ---- cookie banner ----
   var cookieBanner = document.getElementById('cookieBanner');
