@@ -872,10 +872,14 @@
   .newsletter-bubble.footer-gated{ opacity:0; visibility:hidden; pointer-events:none; }
   .newsletter-toggle{
     display:inline-flex; align-items:center; gap:8px; background:var(--navy); color:#fff;
-    font-weight:700; font-size:13.5px; padding:13px 18px; border-radius:999px; border:none; cursor:pointer;
-    box-shadow:0 14px 30px rgba(20,20,30,.22); transition:transform .15s ease, background .15s ease; font-family:inherit;
+    font-weight:700; font-size:13.5px; padding:13px 18px; border-radius:999px; border:1.5px solid transparent; cursor:pointer;
+    box-shadow:0 14px 30px rgba(20,20,30,.22); transition:transform .15s ease, background .15s ease, border-color .15s ease; font-family:inherit;
   }
   .newsletter-toggle:hover{ transform:translateY(-2px); background:#2A3245; }
+  /* once the fixed bubble is sitting over the dark footer, a plain navy
+     pill all but disappears against it -- give it a thin light outline
+     so it stays legible without changing its colour. */
+  .newsletter-bubble.over-footer .newsletter-toggle{ border-color:rgba(255,255,255,.55); }
   .newsletter-toggle svg{ width:16px; height:16px; flex:none; }
   .newsletter-form{
     position:absolute; left:0; bottom:calc(100% + 12px); width:280px; background:var(--bg); border:1px solid var(--line);
@@ -2155,13 +2159,16 @@
 
   // On mobile, hide the newsletter bubble once the footer scrolls into
   // view so it doesn't sit on top of the footer content; bring it back
-  // if the visitor scrolls back up away from the footer.
+  // if the visitor scrolls back up away from the footer. On desktop it
+  // stays visible but picks up a light outline (.over-footer) so the
+  // navy pill doesn't disappear against the footer's own navy background.
   var newsletterBubbleEl = document.getElementById('newsletterBubble');
   var footerGateEl = document.querySelector('footer');
   var isMobileNewsletter = function(){ return window.matchMedia('(max-width: 640px)').matches; };
   if (newsletterBubbleEl && footerGateEl && 'IntersectionObserver' in window){
     var footerGateObserver = new IntersectionObserver(function(entries){
       entries.forEach(function(entry){
+        newsletterBubbleEl.classList.toggle('over-footer', entry.isIntersecting);
         if (!isMobileNewsletter()){
           newsletterBubbleEl.classList.remove('footer-gated');
           return;
