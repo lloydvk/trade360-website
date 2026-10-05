@@ -169,8 +169,9 @@
   .dd-img{ width:36px; height:36px; border-radius:9px; flex:none; padding:0; gap:0; border-width:1.5px; }
   .dd-img svg{ width:15px; height:15px; }
   .dd-icon{ width:36px; height:36px; border-radius:9px; flex:none; display:flex; align-items:center; justify-content:center; background:var(--navy-2); }
-  .dd-icon svg{ width:19px; height:19px; animation:brandSpin 14s linear infinite; }
-  @media (prefers-reduced-motion: reduce){ .dd-icon svg{ animation:none; } }
+  .dd-icon svg{ width:19px; height:19px; }
+  .dd-row:hover .dd-icon svg{ animation:brandSpin 14s linear infinite; }
+  @media (prefers-reduced-motion: reduce){ .dd-row:hover .dd-icon svg{ animation:none; } }
   .dd-foot{
     display:flex; align-items:center; justify-content:space-between; gap:8px;
     margin-top:4px; padding:10px 8px 2px; border-top:1px solid var(--line);
@@ -663,6 +664,7 @@
   .nav-links a{ position:relative; transition:opacity .15s ease; }
   .nav-links a::after{ content:""; position:absolute; left:0; right:100%; bottom:-6px; height:2px; background:var(--gold); transition:right .18s ease; }
   .nav-links a:hover::after{ right:0; }
+  #solutionsNavItem .dd-trigger::after{ content:none; }
   .login-link{ transition:opacity .15s ease; }
   .login-link:hover{ opacity:.7; }
   .strip-item{ transition:background .18s ease; border-radius:10px; }
