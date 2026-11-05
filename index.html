@@ -911,7 +911,7 @@
     transition:transform .18s ease, box-shadow .18s ease, opacity .2s ease, visibility .2s;
   }
   .video-teaser:hover{ transform:translateY(-3px); box-shadow:0 18px 40px rgba(20,20,30,.24); }
-  .video-teaser.hidden, .video-teaser.scroll-gated{ opacity:0; visibility:hidden; pointer-events:none; }
+  .video-teaser.hidden, .video-teaser.scroll-gated, .video-teaser.footer-gated{ opacity:0; visibility:hidden; pointer-events:none; }
   .video-teaser .vt-open{ display:block; width:100%; border:none; margin:0; padding:0; background:none; cursor:pointer; text-align:left; font-family:inherit; }
   .video-teaser .vt-thumb{ display:block; width:100%; position:relative; aspect-ratio:16/10; background-size:cover; background-position:center; }
   .video-teaser .vt-play{
@@ -1527,10 +1527,11 @@
   </div>
 </section>
 
-<div class="section-divider"><div class="wrap"></div></div>
+<!-- Blog preview hidden until real post content replaces the placeholders below. Remove the style="display:none" on both this divider and the section to bring it back. -->
+<div class="section-divider" style="display:none"><div class="wrap"></div></div>
 
 <!-- ================= BLOG ================= -->
-<section class="social-feed">
+<section class="social-feed" style="display:none">
   <div class="wrap">
     <div class="section-head reveal">
       <div class="head-copy">
@@ -2602,6 +2603,31 @@
       }
       window.addEventListener('resize', function(){
         if (!isMobileTeaser()) videoTeaser.classList.remove('scroll-gated');
+      });
+    }
+
+    // On mobile, hide the video teaser once the footer scrolls into view so
+    // it doesn't sit on top of the footer's links and legal text -- same
+    // treatment as the newsletter bubble just above. Bring it back (and let
+    // it re-find a clear spot) once the visitor scrolls back up.
+    if (footerGateEl && !videoTeaserDismissed && 'IntersectionObserver' in window){
+      var vtFooterGateObserver = new IntersectionObserver(function(entries){
+        entries.forEach(function(entry){
+          if (!isMobileTeaser()){
+            videoTeaser.classList.remove('footer-gated');
+            return;
+          }
+          if (entry.isIntersecting){
+            videoTeaser.classList.add('footer-gated');
+          } else {
+            videoTeaser.classList.remove('footer-gated');
+            repositionVideoTeaser();
+          }
+        });
+      }, { threshold: 0 });
+      vtFooterGateObserver.observe(footerGateEl);
+      window.addEventListener('resize', function(){
+        if (!isMobileTeaser()) videoTeaser.classList.remove('footer-gated');
       });
     }
     if (videoTeaserClose){
