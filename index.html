@@ -316,12 +316,14 @@
       mask-image:linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
     }
     .partner-marquee-track{
-      display:flex; align-items:center; gap:20px; width:max-content;
+      display:flex; align-items:flex-start; gap:20px; width:max-content;
       animation:partnerMarquee 32s linear infinite;
     }
+    .partner-marquee-item{ display:flex; flex-direction:column; align-items:center; gap:10px; width:150px; flex:none; }
     .partner-marquee .logo-mark{
       width:150px; height:150px; border-radius:22px; flex:none; padding:0; border-width:1.5px;
     }
+    .partner-marquee-item .sector{ font-size:12px; font-weight:700; color:var(--ink-soft); text-align:center; line-height:1.35; }
     @keyframes partnerMarquee{ from{ transform:translateX(0); } to{ transform:translateX(-50%); } }
     @media (prefers-reduced-motion: reduce){ .partner-marquee-track{ animation:none; overflow-x:auto; } }
   }
@@ -1518,14 +1520,14 @@
     </div>
     <div class="partner-marquee" aria-hidden="false">
       <div class="partner-marquee-track">
-      <div class="logo-mark ph" aria-label="Ecom Ventures — Website development"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.6"/><path d="M3 16l5-5 4 4 5-6 4 5"/></svg></div>
-      <div class="logo-mark ph" aria-label="Danielle Pink — Social and PPC management"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.6"/><path d="M3 16l5-5 4 4 5-6 4 5"/></svg></div>
-      <div class="logo-mark ph" aria-label="SAIGO — Sales strategy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.6"/><path d="M3 16l5-5 4 4 5-6 4 5"/></svg></div>
-      <div class="logo-mark ph" aria-label="Evan Pottage — Accounts"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.6"/><path d="M3 16l5-5 4 4 5-6 4 5"/></svg></div>
-      <div class="logo-mark ph" aria-label="Ecom Ventures — Website development"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.6"/><path d="M3 16l5-5 4 4 5-6 4 5"/></svg></div>
-      <div class="logo-mark ph" aria-label="Danielle Pink — Social and PPC management"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.6"/><path d="M3 16l5-5 4 4 5-6 4 5"/></svg></div>
-      <div class="logo-mark ph" aria-label="SAIGO — Sales strategy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.6"/><path d="M3 16l5-5 4 4 5-6 4 5"/></svg></div>
-      <div class="logo-mark ph" aria-label="Evan Pottage — Accounts"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.6"/><path d="M3 16l5-5 4 4 5-6 4 5"/></svg></div>
+      <div class="partner-marquee-item"><div class="logo-mark ph" aria-label="Ecom Ventures — Website development"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.6"/><path d="M3 16l5-5 4 4 5-6 4 5"/></svg></div><div class="sector">Website development</div></div>
+      <div class="partner-marquee-item"><div class="logo-mark ph" aria-label="Danielle Pink — Social and PPC management"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.6"/><path d="M3 16l5-5 4 4 5-6 4 5"/></svg></div><div class="sector">Social &amp; PPC management</div></div>
+      <div class="partner-marquee-item"><div class="logo-mark ph" aria-label="SAIGO — Sales strategy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.6"/><path d="M3 16l5-5 4 4 5-6 4 5"/></svg></div><div class="sector">Sales strategy</div></div>
+      <div class="partner-marquee-item"><div class="logo-mark ph" aria-label="Evan Pottage — Accounts"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.6"/><path d="M3 16l5-5 4 4 5-6 4 5"/></svg></div><div class="sector">Accounts</div></div>
+      <div class="partner-marquee-item"><div class="logo-mark ph" aria-label="Ecom Ventures — Website development"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.6"/><path d="M3 16l5-5 4 4 5-6 4 5"/></svg></div><div class="sector">Website development</div></div>
+      <div class="partner-marquee-item"><div class="logo-mark ph" aria-label="Danielle Pink — Social and PPC management"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.6"/><path d="M3 16l5-5 4 4 5-6 4 5"/></svg></div><div class="sector">Social &amp; PPC management</div></div>
+      <div class="partner-marquee-item"><div class="logo-mark ph" aria-label="SAIGO — Sales strategy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.6"/><path d="M3 16l5-5 4 4 5-6 4 5"/></svg></div><div class="sector">Sales strategy</div></div>
+      <div class="partner-marquee-item"><div class="logo-mark ph" aria-label="Evan Pottage — Accounts"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.6"/><path d="M3 16l5-5 4 4 5-6 4 5"/></svg></div><div class="sector">Accounts</div></div>
       </div>
     </div>
     <div class="partners-cta-row">
