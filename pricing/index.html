@@ -572,7 +572,7 @@
       <span id="labelMonthly" class="active">Monthly</span>
       <button class="billing-switch" id="billingSwitch" type="button" role="switch" aria-checked="false" aria-label="Toggle annual billing"></button>
       <span id="labelAnnual">Annual</span>
-      <span class="billing-save-pill">Save 2 months</span>
+      <span class="billing-save-pill" id="billingSavePill" style="display:none;">Save 2 months</span>
     </div>
 
     <div class="tier-grid">
@@ -1072,6 +1072,7 @@
   var billingSwitch = document.getElementById('billingSwitch');
   var labelMonthly = document.getElementById('labelMonthly');
   var labelAnnual = document.getElementById('labelAnnual');
+  var billingSavePill = document.getElementById('billingSavePill');
   var tierCards = document.querySelectorAll('.tier-card');
   var gbp = function(n){ return '£' + Number(n).toLocaleString('en-GB'); };
 
@@ -1090,6 +1091,7 @@
     });
     labelMonthly.classList.toggle('active', !annual);
     labelAnnual.classList.toggle('active', annual);
+    if (billingSavePill) billingSavePill.style.display = annual ? 'inline-block' : 'none';
   }
 
   if (billingSwitch){
