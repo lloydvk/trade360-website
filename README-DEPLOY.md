@@ -186,9 +186,6 @@ site earlier. Once this deploy is live:
   yet — right now the only way to reach `/quote` is by typing the URL
   directly. Say the word if you'd like a link added somewhere (e.g. the
   "AI Quote Builder" line in the Sales pillar card, or a nav item).
-- The homepage's red **"Limited time: sign up today for a 30-day free
-  trial"** banner is still there from before the trial became a standing
-  policy rather than a limited-time offer — worth rewording once you're live.
 - The **upload placeholders** (hero photo, pillar images, logo) are still
   placeholders — swap in real photos/logo whenever you have them, by editing
   the relevant `<img>`/background references in `index.html`.
