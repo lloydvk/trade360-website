@@ -224,8 +224,7 @@
   .tier-name{ font-size:19px; font-weight:800; }
   .tier-tagline{ font-size:12.5px; color:var(--ink-soft); margin-top:4px; }
   .tier-price-row{ margin-top:18px; display:flex; align-items:baseline; gap:6px; min-height:44px; }
-  .tier-price-row.poa{ align-items:flex-start; }
-  .tier-price-row.poa .tier-price-poa{ margin-top:0.84em; }
+  .tier-price-poa-spacer{ font-size:clamp(30px,4vw,36px); font-weight:800; width:0; overflow:hidden; visibility:hidden; }
   .tier-price{ font-size:clamp(30px,4vw,36px); font-weight:800; color:var(--ink); font-variant-numeric:tabular-nums; }
   .tier-price-unit{ font-size:13px; color:var(--ink-soft); font-weight:600; }
   .tier-price-poa{ font-size:clamp(15px,1.5vw,19px); font-weight:800; color:var(--ink); white-space:nowrap; }
@@ -625,7 +624,7 @@
       <div class="tier-card">
         <div class="tier-name">Enterprise</div>
         <div class="tier-tagline">For multi-branch and franchise operations.</div>
-        <div class="tier-price-row poa"><span class="tier-price-poa">Price on application</span></div>
+        <div class="tier-price-row"><span class="tier-price-poa">Price on application</span><span class="tier-price-poa-spacer" aria-hidden="true">0</span></div>
         <div class="tier-billed-note"></div>
         <div class="tier-onboarding">Tailored rollout &amp; onboarding</div>
         <div class="tier-stats">
