@@ -35,7 +35,7 @@
     --navy:#1C2130;
     --navy-2:#222933;
     --ink:#1C2130;
-    --ink-soft:#5B6178;
+    --ink-soft:#4A4F63;
     --line:#E7E9EF;
     --gold:#FCBD02;
     --gold-2:#FDCB3C;
@@ -204,7 +204,7 @@
   .intro-tag svg{ width:13px; height:13px; color:var(--gold); flex:none; }
 
   /* ---------- billing toggle ---------- */
-  .billing-toggle-row{ display:flex; align-items:center; justify-content:center; gap:14px; margin:44px 0 34px; }
+  .billing-toggle-row{ display:flex; align-items:center; justify-content:center; gap:14px; margin:44px 0 10px; }
   .billing-toggle-row span{ font-size:13.5px; font-weight:700; color:var(--ink-soft); }
   .billing-toggle-row span.active{ color:var(--ink); }
   .billing-switch{ position:relative; width:50px; height:28px; border-radius:999px; background:var(--line); border:none; cursor:pointer; flex:none; padding:0; }
@@ -212,6 +212,7 @@
   .billing-switch.on{ background:var(--gold); }
   .billing-switch.on::after{ transform:translateX(22px); }
   .billing-save-pill{ font-size:11px; font-weight:800; color:var(--good); background:var(--good-bg); padding:4px 10px; border-radius:999px; }
+  .vat-note{ text-align:center; font-size:12px; color:var(--ink-soft); margin:0 0 26px; }
 
   /* ---------- tier cards ---------- */
   .tiers{ padding-block:0 60px; }
@@ -222,21 +223,33 @@
   .tier-card.featured{ border-color:var(--gold); box-shadow:0 18px 40px rgba(252,189,2,.16); }
   .tier-badge{ position:absolute; top:-13px; left:24px; background:var(--gold); color:var(--navy); font-size:11px; font-weight:800; letter-spacing:.04em; text-transform:uppercase; padding:5px 12px; border-radius:999px; }
   .tier-name{ font-size:19px; font-weight:800; }
-  .tier-tagline{ font-size:12.5px; color:var(--ink-soft); margin-top:4px; }
+  .tier-tagline{ font-size:13.5px; color:var(--ink-soft); margin-top:5px; line-height:1.5; min-height:40.5px; }
   .tier-price-row{ margin-top:18px; display:flex; align-items:baseline; gap:6px; min-height:44px; }
   .tier-price-poa-spacer{ font-size:clamp(30px,4vw,36px); font-weight:800; width:0; overflow:hidden; visibility:hidden; }
   .tier-price{ font-size:clamp(30px,4vw,36px); font-weight:800; color:var(--ink); font-variant-numeric:tabular-nums; }
   .tier-price-unit{ font-size:13px; color:var(--ink-soft); font-weight:600; }
   .tier-price-poa{ font-size:clamp(15px,1.5vw,19px); font-weight:800; color:var(--ink); white-space:nowrap; }
-  .tier-billed-note{ font-size:11.5px; color:var(--ink-soft); margin-top:4px; min-height:15px; }
-  .tier-onboarding{ font-size:12px; color:var(--ink-soft); margin-top:10px; padding-top:10px; border-top:1px dashed var(--line); }
-  .tier-onboarding-note{ display:block; margin-top:3px; font-size:10.5px; opacity:.75; }
+  .tier-billed-note{ font-size:12px; color:var(--ink-soft); margin-top:5px; min-height:32px; font-weight:600; }
+  .tier-onboarding{ font-size:13.5px; color:var(--ink); line-height:1.5; margin-top:12px; padding-top:12px; border-top:1px dashed var(--line); font-weight:600; }
   .tier-stats{ margin-top:16px; display:flex; flex-direction:column; gap:8px; }
   .tier-stat{ display:flex; align-items:center; justify-content:space-between; font-size:12.5px; }
   .tier-stat span:first-child{ color:var(--ink-soft); }
   .tier-stat b{ color:var(--ink); font-weight:700; font-variant-numeric:tabular-nums; }
-  .tier-note{ font-size:11.5px; color:var(--ink-soft); margin-top:12px; line-height:1.5; }
+  .tier-note{ font-size:12.5px; color:var(--ink-soft); margin-top:12px; line-height:1.5; }
   .tier-card .btn{ margin-top:20px; }
+
+  /* ---------- trial / credits info strip ---------- */
+  .info-strip{ padding-block:0 48px; }
+  .info-grid{ display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+  @media (max-width:780px){ .info-grid{ grid-template-columns:1fr; } }
+  .info-card{ background:var(--bg-soft); border:1px solid var(--line); border-radius:16px; padding:22px 24px; }
+  .info-card h3{ font-size:15px; font-weight:800; color:var(--navy); }
+  .info-card p{ font-size:13.5px; color:var(--ink); line-height:1.6; margin-top:8px; }
+  .info-details summary{ font-size:15px; font-weight:800; color:var(--navy); cursor:pointer; list-style:none; display:flex; align-items:center; justify-content:space-between; gap:12px; }
+  .info-details summary::-webkit-details-marker{ display:none; }
+  .info-details summary::after{ content:""; width:9px; height:9px; flex:none; border-right:2px solid var(--navy); border-bottom:2px solid var(--navy); transform:rotate(45deg); transition:transform .15s ease; }
+  .info-details[open] summary::after{ transform:rotate(-135deg); }
+  .info-details[open] summary{ margin-bottom:2px; }
 
   /* ---------- feature matrix ---------- */
   .matrix{ padding-block:56px; background:var(--bg-soft); }
@@ -267,7 +280,7 @@
   .tier-feature-label.starter .dot{ background:var(--ink-soft); }
   .tier-feature-label.growth .dot{ background:var(--gold); }
   .tier-feature-label.pro .dot{ background:var(--navy); }
-  .tier-feature-list{ font-size:13px; color:var(--ink); line-height:1.7; }
+  .tier-feature-list{ font-size:13.5px; color:var(--ink); line-height:1.7; }
 
   /* ---------- bolt-ons ---------- */
   .boltons{ padding-block:56px; }
@@ -275,7 +288,7 @@
   @media (max-width:860px){ .bolton-grid{ grid-template-columns:1fr; } }
   .bolton-card{ background:var(--bg); border:1px solid var(--line); border-radius:16px; padding:22px 22px 20px; box-shadow:var(--shadow); }
   .bolton-card h3{ font-size:15.5px; }
-  .bolton-card .sub{ font-size:12px; color:var(--ink-soft); margin-top:5px; line-height:1.5; }
+  .bolton-card .sub{ font-size:13px; color:var(--ink-soft); margin-top:5px; line-height:1.5; }
   .bolton-rows{ margin-top:16px; display:flex; flex-direction:column; gap:2px; }
   .bolton-row{ display:flex; align-items:center; justify-content:space-between; padding-block:10px; border-top:1px solid var(--line); font-size:13px; }
   .bolton-row:first-child{ border-top:none; }
@@ -291,7 +304,7 @@
   @media (max-width:760px){ .policy-item{ border-left:none; border-top:1px solid var(--line); padding-left:0; } .policy-item:first-child{ border-top:none; } }
   .policy-item svg{ width:26px; height:26px; flex:none; color:var(--gold); margin-top:2px; }
   .policy-item b{ display:block; font-size:14px; font-weight:800; color:var(--navy); }
-  .policy-item span{ font-size:13px; color:var(--ink-soft); line-height:1.5; display:block; margin-top:3px; max-width:32ch; }
+  .policy-item span{ font-size:13.5px; color:var(--ink-soft); line-height:1.55; display:block; margin-top:4px; max-width:34ch; }
 
   /* ---------- bespoke ---------- */
   .bespoke{ padding-block:56px; }
@@ -359,13 +372,13 @@
 
   /* ---------- video teaser (fixed, bottom-right) ---------- */
   .video-teaser{
-    position:fixed; right:20px; bottom:20px; z-index:1150; width:220px;
+    position:fixed; right:20px; bottom:20px; z-index:1150; width:184px;
     border-radius:16px; overflow:hidden; background:var(--bg); border:1px solid var(--line);
     box-shadow:0 14px 34px rgba(20,20,30,.18);
     transition:transform .18s ease, box-shadow .18s ease, opacity .2s ease, visibility .2s;
   }
   .video-teaser:hover{ transform:translateY(-3px); box-shadow:0 18px 40px rgba(20,20,30,.24); }
-  .video-teaser.hidden, .video-teaser.scroll-gated{ opacity:0; visibility:hidden; pointer-events:none; }
+  .video-teaser.hidden, .video-teaser.scroll-gated, .video-teaser.footer-gated{ opacity:0; visibility:hidden; pointer-events:none; }
   .video-teaser .vt-open{ display:block; width:100%; border:none; margin:0; padding:0; background:none; cursor:pointer; text-align:left; font-family:inherit; }
   .video-teaser .vt-thumb{ display:block; width:100%; position:relative; aspect-ratio:16/10; background-size:cover; background-position:center; }
   .video-teaser .vt-play{
@@ -391,7 +404,17 @@
   .video-teaser .vt-info-body{ min-width:0; flex:1; }
   .video-teaser .vt-info-body b{ display:block; font-size:12.5px; font-weight:700; color:var(--ink); line-height:1.3; }
   .video-teaser .vt-info-body span{ display:block; font-size:11px; color:var(--ink-soft); line-height:1.35; margin-top:2px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-  @media (max-width:640px){ .video-teaser{ right:14px; width:168px; } }
+  @media (max-width:640px){
+    /* No safe margin on narrow screens for a floating card without covering
+       page content, so collapse it to a small round play button instead. */
+    .video-teaser{ right:14px; bottom:14px !important; width:52px; border-radius:999px; }
+    .video-teaser .vt-info{ display:none; }
+    .video-teaser .vt-thumb{ aspect-ratio:1/1; }
+    .video-teaser .vt-play{ width:34px; height:34px; }
+    .video-teaser .vt-play svg{ width:12px; height:12px; }
+    .video-teaser .vt-close{ width:19px; height:19px; top:-5px; right:-5px; }
+    .video-teaser .vt-close svg{ width:8px; height:8px; }
+  }
   @media (prefers-reduced-motion: reduce){ .video-teaser{ transition:none; } }
 
   /* ---------- video lightbox ---------- */
@@ -556,7 +579,7 @@
   <div class="wrap">
     <div class="eyebrow">Pricing</div>
     <h1>Simple pricing.<br>No long contracts.</h1>
-    <p>Every plan includes all six Trade 360 pillars — Marketing, Leads, Sales, Projects, Accounts and People. What changes between tiers is how much of each you can do, plus your monthly AI and email allowance.</p>
+    <p>Every plan covers all six Trade 360 pillars — Marketing, Leads, Sales, Projects, Accounts and People. Choose the features, team size and usage allowances that suit your business.</p>
     <div class="intro-tags">
       <span class="intro-tag"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 4v4l2.5 2.5"/><circle cx="8" cy="8" r="6.5"/></svg>30-day free trial</span>
       <span class="intro-tag"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 8h12M8 2v12"/></svg>Rolling monthly contract</span>
@@ -574,14 +597,15 @@
       <span id="labelAnnual">Annual</span>
       <span class="billing-save-pill" id="billingSavePill" style="display:none;">Save 2 months</span>
     </div>
+    <p class="vat-note">All prices shown include VAT.</p>
 
     <div class="tier-grid">
       <div class="tier-card" data-monthly="99" data-annual="83" data-billed="990">
         <div class="tier-name">Foundation</div>
-        <div class="tier-tagline">For sole traders leaving spreadsheets and chaos behind.</div>
+        <div class="tier-tagline">For sole traders who want quoting and invoicing sorted.</div>
         <div class="tier-price-row"><span class="tier-price">£99</span><span class="tier-price-unit">/month</span></div>
         <div class="tier-billed-note"></div>
-        <div class="tier-onboarding">+ £199 one-off onboarding <span class="tier-onboarding-note">(billed on conversion, not during your trial)</span></div>
+        <div class="tier-onboarding">Plus £199 one-off onboarding, payable when you become a paying customer.</div>
         <div class="tier-stats">
           <div class="tier-stat"><span>Users included</span><b>1</b></div>
           <div class="tier-stat"><span>AI credits / month</span><b>150</b></div>
@@ -594,10 +618,10 @@
       <div class="tier-card featured" data-monthly="249" data-annual="208" data-billed="2490">
         <div class="tier-badge">Most popular</div>
         <div class="tier-name">Growth</div>
-        <div class="tier-tagline">For small teams of 2 to 5 juggling more jobs than ever.</div>
+        <div class="tier-tagline">For growing teams that need more capacity and automation.</div>
         <div class="tier-price-row"><span class="tier-price">£249</span><span class="tier-price-unit">/month</span></div>
         <div class="tier-billed-note"></div>
-        <div class="tier-onboarding">+ £499 one-off onboarding <span class="tier-onboarding-note">(billed on conversion, not during your trial)</span></div>
+        <div class="tier-onboarding">Plus £499 one-off onboarding, payable when you become a paying customer.</div>
         <div class="tier-stats">
           <div class="tier-stat"><span>Users included</span><b>5</b></div>
           <div class="tier-stat"><span>AI credits / month</span><b>500</b></div>
@@ -609,10 +633,10 @@
 
       <div class="tier-card" data-monthly="499" data-annual="416" data-billed="4990">
         <div class="tier-name">Pro</div>
-        <div class="tier-tagline">For established crews of 6 to 8 running at full capacity.</div>
+        <div class="tier-tagline">For established crews running multiple jobs at full capacity.</div>
         <div class="tier-price-row"><span class="tier-price">£499</span><span class="tier-price-unit">/month</span></div>
         <div class="tier-billed-note"></div>
-        <div class="tier-onboarding">+ £999 one-off onboarding <span class="tier-onboarding-note">(billed on conversion, not during your trial)</span></div>
+        <div class="tier-onboarding">Plus £999 one-off onboarding, payable when you become a paying customer.</div>
         <div class="tier-stats">
           <div class="tier-stat"><span>Users included</span><b>8</b></div>
           <div class="tier-stat"><span>AI credits / month</span><b>1,000</b></div>
@@ -624,10 +648,10 @@
 
       <div class="tier-card">
         <div class="tier-name">Enterprise</div>
-        <div class="tier-tagline">For multi-branch and franchise operations with 9 or more users.</div>
+        <div class="tier-tagline">For multi-branch and franchise operations, built around you.</div>
         <div class="tier-price-row"><span class="tier-price-poa">Price on application</span><span class="tier-price-poa-spacer" aria-hidden="true">0</span></div>
         <div class="tier-billed-note"></div>
-        <div class="tier-onboarding">Tailored rollout &amp; onboarding <span class="tier-onboarding-note">(scoped and quoted individually)</span></div>
+        <div class="tier-onboarding">Tailored rollout and onboarding, scoped and quoted for your business.</div>
         <div class="tier-stats">
           <div class="tier-stat"><span>Users included</span><b>Custom</b></div>
           <div class="tier-stat"><span>AI credits / month</span><b>Custom</b></div>
@@ -636,6 +660,22 @@
         <a class="btn btn-outline btn-block js-book-demo" href="/#demo">Book a demo</a>
         <p class="tier-note">Volume pricing, custom integrations and a dedicated account manager.</p>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= TRIAL / CREDITS INFO ================= -->
+<section class="info-strip">
+  <div class="wrap">
+    <div class="info-grid reveal-group">
+      <div class="info-card reveal">
+        <h3>How the free trial works</h3>
+        <p>Whichever plan you start from, your 30-day trial gives you full Growth-level access so you can explore everything before deciding. A card is required to start, but nothing is charged until day 31. On day 31 you'll move onto the plan you chose — Foundation, Growth or Pro — at its listed price, plus that plan's one-off onboarding fee. Change or cancel any time before then at no cost. Enterprise is scoped individually and isn't part of the self-serve trial — book a demo instead.</p>
+      </div>
+      <details class="info-card info-details reveal">
+        <summary>How AI credits work</summary>
+        <p>Every AI-assisted action — drafting a quote, writing a follow-up, transcribing a call — uses one credit from your plan's monthly allowance. Credits reset at the start of each billing cycle and don't roll over. If you reach your limit, AI actions pause until your next cycle unless you add more credits as a top-up (see below).</p>
+      </details>
     </div>
   </div>
 </section>
@@ -772,12 +812,12 @@
   <div class="wrap">
     <div class="section-head wide reveal">
       <div class="eyebrow">Need more headroom?</div>
-      <h2>Top up AI credits, emails or seats any time.</h2>
-      <p>Available on any plan, billed monthly alongside it — cancel a bolt-on whenever you no longer need it.</p>
+      <h2>Add monthly capacity as your business grows.</h2>
+      <p>These are recurring monthly charges added to any plan's bill, not one-off purchases. Cancel any time — it stays active for the rest of your current billing period, then drops off your next invoice.</p>
     </div>
     <div class="bolton-grid reveal-group">
       <div class="bolton-card reveal">
-        <h3>AI credit top-ups</h3>
+        <h3>AI credit add-ons</h3>
         <div class="sub">Bigger bundles cost less per credit.</div>
         <div class="bolton-rows">
           <div class="bolton-row"><span>+250 credits</span><b>£15/month</b></div>
@@ -786,7 +826,7 @@
         </div>
       </div>
       <div class="bolton-card reveal">
-        <h3>Email top-ups</h3>
+        <h3>Email add-ons</h3>
         <div class="sub">Bigger bundles cost less per email.</div>
         <div class="bolton-rows">
           <div class="bolton-row"><span>+1,000 emails</span><b>£9/month</b></div>
@@ -811,12 +851,12 @@
 <div class="policy-strip">
   <div class="wrap">
     <div class="policy-item">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6v6l4 2"/><circle cx="12" cy="12" r="9"/></svg>
-      <div><b>30-day free trial</b><span>Full Growth-level access from day one. Card required to start, nothing charged until day 31, and onboarding fees only apply once you convert.</span></div>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18"/><path d="M7 15h4"/></svg>
+      <div><b>Billing &amp; VAT</b><span>All prices include VAT. Pay annually and you're charged once a year; if you cancel, you keep access until that paid year ends — no refund for unused months.</span></div>
     </div>
     <div class="policy-item">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M8 2v4M16 2v4M3 10h18"/></svg>
-      <div><b>Rolling monthly contract</b><span>No minimum term on any plan or bolt-on. Cancel, upgrade or downgrade any time. Pay annually instead and get two months free.</span></div>
+      <div><b>Rolling monthly contract</b><span>No minimum term when billed monthly. Cancel, upgrade or downgrade any time — changes apply from your next billing date.</span></div>
     </div>
     <div class="policy-item">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M17 20a5 5 0 0 0-10 0"/><circle cx="12" cy="10" r="4"/></svg>
@@ -1082,8 +1122,11 @@
       var noteEl = card.querySelector('.tier-billed-note');
       if (!priceEl || !noteEl) return;
       if (annual){
+        var monthlyRate = Number(card.getAttribute('data-monthly'));
+        var billedTotal = Number(card.getAttribute('data-billed'));
+        var saving = (monthlyRate * 12) - billedTotal;
         priceEl.textContent = gbp(card.getAttribute('data-annual'));
-        noteEl.textContent = 'billed ' + gbp(card.getAttribute('data-billed')) + '/year';
+        noteEl.textContent = 'billed ' + gbp(billedTotal) + '/year — save ' + gbp(saving) + ' vs monthly';
       } else {
         priceEl.textContent = gbp(card.getAttribute('data-monthly'));
         noteEl.textContent = '';
@@ -1190,6 +1233,19 @@
         if (!isMobileTeaser()) videoTeaser.classList.remove('scroll-gated');
       });
     }
+
+    // Never let the teaser sit over the final CTA buttons or the footer,
+    // at any screen width.
+    var footerGateEl = document.querySelector('.cta-band');
+    if (footerGateEl && 'IntersectionObserver' in window){
+      var footerGateObserver = new IntersectionObserver(function(entries){
+        entries.forEach(function(entry){
+          videoTeaser.classList.toggle('footer-gated', entry.isIntersecting);
+        });
+      }, { threshold: 0 });
+      footerGateObserver.observe(footerGateEl);
+    }
+
     if (videoTeaserClose){
       videoTeaserClose.addEventListener('click', function(e){
         e.stopPropagation();
