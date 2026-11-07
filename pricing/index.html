@@ -1128,7 +1128,7 @@
         var billedTotal = Number(card.getAttribute('data-billed'));
         var saving = (monthlyRate * 12) - billedTotal;
         priceEl.textContent = gbp(card.getAttribute('data-annual'));
-        noteEl.textContent = 'billed ' + gbp(billedTotal) + '/year — save ' + gbp(saving) + ' vs monthly';
+        noteEl.innerHTML = 'billed ' + gbp(billedTotal) + '/year —<br>save ' + gbp(saving) + ' vs monthly';
         noteEl.classList.remove('offer');
       } else {
         var monthly = Number(card.getAttribute('data-monthly'));
