@@ -219,7 +219,7 @@
     padding:18px 22px; border-radius:16px; border:1.5px dashed var(--gold); background:rgba(252,189,2,.07);
     cursor:pointer; font-family:inherit; transition:background .15s ease;
   }
-  .plan-finder-banner:hover{ background:rgba(252,189,2,.13); }
+  @media (hover:hover) and (pointer:fine){ .plan-finder-banner:hover{ background:rgba(252,189,2,.13); } }
   .pf-banner-icon{ flex:none; width:40px; height:40px; border-radius:999px; background:var(--gold); display:flex; align-items:center; justify-content:center; }
   .pf-banner-icon svg{ width:20px; height:20px; }
   .pf-banner-text{ flex:1; min-width:0; display:flex; flex-direction:column; gap:2px; }
@@ -553,9 +553,10 @@
     font-size:14.5px; font-weight:700; color:var(--ink); cursor:pointer; transition:border-color .15s ease, background .15s ease;
     font-family:inherit;
   }
-  .pf-option:hover{ border-color:var(--gold); background:rgba(252,189,2,.06); }
+  @media (hover:hover) and (pointer:fine){ .pf-option:hover{ border-color:var(--gold); background:rgba(252,189,2,.06); } }
+  .pf-option:active{ border-color:var(--gold); background:rgba(252,189,2,.06); }
   .pf-back{ margin-top:16px; background:none; border:none; padding:0; font-size:13px; font-weight:700; color:var(--ink-soft); cursor:pointer; font-family:inherit; }
-  .pf-back:hover{ color:var(--ink); }
+  @media (hover:hover) and (pointer:fine){ .pf-back:hover{ color:var(--ink); } }
   .pf-result{ text-align:center; }
   .pf-result-badge{ display:none; background:var(--gold); color:var(--navy); font-size:11px; font-weight:800; letter-spacing:.04em; text-transform:uppercase; padding:5px 12px; border-radius:999px; margin-bottom:12px; }
   .pf-result h3{ font-size:24px; }
@@ -564,7 +565,7 @@
   .pf-result-price span{ font-size:13px; font-weight:600; color:var(--ink-soft); margin-left:2px; }
   .pf-result-cta{ width:100%; justify-content:center; margin-top:18px; }
   .pf-restart{ display:block; margin:14px auto 0; background:none; border:none; font-size:13px; font-weight:700; color:var(--ink-soft); cursor:pointer; font-family:inherit; }
-  .pf-restart:hover{ color:var(--ink); }
+  @media (hover:hover) and (pointer:fine){ .pf-restart:hover{ color:var(--ink); } }
   @keyframes pfHighlightPulse{ 0%,100%{ box-shadow:var(--shadow); } 50%{ box-shadow:0 0 0 4px rgba(252,189,2,.45), var(--shadow); } }
   .tier-card.pf-highlight{ animation:pfHighlightPulse .9s ease-in-out 2; }
   @media (max-width:520px){ .pf-modal-inner{ padding:26px 22px; } }
@@ -662,7 +663,7 @@
     <div class="intro-tags">
       <span class="intro-tag"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 4v4l2.5 2.5"/><circle cx="8" cy="8" r="6.5"/></svg>50% off your first month</span>
       <span class="intro-tag"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 8h12M8 2v12"/></svg>Rolling monthly contract</span>
-      <span class="intro-tag"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="5.5" cy="5.5" r="2"/><circle cx="11.5" cy="11.5" r="2"/><path d="M7 6.5 10 10"/></svg>Refer a business, get a free month</span>
+      <span class="intro-tag"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="5.5" cy="5.5" r="2"/><circle cx="11.5" cy="11.5" r="2"/><path d="M7 6.5 10 10"/></svg>Refer a business, get 500 AI credits</span>
     </div>
   </div>
 </header>
@@ -962,7 +963,7 @@
     </div>
     <div class="policy-item">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M17 20a5 5 0 0 0-10 0"/><circle cx="12" cy="10" r="4"/></svg>
-      <div><b>Referral scheme</b><span>Get a free month of your plan for every Foundation, Growth or Pro business you refer that becomes a paying customer. They get 75% off their first month instead of the standard 50%. No cap. Enterprise referrals are handled individually by your account manager.</span></div>
+      <div><b>Referral scheme</b><span>Get 500 AI credits for every Foundation, Growth or Pro business you refer that becomes a paying customer. They get 75% off their first month instead of the standard 50%. No cap. Enterprise referrals are handled individually by your account manager.</span></div>
     </div>
   </div>
 </div>
