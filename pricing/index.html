@@ -248,11 +248,9 @@
   .info-card{ background:var(--bg-soft); border:1px solid var(--line); border-radius:16px; padding:22px 24px; }
   .info-card h3{ font-size:15px; font-weight:800; color:var(--navy); }
   .info-card p{ font-size:13.5px; color:var(--ink); line-height:1.6; margin-top:8px; }
-  .info-details summary{ font-size:15px; font-weight:800; color:var(--navy); cursor:pointer; list-style:none; display:flex; align-items:center; justify-content:space-between; gap:12px; }
-  .info-details summary::-webkit-details-marker{ display:none; }
-  .info-details summary::after{ content:""; width:9px; height:9px; flex:none; border-right:2px solid var(--navy); border-bottom:2px solid var(--navy); transform:rotate(45deg); transition:transform .15s ease; }
-  .info-details[open] summary::after{ transform:rotate(-135deg); }
-  .info-details[open] summary{ margin-bottom:2px; }
+  .info-list{ margin-top:10px; padding-left:18px; display:flex; flex-direction:column; gap:7px; }
+  .info-list li{ font-size:13.5px; color:var(--ink); line-height:1.5; }
+  .info-list li::marker{ color:var(--gold); }
 
   /* ---------- feature matrix ---------- */
   .matrix{ padding-block:56px; background:var(--bg-soft); }
@@ -673,12 +671,22 @@
     <div class="info-grid reveal-group">
       <div class="info-card reveal">
         <h3>How your first month works</h3>
-        <p>Every plan starts with 50% off your first month's subscription. The one-off onboarding fee for your chosen plan is charged alongside it at signup, so we can begin your setup straight away — you get full access immediately. From month two you're billed the full monthly price. It's a rolling monthly contract, so you can cancel, upgrade or downgrade any time. Enterprise is scoped and quoted individually — book a demo instead.</p>
+        <ul class="info-list">
+          <li>Every plan starts with 50% off your first month's subscription.</li>
+          <li>The one-off onboarding fee is charged alongside it at signup, so we can begin your setup straight away.</li>
+          <li>You get full access from day one — there's no waiting period.</li>
+          <li>From month two you're billed the full monthly price, on a rolling monthly contract you can cancel, upgrade or downgrade any time.</li>
+          <li>Enterprise is scoped and quoted individually — book a demo instead.</li>
+        </ul>
       </div>
-      <details class="info-card info-details reveal">
-        <summary>How AI credits work</summary>
-        <p>Every AI-assisted action — drafting a quote, writing a follow-up, transcribing a call — uses one credit from your plan's monthly allowance. Credits reset at the start of each billing cycle and don't roll over. If you reach your limit, AI actions pause until your next cycle unless you add more credits as a top-up (see below).</p>
-      </details>
+      <div class="info-card reveal">
+        <h3>How AI credits work</h3>
+        <ul class="info-list">
+          <li>Every AI-assisted action — drafting a quote, writing a follow-up, transcribing a call — uses one credit from your plan's monthly allowance.</li>
+          <li>Credits reset at the start of each billing cycle and don't roll over.</li>
+          <li>If you reach your limit, AI actions pause until your next cycle unless you add more credits as a top-up.</li>
+        </ul>
+      </div>
     </div>
   </div>
 </section>
