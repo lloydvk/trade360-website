@@ -230,6 +230,7 @@
   .tier-price-unit{ font-size:13px; color:var(--ink-soft); font-weight:600; }
   .tier-price-poa{ font-size:clamp(15px,1.5vw,19px); font-weight:800; color:var(--ink); white-space:nowrap; }
   .tier-billed-note{ font-size:12px; color:var(--ink-soft); margin-top:5px; min-height:32px; font-weight:600; }
+  .tier-billed-note.offer{ color:var(--good); }
   .tier-onboarding{ font-size:13.5px; color:var(--ink); line-height:1.5; margin-top:12px; padding-top:12px; border-top:1px dashed var(--line); font-weight:600; }
   .tier-stats{ margin-top:16px; display:flex; flex-direction:column; gap:8px; }
   .tier-stat{ display:flex; align-items:center; justify-content:space-between; font-size:12.5px; }
@@ -581,7 +582,7 @@
     <h1>Simple pricing.<br>No long contracts.</h1>
     <p>Every plan covers all six Trade 360 pillars — Marketing, Leads, Sales, Projects, Accounts and People. Choose the features, team size and usage allowances that suit your business.</p>
     <div class="intro-tags">
-      <span class="intro-tag"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 4v4l2.5 2.5"/><circle cx="8" cy="8" r="6.5"/></svg>30-day free trial</span>
+      <span class="intro-tag"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 4v4l2.5 2.5"/><circle cx="8" cy="8" r="6.5"/></svg>50% off your first month</span>
       <span class="intro-tag"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 8h12M8 2v12"/></svg>Rolling monthly contract</span>
       <span class="intro-tag"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="5.5" cy="5.5" r="2"/><circle cx="11.5" cy="11.5" r="2"/><path d="M7 6.5 10 10"/></svg>Refer a business, get a free month</span>
     </div>
@@ -604,14 +605,14 @@
         <div class="tier-name">Foundation</div>
         <div class="tier-tagline">For sole traders who want quoting and invoicing sorted.</div>
         <div class="tier-price-row"><span class="tier-price">£99</span><span class="tier-price-unit">/month</span></div>
-        <div class="tier-billed-note"></div>
-        <div class="tier-onboarding">Plus £199 one-off onboarding, charged when you start your trial.</div>
+        <div class="tier-billed-note offer">First month £49.50 — 50% off</div>
+        <div class="tier-onboarding">Plus £199 one-off onboarding, charged at signup.</div>
         <div class="tier-stats">
           <div class="tier-stat"><span>Users included</span><b>1</b></div>
           <div class="tier-stat"><span>AI credits / month</span><b>150</b></div>
           <div class="tier-stat"><span>Emails / month</span><b>500</b></div>
         </div>
-        <a class="btn btn-outline btn-block" href="#demo">Start free trial</a>
+        <a class="btn btn-outline btn-block" href="#demo">Get started</a>
         <p class="tier-note">Roughly 30 AI-generated quotes a month.</p>
       </div>
 
@@ -620,14 +621,14 @@
         <div class="tier-name">Growth</div>
         <div class="tier-tagline">For growing teams that need more capacity and automation.</div>
         <div class="tier-price-row"><span class="tier-price">£249</span><span class="tier-price-unit">/month</span></div>
-        <div class="tier-billed-note"></div>
-        <div class="tier-onboarding">Plus £499 one-off onboarding, charged when you start your trial.</div>
+        <div class="tier-billed-note offer">First month £124.50 — 50% off</div>
+        <div class="tier-onboarding">Plus £499 one-off onboarding, charged at signup.</div>
         <div class="tier-stats">
           <div class="tier-stat"><span>Users included</span><b>5</b></div>
           <div class="tier-stat"><span>AI credits / month</span><b>500</b></div>
           <div class="tier-stat"><span>Emails / month</span><b>2,000</b></div>
         </div>
-        <a class="btn btn-gold btn-block" href="#demo">Start free trial</a>
+        <a class="btn btn-gold btn-block" href="#demo">Get started</a>
         <p class="tier-note">Roughly 100 AI-generated quotes a month.</p>
       </div>
 
@@ -635,14 +636,14 @@
         <div class="tier-name">Pro</div>
         <div class="tier-tagline">For established crews running multiple jobs at full capacity.</div>
         <div class="tier-price-row"><span class="tier-price">£499</span><span class="tier-price-unit">/month</span></div>
-        <div class="tier-billed-note"></div>
-        <div class="tier-onboarding">Plus £999 one-off onboarding, charged when you start your trial.</div>
+        <div class="tier-billed-note offer">First month £249.50 — 50% off</div>
+        <div class="tier-onboarding">Plus £999 one-off onboarding, charged at signup.</div>
         <div class="tier-stats">
           <div class="tier-stat"><span>Users included</span><b>8</b></div>
           <div class="tier-stat"><span>AI credits / month</span><b>1,000</b></div>
           <div class="tier-stat"><span>Emails / month</span><b>5,000</b></div>
         </div>
-        <a class="btn btn-outline btn-block" href="#demo">Start free trial</a>
+        <a class="btn btn-outline btn-block" href="#demo">Get started</a>
         <p class="tier-note">Roughly 200 AI-generated quotes a month.</p>
       </div>
 
@@ -669,8 +670,8 @@
   <div class="wrap">
     <div class="info-grid reveal-group">
       <div class="info-card reveal">
-        <h3>How the free trial works</h3>
-        <p>Whichever plan you start from, your 30-day trial gives you full Growth-level access so you can explore everything before deciding. The one-off onboarding fee for your chosen plan is charged straight away, when your trial starts, so we can begin your setup — your monthly subscription itself isn't charged until day 31. Cancel any time during the trial and you won't pay anything for the plan, but the onboarding fee covers work already under way and isn't refunded. Enterprise is scoped individually and isn't part of the self-serve trial — book a demo instead.</p>
+        <h3>How your first month works</h3>
+        <p>Every plan starts with 50% off your first month's subscription. The one-off onboarding fee for your chosen plan is charged alongside it at signup, so we can begin your setup straight away — you get full access immediately. From month two you're billed the full monthly price. It's a rolling monthly contract, so you can cancel, upgrade or downgrade any time. Enterprise is scoped and quoted individually — book a demo instead.</p>
       </div>
       <details class="info-card info-details reveal">
         <summary>How AI credits work</summary>
@@ -860,7 +861,7 @@
     </div>
     <div class="policy-item">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M17 20a5 5 0 0 0-10 0"/><circle cx="12" cy="10" r="4"/></svg>
-      <div><b>Referral scheme</b><span>Get a free month of your plan for every Foundation, Growth or Pro business you refer that becomes a paying customer. They get a 45-day trial instead of 30. No cap. Enterprise referrals are handled individually by your account manager.</span></div>
+      <div><b>Referral scheme</b><span>Get a free month of your plan for every Foundation, Growth or Pro business you refer that becomes a paying customer. They get 75% off their first month instead of the standard 50%. No cap. Enterprise referrals are handled individually by your account manager.</span></div>
     </div>
   </div>
 </div>
@@ -888,9 +889,9 @@
 <!-- ================= CTA BAND ================= -->
 <section class="cta-band" id="demo">
   <div class="wrap">
-    <h2>Try Trade 360 free for 30 days.</h2>
+    <h2>Get 50% off your first month.</h2>
     <div class="cta-band-actions">
-      <a class="btn btn-navy" href="#demo">Start free trial
+      <a class="btn btn-navy" href="#demo">Get 50% off
         <svg viewBox="0 0 16 16" fill="none" width="14" height="14"><path d="M4 12 12 4M12 4H6M12 4v6" stroke="#F6F6F8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </a>
       <a class="btn btn-outline js-book-demo" href="/#demo" style="background:transparent;border-color:rgba(28,33,48,.35);">Book a demo</a>
@@ -1115,6 +1116,7 @@
   var billingSavePill = document.getElementById('billingSavePill');
   var tierCards = document.querySelectorAll('.tier-card');
   var gbp = function(n){ return '£' + Number(n).toLocaleString('en-GB'); };
+  var gbp2 = function(n){ return '£' + Number(n).toFixed(2); };
 
   function applyBilling(annual){
     tierCards.forEach(function(card){
@@ -1127,9 +1129,12 @@
         var saving = (monthlyRate * 12) - billedTotal;
         priceEl.textContent = gbp(card.getAttribute('data-annual'));
         noteEl.textContent = 'billed ' + gbp(billedTotal) + '/year — save ' + gbp(saving) + ' vs monthly';
+        noteEl.classList.remove('offer');
       } else {
-        priceEl.textContent = gbp(card.getAttribute('data-monthly'));
-        noteEl.textContent = '';
+        var monthly = Number(card.getAttribute('data-monthly'));
+        priceEl.textContent = gbp(monthly);
+        noteEl.textContent = 'First month ' + gbp2(monthly / 2) + ' — 50% off';
+        noteEl.classList.add('offer');
       }
     });
     labelMonthly.classList.toggle('active', !annual);
