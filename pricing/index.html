@@ -231,6 +231,7 @@
   .tier-price-poa{ font-size:clamp(15px,1.5vw,19px); font-weight:800; color:var(--ink); white-space:nowrap; }
   .tier-billed-note{ font-size:12px; color:var(--ink-soft); margin-top:5px; min-height:32px; font-weight:600; }
   .tier-billed-note.offer{ color:var(--good); }
+  .tier-billed-note .tier-savings{ color:var(--good); }
   .tier-onboarding{ font-size:13.5px; color:var(--ink); line-height:1.5; margin-top:12px; padding-top:12px; border-top:1px dashed var(--line); font-weight:600; }
   .tier-stats{ margin-top:16px; display:flex; flex-direction:column; gap:8px; }
   .tier-stat{ display:flex; align-items:center; justify-content:space-between; font-size:12.5px; }
@@ -1128,7 +1129,7 @@
         var billedTotal = Number(card.getAttribute('data-billed'));
         var saving = (monthlyRate * 12) - billedTotal;
         priceEl.textContent = gbp(card.getAttribute('data-annual'));
-        noteEl.innerHTML = 'billed ' + gbp(billedTotal) + '/year —<br>save ' + gbp(saving) + ' vs monthly';
+        noteEl.innerHTML = 'billed ' + gbp(billedTotal) + '/year —<br><span class="tier-savings">save ' + gbp(saving) + ' vs monthly</span>';
         noteEl.classList.remove('offer');
       } else {
         var monthly = Number(card.getAttribute('data-monthly'));
