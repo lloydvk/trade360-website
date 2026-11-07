@@ -216,10 +216,11 @@
 
   /* ---------- tier cards ---------- */
   .tiers{ padding-block:0 60px; }
-  .tier-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:16px; align-items:stretch; }
+  .tier-grid{ display:grid; grid-template-columns:repeat(4,1fr); grid-template-rows:repeat(8,auto); gap:16px; align-items:stretch; }
   @media (max-width:1100px){ .tier-grid{ grid-template-columns:repeat(2,1fr); max-width:620px; margin-inline:auto; } }
   @media (max-width:560px){ .tier-grid{ grid-template-columns:1fr; max-width:440px; } }
-  .tier-card{ background:var(--bg); border:1.5px solid var(--line); border-radius:18px; padding:28px 24px; box-shadow:var(--shadow); display:flex; flex-direction:column; position:relative; }
+  .tier-card{ background:var(--bg); border:1.5px solid var(--line); border-radius:18px; padding:28px 24px; box-shadow:var(--shadow); display:grid; grid-template-rows:subgrid; grid-row:span 8; position:relative; }
+  @supports not (grid-template-rows:subgrid){ .tier-card{ display:flex; flex-direction:column; } }
   .tier-card.featured{ border-color:var(--gold); box-shadow:0 18px 40px rgba(252,189,2,.16); }
   .tier-badge{ position:absolute; top:-13px; left:24px; background:var(--gold); color:var(--navy); font-size:11px; font-weight:800; letter-spacing:.04em; text-transform:uppercase; padding:5px 12px; border-radius:999px; }
   .tier-name{ font-size:19px; font-weight:800; }
@@ -242,7 +243,7 @@
 
   /* ---------- trial / credits info strip ---------- */
   .info-strip{ padding-block:0 48px; }
-  .info-grid{ display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+  .info-grid{ display:grid; grid-template-columns:1fr 1fr; gap:16px; align-items:start; }
   @media (max-width:780px){ .info-grid{ grid-template-columns:1fr; } }
   .info-card{ background:var(--bg-soft); border:1px solid var(--line); border-radius:16px; padding:22px 24px; }
   .info-card h3{ font-size:15px; font-weight:800; color:var(--navy); }
@@ -614,7 +615,7 @@
           <div class="tier-stat"><span>Emails / month</span><b>500</b></div>
         </div>
         <a class="btn btn-outline btn-block" href="#demo">Get started</a>
-        <p class="tier-note">Roughly 30 AI-generated quotes a month.</p>
+        <p class="tier-note">About 30 AI quotes a month.</p>
       </div>
 
       <div class="tier-card featured" data-monthly="249" data-annual="208" data-billed="2490">
@@ -630,7 +631,7 @@
           <div class="tier-stat"><span>Emails / month</span><b>2,000</b></div>
         </div>
         <a class="btn btn-gold btn-block" href="#demo">Get started</a>
-        <p class="tier-note">Roughly 100 AI-generated quotes a month.</p>
+        <p class="tier-note">About 100 AI quotes a month.</p>
       </div>
 
       <div class="tier-card" data-monthly="499" data-annual="416" data-billed="4990">
@@ -645,7 +646,7 @@
           <div class="tier-stat"><span>Emails / month</span><b>5,000</b></div>
         </div>
         <a class="btn btn-outline btn-block" href="#demo">Get started</a>
-        <p class="tier-note">Roughly 200 AI-generated quotes a month.</p>
+        <p class="tier-note">About 200 AI quotes a month.</p>
       </div>
 
       <div class="tier-card">
@@ -660,7 +661,7 @@
           <div class="tier-stat"><span>Emails / month</span><b>Custom</b></div>
         </div>
         <a class="btn btn-outline btn-block js-book-demo" href="/#demo">Book a demo</a>
-        <p class="tier-note">Volume pricing, custom integrations and a dedicated account manager.</p>
+        <p class="tier-note">Tailored pricing and support.</p>
       </div>
     </div>
   </div>
