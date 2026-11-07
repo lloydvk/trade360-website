@@ -213,6 +213,24 @@
   .billing-switch.on::after{ transform:translateX(22px); }
   .billing-save-pill{ font-size:11px; font-weight:800; color:var(--good); background:var(--good-bg); padding:4px 10px; border-radius:999px; }
   .vat-note{ text-align:center; font-size:12px; color:var(--ink-soft); margin:0 0 26px; }
+  /* ---------- plan finder banner ---------- */
+  .plan-finder-banner{
+    width:100%; margin:0 0 26px; display:flex; align-items:center; gap:16px; text-align:left;
+    padding:18px 22px; border-radius:16px; border:1.5px dashed var(--gold); background:rgba(252,189,2,.07);
+    cursor:pointer; font-family:inherit; transition:background .15s ease;
+  }
+  .plan-finder-banner:hover{ background:rgba(252,189,2,.13); }
+  .pf-banner-icon{ flex:none; width:40px; height:40px; border-radius:999px; background:var(--gold); display:flex; align-items:center; justify-content:center; }
+  .pf-banner-icon svg{ width:20px; height:20px; }
+  .pf-banner-text{ flex:1; min-width:0; display:flex; flex-direction:column; gap:2px; }
+  .pf-banner-text b{ font-size:14.5px; color:var(--navy); font-weight:800; }
+  .pf-banner-text span{ font-size:12.5px; color:var(--ink-soft); }
+  .pf-banner-cta{ flex:none; display:flex; align-items:center; gap:6px; font-size:13.5px; font-weight:800; color:var(--navy); white-space:nowrap; }
+  .pf-banner-cta svg{ flex:none; }
+  @media (max-width:620px){
+    .plan-finder-banner{ flex-wrap:wrap; }
+    .pf-banner-cta{ width:100%; justify-content:center; margin-top:4px; padding-top:12px; border-top:1px solid rgba(28,33,48,.08); }
+  }
 
   /* ---------- tier cards ---------- */
   .tiers{ padding-block:0 60px; }
@@ -503,6 +521,53 @@
   .demo-modal .thanks{ font-size:16px; font-weight:700; color:var(--navy); text-align:center; padding:30px 4px; }
   @media (max-width:520px){ .demo-form-row{ flex-direction:column; gap:0; } .demo-modal-inner{ padding:26px 22px; } }
   @media (prefers-reduced-motion: reduce){ .demo-modal, .demo-modal-inner{ transition:none; } }
+
+  /* ---------- plan finder quiz modal ---------- */
+  .pf-modal{
+    position:fixed; inset:0; z-index:1600; display:flex; align-items:center; justify-content:center; padding:20px;
+    background:rgba(11,12,16,.72); backdrop-filter:blur(4px); -webkit-backdrop-filter:blur(4px);
+    opacity:0; visibility:hidden; transition:opacity .25s ease, visibility .25s;
+  }
+  .pf-modal.open{ opacity:1; visibility:visible; }
+  .pf-modal-inner{
+    position:relative; width:100%; max-width:460px; max-height:90vh; overflow-y:auto; background:#fff; border-radius:18px;
+    box-shadow:0 30px 70px rgba(0,0,0,.45); transform:scale(.96) translateY(8px); transition:transform .25s ease;
+    padding:32px;
+  }
+  .pf-modal.open .pf-modal-inner{ transform:scale(1) translateY(0); }
+  .pf-modal-close{
+    position:absolute; top:14px; right:14px; width:32px; height:32px; border-radius:999px;
+    background:rgba(28,33,48,.06); border:none; color:var(--ink);
+    display:flex; align-items:center; justify-content:center; cursor:pointer; z-index:2; transition:background .15s ease;
+  }
+  .pf-modal-close:hover{ background:rgba(28,33,48,.12); }
+  .pf-modal-close svg{ width:12px; height:12px; }
+  .pf-progress{ display:flex; gap:6px; margin:0 28px 20px 0; }
+  .pf-progress-dot{ height:4px; flex:1; border-radius:999px; background:var(--line); transition:background .2s ease; }
+  .pf-progress-dot.active, .pf-progress-dot.done{ background:var(--gold); }
+  .pf-step h3{ font-size:18.5px; font-weight:800; color:var(--navy); line-height:1.3; padding-right:16px; }
+  .pf-options{ margin-top:18px; display:flex; flex-direction:column; gap:10px; }
+  .pf-option{
+    text-align:left; padding:13px 16px; border-radius:12px; border:1.5px solid var(--line); background:var(--bg);
+    font-size:14.5px; font-weight:700; color:var(--ink); cursor:pointer; transition:border-color .15s ease, background .15s ease;
+    font-family:inherit;
+  }
+  .pf-option:hover{ border-color:var(--gold); background:rgba(252,189,2,.06); }
+  .pf-back{ margin-top:16px; background:none; border:none; padding:0; font-size:13px; font-weight:700; color:var(--ink-soft); cursor:pointer; font-family:inherit; }
+  .pf-back:hover{ color:var(--ink); }
+  .pf-result{ text-align:center; }
+  .pf-result-badge{ display:none; background:var(--gold); color:var(--navy); font-size:11px; font-weight:800; letter-spacing:.04em; text-transform:uppercase; padding:5px 12px; border-radius:999px; margin-bottom:12px; }
+  .pf-result h3{ font-size:24px; }
+  .pf-result p{ font-size:14px; color:var(--ink-soft); line-height:1.6; margin-top:10px; }
+  .pf-result-price{ font-size:26px; font-weight:800; color:var(--ink); margin-top:16px; font-variant-numeric:tabular-nums; }
+  .pf-result-price span{ font-size:13px; font-weight:600; color:var(--ink-soft); margin-left:2px; }
+  .pf-result-cta{ width:100%; justify-content:center; margin-top:18px; }
+  .pf-restart{ display:block; margin:14px auto 0; background:none; border:none; font-size:13px; font-weight:700; color:var(--ink-soft); cursor:pointer; font-family:inherit; }
+  .pf-restart:hover{ color:var(--ink); }
+  @keyframes pfHighlightPulse{ 0%,100%{ box-shadow:var(--shadow); } 50%{ box-shadow:0 0 0 4px rgba(252,189,2,.45), var(--shadow); } }
+  .tier-card.pf-highlight{ animation:pfHighlightPulse .9s ease-in-out 2; }
+  @media (max-width:520px){ .pf-modal-inner{ padding:26px 22px; } }
+  @media (prefers-reduced-motion: reduce){ .pf-modal, .pf-modal-inner{ transition:none; } .tier-card.pf-highlight{ animation:none; } }
 </style>
 
 <div class="scroll-progress" id="scrollProgress"></div>
@@ -611,6 +676,19 @@
       <span class="billing-save-pill" id="billingSavePill" style="display:none;">Save 2 months</span>
     </div>
     <p class="vat-note">All prices shown include VAT.</p>
+
+    <button type="button" class="plan-finder-banner reveal" id="planFinderOpen" aria-haspopup="dialog" aria-controls="planFinderModal">
+      <span class="pf-banner-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9.2 9.3a2.8 2.8 0 0 1 5.4.9c0 1.9-2.3 2.1-2.5 3.8"/><circle cx="12" cy="17" r=".3" fill="var(--navy)"/></svg>
+      </span>
+      <span class="pf-banner-text">
+        <b>Not sure which plan is right for you?</b>
+        <span>Answer three quick questions and we'll point you to the right one.</span>
+      </span>
+      <span class="pf-banner-cta">Find my plan
+        <svg viewBox="0 0 16 16" fill="none" width="12" height="12"><path d="M4 12 12 4M12 4H6M12 4v6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </span>
+    </button>
 
     <div class="tier-grid">
       <div class="tier-card" data-monthly="99" data-annual="83" data-billed="990">
@@ -1010,6 +1088,61 @@
   </div>
 </div>
 
+<!-- ================= FIND MY PLAN QUIZ MODAL ================= -->
+<div class="pf-modal" id="planFinderModal" role="dialog" aria-modal="true" aria-labelledby="pfModalHeading">
+  <div class="pf-modal-inner">
+    <button class="pf-modal-close" id="pfModalClose" type="button" aria-label="Close">
+      <svg viewBox="0 0 16 16" fill="none"><path d="M3 3l10 10M13 3 3 13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+    </button>
+
+    <div class="pf-progress" id="pfProgress">
+      <span class="pf-progress-dot" data-dot="1"></span>
+      <span class="pf-progress-dot" data-dot="2"></span>
+      <span class="pf-progress-dot" data-dot="3"></span>
+    </div>
+
+    <div class="pf-step" data-step="1">
+      <h3 id="pfModalHeading">How many people need access to Trade 360?</h3>
+      <div class="pf-options">
+        <button type="button" class="pf-option" data-q="1" data-tier="0">Just me</button>
+        <button type="button" class="pf-option" data-q="1" data-tier="1">2 to 5 people</button>
+        <button type="button" class="pf-option" data-q="1" data-tier="2">6 to 10 people</button>
+        <button type="button" class="pf-option" data-q="1" data-tier="3">More than 10 people</button>
+      </div>
+    </div>
+
+    <div class="pf-step" data-step="2" hidden>
+      <h3>Roughly how many quotes do you send a month?</h3>
+      <div class="pf-options">
+        <button type="button" class="pf-option" data-q="2" data-tier="0">Fewer than 20</button>
+        <button type="button" class="pf-option" data-q="2" data-tier="1">20 to 70</button>
+        <button type="button" class="pf-option" data-q="2" data-tier="2">70 to 150</button>
+        <button type="button" class="pf-option" data-q="2" data-tier="2">More than 150</button>
+      </div>
+      <button type="button" class="pf-back" data-back="1">Back</button>
+    </div>
+
+    <div class="pf-step" data-step="3" hidden>
+      <h3>Do you operate from one location, or several branches or franchises?</h3>
+      <div class="pf-options">
+        <button type="button" class="pf-option" data-q="3" data-tier="0">One location</button>
+        <button type="button" class="pf-option" data-q="3" data-tier="3">Several branches or franchises</button>
+      </div>
+      <button type="button" class="pf-back" data-back="2">Back</button>
+    </div>
+
+    <div class="pf-step pf-result" data-step="result" hidden>
+      <span class="pf-result-badge" id="pfResultBadge"></span>
+      <h3 id="pfResultName">Growth</h3>
+      <p id="pfResultReason"></p>
+      <div class="pf-result-price" id="pfResultPrice"></div>
+      <button type="button" class="btn btn-gold pf-result-cta" id="pfResultCta">View this plan</button>
+      <button type="button" class="pf-restart" id="pfRestart">Start again</button>
+    </div>
+
+  </div>
+</div>
+
 <!-- ================= VIDEO TEASER + LIGHTBOX ================= -->
 <div class="video-teaser" id="videoTeaser">
   <button class="vt-close" id="videoTeaserClose" type="button" aria-label="Dismiss video">
@@ -1403,6 +1536,150 @@
       }
       errEl.textContent = "Couldn't send that — please try again, or call/email us directly.";
     });
+  });
+})();
+
+// ---- "find my plan" quiz modal ----
+(function(){
+  var pfModal = document.getElementById('planFinderModal');
+  var pfOpenBtn = document.getElementById('planFinderOpen');
+  var pfCloseBtn = document.getElementById('pfModalClose');
+  var pfRestartBtn = document.getElementById('pfRestart');
+  if (!pfModal || !pfOpenBtn) return;
+
+  var steps = pfModal.querySelectorAll('.pf-step');
+  var dots = pfModal.querySelectorAll('.pf-progress-dot');
+  var progress = document.getElementById('pfProgress');
+  var answers = {};
+  var modalOpen = false;
+  var lastFocused = null;
+
+  var TIERS = [
+    { key:'foundation', name:'Foundation', cardIndex:0, badge:null,
+      reason:'For sole traders who want quoting and invoicing sorted.' },
+    { key:'growth', name:'Growth', cardIndex:1, badge:'Most popular',
+      reason:'For growing teams that need more capacity and automation.' },
+    { key:'pro', name:'Pro', cardIndex:2, badge:null,
+      reason:'For established crews running multiple jobs at full capacity.' },
+    { key:'enterprise', name:'Enterprise', cardIndex:3, badge:null,
+      reason:'For multi-branch and franchise operations, built around you.' }
+  ];
+
+  function showStep(stepName){
+    steps.forEach(function(s){ s.hidden = s.getAttribute('data-step') !== stepName; });
+    if (stepName === 'result'){
+      if (progress) progress.style.display = 'none';
+    } else {
+      if (progress) progress.style.display = 'flex';
+      var stepNum = Number(stepName);
+      dots.forEach(function(d){
+        var n = Number(d.getAttribute('data-dot'));
+        d.classList.toggle('active', n === stepNum);
+        d.classList.toggle('done', n < stepNum);
+      });
+    }
+  }
+
+  function resetQuiz(){
+    answers = {};
+    showStep('1');
+  }
+
+  function computeResult(){
+    var idx = Math.max(answers[1] || 0, answers[2] || 0, answers[3] || 0);
+    var tier = TIERS[idx];
+    var cards = document.querySelectorAll('.tier-grid .tier-card');
+    var card = cards[tier.cardIndex];
+    var priceText = '', unitText = '';
+    if (card){
+      var priceEl = card.querySelector('.tier-price');
+      var unitEl = card.querySelector('.tier-price-unit');
+      var poaEl = card.querySelector('.tier-price-poa');
+      if (priceEl){
+        priceText = priceEl.textContent;
+        unitText = unitEl ? unitEl.textContent : '';
+      } else if (poaEl){
+        priceText = poaEl.textContent;
+      }
+    }
+    pfModal.querySelector('#pfResultName').textContent = tier.name;
+    pfModal.querySelector('#pfResultReason').textContent = tier.reason;
+    var priceDisplayEl = pfModal.querySelector('#pfResultPrice');
+    if (unitText){
+      priceDisplayEl.innerHTML = priceText + '<span>' + unitText + '</span>';
+    } else {
+      priceDisplayEl.textContent = priceText;
+    }
+    var badgeEl = pfModal.querySelector('#pfResultBadge');
+    if (tier.badge){
+      badgeEl.textContent = tier.badge;
+      badgeEl.style.display = 'inline-block';
+    } else {
+      badgeEl.style.display = 'none';
+    }
+    var ctaEl = pfModal.querySelector('#pfResultCta');
+    ctaEl.textContent = tier.key === 'enterprise' ? 'Book a demo' : ('View ' + tier.name);
+    ctaEl.setAttribute('data-card-index', String(tier.cardIndex));
+    ctaEl.setAttribute('data-key', tier.key);
+    showStep('result');
+  }
+
+  pfModal.querySelectorAll('.pf-option').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var q = Number(btn.getAttribute('data-q'));
+      var tierVal = Number(btn.getAttribute('data-tier'));
+      answers[q] = tierVal;
+      if (q === 1) showStep('2');
+      else if (q === 2) showStep('3');
+      else computeResult();
+    });
+  });
+
+  pfModal.querySelectorAll('.pf-back').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      showStep(btn.getAttribute('data-back'));
+    });
+  });
+
+  if (pfRestartBtn) pfRestartBtn.addEventListener('click', resetQuiz);
+
+  function openPfModal(){
+    if (modalOpen) return;
+    modalOpen = true;
+    lastFocused = document.activeElement;
+    resetQuiz();
+    pfModal.classList.add('open');
+    document.addEventListener('keydown', onPfKeydown);
+  }
+  function closePfModal(){
+    if (!modalOpen) return;
+    modalOpen = false;
+    pfModal.classList.remove('open');
+    document.removeEventListener('keydown', onPfKeydown);
+    if (lastFocused && typeof lastFocused.focus === 'function') lastFocused.focus();
+  }
+  function onPfKeydown(e){ if (e.key === 'Escape') closePfModal(); }
+
+  pfOpenBtn.addEventListener('click', openPfModal);
+  if (pfCloseBtn) pfCloseBtn.addEventListener('click', closePfModal);
+  pfModal.addEventListener('click', function(e){
+    if (e.target === pfModal){ closePfModal(); return; }
+    var cta = e.target.closest ? e.target.closest('#pfResultCta') : null;
+    if (!cta) return;
+    var key = cta.getAttribute('data-key');
+    closePfModal();
+    if (key === 'enterprise'){
+      var demoBtn = document.querySelector('.js-book-demo');
+      if (demoBtn) demoBtn.click();
+      return;
+    }
+    var idx = Number(cta.getAttribute('data-card-index'));
+    var targetCard = document.querySelectorAll('.tier-grid .tier-card')[idx];
+    if (targetCard){
+      targetCard.scrollIntoView({ behavior:'smooth', block:'center' });
+      targetCard.classList.add('pf-highlight');
+      setTimeout(function(){ targetCard.classList.remove('pf-highlight'); }, 1800);
+    }
   });
 })();
 </script>
