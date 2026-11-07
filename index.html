@@ -1070,6 +1070,15 @@
     </button>
   </div>
 </div>
+<script>
+  (function(){
+    try{
+      if (sessionStorage.getItem('promoBannerDismissed') === '1'){
+        document.getElementById('promoBanner').classList.add('hidden');
+      }
+    }catch(e){}
+  })();
+</script>
 
 <div class="scroll-progress" id="scrollProgress"></div>
 
@@ -2097,6 +2106,7 @@
   if (promoBanner && promoClose){
     promoClose.addEventListener('click', function(){
       promoBanner.classList.add('hidden');
+      try{ sessionStorage.setItem('promoBannerDismissed', '1'); }catch(e){}
     });
   }
 
