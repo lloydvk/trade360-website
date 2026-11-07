@@ -236,7 +236,7 @@
   .tiers{ padding-block:0 60px; }
   .tier-grid{ display:grid; grid-template-columns:repeat(4,1fr); grid-template-rows:repeat(8,auto); gap:16px; align-items:stretch; }
   @media (max-width:1100px){ .tier-grid{ grid-template-columns:repeat(2,1fr); max-width:620px; margin-inline:auto; } }
-  @media (max-width:560px){ .tier-grid{ grid-template-columns:1fr; max-width:440px; } }
+  @media (max-width:560px){ .tier-grid{ grid-template-columns:1fr; max-width:440px; } .tier-card.featured{ margin-top:20px; } }
   .tier-card{ background:var(--bg); border:1.5px solid var(--line); border-radius:18px; padding:28px 24px; box-shadow:var(--shadow); display:grid; grid-template-rows:subgrid; grid-row:span 8; position:relative; }
   @supports not (grid-template-rows:subgrid){ .tier-card{ display:flex; flex-direction:column; } }
   .tier-card.featured{ border-color:var(--gold); box-shadow:0 18px 40px rgba(252,189,2,.16); }
@@ -542,10 +542,11 @@
   }
   .pf-modal-close:hover{ background:rgba(28,33,48,.12); }
   .pf-modal-close svg{ width:12px; height:12px; }
-  .pf-progress{ display:flex; gap:6px; margin:0 28px 20px 0; }
-  .pf-progress-dot{ height:4px; flex:1; border-radius:999px; background:var(--line); transition:background .2s ease; }
-  .pf-progress-dot.active, .pf-progress-dot.done{ background:var(--gold); }
-  .pf-step h3{ font-size:18.5px; font-weight:800; color:var(--navy); line-height:1.3; padding-right:16px; }
+  .pf-progress-wrap{ margin:0 28px 18px 0; }
+  .pf-progress-track{ height:4px; border-radius:999px; background:var(--line); overflow:hidden; }
+  .pf-progress-fill{ height:100%; background:var(--gold); border-radius:999px; transition:width .25s ease; width:0; }
+  .pf-progress-label{ margin-top:8px; font-size:11.5px; font-weight:700; color:var(--ink-soft); letter-spacing:.01em; }
+  .pf-step h3{ font-size:18.5px; font-weight:800; color:var(--navy); line-height:1.3; padding-right:16px; min-height:48px; }
   .pf-options{ margin-top:18px; display:flex; flex-direction:column; gap:10px; }
   .pf-option{
     text-align:left; padding:13px 16px; border-radius:12px; border:1.5px solid var(--line); background:var(--bg);
@@ -1095,43 +1096,18 @@
       <svg viewBox="0 0 16 16" fill="none"><path d="M3 3l10 10M13 3 3 13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
     </button>
 
-    <div class="pf-progress" id="pfProgress">
-      <span class="pf-progress-dot" data-dot="1"></span>
-      <span class="pf-progress-dot" data-dot="2"></span>
-      <span class="pf-progress-dot" data-dot="3"></span>
+    <div class="pf-progress-wrap" id="pfProgressWrap">
+      <div class="pf-progress-track"><div class="pf-progress-fill" id="pfProgressFill"></div></div>
+      <div class="pf-progress-label" id="pfProgressLabel">Question 1 of 12</div>
     </div>
 
-    <div class="pf-step" data-step="1">
-      <h3 id="pfModalHeading">How many people need access to Trade 360?</h3>
-      <div class="pf-options">
-        <button type="button" class="pf-option" data-q="1" data-tier="0">Just me</button>
-        <button type="button" class="pf-option" data-q="1" data-tier="1">2 to 5 people</button>
-        <button type="button" class="pf-option" data-q="1" data-tier="2">6 to 10 people</button>
-        <button type="button" class="pf-option" data-q="1" data-tier="3">More than 10 people</button>
-      </div>
+    <div class="pf-step" id="pfQuestionStep">
+      <h3 id="pfModalHeading"></h3>
+      <div class="pf-options" id="pfOptionsContainer"></div>
+      <button type="button" class="pf-back" id="pfBackBtn" hidden>Back</button>
     </div>
 
-    <div class="pf-step" data-step="2" hidden>
-      <h3>Roughly how many quotes do you send a month?</h3>
-      <div class="pf-options">
-        <button type="button" class="pf-option" data-q="2" data-tier="0">Fewer than 20</button>
-        <button type="button" class="pf-option" data-q="2" data-tier="1">20 to 70</button>
-        <button type="button" class="pf-option" data-q="2" data-tier="2">70 to 150</button>
-        <button type="button" class="pf-option" data-q="2" data-tier="2">More than 150</button>
-      </div>
-      <button type="button" class="pf-back" data-back="1">Back</button>
-    </div>
-
-    <div class="pf-step" data-step="3" hidden>
-      <h3>Do you operate from one location, or several branches or franchises?</h3>
-      <div class="pf-options">
-        <button type="button" class="pf-option" data-q="3" data-tier="0">One location</button>
-        <button type="button" class="pf-option" data-q="3" data-tier="3">Several branches or franchises</button>
-      </div>
-      <button type="button" class="pf-back" data-back="2">Back</button>
-    </div>
-
-    <div class="pf-step pf-result" data-step="result" hidden>
+    <div class="pf-step pf-result" id="pfResultStep" hidden>
       <span class="pf-result-badge" id="pfResultBadge"></span>
       <h3 id="pfResultName">Growth</h3>
       <p id="pfResultReason"></p>
