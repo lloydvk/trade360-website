@@ -1521,14 +1521,91 @@
   var pfOpenBtn = document.getElementById('planFinderOpen');
   var pfCloseBtn = document.getElementById('pfModalClose');
   var pfRestartBtn = document.getElementById('pfRestart');
-  if (!pfModal || !pfOpenBtn) return;
+  var pfQuestionStep = document.getElementById('pfQuestionStep');
+  var pfResultStep = document.getElementById('pfResultStep');
+  var pfHeading = document.getElementById('pfModalHeading');
+  var pfOptionsContainer = document.getElementById('pfOptionsContainer');
+  var pfBackBtn = document.getElementById('pfBackBtn');
+  var pfProgressFill = document.getElementById('pfProgressFill');
+  var pfProgressLabel = document.getElementById('pfProgressLabel');
+  var pfProgressWrap = document.getElementById('pfProgressWrap');
+  if (!pfModal || !pfOpenBtn || !pfQuestionStep) return;
 
-  var steps = pfModal.querySelectorAll('.pf-step');
-  var dots = pfModal.querySelectorAll('.pf-progress-dot');
-  var progress = document.getElementById('pfProgress');
-  var answers = {};
-  var modalOpen = false;
-  var lastFocused = null;
+  // Each question contributes a 0-2 "tier pressure" score (Foundation/Growth/Pro).
+  // Two questions can also set forceEnterprise: true on their top option, because
+  // they're real capacity facts (more users than Pro's included 8, or more than
+  // one site) rather than a preference that should just nudge the average.
+  var QUESTIONS = [
+    { key:'team', text:'How many people need access to Trade 360?', options:[
+        { label:'Just me', points:0 },
+        { label:'2 to 5 people', points:1 },
+        { label:'6 to 10 people', points:2 },
+        { label:'More than 10 people', points:2, forceEnterprise:true }
+    ]},
+    { key:'locations', text:'Do you operate from one location, or several branches or franchises?', options:[
+        { label:'One location', points:0 },
+        { label:'Several branches or franchises', points:2, forceEnterprise:true }
+    ]},
+    { key:'quoting', text:'How do you create quotes today?', options:[
+        { label:"By hand or spreadsheet — works fine for now", points:0 },
+        { label:"By hand, but it's starting to feel slow", points:1 },
+        { label:'We want AI to draft quotes for us', points:1 },
+        { label:'We send a high volume and want AI handling most of it', points:2 }
+    ]},
+    { key:'leads', text:'How do you currently track new enquiries and leads?', options:[
+        { label:'Notebook, inbox, or nothing formal', points:0 },
+        { label:'A simple spreadsheet', points:0 },
+        { label:'We want them captured and prioritised automatically', points:1 },
+        { label:'We need leads routed and followed up automatically across a team', points:2 }
+    ]},
+    { key:'marketing', text:'How much marketing do you send — emails, campaigns, follow-ups?', options:[
+        { label:'Barely any', points:0 },
+        { label:'The odd newsletter or promotion', points:1 },
+        { label:'Regular campaigns to a growing list', points:1 },
+        { label:'Frequent, segmented campaigns to a large list', points:2 }
+    ]},
+    { key:'scheduling', text:'How do you plan and schedule jobs today?', options:[
+        { label:'Paper, whiteboard, or a shared calendar', points:0 },
+        { label:"A spreadsheet that's getting hard to manage", points:1 },
+        { label:'We need to coordinate multiple crews', points:2 },
+        { label:"We're juggling many jobs at once and need tight coordination", points:2 }
+    ]},
+    { key:'accounts', text:'How do you handle invoicing and job costing?', options:[
+        { label:'Manually, or with basic accounting software', points:0 },
+        { label:'We want invoicing linked directly to each job', points:1 },
+        { label:'We need detailed profit tracking on every job', points:2 },
+        { label:'We need consolidated reporting across teams or sites', points:2 }
+    ]},
+    { key:'people', text:'What do you need for managing your team?', options:[
+        { label:'Just basic timesheets', points:0 },
+        { label:'Timesheets plus scheduling people to jobs', points:1 },
+        { label:'Rotas, performance tracking and reporting', points:2 },
+        { label:'All of that, across multiple sites or crews', points:2 }
+    ]},
+    { key:'volume', text:'Roughly how many quotes do you send a month?', options:[
+        { label:'Fewer than 20', points:0 },
+        { label:'20 to 70', points:1 },
+        { label:'70 to 150', points:2 },
+        { label:'More than 150', points:2 }
+    ]},
+    { key:'automation', text:'How hands-on do you want to be with day-to-day admin?', options:[
+        { label:'Happy doing most of it myself', points:0 },
+        { label:"I'd like some of it automated", points:1 },
+        { label:'I want as much automated as possible', points:2 }
+    ]},
+    { key:'onboarding', text:'What kind of onboarding support would help most?', options:[
+        { label:"I'm comfortable setting things up myself", points:0 },
+        { label:'Some guided setup would help', points:1 },
+        { label:'Hands-on help getting everything configured', points:1 },
+        { label:'A tailored rollout across multiple teams or sites', points:2 }
+    ]},
+    { key:'growth', text:'Where do you see your business in the next 12 months?', options:[
+        { label:'Pretty much the same size', points:0 },
+        { label:'Growing steadily', points:1 },
+        { label:'Growing fast and adding people', points:2 },
+        { label:'Expanding into new locations', points:2 }
+    ]}
+  ];
 
   var TIERS = [
     { key:'foundation', name:'Foundation', cardIndex:0, badge:null,
@@ -1541,28 +1618,60 @@
       reason:'For multi-branch and franchise operations, built around you.' }
   ];
 
-  function showStep(stepName){
-    steps.forEach(function(s){ s.hidden = s.getAttribute('data-step') !== stepName; });
-    if (stepName === 'result'){
-      if (progress) progress.style.display = 'none';
-    } else {
-      if (progress) progress.style.display = 'flex';
-      var stepNum = Number(stepName);
-      dots.forEach(function(d){
-        var n = Number(d.getAttribute('data-dot'));
-        d.classList.toggle('active', n === stepNum);
-        d.classList.toggle('done', n < stepNum);
+  var answers = [];
+  var currentQ = 0;
+  var modalOpen = false;
+  var lastFocused = null;
+
+  function renderQuestion(i){
+    var q = QUESTIONS[i];
+    pfHeading.textContent = q.text;
+    pfOptionsContainer.innerHTML = '';
+    q.options.forEach(function(opt){
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'pf-option';
+      btn.textContent = opt.label;
+      btn.addEventListener('click', function(){
+        answers[i] = opt;
+        if (i < QUESTIONS.length - 1){
+          currentQ = i + 1;
+          renderQuestion(currentQ);
+        } else {
+          computeResult();
+        }
       });
-    }
+      pfOptionsContainer.appendChild(btn);
+    });
+    pfBackBtn.hidden = (i === 0);
+    pfProgressFill.style.width = (i / QUESTIONS.length * 100) + '%';
+    pfProgressLabel.textContent = 'Question ' + (i + 1) + ' of ' + QUESTIONS.length;
+    pfQuestionStep.hidden = false;
+    pfResultStep.hidden = true;
+    if (pfProgressWrap) pfProgressWrap.style.display = '';
   }
 
   function resetQuiz(){
-    answers = {};
-    showStep('1');
+    answers = [];
+    currentQ = 0;
+    renderQuestion(0);
   }
 
   function computeResult(){
-    var idx = Math.max(answers[1] || 0, answers[2] || 0, answers[3] || 0);
+    var total = 0, count = 0, forceEnterprise = false;
+    answers.forEach(function(ans){
+      if (!ans) return;
+      total += ans.points;
+      count++;
+      if (ans.forceEnterprise) forceEnterprise = true;
+    });
+    var idx;
+    if (forceEnterprise){
+      idx = 3;
+    } else {
+      var avg = count ? (total / count) : 0;
+      idx = avg < 0.5 ? 0 : (avg < 1.5 ? 1 : 2);
+    }
     var tier = TIERS[idx];
     var cards = document.querySelectorAll('.tier-grid .tier-card');
     var card = cards[tier.cardIndex];
@@ -1597,24 +1706,15 @@
     ctaEl.textContent = tier.key === 'enterprise' ? 'Book a demo' : ('View ' + tier.name);
     ctaEl.setAttribute('data-card-index', String(tier.cardIndex));
     ctaEl.setAttribute('data-key', tier.key);
-    showStep('result');
+    pfQuestionStep.hidden = true;
+    pfResultStep.hidden = false;
+    if (pfProgressWrap) pfProgressWrap.style.display = 'none';
   }
 
-  pfModal.querySelectorAll('.pf-option').forEach(function(btn){
-    btn.addEventListener('click', function(){
-      var q = Number(btn.getAttribute('data-q'));
-      var tierVal = Number(btn.getAttribute('data-tier'));
-      answers[q] = tierVal;
-      if (q === 1) showStep('2');
-      else if (q === 2) showStep('3');
-      else computeResult();
-    });
-  });
-
-  pfModal.querySelectorAll('.pf-back').forEach(function(btn){
-    btn.addEventListener('click', function(){
-      showStep(btn.getAttribute('data-back'));
-    });
+  pfBackBtn.addEventListener('click', function(){
+    if (currentQ === 0) return;
+    currentQ -= 1;
+    renderQuestion(currentQ);
   });
 
   if (pfRestartBtn) pfRestartBtn.addEventListener('click', resetQuiz);
