@@ -84,6 +84,35 @@
 
   /* ---------- scroll progress + nav (matches the Trade 360 homepage) ---------- */
   .scroll-progress{ position:fixed; top:0; left:0; height:3px; width:0%; background:var(--gold); z-index:1000; transition:width .1s linear; }
+
+  /* ---------- promo banner ---------- */
+  .promo-banner{ position:relative; overflow:hidden; background:linear-gradient(90deg, #E1342E, #C41E3A); color:#fff; }
+  .promo-banner .wrap{ display:flex; align-items:center; justify-content:center; gap:16px; padding:10px 46px 10px 24px; flex-wrap:wrap; text-align:center; position:relative; }
+  .promo-banner::after{
+    content:""; position:absolute; inset:0; pointer-events:none;
+    background:linear-gradient(100deg, transparent 20%, rgba(255,255,255,.18) 35%, transparent 50%);
+    background-size:220% 100%; animation:promoShimmer 5s ease-in-out infinite;
+  }
+  @keyframes promoShimmer{ 0%{ background-position:120% 0; } 55%, 100%{ background-position:-40% 0; } }
+  .promo-text{ font-size:13.5px; font-weight:600; }
+  .promo-text b{ font-weight:800; }
+  .promo-cta{ display:inline-flex; align-items:center; gap:6px; background:#fff; color:#C41E3A; font-size:12.5px; font-weight:800; padding:7px 14px; border-radius:999px; white-space:nowrap; transition:transform .15s ease, box-shadow .15s ease; }
+  @media (hover:hover) and (pointer:fine){ .promo-cta:hover{ transform:translateY(-1px); box-shadow:0 6px 14px rgba(0,0,0,.18); } }
+  .promo-cta:active{ transform:translateY(0); box-shadow:0 2px 6px rgba(0,0,0,.18); }
+  .promo-cta svg{ width:12px; height:12px; }
+  .promo-close{ position:absolute; right:14px; top:50%; transform:translateY(-50%); width:24px; height:24px; border-radius:999px; background:rgba(255,255,255,.16); border:none; color:#fff; display:flex; align-items:center; justify-content:center; cursor:pointer; transition:background .15s ease; }
+  @media (hover:hover) and (pointer:fine){ .promo-close:hover{ background:rgba(255,255,255,.3); } }
+  .promo-close:active{ background:rgba(255,255,255,.4); }
+  .promo-close svg{ width:11px; height:11px; }
+  .promo-banner.hidden{ display:none; }
+  @media (prefers-reduced-motion: reduce){ .promo-banner::after{ animation:none; } }
+  .promo-text-short{ display:none; }
+  @media (max-width:560px){
+    .promo-banner .wrap{ padding:10px 40px 10px 16px; gap:10px; }
+    .promo-text{ font-size:12.5px; }
+    .promo-text-full{ display:none; }
+    .promo-text-short{ display:inline; }
+  }
   .nav{ position:sticky; top:env(safe-area-inset-top,0px); z-index:30; background:var(--bg); border-bottom:1px solid var(--line); transition:box-shadow .25s ease, background .25s ease; }
   /* a faint, slow-breathing warmth behind the nav content so the bar isn't flat white;
      z-index:-1 keeps it painted above the nav's own background but under every real
@@ -451,6 +480,20 @@
   @media (max-width:520px){ .demo-form-row{ flex-direction:column; gap:0; } .demo-modal-inner{ padding:26px 22px; } }
   @media (prefers-reduced-motion: reduce){ .demo-modal, .demo-modal-inner{ transition:none; } }
 </style>
+
+<!-- ================= PROMO BANNER ================= -->
+<div class="promo-banner" id="promoBanner">
+  <div class="wrap">
+    <span class="promo-text promo-text-full"><b>Every plan:</b> get 50% off your first month.</span>
+    <span class="promo-text promo-text-short"><b>Every plan:</b> 50% off first month.</span>
+    <a class="promo-cta" href="/pricing/">Get 50% off
+      <svg viewBox="0 0 16 16" fill="none"><path d="M4 12 12 4M12 4H6M12 4v6" stroke="#C41E3A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+    <button class="promo-close" id="promoClose" type="button" aria-label="Dismiss banner">
+      <svg viewBox="0 0 16 16" fill="none"><path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+</div>
 
 <div class="scroll-progress" id="scrollProgress"></div>
 
@@ -897,6 +940,15 @@
   }
   window.addEventListener('scroll', onScroll, { passive:true });
   onScroll();
+
+  // ---- promo banner dismiss ----
+  var promoBanner = document.getElementById('promoBanner');
+  var promoClose = document.getElementById('promoClose');
+  if (promoBanner && promoClose){
+    promoClose.addEventListener('click', function(){
+      promoBanner.classList.add('hidden');
+    });
+  }
 
   // ---- mobile menu toggle ----
   var toggle = document.getElementById('navToggle');

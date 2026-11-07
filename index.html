@@ -878,10 +878,12 @@
   .promo-text{ font-size:13.5px; font-weight:600; }
   .promo-text b{ font-weight:800; }
   .promo-cta{ display:inline-flex; align-items:center; gap:6px; background:#fff; color:#C41E3A; font-size:12.5px; font-weight:800; padding:7px 14px; border-radius:999px; white-space:nowrap; transition:transform .15s ease, box-shadow .15s ease; }
-  .promo-cta:hover{ transform:translateY(-1px); box-shadow:0 6px 14px rgba(0,0,0,.18); }
+  @media (hover:hover) and (pointer:fine){ .promo-cta:hover{ transform:translateY(-1px); box-shadow:0 6px 14px rgba(0,0,0,.18); } }
+  .promo-cta:active{ transform:translateY(0); box-shadow:0 2px 6px rgba(0,0,0,.18); }
   .promo-cta svg{ width:12px; height:12px; }
   .promo-close{ position:absolute; right:14px; top:50%; transform:translateY(-50%); width:24px; height:24px; border-radius:999px; background:rgba(255,255,255,.16); border:none; color:#fff; display:flex; align-items:center; justify-content:center; cursor:pointer; transition:background .15s ease; }
-  .promo-close:hover{ background:rgba(255,255,255,.3); }
+  @media (hover:hover) and (pointer:fine){ .promo-close:hover{ background:rgba(255,255,255,.3); } }
+  .promo-close:active{ background:rgba(255,255,255,.4); }
   .promo-close svg{ width:11px; height:11px; }
   .promo-banner.hidden{ display:none; }
   @media (prefers-reduced-motion: reduce){ .promo-banner::after{ animation:none; } }
@@ -1060,7 +1062,7 @@
   <div class="wrap">
     <span class="promo-text promo-text-full"><b>Every plan:</b> get 50% off your first month.</span>
     <span class="promo-text promo-text-short"><b>Every plan:</b> 50% off first month.</span>
-    <a class="promo-cta" href="#demo">Get 50% off
+    <a class="promo-cta" href="/pricing/">Get 50% off
       <svg viewBox="0 0 16 16" fill="none"><path d="M4 12 12 4M12 4H6M12 4v6" stroke="#C41E3A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </a>
     <button class="promo-close" id="promoClose" type="button" aria-label="Dismiss banner">
