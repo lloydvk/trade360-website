@@ -313,7 +313,9 @@
     .tier-price-row{ margin-top:13px; }
     .tier-billed-note{ margin-top:8px; }
     .tier-billed-note.offer, .tier-billed-note.save{ padding:8px 10px; }
+    .tier-billed-note.save{ flex-direction:row; align-items:center; justify-content:space-between; gap:8px; }
     .tier-onboarding{ margin-top:9px; padding-top:9px; }
+    .tier-onboarding-ghost{ display:none; }
     .tier-stats{ margin-top:4px; gap:6px; }
     .tier-note{ margin-top:9px; }
     .tier-card .btn{ margin-top:15px; }
@@ -954,7 +956,7 @@
         <div class="tier-tagline">For multi-branch and franchise operations, built around you.</div>
         <div class="tier-price-row"><div class="tier-price-eyebrow">Custom pricing</div><div class="tier-price-line"><span class="tier-price-poa">Price on application</span><span class="tier-price-poa-spacer" aria-hidden="true">0</span></div></div>
         <div class="tier-billed-note"></div>
-        <div class="tier-onboarding" style="visibility:hidden;" aria-hidden="true">Tailored rollout and onboarding, quoted for your business.</div>
+        <div class="tier-onboarding tier-onboarding-ghost" style="visibility:hidden;" aria-hidden="true">Tailored rollout and onboarding, quoted for your business.</div>
         <div class="tier-stats">
           <div class="tier-stat"><span>Users included</span><b>Custom</b></div>
           <div class="tier-stat"><span>AI credits / month</span><b>Custom</b></div>
