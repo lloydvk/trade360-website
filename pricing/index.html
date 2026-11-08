@@ -358,7 +358,7 @@
   .comp-table thead th.comp-feature-col{ z-index:3; }
   .comp-table th.comp-pop-col{ position:relative; background:rgba(252,189,2,.08); }
   .comp-table-wrap .comp-table thead th.comp-pop-col{ z-index:2; }
-  .comp-pop-badge{ display:block; font-size:10px; font-weight:800; letter-spacing:.05em; text-transform:uppercase; color:#B8860B; margin-bottom:4px; }
+  .comp-pop-badge{ display:block; width:fit-content; margin:0 auto 6px; background:var(--gold); color:var(--navy); font-size:10px; font-weight:800; letter-spacing:.04em; text-transform:uppercase; padding:4px 10px; border-radius:999px; }
   .comp-table tbody td{ text-align:center; padding:13px 16px; min-width:120px; border-bottom:1px solid var(--line); }
   .comp-table tbody tr:last-child td{ border-bottom:none; }
   .comp-table td.comp-pop-col{ background:rgba(252,189,2,.045); }
@@ -403,6 +403,13 @@
     .comp-table th.comp-feature-col, .comp-table td.comp-feature-col{ padding:11px 12px 11px 16px; font-size:13px; }
     .comp-table tbody td{ padding:11px 12px; }
     .comp-cat-row td{ padding:10px 12px 10px 16px; }
+  }
+  @media (max-width:480px){
+    .comp-controls{ flex-wrap:nowrap; gap:8px; }
+    .comp-select{ font-size:12px; padding:7px 24px 7px 11px; }
+    .comp-select-wrap svg{ right:10px; }
+    .comp-tier-switch{ gap:6px; flex:1; flex-wrap:nowrap; }
+    .comp-tier-pill{ flex:1; padding:7px 4px; font-size:12px; text-align:center; }
   }
 
   /* ---------- bolt-ons ---------- */
@@ -688,11 +695,19 @@
   .pb-row{ display:flex; align-items:baseline; justify-content:space-between; gap:10px; font-size:14px; color:var(--ink); padding:7px 0; }
   .pb-row span{ color:var(--ink-soft); font-weight:600; }
   .pb-row b{ font-weight:800; font-variant-numeric:tabular-nums; white-space:nowrap; }
-  .pb-total{
-    display:flex; align-items:center; justify-content:space-between; gap:10px; margin-top:14px; padding:14px 16px;
-    background:var(--navy); border-radius:12px; color:#fff; font-size:14.5px; font-weight:700;
+  .pb-cta{
+    display:flex; align-items:center; justify-content:space-between; gap:10px; width:100%;
+    margin-top:22px; padding:16px 20px; background:var(--gold); border-radius:12px; border:none;
+    color:var(--navy); font-size:15px; font-weight:800; font-family:inherit; text-decoration:none;
+    cursor:pointer; box-sizing:border-box; transition:background .15s ease, transform .1s ease;
   }
-  .pb-total b{ font-size:19px; font-weight:800; font-variant-numeric:tabular-nums; }
+  @media (hover:hover) and (pointer:fine){ .pb-cta:hover{ background:var(--gold-2); } }
+  .pb-cta:active{ transform:scale(.99); }
+  .pb-cta b{ font-size:19px; font-weight:800; font-variant-numeric:tabular-nums; }
+  .pb-legal{ margin-top:12px; text-align:right; }
+  .pb-legal span{ display:block; font-size:11.5px; color:var(--ink-soft); line-height:1.6; }
+  .pb-legal a{ display:block; font-size:11.5px; color:var(--ink-soft); line-height:1.6; text-decoration:underline; text-underline-offset:2px; }
+  @media (hover:hover) and (pointer:fine){ .pb-legal a:hover{ color:var(--ink); } }
   .pb-next{ border-top:1px dashed var(--line); padding-top:16px; }
   .pb-note{ font-size:12px; color:var(--ink-soft); line-height:1.5; margin-top:6px; }
   @media (max-width:640px){
@@ -967,7 +982,6 @@
         <button type="button" class="comp-tier-pill" data-tier="foundation" aria-pressed="false">Foundation</button>
         <button type="button" class="comp-tier-pill is-popular" data-tier="growth" aria-pressed="true">Growth</button>
         <button type="button" class="comp-tier-pill" data-tier="pro" aria-pressed="false">Pro</button>
-        <button type="button" class="comp-tier-pill" data-tier="enterprise" aria-pressed="false">Enterprise</button>
       </div>
     </div>
     <div class="comp-table-wrap reveal" data-active-tier="growth">
@@ -1555,9 +1569,13 @@
       <div class="pb-row"><span>One-off onboarding</span><b id="pbOnboardingValue"></b></div>
     </div>
 
-    <div class="pb-total">
-      <span>Total to pay today</span>
+    <a class="pb-cta" id="pbPayCta" href="#demo">
+      <span>Pay to get started</span>
       <b id="pbTotalValue"></b>
+    </a>
+    <div class="pb-legal">
+      <span>All prices include VAT</span>
+      <a href="/terms/">Terms and conditions apply</a>
     </div>
 
     <div class="pb-section pb-next">
