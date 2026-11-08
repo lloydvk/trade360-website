@@ -372,8 +372,9 @@
   .comp-tier-switch{ display:none; gap:8px; flex-wrap:wrap; align-items:center; }
   @media (max-width:780px){ .comp-tier-switch{ display:flex; } }
   .comp-tier-pill{ appearance:none; border:1px solid var(--line); background:var(--bg); color:var(--ink-soft); font:inherit; font-size:13px; font-weight:700; padding:8px 15px; border-radius:999px; cursor:pointer; transition:background .15s ease, color .15s ease, border-color .15s ease; }
-  .comp-tier-pill[aria-pressed="true"]{ background:var(--navy); border-color:var(--navy); color:#fff; }
-  .comp-tier-pill.is-popular[aria-pressed="true"]{ background:var(--gold); border-color:var(--gold); color:var(--navy); }
+  /* Gold (not navy) when active, so the tier switcher reads as a distinct
+     control from the navy "All pillars" pill in the table's corner cell. */
+  .comp-tier-pill[aria-pressed="true"]{ background:var(--gold); border-color:var(--gold); color:var(--navy); }
   @media (hover:hover) and (pointer:fine){ .comp-tier-pill:hover{ border-color:var(--navy); } }
   .comp-tier-pill:active{ transform:scale(.97); }
 
@@ -396,7 +397,10 @@
   .comp-table td.comp-pop-col{ background:rgba(252,189,2,.045); }
   .comp-table .tick{ display:inline-flex; align-items:center; justify-content:center; width:21px; height:21px; border-radius:999px; background:var(--gold); color:var(--navy); font-size:11px; line-height:1; }
   .comp-table .dash{ display:inline-block; color:var(--line); font-size:16px; font-weight:700; }
-  .comp-cat-row td{ background:var(--bg-soft); padding:14px 16px 14px 22px; border-bottom:1px solid var(--line); text-align:left; }
+  /* Specificity note: ".comp-table tbody td" above is (class+type+type), which
+     otherwise beats a plain ".comp-cat-row td" — so these are qualified with
+     "tbody tr" to win the cascade and keep this row's own padding/alignment. */
+  .comp-table tbody tr.comp-cat-row td{ background:var(--bg-soft); padding:14px 16px 14px 22px; border-bottom:1px solid var(--line); text-align:left; }
   .comp-cat-row:first-child td{ border-top:none; }
   .comp-cat-head{ display:flex; align-items:center; gap:12px; }
   .comp-cat-head svg.ring{ width:30px; height:30px; flex:none; }
@@ -426,6 +430,10 @@
     .comp-table th.comp-pop-col, .comp-table td.comp-pop-col{ background:transparent; }
     .comp-table th:not(.comp-feature-col), .comp-table td:not(.comp-feature-col){ display:none; width:38%; }
     .comp-table tbody tr.comp-cat-row td{ display:table-cell; width:100%; }
+    /* Stack the ring icon above the title instead of beside it, so the title
+       text lines up with the feature rows below it (e.g. "Lead Capture")
+       instead of being pushed right by the icon's own width. */
+    .comp-cat-head{ flex-direction:column; align-items:flex-start; gap:6px; }
     .comp-table-wrap[data-active-tier="foundation"] th:nth-child(2), .comp-table-wrap[data-active-tier="foundation"] td:nth-child(2){ display:table-cell; }
     .comp-table-wrap[data-active-tier="growth"] th:nth-child(3), .comp-table-wrap[data-active-tier="growth"] td:nth-child(3){ display:table-cell; }
     .comp-table-wrap[data-active-tier="pro"] th:nth-child(4), .comp-table-wrap[data-active-tier="pro"] td:nth-child(4){ display:table-cell; }
@@ -440,7 +448,7 @@
     .comp-table thead th{ padding:14px 12px; font-size:13px; }
     .comp-table th.comp-feature-col, .comp-table td.comp-feature-col{ padding:11px 12px 11px 16px; font-size:13px; }
     .comp-table tbody td{ padding:11px 12px; }
-    .comp-cat-row td{ padding:10px 12px 10px 16px; }
+    .comp-table tbody tr.comp-cat-row td{ padding:10px 12px 10px 16px; }
   }
   @media (max-width:480px){
     .comp-controls{ gap:8px; }
