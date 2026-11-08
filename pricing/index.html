@@ -241,7 +241,7 @@
   .billing-switch::after{ content:""; position:absolute; top:3px; left:3px; width:22px; height:22px; border-radius:999px; background:#fff; box-shadow:0 2px 6px rgba(20,20,30,.25); transition:transform .2s ease; }
   .billing-switch.on{ background:var(--gold); }
   .billing-switch.on::after{ transform:translateX(22px); }
-  .billing-save-pill{ font-size:11px; font-weight:800; color:var(--good); background:var(--good-bg); padding:4px 10px; border-radius:999px; }
+  .billing-toggle-row .billing-save-pill{ font-size:11px; font-weight:800; color:#fff; background:var(--good); padding:4px 10px; border-radius:999px; }
   .vat-note{ text-align:center; font-size:12px; color:var(--ink-soft); margin:0 0 26px; }
   /* ---------- plan finder banner ---------- */
   .plan-finder-banner{
@@ -301,7 +301,7 @@
   .tier-info-btn{ width:20px; height:20px; border-radius:999px; border:1px solid var(--line); background:var(--bg-soft); color:var(--ink-soft); font-size:11px; font-weight:800; font-family:inherit; display:inline-flex; vertical-align:middle; align-items:center; justify-content:center; cursor:pointer; flex-shrink:0; padding:0; line-height:1; margin-left:5px; transition:border-color .15s ease, color .15s ease; }
   @media (hover:hover) and (pointer:fine){ .tier-info-btn:hover{ border-color:var(--gold); color:var(--ink); } }
   .tier-info-btn:active{ border-color:var(--gold); color:var(--ink); }
-  .tier-stats{ margin-top:16px; display:flex; flex-direction:column; gap:8px; }
+  .tier-stats{ margin-top:4px; display:flex; flex-direction:column; gap:8px; }
   .tier-stat{ display:flex; align-items:center; justify-content:space-between; font-size:12.5px; }
   .tier-stat span:first-child{ color:var(--ink-soft); }
   .tier-stat b{ color:var(--ink); font-weight:700; font-variant-numeric:tabular-nums; }
@@ -314,7 +314,7 @@
     .tier-billed-note{ margin-top:8px; }
     .tier-billed-note.offer, .tier-billed-note.save{ padding:8px 10px; }
     .tier-onboarding{ margin-top:9px; padding-top:9px; }
-    .tier-stats{ margin-top:12px; gap:6px; }
+    .tier-stats{ margin-top:4px; gap:6px; }
     .tier-note{ margin-top:9px; }
     .tier-card .btn{ margin-top:15px; }
   }
@@ -457,6 +457,10 @@
   .policy-item svg{ width:26px; height:26px; flex:none; color:var(--gold); margin-top:2px; }
   .policy-item b{ display:block; font-size:14px; font-weight:800; color:var(--navy); }
   .policy-item span{ font-size:13.5px; color:var(--ink-soft); line-height:1.55; display:block; margin-top:4px; max-width:34ch; }
+  .policy-list{ font-size:13.5px; color:var(--ink-soft); line-height:1.55; margin:6px 0 0; padding-left:16px; max-width:34ch; }
+  .policy-list li{ margin-top:4px; }
+  .policy-list li:first-child{ margin-top:0; }
+  .policy-list li::marker{ color:var(--gold); }
 
   /* ---------- bespoke ---------- */
   .bespoke{ padding-block:56px; }
@@ -1416,19 +1420,19 @@
   <div class="wrap">
     <div class="policy-item">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 6v6c0 4.5 3.2 7.6 8 9 4.8-1.4 8-4.5 8-9V6l-8-3Z"/><path d="m9 12 2 2 4-4.5"/></svg>
-      <div><b>30-day money-back guarantee</b><span>Try Trade 360 for 30 days. If it doesn't match your expectations, tell us within that window and we'll refund what you've paid in full — no questions asked.</span></div>
+      <div><b>30-day money-back guarantee</b><ul class="policy-list"><li>Try Trade 360 for 30 days.</li><li>If it doesn't match your expectations, tell us within that window and we'll refund what you've paid in full — no questions asked.</li></ul></div>
     </div>
     <div class="policy-item">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18"/><path d="M7 15h4"/></svg>
-      <div><b>Billing &amp; VAT</b><span>All prices include VAT. Pay annually and you're billed once a year; outside the 30-day guarantee, there's no refund for the months left once you cancel.</span></div>
+      <div><b>Billing &amp; VAT</b><ul class="policy-list"><li>All prices include VAT.</li><li>Pay annually and you're billed once a year; outside the 30-day guarantee, there's no refund for the months left once you cancel.</li></ul></div>
     </div>
     <div class="policy-item">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M8 2v4M16 2v4M3 10h18"/></svg>
-      <div><b>Rolling monthly contract</b><span>No minimum term when billed monthly — stay because it works, not because you're locked in. Cancel, upgrade or downgrade any time; changes apply from your next billing date.</span></div>
+      <div><b>Rolling monthly contract</b><ul class="policy-list"><li>No minimum term when billed monthly — stay because it works, not because you're locked in.</li><li>Cancel, upgrade or downgrade any time; changes apply from your next billing date.</li></ul></div>
     </div>
     <div class="policy-item">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M17 20a5 5 0 0 0-10 0"/><circle cx="12" cy="10" r="4"/></svg>
-      <div><b>Referral scheme</b><span>Get 250 AI credits for every Foundation, Growth or Pro business you refer that becomes a paying customer — no cap. They still get the standard 50% off their first month.</span></div>
+      <div><b>Referral scheme</b><ul class="policy-list"><li>Get 250 AI credits for every Foundation, Growth or Pro business you refer that becomes a paying customer — no cap.</li><li>They still get the standard 50% off their first month.</li></ul></div>
     </div>
   </div>
 </div>
