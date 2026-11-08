@@ -42,6 +42,7 @@
     --shadow: 0 1px 2px rgba(20,20,30,.03), 0 10px 24px rgba(20,20,30,.05);
     --good:#1E9E6B;
     --good-bg:#E7F7EF;
+    --sale:#E1342E;
   }
   @media (prefers-color-scheme: dark){
     :root:not([data-theme="light"]){
@@ -278,7 +279,7 @@
   .tier-price-unit{ font-size:13px; color:var(--ink-soft); font-weight:600; }
   .tier-price-poa{ font-size:clamp(15px,1.5vw,19px); font-weight:800; color:var(--ink); white-space:nowrap; }
   .tier-billed-note{ font-size:12px; color:var(--ink-soft); margin-top:5px; min-height:32px; font-weight:600; }
-  .tier-billed-note.offer{ color:var(--good); }
+  .tier-billed-note.offer{ color:var(--sale); font-weight:800; }
   .tier-billed-note .tier-savings{ color:var(--good); }
   .tier-onboarding{ font-size:13.5px; color:var(--ink); line-height:1.5; margin-top:12px; padding-top:12px; border-top:1px dashed var(--line); font-weight:600; }
   .tier-stats{ margin-top:16px; display:flex; flex-direction:column; gap:8px; }
@@ -320,8 +321,13 @@
   .section-head.wide{ max-width:min(92ch, 100%); }
   .sr-only{ position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
 
-  .comp-table-hint{ display:none; font-size:12.5px; font-weight:700; color:var(--ink-soft); text-align:right; margin:28px 2px 8px; }
-  @media (max-width:780px){ .comp-table-hint{ display:block; } }
+  .comp-tier-switch{ display:none; gap:8px; flex-wrap:wrap; margin:28px 2px 14px; }
+  @media (max-width:780px){ .comp-tier-switch{ display:flex; } }
+  .comp-tier-pill{ appearance:none; border:1px solid var(--line); background:var(--bg); color:var(--ink-soft); font:inherit; font-size:13px; font-weight:700; padding:8px 15px; border-radius:999px; cursor:pointer; transition:background .15s ease, color .15s ease, border-color .15s ease; }
+  .comp-tier-pill[aria-pressed="true"]{ background:var(--navy); border-color:var(--navy); color:#fff; }
+  .comp-tier-pill.is-popular[aria-pressed="true"]{ background:var(--gold); border-color:var(--gold); color:var(--navy); }
+  @media (hover:hover) and (pointer:fine){ .comp-tier-pill:hover{ border-color:var(--navy); } }
+  .comp-tier-pill:active{ transform:scale(.97); }
 
   .comp-table-wrap{ margin-top:12px; border:1px solid var(--line); border-radius:16px; background:var(--bg); box-shadow:var(--shadow); overflow:auto; -webkit-overflow-scrolling:touch; }
   .comp-table{ width:100%; min-width:700px; border-collapse:collapse; }
@@ -343,10 +349,28 @@
   .comp-cat-row svg{ width:18px; height:18px; flex:none; color:var(--gold); filter:brightness(.85); }
   .comp-table-note{ font-size:13px; color:var(--ink-soft); text-align:center; margin-top:18px; max-width:62ch; margin-inline:auto; line-height:1.6; }
   .comp-table-note a{ color:var(--navy); font-weight:700; text-decoration:underline; text-underline-offset:2px; }
+
+  /* Below 780px, horizontal scrolling through 4 tier columns is awkward on top of
+     a long vertical list, so swap to a tier switcher: pick one tier, see it as a
+     single plain column against the feature names. No horizontal scroll needed. */
+  @media (max-width:780px){
+    .comp-table-wrap{ overflow:visible; }
+    .comp-table{ min-width:0; width:100%; table-layout:fixed; }
+    .comp-table thead th{ position:static; }
+    .comp-table th.comp-feature-col, .comp-table td.comp-feature-col{ position:static; box-shadow:none; min-width:0; width:62%; }
+    .comp-table th.comp-pop-col, .comp-table td.comp-pop-col{ background:transparent; }
+    .comp-table th:not(.comp-feature-col), .comp-table td:not(.comp-feature-col){ display:none; width:38%; }
+    .comp-table tbody tr.comp-cat-row td{ display:flex; width:100%; }
+    .comp-table-wrap[data-active-tier="foundation"] th:nth-child(2), .comp-table-wrap[data-active-tier="foundation"] td:nth-child(2){ display:table-cell; }
+    .comp-table-wrap[data-active-tier="growth"] th:nth-child(3), .comp-table-wrap[data-active-tier="growth"] td:nth-child(3){ display:table-cell; }
+    .comp-table-wrap[data-active-tier="pro"] th:nth-child(4), .comp-table-wrap[data-active-tier="pro"] td:nth-child(4){ display:table-cell; }
+    .comp-table-wrap[data-active-tier="enterprise"] th:nth-child(5), .comp-table-wrap[data-active-tier="enterprise"] td:nth-child(5){ display:table-cell; }
+  }
   @media (max-width:560px){
+    .comp-tier-switch{ margin:24px 2px 10px; }
     .comp-table thead th{ padding:14px 12px; font-size:13px; }
-    .comp-table th.comp-feature-col, .comp-table td.comp-feature-col{ min-width:190px; padding:11px 12px 11px 16px; font-size:13px; }
-    .comp-table tbody td{ padding:11px 12px; min-width:100px; }
+    .comp-table th.comp-feature-col, .comp-table td.comp-feature-col{ padding:11px 12px 11px 16px; font-size:13px; }
+    .comp-table tbody td{ padding:11px 12px; }
     .comp-cat-row td{ padding:10px 12px 10px 16px; }
   }
 
@@ -436,7 +460,9 @@
   }
   .foot-legal{ border-top:1px solid rgba(255,255,255,.08); margin-top:28px; padding-top:16px; position:relative; z-index:1; }
   .foot-legal .wrap{ justify-content:flex-start; }
-  .foot-legal span{ font-size:11px; color:#6E7286; line-height:1.6; }
+  .foot-legal-info{ display:flex; flex-direction:column; gap:3px; }
+  .foot-legal-info span{ font-size:11px; color:#6E7286; line-height:1.6; }
+  .foot-legal-info .foot-legal-name{ color:#9A9EB0; font-weight:700; }
 
   /* ---------- scroll reveal ---------- */
   .reveal{ opacity:0; transform:translateY(18px); transition:opacity .5s ease, transform .5s ease; }
@@ -723,13 +749,12 @@
 <header class="intro">
   <div class="wrap">
     <div class="eyebrow">Pricing</div>
-    <h1>Simple pricing.<br>No long contracts.</h1>
+    <h1>Simple pricing.<br>Rolling monthly contracts.</h1>
     <p>Every plan covers all six Trade 360 pillars — Marketing, Leads, Sales, Projects, Accounts and People. Choose the features, team size and usage allowances that suit your business.</p>
     <div class="intro-tags">
-      <span class="intro-tag"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 4v4l2.5 2.5"/><circle cx="8" cy="8" r="6.5"/></svg>50% off your first month</span>
-      <span class="intro-tag"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 8h12M8 2v12"/></svg>Rolling monthly contract</span>
-      <span class="intro-tag"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="5.5" cy="5.5" r="2"/><circle cx="11.5" cy="11.5" r="2"/><path d="M7 6.5 10 10"/></svg>Refer a business, get 250 AI credits</span>
-      <span class="intro-tag"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5 6.5 12 13 4"/></svg>30-day money-back guarantee</span>
+      <span class="intro-tag"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 2h5l7 7-5 5-7-7V2Z"/><circle cx="5" cy="5" r="1" fill="currentColor" stroke="none"/></svg>50% off your first month</span>
+      <span class="intro-tag"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="5.5" cy="5.5" r="2"/><path d="M1.5 14c0-2.2 1.8-4 4-4s4 1.8 4 4"/><circle cx="11.5" cy="6.5" r="1.6"/><path d="M9.3 9.2c.7-.4 1.4-.6 2.2-.6 2 0 3.5 1.4 3.7 3.3"/></svg>Refer a business, get 250 AI credits</span>
+      <span class="intro-tag"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2 2.7 4v4c0 3 2.1 5.1 5.3 6 3.2-.9 5.3-3 5.3-6V4L8 2Z"/><path d="m6 8 1.3 1.3L10 6.3"/></svg>30-day money-back guarantee</span>
     </div>
   </div>
 </header>
@@ -858,8 +883,13 @@
       <p>No plan hides a part of the platform from you — Foundation gets the essentials in every pillar, Growth and Pro add depth where a bigger team needs it.</p>
     </div>
 
-    <div class="comp-table-hint">Swipe to compare Growth, Pro and Enterprise &rarr;</div>
-    <div class="comp-table-wrap reveal">
+    <div class="comp-tier-switch" role="group" aria-label="Choose a plan to compare">
+      <button type="button" class="comp-tier-pill" data-tier="foundation" aria-pressed="false">Foundation</button>
+      <button type="button" class="comp-tier-pill is-popular" data-tier="growth" aria-pressed="true">Growth</button>
+      <button type="button" class="comp-tier-pill" data-tier="pro" aria-pressed="false">Pro</button>
+      <button type="button" class="comp-tier-pill" data-tier="enterprise" aria-pressed="false">Enterprise</button>
+    </div>
+    <div class="comp-table-wrap reveal" data-active-tier="growth">
       <table class="comp-table">
         <thead>
           <tr>
@@ -1346,7 +1376,10 @@
   </div>
   <div class="foot-legal">
     <div class="wrap">
-      <span>Trade 360 Limited, company number 17565529. Registered office: The Old T A Centre, Territorial Street, Middlesbrough, England, TS3 8DR.</span>
+      <div class="foot-legal-info">
+        <span class="foot-legal-name">Trade 360 Limited &nbsp;&middot;&nbsp; Company No. 17565529</span>
+        <span>Registered office: The Old T A Centre, Territorial Street, Middlesbrough, England, TS3 8DR</span>
+      </div>
     </div>
   </div>
 </footer>
@@ -1493,6 +1526,21 @@
     promoClose.addEventListener('click', function(){
       promoBanner.classList.add('hidden');
       try{ sessionStorage.setItem('promoBannerDismissed', '1'); }catch(e){}
+    });
+  }
+
+  // ---- comparison table: mobile tier switcher ----
+  var compTierSwitch = document.querySelector('.comp-tier-switch');
+  var compTableWrap = document.querySelector('.comp-table-wrap');
+  if (compTierSwitch && compTableWrap){
+    var compTierPills = compTierSwitch.querySelectorAll('.comp-tier-pill');
+    compTierSwitch.addEventListener('click', function(e){
+      var btn = e.target.closest('.comp-tier-pill');
+      if (!btn) return;
+      compTableWrap.setAttribute('data-active-tier', btn.getAttribute('data-tier'));
+      for (var i = 0; i < compTierPills.length; i++){
+        compTierPills[i].setAttribute('aria-pressed', compTierPills[i] === btn ? 'true' : 'false');
+      }
     });
   }
 
