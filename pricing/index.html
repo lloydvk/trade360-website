@@ -290,10 +290,9 @@
   .tier-fm-price{ font-size:15px; font-weight:800; color:var(--sale); font-variant-numeric:tabular-nums; }
   .tier-fm-badge{ flex-shrink:0; background:var(--sale); color:#fff; font-size:10.5px; font-weight:800; padding:4px 9px; border-radius:999px; white-space:nowrap; }
   .tier-billed-note .tier-savings{ color:var(--good); }
-  .tier-onboarding{ display:flex; align-items:center; justify-content:space-between; gap:8px; font-size:13.5px; color:var(--ink); line-height:1.5; margin-top:12px; padding-top:12px; border-top:1px dashed var(--line); font-weight:600; }
-  .tier-onboarding-right{ display:flex; align-items:center; gap:6px; }
+  .tier-onboarding{ font-size:13.5px; color:var(--ink); line-height:1.5; margin-top:12px; padding-top:12px; border-top:1px dashed var(--line); font-weight:600; }
   .tier-onboarding-price{ font-variant-numeric:tabular-nums; font-weight:800; }
-  .tier-info-btn{ width:20px; height:20px; border-radius:999px; border:1px solid var(--line); background:var(--bg-soft); color:var(--ink-soft); font-size:11px; font-weight:800; font-family:inherit; display:flex; align-items:center; justify-content:center; cursor:pointer; flex-shrink:0; padding:0; line-height:1; transition:border-color .15s ease, color .15s ease; }
+  .tier-info-btn{ width:20px; height:20px; border-radius:999px; border:1px solid var(--line); background:var(--bg-soft); color:var(--ink-soft); font-size:11px; font-weight:800; font-family:inherit; display:inline-flex; vertical-align:middle; align-items:center; justify-content:center; cursor:pointer; flex-shrink:0; padding:0; line-height:1; margin-left:5px; transition:border-color .15s ease, color .15s ease; }
   @media (hover:hover) and (pointer:fine){ .tier-info-btn:hover{ border-color:var(--gold); color:var(--ink); } }
   .tier-info-btn:active{ border-color:var(--gold); color:var(--ink); }
   .tier-stats{ margin-top:16px; display:flex; flex-direction:column; gap:8px; }
@@ -707,7 +706,7 @@
   .pb-row{ display:flex; align-items:center; justify-content:space-between; gap:10px; font-size:14px; color:var(--ink); padding:7px 0; }
   .pb-row span{ color:var(--ink-soft); font-weight:600; }
   .pb-row b{ font-weight:800; font-variant-numeric:tabular-nums; white-space:nowrap; }
-  .pb-row-value{ display:flex; flex-direction:column; align-items:flex-end; gap:1px; }
+  .pb-row-value{ display:flex; flex-direction:row; align-items:baseline; gap:6px; }
   .pb-row-full{ font-size:12px; font-weight:600; color:var(--ink-soft); text-decoration:line-through; font-variant-numeric:tabular-nums; white-space:nowrap; }
   .pb-row-full:empty{ display:none; }
   .pb-cta{
@@ -885,7 +884,7 @@
         <div class="tier-tagline">For sole traders who want quoting and invoicing sorted.</div>
         <div class="tier-price-row"><div class="tier-price-eyebrow">Standard price</div><div class="tier-price-line"><span class="tier-price">£99.00</span><span class="tier-price-unit">/month</span></div></div>
         <div class="tier-billed-note offer"><div class="tier-fm-text"><span class="tier-fm-label">First month</span><span class="tier-fm-price">£49.50</span></div><span class="tier-fm-badge">Save 50%</span></div>
-        <div class="tier-onboarding"><span>+ One-off onboarding</span><span class="tier-onboarding-right"><b class="tier-onboarding-price">£199.00</b><button type="button" class="tier-info-btn" data-breakdown-trigger aria-label="See payment breakdown for Foundation">i</button></span></div>
+        <div class="tier-onboarding">Plus a <b class="tier-onboarding-price">£199.00</b> one-off onboarding fee, charged at signup.<button type="button" class="tier-info-btn" data-breakdown-trigger aria-label="See payment breakdown for Foundation">i</button></div>
         <div class="tier-stats">
           <div class="tier-stat"><span>Users included</span><b>1</b></div>
           <div class="tier-stat"><span>AI credits / month</span><b>100</b></div>
@@ -901,7 +900,7 @@
         <div class="tier-tagline">For growing teams that need more capacity and automation.</div>
         <div class="tier-price-row"><div class="tier-price-eyebrow">Standard price</div><div class="tier-price-line"><span class="tier-price">£249.00</span><span class="tier-price-unit">/month</span></div></div>
         <div class="tier-billed-note offer"><div class="tier-fm-text"><span class="tier-fm-label">First month</span><span class="tier-fm-price">£124.50</span></div><span class="tier-fm-badge">Save 50%</span></div>
-        <div class="tier-onboarding"><span>+ One-off onboarding</span><span class="tier-onboarding-right"><b class="tier-onboarding-price">£499.00</b><button type="button" class="tier-info-btn" data-breakdown-trigger aria-label="See payment breakdown for Growth">i</button></span></div>
+        <div class="tier-onboarding">Plus a <b class="tier-onboarding-price">£499.00</b> one-off onboarding fee, charged at signup.<button type="button" class="tier-info-btn" data-breakdown-trigger aria-label="See payment breakdown for Growth">i</button></div>
         <div class="tier-stats">
           <div class="tier-stat"><span>Users included</span><b>5</b></div>
           <div class="tier-stat"><span>AI credits / month</span><b>350</b></div>
@@ -916,7 +915,7 @@
         <div class="tier-tagline">For established crews running multiple jobs at full capacity.</div>
         <div class="tier-price-row"><div class="tier-price-eyebrow">Standard price</div><div class="tier-price-line"><span class="tier-price">£499.00</span><span class="tier-price-unit">/month</span></div></div>
         <div class="tier-billed-note offer"><div class="tier-fm-text"><span class="tier-fm-label">First month</span><span class="tier-fm-price">£249.50</span></div><span class="tier-fm-badge">Save 50%</span></div>
-        <div class="tier-onboarding"><span>+ One-off onboarding</span><span class="tier-onboarding-right"><b class="tier-onboarding-price">£999.00</b><button type="button" class="tier-info-btn" data-breakdown-trigger aria-label="See payment breakdown for Pro">i</button></span></div>
+        <div class="tier-onboarding">Plus a <b class="tier-onboarding-price">£999.00</b> one-off onboarding fee, charged at signup.<button type="button" class="tier-info-btn" data-breakdown-trigger aria-label="See payment breakdown for Pro">i</button></div>
         <div class="tier-stats">
           <div class="tier-stat"><span>Users included</span><b>8</b></div>
           <div class="tier-stat"><span>AI credits / month</span><b>700</b></div>
