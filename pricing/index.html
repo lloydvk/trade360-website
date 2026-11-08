@@ -835,7 +835,7 @@
     </div>
     <div class="nav-right">
       <a class="login-link" href="#">Log in</a>
-      <a class="btn btn-gold js-book-demo" href="/#demo">Book a demo
+      <a class="btn btn-gold js-book-demo" href="/book-demo/">Book a demo
         <svg viewBox="0 0 16 16" fill="none" width="14" height="14"><path d="M4 12 12 4M12 4H6M12 4v6" stroke="#1C2130" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </a>
       <button class="nav-toggle" id="navToggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobilePanel">
@@ -850,7 +850,7 @@
     <a href="/pricing/">Pricing</a>
     <a href="#">Log in</a>
     <div class="mp-cta">
-      <a class="btn btn-gold js-book-demo" href="/#demo" style="width:100%; justify-content:center;">Book a demo
+      <a class="btn btn-gold js-book-demo" href="/book-demo/" style="width:100%; justify-content:center;">Book a demo
         <svg viewBox="0 0 16 16" fill="none" width="14" height="14"><path d="M4 12 12 4M12 4H6M12 4v6" stroke="#1C2130" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </a>
     </div>
@@ -953,7 +953,7 @@
           <div class="tier-stat"><span>AI credits / month</span><b>Custom</b></div>
           <div class="tier-stat"><span>Emails / month</span><b>Custom</b></div>
         </div>
-        <a class="btn btn-outline btn-block js-book-demo" href="/#demo">Book a demo</a>
+        <a class="btn btn-outline btn-block js-book-demo" href="/book-demo/">Book a demo</a>
         <p class="tier-note">Tailored pricing and support.</p>
       </div>
     </div>
@@ -1378,7 +1378,7 @@
         </tbody>
       </table>
     </div>
-    <p class="comp-table-note">Enterprise includes everything in Pro, plus bespoke integrations, rollout and support scoped to your business — <a href="/#demo" class="js-book-demo">book a demo</a> to discuss.</p>
+    <p class="comp-table-note">Enterprise includes everything in Pro, plus bespoke integrations, rollout and support scoped to your business — <a href="/book-demo/" class="js-book-demo">book a demo</a> to discuss.</p>
   </div>
 </section>
 
@@ -1483,7 +1483,7 @@
       <a class="btn btn-navy" href="#demo">Get 50% off
         <svg viewBox="0 0 16 16" fill="none" width="14" height="14"><path d="M4 12 12 4M12 4H6M12 4v6" stroke="#F6F6F8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </a>
-      <a class="btn btn-outline js-book-demo" href="/#demo" style="background:transparent;border-color:rgba(28,33,48,.35);">Book a demo</a>
+      <a class="btn btn-outline js-book-demo" href="/book-demo/" style="background:transparent;border-color:rgba(28,33,48,.35);">Book a demo</a>
     </div>
   </div>
 </section>
@@ -1514,7 +1514,7 @@
       <a href="#">Why Trade 360?</a>
       <a href="/pricing/">Pricing</a>
       <a href="/partners/">Partners</a>
-      <a class="js-book-demo" href="/#demo">Contact</a>
+      <a class="js-book-demo" href="/book-demo/">Contact</a>
     </div>
     <div class="foot-brand">
       <div class="brand-block">
@@ -1688,7 +1688,7 @@
         <h3>Why choose Trade 360?</h3>
         <p>Zara &middot; 33s intro</p>
       </div>
-      <a class="btn btn-gold js-book-demo" href="/#demo">Book a demo
+      <a class="btn btn-gold js-book-demo" href="/book-demo/">Book a demo
         <svg viewBox="0 0 16 16" fill="none" width="14" height="14"><path d="M4 12 12 4M12 4H6M12 4v6" stroke="#1C2130" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </a>
     </div>
@@ -2044,12 +2044,6 @@
   }
   function onDemoModalKeydown(e){ if (e.key === 'Escape') closeDemoModal(); }
 
-  document.querySelectorAll('.js-book-demo').forEach(function(btn){
-    btn.addEventListener('click', function(e){
-      e.preventDefault();
-      openDemoModal();
-    });
-  });
   if (demoModalClose) demoModalClose.addEventListener('click', closeDemoModal);
   demoModal.addEventListener('click', function(e){
     if (e.target === demoModal) closeDemoModal();
