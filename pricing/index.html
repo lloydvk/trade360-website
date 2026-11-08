@@ -356,7 +356,10 @@
     .comp-select-wrap-th{ display:inline-flex; }
   }
 
-  .comp-pillar-switch{ display:flex; gap:8px; overflow-x:auto; -webkit-overflow-scrolling:touch; scrollbar-width:none; padding-bottom:2px; }
+  /* Pillar filtering now lives in the table's own corner cell (All pillars
+     reset button + desktop select), so this separate chip row above the
+     table is redundant on mobile and hidden. */
+  .comp-pillar-switch{ display:none; gap:8px; overflow-x:auto; -webkit-overflow-scrolling:touch; scrollbar-width:none; padding-bottom:2px; }
   .comp-pillar-switch::-webkit-scrollbar{ display:none; }
   .comp-pillar-pill{ appearance:none; border:1px solid var(--line); background:var(--bg-soft); color:var(--navy); font:inherit; font-size:13px; font-weight:700; padding:7px 14px; border-radius:999px; cursor:pointer; white-space:nowrap; flex:none; transition:background .15s ease, border-color .15s ease, color .15s ease; }
   @media (hover:hover) and (pointer:fine){ .comp-pillar-pill:hover{ background:#fff; border-color:var(--gold); } }
@@ -364,7 +367,7 @@
   .comp-pillar-pill:active{ transform:scale(.97); }
 
   .comp-pillar-reset-th{ display:none; }
-  @media (max-width:780px){ .comp-pillar-reset-th{ display:inline-flex; align-items:center; margin-top:10px; } }
+  @media (max-width:780px){ .comp-pillar-reset-th{ display:inline-flex; align-items:center; } }
 
   .comp-tier-switch{ display:none; gap:8px; flex-wrap:wrap; align-items:center; }
   @media (max-width:780px){ .comp-tier-switch{ display:flex; } }
