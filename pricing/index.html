@@ -343,7 +343,7 @@
   .section-head.wide{ max-width:min(92ch, 100%); }
   .sr-only{ position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
 
-  .comp-controls{ display:flex; flex-wrap:wrap; align-items:center; gap:10px 14px; margin:28px 2px 14px; }
+  .comp-controls{ display:flex; flex-direction:column; gap:10px; margin:28px 2px 14px; }
   .comp-select-wrap{ position:relative; display:inline-flex; align-items:center; }
   .comp-select-wrap svg{ position:absolute; right:13px; width:11px; height:11px; pointer-events:none; color:var(--ink-soft); }
   .comp-select{ appearance:none; font:inherit; font-size:13px; font-weight:700; color:var(--ink); background:var(--bg); border:1px solid var(--line); border-radius:999px; padding:8px 32px 8px 15px; cursor:pointer; }
@@ -363,9 +363,11 @@
   .comp-pillar-pill[aria-pressed="true"]{ background:var(--navy); border-color:var(--navy); color:#fff; }
   .comp-pillar-pill:active{ transform:scale(.97); }
 
+  .comp-pillar-reset-th{ display:none; }
+  @media (max-width:780px){ .comp-pillar-reset-th{ display:inline-flex; align-items:center; margin-top:10px; } }
+
   .comp-tier-switch{ display:none; gap:8px; flex-wrap:wrap; align-items:center; }
   @media (max-width:780px){ .comp-tier-switch{ display:flex; } }
-  .comp-tier-switch .comp-pillar-pill-all{ padding:8px 15px; }
   .comp-tier-pill{ appearance:none; border:1px solid var(--line); background:var(--bg); color:var(--ink-soft); font:inherit; font-size:13px; font-weight:700; padding:8px 15px; border-radius:999px; cursor:pointer; transition:background .15s ease, color .15s ease, border-color .15s ease; }
   .comp-tier-pill[aria-pressed="true"]{ background:var(--navy); border-color:var(--navy); color:#fff; }
   .comp-tier-pill.is-popular[aria-pressed="true"]{ background:var(--gold); border-color:var(--gold); color:var(--navy); }
@@ -425,6 +427,10 @@
     .comp-table-wrap[data-active-tier="growth"] th:nth-child(3), .comp-table-wrap[data-active-tier="growth"] td:nth-child(3){ display:table-cell; }
     .comp-table-wrap[data-active-tier="pro"] th:nth-child(4), .comp-table-wrap[data-active-tier="pro"] td:nth-child(4){ display:table-cell; }
     .comp-table-wrap[data-active-tier="enterprise"] th:nth-child(5), .comp-table-wrap[data-active-tier="enterprise"] td:nth-child(5){ display:table-cell; }
+    /* Only one tier column shows at a time here, so there's no cross-column
+       baseline to protect — let the header shrink when its badge slot is empty
+       instead of reserving space for a badge that isn't there. */
+    .comp-th-badge-slot:empty{ display:none; }
   }
   @media (max-width:560px){
     .comp-controls{ margin:24px 2px 10px; }
@@ -434,11 +440,11 @@
     .comp-cat-row td{ padding:10px 12px 10px 16px; }
   }
   @media (max-width:480px){
-    .comp-controls{ flex-wrap:nowrap; gap:8px; }
+    .comp-controls{ gap:8px; }
     .comp-select{ font-size:12px; padding:7px 24px 7px 11px; }
     .comp-select-wrap svg{ right:10px; }
     .comp-tier-switch{ gap:6px; flex:1; flex-wrap:nowrap; }
-    .comp-tier-pill, .comp-tier-switch .comp-pillar-pill-all{ flex:1; padding:7px 4px; font-size:12px; text-align:center; }
+    .comp-tier-pill{ flex:1; padding:7px 4px; font-size:12px; text-align:center; }
   }
 
   /* ---------- bolt-ons ---------- */
@@ -465,7 +471,14 @@
     .policy-item:nth-child(odd){ border-left:none; padding-left:0; }
     .policy-item:nth-child(n+3){ border-top:1px solid var(--line); }
   }
-  @media (max-width:560px){ .policy-item{ border-left:none; border-top:1px solid var(--line); padding-left:0; } .policy-item:first-child{ border-top:none; } }
+  @media (max-width:560px){
+    .policy-item{ border-left:none; border-top:1px solid var(--line); padding-left:0; flex-direction:column; align-items:center; text-align:center; }
+    .policy-item:first-child{ border-top:none; }
+    .policy-item svg{ margin-top:0; }
+    .policy-desc-row{ justify-content:center; }
+    .policy-item span{ max-width:none; }
+    .policy-list{ max-width:none; text-align:left; }
+  }
   .policy-item svg{ width:26px; height:26px; flex:none; color:var(--gold); margin-top:2px; }
   .policy-item b{ display:block; font-size:14px; font-weight:800; color:var(--navy); }
   .policy-desc-row{ display:flex; align-items:center; gap:5px; margin-top:4px; }
@@ -1023,8 +1036,7 @@
         <button type="button" class="comp-pillar-pill" data-pillar="accounts" aria-pressed="false">Accounts</button>
         <button type="button" class="comp-pillar-pill" data-pillar="people" aria-pressed="false">People</button>
       </div>
-      <div class="comp-tier-switch" role="group" aria-label="Choose a plan to compare, or reset the pillar filter">
-        <button type="button" class="comp-pillar-pill comp-pillar-pill-all" data-pillar="all" aria-pressed="true">All pillars</button>
+      <div class="comp-tier-switch" role="group" aria-label="Choose a plan to compare">
         <button type="button" class="comp-tier-pill" data-tier="foundation" aria-pressed="false">Foundation</button>
         <button type="button" class="comp-tier-pill is-popular" data-tier="growth" aria-pressed="true">Growth</button>
         <button type="button" class="comp-tier-pill" data-tier="pro" aria-pressed="false">Pro</button>
@@ -1036,6 +1048,7 @@
           <tr>
             <th class="comp-feature-col">
               <span class="sr-only">Feature</span>
+              <button type="button" class="comp-pillar-pill comp-pillar-pill-all comp-pillar-reset-th" data-pillar="all" aria-pressed="true">All pillars</button>
               <div class="comp-select-wrap comp-select-wrap-th">
                 <label for="compPillarSelectDesktop" class="sr-only">Filter by pillar</label>
                 <select id="compPillarSelectDesktop" class="comp-select">
@@ -1764,9 +1777,9 @@
       }
     });
   }
-  var compControlsWrap = document.querySelector('.comp-controls');
+  var compMatrixWrap = document.querySelector('.matrix .wrap');
   var compPillarSelectDesktop = document.getElementById('compPillarSelectDesktop');
-  var compPillarPills = compControlsWrap ? compControlsWrap.querySelectorAll('.comp-pillar-pill') : [];
+  var compPillarPills = compMatrixWrap ? compMatrixWrap.querySelectorAll('.comp-pillar-pill') : [];
   function setActivePillar(val){
     if (val === 'all'){
       compTableWrap.removeAttribute('data-active-pillar');
@@ -1778,8 +1791,8 @@
     }
     if (compPillarSelectDesktop) compPillarSelectDesktop.value = val;
   }
-  if (compControlsWrap && compTableWrap){
-    compControlsWrap.addEventListener('click', function(e){
+  if (compMatrixWrap && compTableWrap){
+    compMatrixWrap.addEventListener('click', function(e){
       var btn = e.target.closest('.comp-pillar-pill');
       if (!btn) return;
       setActivePillar(btn.getAttribute('data-pillar'));
