@@ -281,15 +281,18 @@
   .tier-price-unit{ font-size:13px; color:var(--ink-soft); font-weight:600; }
   .tier-price-poa{ font-size:clamp(15px,1.5vw,19px); font-weight:800; color:var(--ink); white-space:nowrap; }
   .tier-billed-note{ font-size:12px; color:var(--ink-soft); margin-top:10px; min-height:0; font-weight:600; }
-  .tier-billed-note.offer{
+  .tier-billed-note.offer, .tier-billed-note.save{
     display:flex; align-items:center; justify-content:space-between; gap:10px;
-    background:rgba(225,52,46,.08); border:1px solid rgba(225,52,46,.22); border-radius:10px; padding:9px 12px;
+    border-radius:10px; padding:9px 12px;
   }
+  .tier-billed-note.offer{ background:rgba(225,52,46,.08); border:1px solid rgba(225,52,46,.22); }
+  .tier-billed-note.save{ background:var(--good-bg); border:1px solid rgba(30,158,107,.3); }
   .tier-fm-text{ display:flex; flex-direction:column; gap:1px; }
   .tier-fm-label{ font-size:10.5px; font-weight:700; color:var(--ink-soft); text-transform:uppercase; letter-spacing:.03em; }
   .tier-fm-price{ font-size:15px; font-weight:800; color:var(--sale); font-variant-numeric:tabular-nums; }
   .tier-fm-badge{ flex-shrink:0; background:var(--sale); color:#fff; font-size:10.5px; font-weight:800; padding:4px 9px; border-radius:999px; white-space:nowrap; }
-  .tier-billed-note .tier-savings{ color:var(--good); }
+  .tier-billed-note.save .tier-fm-price{ color:var(--good); }
+  .tier-billed-note.save .tier-fm-badge{ background:var(--good); }
   .tier-onboarding{ font-size:13.5px; color:var(--ink); line-height:1.5; margin-top:12px; padding-top:12px; border-top:1px dashed var(--line); font-weight:600; }
   .tier-onboarding-price{ font-variant-numeric:tabular-nums; font-weight:800; }
   .tier-info-btn{ width:20px; height:20px; border-radius:999px; border:1px solid var(--line); background:var(--bg-soft); color:var(--ink-soft); font-size:11px; font-weight:800; font-family:inherit; display:inline-flex; vertical-align:middle; align-items:center; justify-content:center; cursor:pointer; flex-shrink:0; padding:0; line-height:1; margin-left:5px; transition:border-color .15s ease, color .15s ease; }
@@ -306,7 +309,7 @@
     .tier-tagline{ margin-top:4px; min-height:0; }
     .tier-price-row{ margin-top:13px; }
     .tier-billed-note{ margin-top:8px; }
-    .tier-billed-note.offer{ padding:8px 10px; }
+    .tier-billed-note.offer, .tier-billed-note.save{ padding:8px 10px; }
     .tier-onboarding{ margin-top:9px; padding-top:9px; }
     .tier-stats{ margin-top:12px; gap:6px; }
     .tier-note{ margin-top:9px; }
@@ -844,7 +847,7 @@
 <header class="intro">
   <div class="wrap">
     <div class="eyebrow">Pricing</div>
-    <h1>Simple pricing.<br>Rolling monthly contracts.</h1>
+    <h1>Simple pricing.<br>Rolling contracts.</h1>
     <p>Every plan covers all six Trade 360 pillars — Marketing, Leads, Sales, Projects, Accounts and People. Choose the features, team size and usage allowances that suit your business.</p>
     <div class="intro-tags">
       <span class="intro-tag"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 2h5l7 7-5 5-7-7V2Z"/><circle cx="5" cy="5" r="1" fill="currentColor" stroke="none"/></svg>50% off your first month</span>
@@ -884,7 +887,7 @@
         <div class="tier-tagline">For sole traders who want quoting and invoicing sorted.</div>
         <div class="tier-price-row"><div class="tier-price-eyebrow">Standard price</div><div class="tier-price-line"><span class="tier-price">£99.00</span><span class="tier-price-unit">/month</span></div></div>
         <div class="tier-billed-note offer"><div class="tier-fm-text"><span class="tier-fm-label">First month</span><span class="tier-fm-price">£49.50</span></div><span class="tier-fm-badge">Save 50%</span></div>
-        <div class="tier-onboarding">Plus a <b class="tier-onboarding-price">£199.00</b> one-off onboarding fee, charged at signup.<button type="button" class="tier-info-btn" data-breakdown-trigger aria-label="See payment breakdown for Foundation">i</button></div>
+        <div class="tier-onboarding">+ <b class="tier-onboarding-price">£199.00</b> onboarding fee.<button type="button" class="tier-info-btn" data-breakdown-trigger aria-label="See payment breakdown for Foundation">i</button></div>
         <div class="tier-stats">
           <div class="tier-stat"><span>Users included</span><b>1</b></div>
           <div class="tier-stat"><span>AI credits / month</span><b>100</b></div>
@@ -900,7 +903,7 @@
         <div class="tier-tagline">For growing teams that need more capacity and automation.</div>
         <div class="tier-price-row"><div class="tier-price-eyebrow">Standard price</div><div class="tier-price-line"><span class="tier-price">£249.00</span><span class="tier-price-unit">/month</span></div></div>
         <div class="tier-billed-note offer"><div class="tier-fm-text"><span class="tier-fm-label">First month</span><span class="tier-fm-price">£124.50</span></div><span class="tier-fm-badge">Save 50%</span></div>
-        <div class="tier-onboarding">Plus a <b class="tier-onboarding-price">£499.00</b> one-off onboarding fee, charged at signup.<button type="button" class="tier-info-btn" data-breakdown-trigger aria-label="See payment breakdown for Growth">i</button></div>
+        <div class="tier-onboarding">+ <b class="tier-onboarding-price">£499.00</b> onboarding fee.<button type="button" class="tier-info-btn" data-breakdown-trigger aria-label="See payment breakdown for Growth">i</button></div>
         <div class="tier-stats">
           <div class="tier-stat"><span>Users included</span><b>5</b></div>
           <div class="tier-stat"><span>AI credits / month</span><b>350</b></div>
@@ -915,7 +918,7 @@
         <div class="tier-tagline">For established crews running multiple jobs at full capacity.</div>
         <div class="tier-price-row"><div class="tier-price-eyebrow">Standard price</div><div class="tier-price-line"><span class="tier-price">£499.00</span><span class="tier-price-unit">/month</span></div></div>
         <div class="tier-billed-note offer"><div class="tier-fm-text"><span class="tier-fm-label">First month</span><span class="tier-fm-price">£249.50</span></div><span class="tier-fm-badge">Save 50%</span></div>
-        <div class="tier-onboarding">Plus a <b class="tier-onboarding-price">£999.00</b> one-off onboarding fee, charged at signup.<button type="button" class="tier-info-btn" data-breakdown-trigger aria-label="See payment breakdown for Pro">i</button></div>
+        <div class="tier-onboarding">+ <b class="tier-onboarding-price">£999.00</b> onboarding fee.<button type="button" class="tier-info-btn" data-breakdown-trigger aria-label="See payment breakdown for Pro">i</button></div>
         <div class="tier-stats">
           <div class="tier-stat"><span>Users included</span><b>8</b></div>
           <div class="tier-stat"><span>AI credits / month</span><b>700</b></div>
@@ -1792,14 +1795,17 @@
       if (annual){
         var monthlyRate = Number(card.getAttribute('data-monthly'));
         var billedTotal = Number(card.getAttribute('data-billed'));
-        var saving = (monthlyRate * 12) - billedTotal;
+        var monthsSaved = Math.round((monthlyRate * 12 - billedTotal) / monthlyRate);
+        var monthsLabel = monthsSaved + (monthsSaved === 1 ? ' month' : ' months');
         priceEl.textContent = gbp(card.getAttribute('data-annual'));
-        noteEl.innerHTML = 'billed ' + gbp(billedTotal) + '/year —<br><span class="tier-savings">save ' + gbp(saving) + ' vs monthly</span>';
+        noteEl.innerHTML = '<div class="tier-fm-text"><span class="tier-fm-label">Billed annually</span><span class="tier-fm-price">' + gbp(billedTotal) + '/year</span></div><span class="tier-fm-badge">Save ' + monthsLabel + '</span>';
         noteEl.classList.remove('offer');
+        noteEl.classList.add('save');
       } else {
         var monthly = Number(card.getAttribute('data-monthly'));
         priceEl.textContent = gbp(monthly);
         noteEl.innerHTML = '<div class="tier-fm-text"><span class="tier-fm-label">First month</span><span class="tier-fm-price">' + gbp2(monthly / 2) + '</span></div><span class="tier-fm-badge">Save 50%</span>';
+        noteEl.classList.remove('save');
         noteEl.classList.add('offer');
       }
     });
