@@ -210,19 +210,29 @@
   @media (min-width:960px){ .mobile-panel{ display:none !important; } }
 
   /* ---------- hero ---------- */
-  .why-hero{ background:var(--navy-2); color:#fff; padding-block:64px 56px; position:relative; overflow:hidden; }
+  .why-hero{ background:var(--navy-2); color:#fff; padding-block:48px; position:relative; overflow:hidden; }
   .why-hero::before{ content:""; position:absolute; inset:0; z-index:0; pointer-events:none; background:
       radial-gradient(circle at 88% 8%, rgba(252,189,2,.10), transparent 45%),
       radial-gradient(280px 280px at 78% 82%, rgba(252,189,2,.10), transparent 70%),
       repeating-linear-gradient(0deg, rgba(255,255,255,.02) 0 1px, transparent 1px 64px),
       repeating-linear-gradient(90deg, rgba(255,255,255,.02) 0 1px, transparent 1px 64px);
       animation:driftGlow 16s ease-in-out infinite alternate; }
+  .why-hero::after{
+    content:""; position:absolute; inset:0; z-index:0; pointer-events:none; overflow:hidden;
+    background: radial-gradient(360px 360px at 18% 46%, rgba(252,189,2,.22), transparent 70%);
+    animation:pulseGlow 4.2s ease-in-out infinite;
+    transform-origin:18% 46%;
+  }
   @keyframes driftGlow{ 0%{ transform:translate(0,0) scale(1); } 100%{ transform:translate(3%,-2%) scale(1.06); } }
-  @media (prefers-reduced-motion: reduce){ .why-hero::before{ animation:none; } }
-  .why-hero .wrap{ position:relative; z-index:1; max-width:860px; text-align:center; }
+  @keyframes pulseGlow{ 0%,100%{ opacity:.55; transform:scale(1); } 50%{ opacity:1; transform:scale(1.12); } }
+  @media (prefers-reduced-motion: reduce){ .why-hero::before, .why-hero::after{ animation:none; } }
+  .why-hero .wrap{ position:relative; z-index:1; }
   .why-hero .eyebrow{ color:var(--gold); filter:none; }
-  .why-hero h1{ font-size:clamp(30px,5vw,50px); color:#fff; }
-  .why-hero p{ font-size:16.5px; line-height:1.65; color:#A9AEC0; max-width:56ch; margin:18px auto 0; }
+  .why-hero h1{ font-size:clamp(28px,4vw,42px); color:#fff; max-width:22ch; }
+  .why-hero p{ font-size:15.5px; line-height:1.6; color:#A9AEC0; max-width:60ch; margin-top:14px; }
+  .why-hero-tags{ display:flex; flex-wrap:wrap; gap:10px; margin-top:22px; }
+  .why-hero-tag{ display:flex; align-items:center; gap:7px; font-size:12.5px; font-weight:600; color:#EDEEF3; background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.14); padding:7px 13px; border-radius:999px; }
+  .why-hero-tag svg{ width:13px; height:13px; color:var(--gold); flex:none; }
 
   /* ---------- the name ---------- */
   .the-name{ padding-block:64px; }
@@ -460,6 +470,11 @@
     <div class="eyebrow">Why Trade 360?</div>
     <h1>We obsess over the little details, so you don't have to.</h1>
     <p>So you can focus on what you do best — your trade. Trade 360 was built by people who've actually run businesses like yours, not by outsiders guessing what you need.</p>
+    <div class="why-hero-tags">
+      <span class="why-hero-tag"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 14s-5-3.1-6.8-6.4A3.9 3.9 0 0 1 8 4.3a3.9 3.9 0 0 1 6.8 3.3C13 10.9 8 14 8 14Z"/></svg>30+ years combined experience</span>
+      <span class="why-hero-tag"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M1.5 12 6 7.5l2.5 2.5L14.5 4M14.5 4h-4M14.5 4v4"/></svg>Proven on a real business for 32 months</span>
+      <span class="why-hero-tag"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polygon points="9 1 2 9.5 7.5 9.5 6.5 15 14 6 8.5 6 9 1"/></svg>One AI, start to finish</span>
+    </div>
   </div>
 </header>
 
