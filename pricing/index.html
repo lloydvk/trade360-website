@@ -457,10 +457,10 @@
   .policy-item svg{ width:26px; height:26px; flex:none; color:var(--gold); margin-top:2px; }
   .policy-item b{ display:block; font-size:14px; font-weight:800; color:var(--navy); }
   .policy-item span{ font-size:13.5px; color:var(--ink-soft); line-height:1.55; display:block; margin-top:4px; max-width:34ch; }
-  .policy-list{ font-size:13.5px; color:var(--ink-soft); line-height:1.55; margin:6px 0 0; padding-left:16px; max-width:34ch; }
-  .policy-list li{ margin-top:4px; }
+  .policy-list{ margin:7px 0 0; padding:0; list-style:none; max-width:34ch; }
+  .policy-list li{ position:relative; padding-left:15px; font-size:13.5px; color:var(--ink-soft); line-height:1.55; margin-top:7px; }
   .policy-list li:first-child{ margin-top:0; }
-  .policy-list li::marker{ color:var(--gold); }
+  .policy-list li::before{ content:""; position:absolute; left:1px; top:7px; width:5px; height:5px; border-radius:999px; background:var(--gold); }
 
   /* ---------- bespoke ---------- */
   .bespoke{ padding-block:56px; }
