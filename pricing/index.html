@@ -734,6 +734,8 @@
   @media (hover:hover) and (pointer:fine){ .pb-legal a:hover{ color:var(--ink); } }
   .pb-next{ border-top:1px dashed var(--line); padding-top:16px; }
   .pb-note{ font-size:12px; color:var(--ink-soft); line-height:1.5; margin-top:6px; }
+  .pb-note a{ color:var(--ink-soft); text-decoration:underline; text-underline-offset:2px; }
+  @media (hover:hover) and (pointer:fine){ .pb-note a:hover{ color:var(--ink); } }
   @media (max-width:640px){
     .pb-modal{ align-items:flex-end; padding:0; }
     .pb-modal-inner{
@@ -2350,7 +2352,7 @@
       pbNextLabel.textContent = 'From year 2 onwards';
       pbRow2Label.textContent = 'Annual subscription';
       pbRow2Value.textContent = gbp(billedTotal) + '/year';
-      pbNote.textContent = 'Billed annually at the same rate each year, for as long as you stay on this plan.';
+      pbNote.innerHTML = 'Billed annually at the standard rate for this plan. Rates may increase at renewal — see <a href="/terms/">terms and conditions</a>.';
     } else {
       var firstMonth = monthly / 2;
       pbFirstLabel.textContent = 'First payment';
