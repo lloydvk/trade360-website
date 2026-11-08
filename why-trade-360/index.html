@@ -203,12 +203,13 @@
   .the-name p + p{ margin-top:12px; }
   .wheel{ position:relative; display:flex; align-items:center; justify-content:center; }
   .wheel-ring{ width:min(320px, 80vw); height:min(320px, 80vw); border-radius:999px; background:var(--bg-soft); border:1px solid var(--line); position:relative; display:flex; align-items:center; justify-content:center; }
-  .wheel-center{ display:flex; flex-direction:column; align-items:center; gap:2px; text-align:center; }
-  .wheel-center svg{ width:46px; height:46px; }
-  .wheel-center b{ font-size:15px; font-weight:800; color:var(--navy); margin-top:6px; }
-  .wheel-center span{ font-size:11px; color:var(--ink-soft); font-weight:600; }
-  .wheel-pillar{ position:absolute; display:flex; flex-direction:column; align-items:center; gap:5px; width:84px; text-align:center; }
-  .wheel-pillar svg{ width:28px; height:28px; }
+  .wheel-center{ display:flex; flex-direction:column; align-items:center; gap:10px; text-align:center; }
+  .wheel-center svg{ width:40px; height:40px; animation:brandSpin 14s linear infinite; }
+  @media (prefers-reduced-motion: reduce){ .wheel-center svg{ animation:none; } }
+  .wheel-center img{ height:26px; width:auto; display:block; }
+  .wheel-pillar{ position:absolute; display:flex; flex-direction:column; align-items:center; gap:8px; width:84px; text-align:center; }
+  .wheel-pillar-icon{ width:48px; height:48px; border-radius:999px; background:var(--bg); border:1px solid var(--line); box-shadow:var(--shadow); display:flex; align-items:center; justify-content:center; flex:none; }
+  .wheel-pillar-icon svg{ width:26px; height:26px; }
   .wheel-pillar span{ font-size:11.5px; font-weight:700; color:var(--navy); }
   .wheel-pillar.p0{ top:-14px; left:50%; transform:translateX(-50%); }
   .wheel-pillar.p1{ top:14%; right:-30px; }
@@ -224,6 +225,18 @@
   }
 
   /* ---------- stats strip ---------- */
+  /* ---------- proof callout ---------- */
+  .proof-band{ padding-block:0 56px; }
+  .proof-box{
+    display:flex; align-items:center; gap:20px; background:var(--gold);
+    background-image:repeating-linear-gradient(-45deg, rgba(28,33,48,.05) 0 2px, transparent 2px 16px);
+    border-radius:18px; padding:28px 32px; box-shadow:var(--shadow);
+  }
+  .proof-box svg{ width:38px; height:38px; flex:none; color:var(--navy); }
+  .proof-box p{ font-size:15.5px; line-height:1.55; color:var(--navy); margin:0; }
+  .proof-box p b{ font-weight:800; }
+  @media (max-width:640px){ .proof-box{ flex-direction:column; align-items:flex-start; gap:14px; padding:24px 22px; } }
+
   .who{ padding-block:64px; background:var(--bg-soft); border-bottom:1px solid var(--line); }
   .who-grid{ display:grid; grid-template-columns:repeat(3,1fr); margin-top:36px; }
   @media (max-width:760px){ .who-grid{ grid-template-columns:1fr; } }
@@ -376,18 +389,27 @@
       <div class="wheel reveal">
         <div class="wheel-ring">
           <div class="wheel-center">
-            <svg viewBox="0 0 40 40"><path fill="var(--gold)" d="M 12.11 3.82 A 18 18 0 0 1 27.89 3.82 L 24.82 10.11 A 11 11 0 0 0 15.18 10.11 Z"/><path fill="var(--gold-2)" d="M 30.07 5.08 A 18 18 0 0 1 37.96 18.74 L 30.97 19.23 A 11 11 0 0 0 26.15 10.88 Z"/><path fill="var(--gold)" d="M 37.96 21.26 A 18 18 0 0 1 30.07 34.92 L 26.15 29.12 A 11 11 0 0 0 30.97 20.77 Z"/><path fill="var(--gold-2)" d="M 27.89 36.18 A 18 18 0 0 1 12.11 36.18 L 15.18 29.89 A 11 11 0 0 0 24.82 29.89 Z"/><path fill="var(--gold)" d="M 9.93 34.92 A 18 18 0 0 1 2.04 21.26 L 9.03 20.77 A 11 11 0 0 0 13.85 29.12 Z"/><path fill="var(--gold-2)" d="M 2.04 18.74 A 18 18 0 0 1 9.93 5.08 L 13.85 10.88 A 11 11 0 0 0 9.03 19.23 Z"/></svg>
-            <b>360&deg;</b>
-            <span>Lead to Profit</span>
+            <svg viewBox="0 0 40 40" aria-hidden="true"><path fill="var(--gold)" d="M 12.11 3.82 A 18 18 0 0 1 27.89 3.82 L 24.82 10.11 A 11 11 0 0 0 15.18 10.11 Z"/><path fill="var(--gold-2)" d="M 30.07 5.08 A 18 18 0 0 1 37.96 18.74 L 30.97 19.23 A 11 11 0 0 0 26.15 10.88 Z"/><path fill="var(--gold)" d="M 37.96 21.26 A 18 18 0 0 1 30.07 34.92 L 26.15 29.12 A 11 11 0 0 0 30.97 20.77 Z"/><path fill="var(--gold-2)" d="M 27.89 36.18 A 18 18 0 0 1 12.11 36.18 L 15.18 29.89 A 11 11 0 0 0 24.82 29.89 Z"/><path fill="var(--gold)" d="M 9.93 34.92 A 18 18 0 0 1 2.04 21.26 L 9.03 20.77 A 11 11 0 0 0 13.85 29.12 Z"/><path fill="var(--gold-2)" d="M 2.04 18.74 A 18 18 0 0 1 9.93 5.08 L 13.85 10.88 A 11 11 0 0 0 9.03 19.23 Z"/></svg>
+            <img src="/assets/images/header-logo.png" alt="Trade360">
           </div>
-          <div class="wheel-pillar p0"><svg viewBox="0 0 40 40"><path fill="var(--gold)" d="M 12.11 3.82 A 18 18 0 0 1 27.89 3.82 L 24.82 10.11 A 11 11 0 0 0 15.18 10.11 Z"/><path fill="var(--ring-pale)" d="M 30.07 5.08 A 18 18 0 0 1 37.96 18.74 L 30.97 19.23 A 11 11 0 0 0 26.15 10.88 Z"/><path fill="var(--ring-pale)" d="M 37.96 21.26 A 18 18 0 0 1 30.07 34.92 L 26.15 29.12 A 11 11 0 0 0 30.97 20.77 Z"/><path fill="var(--ring-pale)" d="M 27.89 36.18 A 18 18 0 0 1 12.11 36.18 L 15.18 29.89 A 11 11 0 0 0 24.82 29.89 Z"/><path fill="var(--ring-pale)" d="M 9.93 34.92 A 18 18 0 0 1 2.04 21.26 L 9.03 20.77 A 11 11 0 0 0 13.85 29.12 Z"/><path fill="var(--ring-pale)" d="M 2.04 18.74 A 18 18 0 0 1 9.93 5.08 L 13.85 10.88 A 11 11 0 0 0 9.03 19.23 Z"/></svg><span>Marketing</span></div>
-          <div class="wheel-pillar p1"><svg viewBox="0 0 40 40"><path fill="var(--gold)" d="M 12.11 3.82 A 18 18 0 0 1 27.89 3.82 L 24.82 10.11 A 11 11 0 0 0 15.18 10.11 Z"/><path fill="var(--gold-2)" d="M 30.07 5.08 A 18 18 0 0 1 37.96 18.74 L 30.97 19.23 A 11 11 0 0 0 26.15 10.88 Z"/><path fill="var(--ring-pale)" d="M 37.96 21.26 A 18 18 0 0 1 30.07 34.92 L 26.15 29.12 A 11 11 0 0 0 30.97 20.77 Z"/><path fill="var(--ring-pale)" d="M 27.89 36.18 A 18 18 0 0 1 12.11 36.18 L 15.18 29.89 A 11 11 0 0 0 24.82 29.89 Z"/><path fill="var(--ring-pale)" d="M 9.93 34.92 A 18 18 0 0 1 2.04 21.26 L 9.03 20.77 A 11 11 0 0 0 13.85 29.12 Z"/><path fill="var(--ring-pale)" d="M 2.04 18.74 A 18 18 0 0 1 9.93 5.08 L 13.85 10.88 A 11 11 0 0 0 9.03 19.23 Z"/></svg><span>Leads</span></div>
-          <div class="wheel-pillar p2"><svg viewBox="0 0 40 40"><path fill="var(--gold)" d="M 12.11 3.82 A 18 18 0 0 1 27.89 3.82 L 24.82 10.11 A 11 11 0 0 0 15.18 10.11 Z"/><path fill="var(--gold-2)" d="M 30.07 5.08 A 18 18 0 0 1 37.96 18.74 L 30.97 19.23 A 11 11 0 0 0 26.15 10.88 Z"/><path fill="var(--gold)" d="M 37.96 21.26 A 18 18 0 0 1 30.07 34.92 L 26.15 29.12 A 11 11 0 0 0 30.97 20.77 Z"/><path fill="var(--ring-pale)" d="M 27.89 36.18 A 18 18 0 0 1 12.11 36.18 L 15.18 29.89 A 11 11 0 0 0 24.82 29.89 Z"/><path fill="var(--ring-pale)" d="M 9.93 34.92 A 18 18 0 0 1 2.04 21.26 L 9.03 20.77 A 11 11 0 0 0 13.85 29.12 Z"/><path fill="var(--ring-pale)" d="M 2.04 18.74 A 18 18 0 0 1 9.93 5.08 L 13.85 10.88 A 11 11 0 0 0 9.03 19.23 Z"/></svg><span>Sales</span></div>
-          <div class="wheel-pillar p3"><svg viewBox="0 0 40 40"><path fill="var(--gold)" d="M 12.11 3.82 A 18 18 0 0 1 27.89 3.82 L 24.82 10.11 A 11 11 0 0 0 15.18 10.11 Z"/><path fill="var(--gold-2)" d="M 30.07 5.08 A 18 18 0 0 1 37.96 18.74 L 30.97 19.23 A 11 11 0 0 0 26.15 10.88 Z"/><path fill="var(--gold)" d="M 37.96 21.26 A 18 18 0 0 1 30.07 34.92 L 26.15 29.12 A 11 11 0 0 0 30.97 20.77 Z"/><path fill="var(--gold-2)" d="M 27.89 36.18 A 18 18 0 0 1 12.11 36.18 L 15.18 29.89 A 11 11 0 0 0 24.82 29.89 Z"/><path fill="var(--ring-pale)" d="M 9.93 34.92 A 18 18 0 0 1 2.04 21.26 L 9.03 20.77 A 11 11 0 0 0 13.85 29.12 Z"/><path fill="var(--ring-pale)" d="M 2.04 18.74 A 18 18 0 0 1 9.93 5.08 L 13.85 10.88 A 11 11 0 0 0 9.03 19.23 Z"/></svg><span>Projects</span></div>
-          <div class="wheel-pillar p4"><svg viewBox="0 0 40 40"><path fill="var(--gold)" d="M 12.11 3.82 A 18 18 0 0 1 27.89 3.82 L 24.82 10.11 A 11 11 0 0 0 15.18 10.11 Z"/><path fill="var(--gold-2)" d="M 30.07 5.08 A 18 18 0 0 1 37.96 18.74 L 30.97 19.23 A 11 11 0 0 0 26.15 10.88 Z"/><path fill="var(--gold)" d="M 37.96 21.26 A 18 18 0 0 1 30.07 34.92 L 26.15 29.12 A 11 11 0 0 0 30.97 20.77 Z"/><path fill="var(--gold-2)" d="M 27.89 36.18 A 18 18 0 0 1 12.11 36.18 L 15.18 29.89 A 11 11 0 0 0 24.82 29.89 Z"/><path fill="var(--gold)" d="M 9.93 34.92 A 18 18 0 0 1 2.04 21.26 L 9.03 20.77 A 11 11 0 0 0 13.85 29.12 Z"/><path fill="var(--ring-pale)" d="M 2.04 18.74 A 18 18 0 0 1 9.93 5.08 L 13.85 10.88 A 11 11 0 0 0 9.03 19.23 Z"/></svg><span>Accounts</span></div>
-          <div class="wheel-pillar p5"><svg viewBox="0 0 40 40"><path fill="var(--gold)" d="M 12.11 3.82 A 18 18 0 0 1 27.89 3.82 L 24.82 10.11 A 11 11 0 0 0 15.18 10.11 Z"/><path fill="var(--gold-2)" d="M 30.07 5.08 A 18 18 0 0 1 37.96 18.74 L 30.97 19.23 A 11 11 0 0 0 26.15 10.88 Z"/><path fill="var(--gold)" d="M 37.96 21.26 A 18 18 0 0 1 30.07 34.92 L 26.15 29.12 A 11 11 0 0 0 30.97 20.77 Z"/><path fill="var(--gold-2)" d="M 27.89 36.18 A 18 18 0 0 1 12.11 36.18 L 15.18 29.89 A 11 11 0 0 0 24.82 29.89 Z"/><path fill="var(--gold)" d="M 9.93 34.92 A 18 18 0 0 1 2.04 21.26 L 9.03 20.77 A 11 11 0 0 0 13.85 29.12 Z"/><path fill="var(--gold-2)" d="M 2.04 18.74 A 18 18 0 0 1 9.93 5.08 L 13.85 10.88 A 11 11 0 0 0 9.03 19.23 Z"/></svg><span>People</span></div>
+          <div class="wheel-pillar p0"><span class="wheel-pillar-icon"><svg viewBox="0 0 40 40"><path fill="var(--gold)" d="M 12.11 3.82 A 18 18 0 0 1 27.89 3.82 L 24.82 10.11 A 11 11 0 0 0 15.18 10.11 Z"/><path fill="var(--ring-pale)" d="M 30.07 5.08 A 18 18 0 0 1 37.96 18.74 L 30.97 19.23 A 11 11 0 0 0 26.15 10.88 Z"/><path fill="var(--ring-pale)" d="M 37.96 21.26 A 18 18 0 0 1 30.07 34.92 L 26.15 29.12 A 11 11 0 0 0 30.97 20.77 Z"/><path fill="var(--ring-pale)" d="M 27.89 36.18 A 18 18 0 0 1 12.11 36.18 L 15.18 29.89 A 11 11 0 0 0 24.82 29.89 Z"/><path fill="var(--ring-pale)" d="M 9.93 34.92 A 18 18 0 0 1 2.04 21.26 L 9.03 20.77 A 11 11 0 0 0 13.85 29.12 Z"/><path fill="var(--ring-pale)" d="M 2.04 18.74 A 18 18 0 0 1 9.93 5.08 L 13.85 10.88 A 11 11 0 0 0 9.03 19.23 Z"/></svg></span><span>Marketing</span></div>
+          <div class="wheel-pillar p1"><span class="wheel-pillar-icon"><svg viewBox="0 0 40 40"><path fill="var(--gold)" d="M 12.11 3.82 A 18 18 0 0 1 27.89 3.82 L 24.82 10.11 A 11 11 0 0 0 15.18 10.11 Z"/><path fill="var(--gold-2)" d="M 30.07 5.08 A 18 18 0 0 1 37.96 18.74 L 30.97 19.23 A 11 11 0 0 0 26.15 10.88 Z"/><path fill="var(--ring-pale)" d="M 37.96 21.26 A 18 18 0 0 1 30.07 34.92 L 26.15 29.12 A 11 11 0 0 0 30.97 20.77 Z"/><path fill="var(--ring-pale)" d="M 27.89 36.18 A 18 18 0 0 1 12.11 36.18 L 15.18 29.89 A 11 11 0 0 0 24.82 29.89 Z"/><path fill="var(--ring-pale)" d="M 9.93 34.92 A 18 18 0 0 1 2.04 21.26 L 9.03 20.77 A 11 11 0 0 0 13.85 29.12 Z"/><path fill="var(--ring-pale)" d="M 2.04 18.74 A 18 18 0 0 1 9.93 5.08 L 13.85 10.88 A 11 11 0 0 0 9.03 19.23 Z"/></svg></span><span>Leads</span></div>
+          <div class="wheel-pillar p2"><span class="wheel-pillar-icon"><svg viewBox="0 0 40 40"><path fill="var(--gold)" d="M 12.11 3.82 A 18 18 0 0 1 27.89 3.82 L 24.82 10.11 A 11 11 0 0 0 15.18 10.11 Z"/><path fill="var(--gold-2)" d="M 30.07 5.08 A 18 18 0 0 1 37.96 18.74 L 30.97 19.23 A 11 11 0 0 0 26.15 10.88 Z"/><path fill="var(--gold)" d="M 37.96 21.26 A 18 18 0 0 1 30.07 34.92 L 26.15 29.12 A 11 11 0 0 0 30.97 20.77 Z"/><path fill="var(--ring-pale)" d="M 27.89 36.18 A 18 18 0 0 1 12.11 36.18 L 15.18 29.89 A 11 11 0 0 0 24.82 29.89 Z"/><path fill="var(--ring-pale)" d="M 9.93 34.92 A 18 18 0 0 1 2.04 21.26 L 9.03 20.77 A 11 11 0 0 0 13.85 29.12 Z"/><path fill="var(--ring-pale)" d="M 2.04 18.74 A 18 18 0 0 1 9.93 5.08 L 13.85 10.88 A 11 11 0 0 0 9.03 19.23 Z"/></svg></span><span>Sales</span></div>
+          <div class="wheel-pillar p3"><span class="wheel-pillar-icon"><svg viewBox="0 0 40 40"><path fill="var(--gold)" d="M 12.11 3.82 A 18 18 0 0 1 27.89 3.82 L 24.82 10.11 A 11 11 0 0 0 15.18 10.11 Z"/><path fill="var(--gold-2)" d="M 30.07 5.08 A 18 18 0 0 1 37.96 18.74 L 30.97 19.23 A 11 11 0 0 0 26.15 10.88 Z"/><path fill="var(--gold)" d="M 37.96 21.26 A 18 18 0 0 1 30.07 34.92 L 26.15 29.12 A 11 11 0 0 0 30.97 20.77 Z"/><path fill="var(--gold-2)" d="M 27.89 36.18 A 18 18 0 0 1 12.11 36.18 L 15.18 29.89 A 11 11 0 0 0 24.82 29.89 Z"/><path fill="var(--ring-pale)" d="M 9.93 34.92 A 18 18 0 0 1 2.04 21.26 L 9.03 20.77 A 11 11 0 0 0 13.85 29.12 Z"/><path fill="var(--ring-pale)" d="M 2.04 18.74 A 18 18 0 0 1 9.93 5.08 L 13.85 10.88 A 11 11 0 0 0 9.03 19.23 Z"/></svg></span><span>Projects</span></div>
+          <div class="wheel-pillar p4"><span class="wheel-pillar-icon"><svg viewBox="0 0 40 40"><path fill="var(--gold)" d="M 12.11 3.82 A 18 18 0 0 1 27.89 3.82 L 24.82 10.11 A 11 11 0 0 0 15.18 10.11 Z"/><path fill="var(--gold-2)" d="M 30.07 5.08 A 18 18 0 0 1 37.96 18.74 L 30.97 19.23 A 11 11 0 0 0 26.15 10.88 Z"/><path fill="var(--gold)" d="M 37.96 21.26 A 18 18 0 0 1 30.07 34.92 L 26.15 29.12 A 11 11 0 0 0 30.97 20.77 Z"/><path fill="var(--gold-2)" d="M 27.89 36.18 A 18 18 0 0 1 12.11 36.18 L 15.18 29.89 A 11 11 0 0 0 24.82 29.89 Z"/><path fill="var(--gold)" d="M 9.93 34.92 A 18 18 0 0 1 2.04 21.26 L 9.03 20.77 A 11 11 0 0 0 13.85 29.12 Z"/><path fill="var(--ring-pale)" d="M 2.04 18.74 A 18 18 0 0 1 9.93 5.08 L 13.85 10.88 A 11 11 0 0 0 9.03 19.23 Z"/></svg></span><span>Accounts</span></div>
+          <div class="wheel-pillar p5"><span class="wheel-pillar-icon"><svg viewBox="0 0 40 40"><path fill="var(--gold)" d="M 12.11 3.82 A 18 18 0 0 1 27.89 3.82 L 24.82 10.11 A 11 11 0 0 0 15.18 10.11 Z"/><path fill="var(--gold-2)" d="M 30.07 5.08 A 18 18 0 0 1 37.96 18.74 L 30.97 19.23 A 11 11 0 0 0 26.15 10.88 Z"/><path fill="var(--gold)" d="M 37.96 21.26 A 18 18 0 0 1 30.07 34.92 L 26.15 29.12 A 11 11 0 0 0 30.97 20.77 Z"/><path fill="var(--gold-2)" d="M 27.89 36.18 A 18 18 0 0 1 12.11 36.18 L 15.18 29.89 A 11 11 0 0 0 24.82 29.89 Z"/><path fill="var(--gold)" d="M 9.93 34.92 A 18 18 0 0 1 2.04 21.26 L 9.03 20.77 A 11 11 0 0 0 13.85 29.12 Z"/><path fill="var(--gold-2)" d="M 2.04 18.74 A 18 18 0 0 1 9.93 5.08 L 13.85 10.88 A 11 11 0 0 0 9.03 19.23 Z"/></svg></span><span>People</span></div>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PROOF CALLOUT ================= -->
+<section class="proof-band">
+  <div class="wrap">
+    <div class="proof-box reveal">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 7-8M20 7h-5M20 7v5"/></svg>
+      <p><b>This isn't theory.</b> This system was originally built and tested on a real company over 32 months — a startup that has doubled its revenue and size, year on year.</p>
     </div>
   </div>
 </section>
@@ -493,7 +515,7 @@
     <div class="wrap">
       <div class="foot-legal-info">
         <span class="foot-legal-name">Trade 360 Limited &nbsp;&middot;&nbsp; Company No. 17565529</span>
-        <span>Registered office: <span class="foot-addr"><span class="foot-addr-part">The Old T A Centre,</span> <span class="foot-addr-part">Territorial Street,</span> <span class="foot-addr-part">Middlesbrough,</span> <span class="foot-addr-part">England,</span> <span class="foot-addr-part">TS3 8DR</span></span></span>
+        <span><b>Registered Office:</b> <span class="foot-addr"><span class="foot-addr-part">The Old T A Centre,</span> <span class="foot-addr-part">Territorial Street,</span> <span class="foot-addr-part">Middlesbrough,</span> <span class="foot-addr-part">England,</span> <span class="foot-addr-part">TS3 8DR</span></span></span>
       </div>
     </div>
   </div>

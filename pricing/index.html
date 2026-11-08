@@ -442,6 +442,12 @@
        baseline to protect — let the header shrink when its badge slot is empty
        instead of reserving space for a badge that isn't there. */
     .comp-th-badge-slot:empty{ display:none; }
+    /* Tap a category header to zoom into just that pillar (the only way to
+       filter to one pillar on mobile, now the chip row above is hidden). */
+    .comp-cat-row{ cursor:pointer; }
+    .comp-cat-row:active{ background:var(--bg); }
+    .comp-table-wrap[data-active-pillar] .comp-cat-row{ border-left:3px solid var(--gold); }
+    .comp-table-wrap[data-active-pillar] .comp-cat-row td{ padding-left:13px; }
   }
   @media (max-width:560px){
     .comp-controls{ margin:24px 2px 10px; }
@@ -1569,7 +1575,7 @@
     <div class="wrap">
       <div class="foot-legal-info">
         <span class="foot-legal-name">Trade 360 Limited &nbsp;&middot;&nbsp; Company No. 17565529</span>
-        <span>Registered office: <span class="foot-addr"><span class="foot-addr-part">The Old T A Centre,</span> <span class="foot-addr-part">Territorial Street,</span> <span class="foot-addr-part">Middlesbrough,</span> <span class="foot-addr-part">England,</span> <span class="foot-addr-part">TS3 8DR</span></span></span>
+        <span><b>Registered Office:</b> <span class="foot-addr"><span class="foot-addr-part">The Old T A Centre,</span> <span class="foot-addr-part">Territorial Street,</span> <span class="foot-addr-part">Middlesbrough,</span> <span class="foot-addr-part">England,</span> <span class="foot-addr-part">TS3 8DR</span></span></span>
       </div>
     </div>
   </div>
@@ -1805,8 +1811,19 @@
   if (compMatrixWrap && compTableWrap){
     compMatrixWrap.addEventListener('click', function(e){
       var btn = e.target.closest('.comp-pillar-pill');
-      if (!btn) return;
-      setActivePillar(btn.getAttribute('data-pillar'));
+      if (btn){
+        setActivePillar(btn.getAttribute('data-pillar'));
+        return;
+      }
+      // Mobile: with the standalone pillar chip row hidden, a category
+      // header (e.g. "Marketing") is the only way to zoom into one pillar —
+      // tap it to filter, tap it again (or "All pillars") to clear.
+      var catRow = e.target.closest('.comp-cat-row');
+      if (catRow && window.matchMedia('(max-width:780px)').matches){
+        var pillar = catRow.getAttribute('data-pillar');
+        var current = compTableWrap.getAttribute('data-active-pillar');
+        setActivePillar(current === pillar ? 'all' : pillar);
+      }
     });
   }
   if (compPillarSelectDesktop && compTableWrap){
