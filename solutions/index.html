@@ -693,7 +693,7 @@
             <th class="compare-tier-col">
               <div class="compare-tier-head">
                 <span class="compare-tier-name">Foundation</span>
-                <span class="compare-tier-price">&pound;99<small>/mo</small></span>
+                <span class="compare-tier-price">&pound;99.00<small>/mo</small></span>
                 <a class="btn btn-outline" href="/pricing/">View pricing</a>
               </div>
             </th>
@@ -701,14 +701,14 @@
               <div class="compare-tier-head">
                 <span class="compare-tier-badge">Most popular</span>
                 <span class="compare-tier-name">Growth</span>
-                <span class="compare-tier-price">&pound;249<small>/mo</small></span>
+                <span class="compare-tier-price">&pound;249.00<small>/mo</small></span>
                 <a class="btn btn-gold" href="/pricing/">View pricing</a>
               </div>
             </th>
             <th class="compare-tier-col">
               <div class="compare-tier-head">
                 <span class="compare-tier-name">Pro</span>
-                <span class="compare-tier-price">&pound;499<small>/mo</small></span>
+                <span class="compare-tier-price">&pound;499.00<small>/mo</small></span>
                 <a class="btn btn-outline" href="/pricing/">View pricing</a>
               </div>
             </th>
@@ -1025,27 +1025,27 @@
         <h3>AI credit add-ons</h3>
         <div class="sub">Bigger bundles cost less per credit.</div>
         <div class="bolton-rows">
-          <div class="bolton-row"><span>+175 credits</span><b>£15/month</b></div>
-          <div class="bolton-row"><span>+525 credits</span><b>£40/month</b></div>
-          <div class="bolton-row"><span>+1,400 credits</span><b>£95/month</b></div>
+          <div class="bolton-row"><span>+175 credits</span><b>£15.00/month</b></div>
+          <div class="bolton-row"><span>+525 credits</span><b>£40.00/month</b></div>
+          <div class="bolton-row"><span>+1,400 credits</span><b>£95.00/month</b></div>
         </div>
       </div>
       <div class="bolton-card reveal">
         <h3>Email add-ons</h3>
         <div class="sub">Bigger bundles cost less per email.</div>
         <div class="bolton-rows">
-          <div class="bolton-row"><span>+700 emails</span><b>£9/month</b></div>
-          <div class="bolton-row"><span>+3,500 emails</span><b>£35/month</b></div>
-          <div class="bolton-row"><span>+14,000 emails</span><b>£110/month</b></div>
+          <div class="bolton-row"><span>+700 emails</span><b>£9.00/month</b></div>
+          <div class="bolton-row"><span>+3,500 emails</span><b>£35.00/month</b></div>
+          <div class="bolton-row"><span>+14,000 emails</span><b>£110.00/month</b></div>
         </div>
       </div>
       <div class="bolton-card reveal">
         <h3>Extra users</h3>
         <div class="sub">One flat price per extra user.</div>
         <div class="bolton-rows">
-          <div class="bolton-row"><span>Foundation</span><b>£15/user/month</b></div>
-          <div class="bolton-row"><span>Growth</span><b>£12/user/month</b></div>
-          <div class="bolton-row"><span>Pro</span><b>£9/user/month</b></div>
+          <div class="bolton-row"><span>Foundation</span><b>£15.00/user/month</b></div>
+          <div class="bolton-row"><span>Growth</span><b>£12.00/user/month</b></div>
+          <div class="bolton-row"><span>Pro</span><b>£9.00/user/month</b></div>
         </div>
       </div>
     </div>
@@ -1081,9 +1081,9 @@
           <p>If your business needs an integration, workflow or report that isn't in the standard platform, we scope and price it separately — on top of whichever plan you're on.</p>
         </div>
         <div class="bespoke-list">
-          <div class="bespoke-list-item"><b>Custom integrations &amp; workflow builds</b><span>From £750, scoped after a short discovery call.</span></div>
-          <div class="bespoke-list-item"><b>Dedicated implementation manager</b><span>+£150/month, any plan.</span></div>
-          <div class="bespoke-list-item"><b>White-label &amp; custom domain branding</b><span>+£49/month, Pro only.</span></div>
+          <div class="bespoke-list-item"><b>Custom integrations &amp; workflow builds</b><span>From £750.00, scoped after a short discovery call.</span></div>
+          <div class="bespoke-list-item"><b>Dedicated implementation manager</b><span>+£150.00/month, any plan.</span></div>
+          <div class="bespoke-list-item"><b>White-label &amp; custom domain branding</b><span>+£49.00/month, Pro only.</span></div>
         </div>
       </div>
     </div>
@@ -1331,7 +1331,7 @@
   var labelMonthly = document.getElementById('labelMonthly');
   var labelAnnual = document.getElementById('labelAnnual');
   var tierCards = document.querySelectorAll('.tier-card');
-  var gbp = function(n){ return '£' + Number(n).toLocaleString('en-GB'); };
+  var gbp = function(n){ return '£' + Number(n).toLocaleString('en-GB', { minimumFractionDigits:2, maximumFractionDigits:2 }); };
 
   function applyBilling(annual){
     tierCards.forEach(function(card){

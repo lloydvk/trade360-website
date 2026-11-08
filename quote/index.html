@@ -1052,8 +1052,8 @@
   }
 
   function gbp(n){
-    var v = Math.round(Number(n) || 0);
-    return '£' + v.toLocaleString('en-GB');
+    var v = Number(n) || 0;
+    return '£' + v.toLocaleString('en-GB', { minimumFractionDigits:2, maximumFractionDigits:2 });
   }
 
   function escapeHtml(s){
@@ -1612,7 +1612,7 @@
       doc.text(descLines, col1, y);
       doc.text(String(li.quantity != null ? li.quantity : ''), col2, y);
       doc.text(String(li.unit || ''), col3, y);
-      doc.text('£' + Math.round(li.total || 0).toLocaleString('en-GB'), col4, y, { align:'right' });
+      doc.text('£' + Number(li.total || 0).toLocaleString('en-GB', { minimumFractionDigits:2, maximumFractionDigits:2 }), col4, y, { align:'right' });
       y += Math.max(descLines.length, 1) * 13 + 6;
     });
 
@@ -1625,7 +1625,7 @@
       doc.setFontSize(bold ? 12 : 10);
       doc.setTextColor(bold ? navy[0] : inkSoft[0], bold ? navy[1] : inkSoft[1], bold ? navy[2] : inkSoft[2]);
       doc.text(label, col3, y);
-      doc.text('£' + Math.round(value || 0).toLocaleString('en-GB'), col4, y, { align:'right' });
+      doc.text('£' + Number(value || 0).toLocaleString('en-GB', { minimumFractionDigits:2, maximumFractionDigits:2 }), col4, y, { align:'right' });
       y += bold ? 18 : 15;
     }
     totalsRow('Subtotal', q.pricing.subtotal, false);

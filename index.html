@@ -1380,7 +1380,7 @@
     <div class="calc-card reveal">
       <div class="calc-inputs">
         <div class="calc-field">
-          <div class="calc-field-head"><span>Your day rate</span><b id="calcDayRateVal">£280</b></div>
+          <div class="calc-field-head"><span>Your day rate</span><b id="calcDayRateVal">£280.00</b></div>
           <input type="range" id="calcDayRate" min="50" max="800" step="10" value="280" aria-label="Your day rate">
         </div>
         <div class="calc-field">
@@ -1403,19 +1403,19 @@
         </div>
         <div class="calc-result-row">
           <span>What that time is costing you</span>
-          <b id="calcWeeklyCost">£525/week</b>
+          <b id="calcWeeklyCost">£525.00/week</b>
         </div>
         <div class="calc-result-hero">
           <span>Potential cost of admin per month</span>
-          <b id="calcMonthlyCost">£2,013</b>
+          <b id="calcMonthlyCost">£2,013.00</b>
         </div>
         <div class="calc-result-row calc-package-row">
           <span>Trade 360 Foundation package</span>
-          <b>£99/month</b>
+          <b>£99.00/month</b>
         </div>
         <div class="calc-result-hero calc-result-hero-saving">
           <span>Recover 75% of this time and you could save</span>
-          <b id="calcNetSaving">£1,411/month</b>
+          <b id="calcNetSaving">£1,411.00/month</b>
         </div>
         <p class="calc-saving-note">And that's before counting the extra work our AI helps you win.</p>
         <a class="btn btn-gold js-book-demo" href="#demo">See how Trade 360 gets this time back
@@ -2429,7 +2429,7 @@
   var CALC_RECOVERY_RATE = 0.75;
   var calcSliders = [calcDayRate, calcAdminHours, calcSalesHours, calcAccountsHours];
   if (calcSliders.every(Boolean) && calcTotalHours && calcWeeklyCost && calcMonthlyCost){
-    var gbp = function(n){ return '£' + Math.round(n).toLocaleString('en-GB'); };
+    var gbp = function(n){ return '£' + Number(n).toLocaleString('en-GB', { minimumFractionDigits:2, maximumFractionDigits:2 }); };
     var fillSlider = function(el){
       var min = parseFloat(el.min) || 0;
       var max = parseFloat(el.max) || 100;
