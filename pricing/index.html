@@ -455,12 +455,17 @@
   }
   @media (max-width:560px){ .policy-item{ border-left:none; border-top:1px solid var(--line); padding-left:0; } .policy-item:first-child{ border-top:none; } }
   .policy-item svg{ width:26px; height:26px; flex:none; color:var(--gold); margin-top:2px; }
+  .policy-item-row{ display:flex; align-items:center; gap:5px; }
+  .policy-item-row .tier-info-btn{ margin-left:0; flex-shrink:0; }
   .policy-item b{ display:block; font-size:14px; font-weight:800; color:var(--navy); }
   .policy-item span{ font-size:13.5px; color:var(--ink-soft); line-height:1.55; display:block; margin-top:4px; max-width:34ch; }
   .policy-list{ margin:7px 0 0; padding:0; list-style:none; max-width:34ch; }
   .policy-list li{ position:relative; padding-left:15px; font-size:13.5px; color:var(--ink-soft); line-height:1.55; margin-top:7px; }
   .policy-list li:first-child{ margin-top:0; }
   .policy-list li::before{ content:""; position:absolute; left:1px; top:7px; width:5px; height:5px; border-radius:999px; background:var(--gold); }
+  .pb-modal-inner h3{ font-size:18.5px; font-weight:800; color:var(--navy); padding-right:16px; }
+  .policy-modal-body{ margin-top:14px; }
+  .policy-modal-body .policy-list{ margin-top:0; }
 
   /* ---------- bespoke ---------- */
   .bespoke{ padding-block:56px; }
@@ -1422,19 +1427,31 @@
   <div class="wrap">
     <div class="policy-item">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 6v6c0 4.5 3.2 7.6 8 9 4.8-1.4 8-4.5 8-9V6l-8-3Z"/><path d="m9 12 2 2 4-4.5"/></svg>
-      <div><b>30-day money-back guarantee</b><ul class="policy-list"><li>Try Trade 360 for 30 days.</li><li>If it doesn't match your expectations, tell us within that window and we'll refund what you've paid in full — no questions asked.</li></ul></div>
+      <div>
+        <div class="policy-item-row"><b>30-day money-back guarantee</b><button type="button" class="tier-info-btn" data-policy-trigger="guarantee" aria-label="More about the 30-day money-back guarantee">i</button></div>
+        <span>Try it risk-free for 30 days.</span>
+      </div>
     </div>
     <div class="policy-item">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18"/><path d="M7 15h4"/></svg>
-      <div><b>Billing &amp; VAT</b><ul class="policy-list"><li>All prices include VAT.</li><li>Pay annually and you're billed once a year; outside the 30-day guarantee, there's no refund for the months left once you cancel.</li></ul></div>
+      <div>
+        <div class="policy-item-row"><b>Billing &amp; VAT</b><button type="button" class="tier-info-btn" data-policy-trigger="billing" aria-label="More about billing and VAT">i</button></div>
+        <span>Prices always include VAT.</span>
+      </div>
     </div>
     <div class="policy-item">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M8 2v4M16 2v4M3 10h18"/></svg>
-      <div><b>Rolling monthly contract</b><ul class="policy-list"><li>No minimum term when billed monthly — stay because it works, not because you're locked in.</li><li>Cancel, upgrade or downgrade any time; changes apply from your next billing date.</li></ul></div>
+      <div>
+        <div class="policy-item-row"><b>Rolling monthly contract</b><button type="button" class="tier-info-btn" data-policy-trigger="rolling" aria-label="More about rolling monthly contracts">i</button></div>
+        <span>Change or cancel any time.</span>
+      </div>
     </div>
     <div class="policy-item">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M17 20a5 5 0 0 0-10 0"/><circle cx="12" cy="10" r="4"/></svg>
-      <div><b>Referral scheme</b><ul class="policy-list"><li>Get 250 AI credits for every Foundation, Growth or Pro business you refer that becomes a paying customer — no cap.</li><li>They still get the standard 50% off their first month.</li></ul></div>
+      <div>
+        <div class="policy-item-row"><b>Referral scheme</b><button type="button" class="tier-info-btn" data-policy-trigger="referral" aria-label="More about the referral scheme">i</button></div>
+        <span>250 AI credits per referral.</span>
+      </div>
     </div>
   </div>
 </div>
@@ -1623,6 +1640,17 @@
       <div class="pb-row"><span id="pbRow2Label">Monthly subscription</span><b id="pbRow2Value"></b></div>
       <p class="pb-note" id="pbNote">Your subscription returns to the standard monthly price.</p>
     </div>
+  </div>
+</div>
+
+<!-- ================= POLICY INFO MODAL ================= -->
+<div class="pb-modal" id="policyModal" role="dialog" aria-modal="true" aria-labelledby="policyModalHeading">
+  <div class="pb-modal-inner">
+    <button class="pb-modal-close" id="policyModalClose" type="button" aria-label="Close">
+      <svg viewBox="0 0 16 16" fill="none"><path d="M3 3l10 10M13 3 3 13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+    </button>
+    <h3 id="policyModalHeading"></h3>
+    <div class="policy-modal-body" id="policyModalBody"></div>
   </div>
 </div>
 
@@ -2396,6 +2424,68 @@
   if (pbClose) pbClose.addEventListener('click', closeBreakdown);
   pbModal.addEventListener('click', function(e){
     if (e.target === pbModal) closeBreakdown();
+  });
+})();
+
+// ---- policy info modal ----
+(function(){
+  var policyModal = document.getElementById('policyModal');
+  var policyClose = document.getElementById('policyModalClose');
+  var policyHeading = document.getElementById('policyModalHeading');
+  var policyBody = document.getElementById('policyModalBody');
+  if (!policyModal) return;
+
+  var policyDetails = {
+    guarantee: {
+      title: '30-day money-back guarantee',
+      body: '<ul class="policy-list"><li>Try Trade 360 for 30 days.</li><li>If it doesn\'t match your expectations, tell us within that window and we\'ll refund what you\'ve paid in full — no questions asked.</li></ul>'
+    },
+    billing: {
+      title: 'Billing & VAT',
+      body: '<ul class="policy-list"><li>All prices include VAT.</li><li>Pay annually and you\'re billed once a year; outside the 30-day guarantee, there\'s no refund for the months left once you cancel.</li></ul>'
+    },
+    rolling: {
+      title: 'Rolling monthly contract',
+      body: '<ul class="policy-list"><li>No minimum term when billed monthly — stay because it works, not because you\'re locked in.</li><li>Cancel, upgrade or downgrade any time; changes apply from your next billing date.</li></ul>'
+    },
+    referral: {
+      title: 'Referral scheme',
+      body: '<ul class="policy-list"><li>Get 250 AI credits for every Foundation, Growth or Pro business you refer that becomes a paying customer — no cap.</li><li>They still get the standard 50% off their first month.</li></ul>'
+    }
+  };
+
+  var policyOpen = false;
+  var policyLastFocused = null;
+
+  function openPolicy(key){
+    var detail = policyDetails[key];
+    if (!detail || policyOpen) return;
+    policyOpen = true;
+    policyHeading.textContent = detail.title;
+    policyBody.innerHTML = detail.body;
+    policyLastFocused = document.activeElement;
+    policyModal.classList.add('open');
+    document.addEventListener('keydown', onPolicyKeydown);
+    if (policyClose) policyClose.focus();
+  }
+  function closePolicy(){
+    if (!policyOpen) return;
+    policyOpen = false;
+    policyModal.classList.remove('open');
+    document.removeEventListener('keydown', onPolicyKeydown);
+    if (policyLastFocused && typeof policyLastFocused.focus === 'function') policyLastFocused.focus();
+  }
+  function onPolicyKeydown(e){ if (e.key === 'Escape') closePolicy(); }
+
+  document.querySelectorAll('[data-policy-trigger]').forEach(function(btn){
+    btn.addEventListener('click', function(e){
+      e.preventDefault();
+      openPolicy(btn.getAttribute('data-policy-trigger'));
+    });
+  });
+  if (policyClose) policyClose.addEventListener('click', closePolicy);
+  policyModal.addEventListener('click', function(e){
+    if (e.target === policyModal) closePolicy();
   });
 })();
 </script>
