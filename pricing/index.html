@@ -321,7 +321,13 @@
   .section-head.wide{ max-width:min(92ch, 100%); }
   .sr-only{ position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
 
-  .comp-tier-switch{ display:none; gap:8px; flex-wrap:wrap; margin:28px 2px 14px; }
+  .comp-controls{ display:flex; flex-wrap:wrap; align-items:center; gap:10px 14px; margin:28px 2px 14px; }
+  .comp-select-wrap{ position:relative; display:inline-flex; align-items:center; }
+  .comp-select-wrap svg{ position:absolute; right:13px; width:11px; height:11px; pointer-events:none; color:var(--ink-soft); }
+  .comp-select{ appearance:none; font:inherit; font-size:13px; font-weight:700; color:var(--ink); background:var(--bg); border:1px solid var(--line); border-radius:999px; padding:8px 32px 8px 15px; cursor:pointer; }
+  @media (hover:hover) and (pointer:fine){ .comp-select:hover{ border-color:var(--navy); } }
+
+  .comp-tier-switch{ display:none; gap:8px; flex-wrap:wrap; }
   @media (max-width:780px){ .comp-tier-switch{ display:flex; } }
   .comp-tier-pill{ appearance:none; border:1px solid var(--line); background:var(--bg); color:var(--ink-soft); font:inherit; font-size:13px; font-weight:700; padding:8px 15px; border-radius:999px; cursor:pointer; transition:background .15s ease, color .15s ease, border-color .15s ease; }
   .comp-tier-pill[aria-pressed="true"]{ background:var(--navy); border-color:var(--navy); color:#fff; }
@@ -343,12 +349,22 @@
   .comp-table td.comp-pop-col{ background:rgba(252,189,2,.045); }
   .comp-table .tick{ display:inline-flex; align-items:center; justify-content:center; width:21px; height:21px; border-radius:999px; background:var(--good); color:#fff; font-size:11px; line-height:1; }
   .comp-table .dash{ display:inline-block; color:var(--line); font-size:16px; font-weight:700; }
-  .comp-cat-row td{ background:var(--bg-soft); padding:12px 16px 12px 22px; border-bottom:1px solid var(--line); }
+  .comp-cat-row td{ background:var(--bg-soft); padding:12px 16px 12px 22px; border-bottom:1px solid var(--line); text-align:left; }
   .comp-cat-row:first-child td{ border-top:none; }
-  .comp-cat-row td{ display:flex; align-items:center; gap:10px; font-size:13px; font-weight:800; color:var(--navy); text-transform:uppercase; letter-spacing:.04em; position:static; }
+  .comp-cat-label{ display:flex; align-items:center; gap:10px; font-size:13px; font-weight:800; color:var(--navy); text-transform:uppercase; letter-spacing:.04em; }
   .comp-cat-row svg{ width:18px; height:18px; flex:none; color:var(--gold); filter:brightness(.85); }
   .comp-table-note{ font-size:13px; color:var(--ink-soft); text-align:center; margin-top:18px; max-width:62ch; margin-inline:auto; line-height:1.6; }
   .comp-table-note a{ color:var(--navy); font-weight:700; text-decoration:underline; text-underline-offset:2px; }
+
+  /* Pillar filter: hide every row except the chosen pillar's category heading and
+     its own feature rows. Works at every width, independently of the tier filter. */
+  .comp-table-wrap[data-active-pillar] tbody tr[data-pillar]{ display:none; }
+  .comp-table-wrap[data-active-pillar="marketing"] tbody tr[data-pillar="marketing"],
+  .comp-table-wrap[data-active-pillar="leads"] tbody tr[data-pillar="leads"],
+  .comp-table-wrap[data-active-pillar="sales"] tbody tr[data-pillar="sales"],
+  .comp-table-wrap[data-active-pillar="projects"] tbody tr[data-pillar="projects"],
+  .comp-table-wrap[data-active-pillar="accounts"] tbody tr[data-pillar="accounts"],
+  .comp-table-wrap[data-active-pillar="people"] tbody tr[data-pillar="people"]{ display:table-row; }
 
   /* Below 780px, horizontal scrolling through 4 tier columns is awkward on top of
      a long vertical list, so swap to a tier switcher: pick one tier, see it as a
@@ -360,14 +376,14 @@
     .comp-table th.comp-feature-col, .comp-table td.comp-feature-col{ position:static; box-shadow:none; min-width:0; width:62%; }
     .comp-table th.comp-pop-col, .comp-table td.comp-pop-col{ background:transparent; }
     .comp-table th:not(.comp-feature-col), .comp-table td:not(.comp-feature-col){ display:none; width:38%; }
-    .comp-table tbody tr.comp-cat-row td{ display:flex; width:100%; }
+    .comp-table tbody tr.comp-cat-row td{ display:table-cell; width:100%; }
     .comp-table-wrap[data-active-tier="foundation"] th:nth-child(2), .comp-table-wrap[data-active-tier="foundation"] td:nth-child(2){ display:table-cell; }
     .comp-table-wrap[data-active-tier="growth"] th:nth-child(3), .comp-table-wrap[data-active-tier="growth"] td:nth-child(3){ display:table-cell; }
     .comp-table-wrap[data-active-tier="pro"] th:nth-child(4), .comp-table-wrap[data-active-tier="pro"] td:nth-child(4){ display:table-cell; }
     .comp-table-wrap[data-active-tier="enterprise"] th:nth-child(5), .comp-table-wrap[data-active-tier="enterprise"] td:nth-child(5){ display:table-cell; }
   }
   @media (max-width:560px){
-    .comp-tier-switch{ margin:24px 2px 10px; }
+    .comp-controls{ margin:24px 2px 10px; }
     .comp-table thead th{ padding:14px 12px; font-size:13px; }
     .comp-table th.comp-feature-col, .comp-table td.comp-feature-col{ padding:11px 12px 11px 16px; font-size:13px; }
     .comp-table tbody td{ padding:11px 12px; }
@@ -883,11 +899,26 @@
       <p>No plan hides a part of the platform from you — Foundation gets the essentials in every pillar, Growth and Pro add depth where a bigger team needs it.</p>
     </div>
 
-    <div class="comp-tier-switch" role="group" aria-label="Choose a plan to compare">
-      <button type="button" class="comp-tier-pill" data-tier="foundation" aria-pressed="false">Foundation</button>
-      <button type="button" class="comp-tier-pill is-popular" data-tier="growth" aria-pressed="true">Growth</button>
-      <button type="button" class="comp-tier-pill" data-tier="pro" aria-pressed="false">Pro</button>
-      <button type="button" class="comp-tier-pill" data-tier="enterprise" aria-pressed="false">Enterprise</button>
+    <div class="comp-controls">
+      <div class="comp-select-wrap">
+        <label for="compPillarSelect" class="sr-only">Filter by pillar</label>
+        <select id="compPillarSelect" class="comp-select">
+          <option value="all">All pillars</option>
+          <option value="marketing">Marketing</option>
+          <option value="leads">Leads</option>
+          <option value="sales">Sales</option>
+          <option value="projects">Projects</option>
+          <option value="accounts">Accounts</option>
+          <option value="people">People</option>
+        </select>
+        <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5"/></svg>
+      </div>
+      <div class="comp-tier-switch" role="group" aria-label="Choose a plan to compare">
+        <button type="button" class="comp-tier-pill" data-tier="foundation" aria-pressed="false">Foundation</button>
+        <button type="button" class="comp-tier-pill is-popular" data-tier="growth" aria-pressed="true">Growth</button>
+        <button type="button" class="comp-tier-pill" data-tier="pro" aria-pressed="false">Pro</button>
+        <button type="button" class="comp-tier-pill" data-tier="enterprise" aria-pressed="false">Enterprise</button>
+      </div>
     </div>
     <div class="comp-table-wrap reveal" data-active-tier="growth">
       <table class="comp-table">
@@ -901,333 +932,333 @@
           </tr>
         </thead>
         <tbody>
-          <tr class="comp-cat-row">
-            <td colspan="5"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10v4a1 1 0 0 0 1 1h2l5 4V5L6 9H4a1 1 0 0 0-1 1Z"/><path d="M15 8a4 4 0 0 1 0 8"/><path d="M18 5a8 8 0 0 1 0 14"/></svg>Marketing</td>
+          <tr class="comp-cat-row" data-pillar="marketing">
+            <td colspan="5"><span class="comp-cat-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10v4a1 1 0 0 0 1 1h2l5 4V5L6 9H4a1 1 0 0 0-1 1Z"/><path d="M15 8a4 4 0 0 1 0 8"/><path d="M18 5a8 8 0 0 1 0 14"/></svg>Marketing</span></td>
           </tr>
-          <tr>
+          <tr data-pillar="marketing">
             <td class="comp-feature-col">Lead Capture</td>
             <td class="comp-yes"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
             <td class="comp-yes comp-pop-col"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
             <td class="comp-yes"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
             <td class="comp-yes"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
           </tr>
-          <tr>
+          <tr data-pillar="marketing">
             <td class="comp-feature-col">Brochure Automation</td>
             <td class="comp-yes"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
             <td class="comp-yes comp-pop-col"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
             <td class="comp-yes"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
             <td class="comp-yes"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
           </tr>
-          <tr>
+          <tr data-pillar="marketing">
             <td class="comp-feature-col">Campaign Builder</td>
             <td class="comp-yes"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
             <td class="comp-yes comp-pop-col"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
             <td class="comp-yes"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
             <td class="comp-yes"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
           </tr>
-          <tr>
+          <tr data-pillar="marketing">
             <td class="comp-feature-col">AI Content</td>
             <td class="comp-no"><span class="dash" aria-hidden="true">&#8211;</span><span class="sr-only">Not included</span></td>
             <td class="comp-yes comp-pop-col"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
             <td class="comp-yes"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
             <td class="comp-yes"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
           </tr>
-          <tr>
+          <tr data-pillar="marketing">
             <td class="comp-feature-col">Ad Tracking</td>
             <td class="comp-no"><span class="dash" aria-hidden="true">&#8211;</span><span class="sr-only">Not included</span></td>
             <td class="comp-yes comp-pop-col"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
             <td class="comp-yes"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
             <td class="comp-yes"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
           </tr>
-          <tr>
+          <tr data-pillar="marketing">
             <td class="comp-feature-col">Referral Programme</td>
             <td class="comp-no"><span class="dash" aria-hidden="true">&#8211;</span><span class="sr-only">Not included</span></td>
             <td class="comp-no comp-pop-col"><span class="dash" aria-hidden="true">&#8211;</span><span class="sr-only">Not included</span></td>
             <td class="comp-yes"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
             <td class="comp-yes"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
           </tr>
-          <tr class="comp-cat-row">
-            <td colspan="5"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16l-6 8v6l-4 2v-8L4 4Z"/></svg>Leads</td>
+          <tr class="comp-cat-row" data-pillar="leads">
+            <td colspan="5"><span class="comp-cat-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16l-6 8v6l-4 2v-8L4 4Z"/></svg>Leads</span></td>
           </tr>
-          <tr>
+          <tr data-pillar="leads">
             <td class="comp-feature-col">Centralised Inbox</td>
             <td class="comp-yes"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
             <td class="comp-yes comp-pop-col"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
             <td class="comp-yes"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
             <td class="comp-yes"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
           </tr>
-          <tr>
+          <tr data-pillar="leads">
             <td class="comp-feature-col">Lead Scoring</td>
             <td class="comp-yes"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
             <td class="comp-yes comp-pop-col"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
             <td class="comp-yes"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
             <td class="comp-yes"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
           </tr>
-          <tr>
+          <tr data-pillar="leads">
             <td class="comp-feature-col">Smart Follow-Up</td>
             <td class="comp-yes"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
             <td class="comp-yes comp-pop-col"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
             <td class="comp-yes"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
             <td class="comp-yes"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
           </tr>
-          <tr>
+          <tr data-pillar="leads">
             <td class="comp-feature-col">Call Transcription</td>
             <td class="comp-no"><span class="dash" aria-hidden="true">&#8211;</span><span class="sr-only">Not included</span></td>
             <td class="comp-yes comp-pop-col"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
             <td class="comp-yes"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
             <td class="comp-yes"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
           </tr>
-          <tr>
+          <tr data-pillar="leads">
             <td class="comp-feature-col">Readiness Scoring</td>
             <td class="comp-no"><span class="dash" aria-hidden="true">&#8211;</span><span class="sr-only">Not included</span></td>
             <td class="comp-yes comp-pop-col"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
             <td class="comp-yes"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
             <td class="comp-yes"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
           </tr>
-          <tr>
+          <tr data-pillar="leads">
             <td class="comp-feature-col">AI Chat Capture</td>
             <td class="comp-no"><span class="dash" aria-hidden="true">&#8211;</span><span class="sr-only">Not included</span></td>
             <td class="comp-no comp-pop-col"><span class="dash" aria-hidden="true">&#8211;</span><span class="sr-only">Not included</span></td>
             <td class="comp-yes"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
             <td class="comp-yes"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
           </tr>
-          <tr class="comp-cat-row">
-            <td colspan="5"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12.5 3.5 20.5 11.5 11.5 20.5 3.5 12.5V3.5h9Z"/><circle cx="8" cy="8" r="1.3" fill="currentColor" stroke="none"/></svg>Sales</td>
+          <tr class="comp-cat-row" data-pillar="sales">
+            <td colspan="5"><span class="comp-cat-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12.5 3.5 20.5 11.5 11.5 20.5 3.5 12.5V3.5h9Z"/><circle cx="8" cy="8" r="1.3" fill="currentColor" stroke="none"/></svg>Sales</span></td>
           </tr>
-          <tr>
+          <tr data-pillar="sales">
             <td class="comp-feature-col">AI Quote Builder</td>
             <td class="comp-yes"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
             <td class="comp-yes comp-pop-col"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
             <td class="comp-yes"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
             <td class="comp-yes"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
           </tr>
-          <tr>
+          <tr data-pillar="sales">
             <td class="comp-feature-col">AI Insight</td>
             <td class="comp-yes"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
             <td class="comp-yes comp-pop-col"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
             <td class="comp-yes"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
             <td class="comp-yes"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
           </tr>
-          <tr>
+          <tr data-pillar="sales">
             <td class="comp-feature-col">Quote Configurator</td>
             <td class="comp-yes"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
             <td class="comp-yes comp-pop-col"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
             <td class="comp-yes"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
             <td class="comp-yes"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
           </tr>
-          <tr>
+          <tr data-pillar="sales">
             <td class="comp-feature-col">eSign Contracts</td>
             <td class="comp-no"><span class="dash" aria-hidden="true">&#8211;</span><span class="sr-only">Not included</span></td>
             <td class="comp-yes comp-pop-col"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
             <td class="comp-yes"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
             <td class="comp-yes"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
           </tr>
-          <tr>
+          <tr data-pillar="sales">
             <td class="comp-feature-col">Pipeline Forecasting</td>
             <td class="comp-no"><span class="dash" aria-hidden="true">&#8211;</span><span class="sr-only">Not included</span></td>
             <td class="comp-yes comp-pop-col"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
             <td class="comp-yes"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
             <td class="comp-yes"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
           </tr>
-          <tr>
+          <tr data-pillar="sales">
             <td class="comp-feature-col">Win/Loss Tracking</td>
             <td class="comp-no"><span class="dash" aria-hidden="true">&#8211;</span><span class="sr-only">Not included</span></td>
             <td class="comp-yes comp-pop-col"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
             <td class="comp-yes"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
             <td class="comp-yes"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
           </tr>
-          <tr>
+          <tr data-pillar="sales">
             <td class="comp-feature-col">3D Visualisation</td>
             <td class="comp-no"><span class="dash" aria-hidden="true">&#8211;</span><span class="sr-only">Not included</span></td>
             <td class="comp-no comp-pop-col"><span class="dash" aria-hidden="true">&#8211;</span><span class="sr-only">Not included</span></td>
             <td class="comp-yes"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
             <td class="comp-yes"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
           </tr>
-          <tr>
+          <tr data-pillar="sales">
             <td class="comp-feature-col">Commission Tracking</td>
             <td class="comp-no"><span class="dash" aria-hidden="true">&#8211;</span><span class="sr-only">Not included</span></td>
             <td class="comp-no comp-pop-col"><span class="dash" aria-hidden="true">&#8211;</span><span class="sr-only">Not included</span></td>
             <td class="comp-yes"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
             <td class="comp-yes"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
           </tr>
-          <tr class="comp-cat-row">
-            <td colspan="5"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 3h6v3H9z"/><path d="M8 11h8M8 15h5"/></svg>Projects</td>
+          <tr class="comp-cat-row" data-pillar="projects">
+            <td colspan="5"><span class="comp-cat-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 3h6v3H9z"/><path d="M8 11h8M8 15h5"/></svg>Projects</span></td>
           </tr>
-          <tr>
+          <tr data-pillar="projects">
             <td class="comp-feature-col">Order Management</td>
             <td class="comp-yes"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
             <td class="comp-yes comp-pop-col"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
             <td class="comp-yes"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
             <td class="comp-yes"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
           </tr>
-          <tr>
+          <tr data-pillar="projects">
             <td class="comp-feature-col">Smart Scheduling</td>
             <td class="comp-yes"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
             <td class="comp-yes comp-pop-col"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
             <td class="comp-yes"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
             <td class="comp-yes"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
           </tr>
-          <tr>
+          <tr data-pillar="projects">
             <td class="comp-feature-col">Document Matching</td>
             <td class="comp-yes"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
             <td class="comp-yes comp-pop-col"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
             <td class="comp-yes"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
             <td class="comp-yes"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
           </tr>
-          <tr>
+          <tr data-pillar="projects">
             <td class="comp-feature-col">Capacity Planning</td>
             <td class="comp-no"><span class="dash" aria-hidden="true">&#8211;</span><span class="sr-only">Not included</span></td>
             <td class="comp-yes comp-pop-col"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
             <td class="comp-yes"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
             <td class="comp-yes"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
           </tr>
-          <tr>
+          <tr data-pillar="projects">
             <td class="comp-feature-col">Customer Portal</td>
             <td class="comp-no"><span class="dash" aria-hidden="true">&#8211;</span><span class="sr-only">Not included</span></td>
             <td class="comp-yes comp-pop-col"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
             <td class="comp-yes"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
             <td class="comp-yes"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
           </tr>
-          <tr>
+          <tr data-pillar="projects">
             <td class="comp-feature-col">Materials Tracking</td>
             <td class="comp-no"><span class="dash" aria-hidden="true">&#8211;</span><span class="sr-only">Not included</span></td>
             <td class="comp-yes comp-pop-col"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
             <td class="comp-yes"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
             <td class="comp-yes"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
           </tr>
-          <tr>
+          <tr data-pillar="projects">
             <td class="comp-feature-col">Field Mobile App</td>
             <td class="comp-no"><span class="dash" aria-hidden="true">&#8211;</span><span class="sr-only">Not included</span></td>
             <td class="comp-yes comp-pop-col"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
             <td class="comp-yes"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
             <td class="comp-yes"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
           </tr>
-          <tr>
+          <tr data-pillar="projects">
             <td class="comp-feature-col">Snagging &amp; Aftercare</td>
             <td class="comp-no"><span class="dash" aria-hidden="true">&#8211;</span><span class="sr-only">Not included</span></td>
             <td class="comp-no comp-pop-col"><span class="dash" aria-hidden="true">&#8211;</span><span class="sr-only">Not included</span></td>
             <td class="comp-yes"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
             <td class="comp-yes"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
           </tr>
-          <tr class="comp-cat-row">
-            <td colspan="5"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12v18l-2.5-1.5L13 21l-2.5-1.5L8 21l-2-1.5V3Z"/><path d="M9 8h6M9 12h6M9 16h3"/></svg>Accounts</td>
+          <tr class="comp-cat-row" data-pillar="accounts">
+            <td colspan="5"><span class="comp-cat-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12v18l-2.5-1.5L13 21l-2.5-1.5L8 21l-2-1.5V3Z"/><path d="M9 8h6M9 12h6M9 16h3"/></svg>Accounts</span></td>
           </tr>
-          <tr>
+          <tr data-pillar="accounts">
             <td class="comp-feature-col">Flexible Invoicing</td>
             <td class="comp-yes"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
             <td class="comp-yes comp-pop-col"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
             <td class="comp-yes"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
             <td class="comp-yes"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
           </tr>
-          <tr>
+          <tr data-pillar="accounts">
             <td class="comp-feature-col">Online Payments</td>
             <td class="comp-yes"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
             <td class="comp-yes comp-pop-col"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
             <td class="comp-yes"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
             <td class="comp-yes"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
           </tr>
-          <tr>
+          <tr data-pillar="accounts">
             <td class="comp-feature-col">Cost Tracking</td>
             <td class="comp-yes"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
             <td class="comp-yes comp-pop-col"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
             <td class="comp-yes"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
             <td class="comp-yes"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
           </tr>
-          <tr>
+          <tr data-pillar="accounts">
             <td class="comp-feature-col">Accounting Sync</td>
             <td class="comp-no"><span class="dash" aria-hidden="true">&#8211;</span><span class="sr-only">Not included</span></td>
             <td class="comp-yes comp-pop-col"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
             <td class="comp-yes"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
             <td class="comp-yes"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
           </tr>
-          <tr>
+          <tr data-pillar="accounts">
             <td class="comp-feature-col">Live Profitability</td>
             <td class="comp-no"><span class="dash" aria-hidden="true">&#8211;</span><span class="sr-only">Not included</span></td>
             <td class="comp-yes comp-pop-col"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
             <td class="comp-yes"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
             <td class="comp-yes"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
           </tr>
-          <tr>
+          <tr data-pillar="accounts">
             <td class="comp-feature-col">Profit Calculator</td>
             <td class="comp-no"><span class="dash" aria-hidden="true">&#8211;</span><span class="sr-only">Not included</span></td>
             <td class="comp-yes comp-pop-col"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
             <td class="comp-yes"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
             <td class="comp-yes"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
           </tr>
-          <tr>
+          <tr data-pillar="accounts">
             <td class="comp-feature-col">Payment Reminders</td>
             <td class="comp-no"><span class="dash" aria-hidden="true">&#8211;</span><span class="sr-only">Not included</span></td>
             <td class="comp-yes comp-pop-col"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
             <td class="comp-yes"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
             <td class="comp-yes"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
           </tr>
-          <tr>
+          <tr data-pillar="accounts">
             <td class="comp-feature-col">Cash-Flow Forecast</td>
             <td class="comp-no"><span class="dash" aria-hidden="true">&#8211;</span><span class="sr-only">Not included</span></td>
             <td class="comp-no comp-pop-col"><span class="dash" aria-hidden="true">&#8211;</span><span class="sr-only">Not included</span></td>
             <td class="comp-yes"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
             <td class="comp-yes"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
           </tr>
-          <tr>
+          <tr data-pillar="accounts">
             <td class="comp-feature-col">Financial Reporting</td>
             <td class="comp-no"><span class="dash" aria-hidden="true">&#8211;</span><span class="sr-only">Not included</span></td>
             <td class="comp-no comp-pop-col"><span class="dash" aria-hidden="true">&#8211;</span><span class="sr-only">Not included</span></td>
             <td class="comp-yes"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
             <td class="comp-yes"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
           </tr>
-          <tr class="comp-cat-row">
-            <td colspan="5"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><path d="M3.5 20a5.5 5.5 0 0 1 11 0"/><circle cx="17" cy="9" r="2.4"/><path d="M15.5 20a4.3 4.3 0 0 1 6.3-3.8"/></svg>People</td>
+          <tr class="comp-cat-row" data-pillar="people">
+            <td colspan="5"><span class="comp-cat-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><path d="M3.5 20a5.5 5.5 0 0 1 11 0"/><circle cx="17" cy="9" r="2.4"/><path d="M15.5 20a4.3 4.3 0 0 1 6.3-3.8"/></svg>People</span></td>
           </tr>
-          <tr>
+          <tr data-pillar="people">
             <td class="comp-feature-col">Field Timesheets</td>
             <td class="comp-yes"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
             <td class="comp-yes comp-pop-col"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
             <td class="comp-yes"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
             <td class="comp-yes"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
           </tr>
-          <tr>
+          <tr data-pillar="people">
             <td class="comp-feature-col">Expense Logging</td>
             <td class="comp-yes"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
             <td class="comp-yes comp-pop-col"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
             <td class="comp-yes"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
             <td class="comp-yes"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
           </tr>
-          <tr>
+          <tr data-pillar="people">
             <td class="comp-feature-col">Payroll Costing</td>
             <td class="comp-yes"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
             <td class="comp-yes comp-pop-col"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
             <td class="comp-yes"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
             <td class="comp-yes"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
           </tr>
-          <tr>
+          <tr data-pillar="people">
             <td class="comp-feature-col">HR Records</td>
             <td class="comp-no"><span class="dash" aria-hidden="true">&#8211;</span><span class="sr-only">Not included</span></td>
             <td class="comp-yes comp-pop-col"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
             <td class="comp-yes"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
             <td class="comp-yes"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
           </tr>
-          <tr>
+          <tr data-pillar="people">
             <td class="comp-feature-col">Leave Management</td>
             <td class="comp-no"><span class="dash" aria-hidden="true">&#8211;</span><span class="sr-only">Not included</span></td>
             <td class="comp-yes comp-pop-col"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
             <td class="comp-yes"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
             <td class="comp-yes"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
           </tr>
-          <tr>
+          <tr data-pillar="people">
             <td class="comp-feature-col">Certification Tracking</td>
             <td class="comp-no"><span class="dash" aria-hidden="true">&#8211;</span><span class="sr-only">Not included</span></td>
             <td class="comp-yes comp-pop-col"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
             <td class="comp-yes"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
             <td class="comp-yes"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
           </tr>
-          <tr>
+          <tr data-pillar="people">
             <td class="comp-feature-col">Roles &amp; Permissions</td>
             <td class="comp-no"><span class="dash" aria-hidden="true">&#8211;</span><span class="sr-only">Not included</span></td>
             <td class="comp-no comp-pop-col"><span class="dash" aria-hidden="true">&#8211;</span><span class="sr-only">Not included</span></td>
             <td class="comp-yes"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
             <td class="comp-yes"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
           </tr>
-          <tr>
+          <tr data-pillar="people">
             <td class="comp-feature-col">Performance Tracking</td>
             <td class="comp-no"><span class="dash" aria-hidden="true">&#8211;</span><span class="sr-only">Not included</span></td>
             <td class="comp-no comp-pop-col"><span class="dash" aria-hidden="true">&#8211;</span><span class="sr-only">Not included</span></td>
@@ -1529,7 +1560,7 @@
     });
   }
 
-  // ---- comparison table: mobile tier switcher ----
+  // ---- comparison table: tier switcher (mobile) + pillar filter (all widths) ----
   var compTierSwitch = document.querySelector('.comp-tier-switch');
   var compTableWrap = document.querySelector('.comp-table-wrap');
   if (compTierSwitch && compTableWrap){
@@ -1540,6 +1571,16 @@
       compTableWrap.setAttribute('data-active-tier', btn.getAttribute('data-tier'));
       for (var i = 0; i < compTierPills.length; i++){
         compTierPills[i].setAttribute('aria-pressed', compTierPills[i] === btn ? 'true' : 'false');
+      }
+    });
+  }
+  var compPillarSelect = document.getElementById('compPillarSelect');
+  if (compPillarSelect && compTableWrap){
+    compPillarSelect.addEventListener('change', function(){
+      if (compPillarSelect.value === 'all'){
+        compTableWrap.removeAttribute('data-active-pillar');
+      } else {
+        compTableWrap.setAttribute('data-active-pillar', compPillarSelect.value);
       }
     });
   }
