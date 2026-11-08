@@ -378,6 +378,7 @@
   .foot-legal-info{ display:flex; flex-direction:column; gap:3px; }
   .foot-legal-info span{ font-size:11px; color:#6E7286; line-height:1.6; }
   .foot-legal-info .foot-legal-name{ color:#9A9EB0; font-weight:700; }
+  @media (max-width:560px){ .foot-addr-part{ display:block; } }
 
   /* ---------- scroll reveal ---------- */
   .reveal{ opacity:0; transform:translateY(18px); transition:opacity .5s ease, transform .5s ease; }
@@ -734,7 +735,7 @@
     <div class="wrap">
       <div class="foot-legal-info">
         <span class="foot-legal-name">Trade 360 Limited &nbsp;&middot;&nbsp; Company No. 17565529</span>
-        <span>Registered office: The Old T A Centre, Territorial Street, Middlesbrough, England, TS3 8DR</span>
+        <span>Registered office: <span class="foot-addr"><span class="foot-addr-part">The Old T A Centre,</span> <span class="foot-addr-part">Territorial Street,</span> <span class="foot-addr-part">Middlesbrough,</span> <span class="foot-addr-part">England,</span> <span class="foot-addr-part">TS3 8DR</span></span></span>
       </div>
     </div>
   </div>

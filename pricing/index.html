@@ -363,8 +363,9 @@
   .comp-pillar-pill[aria-pressed="true"]{ background:var(--navy); border-color:var(--navy); color:#fff; }
   .comp-pillar-pill:active{ transform:scale(.97); }
 
-  .comp-tier-switch{ display:none; gap:8px; flex-wrap:wrap; }
+  .comp-tier-switch{ display:none; gap:8px; flex-wrap:wrap; align-items:center; }
   @media (max-width:780px){ .comp-tier-switch{ display:flex; } }
+  .comp-tier-switch .comp-pillar-pill-all{ padding:8px 15px; }
   .comp-tier-pill{ appearance:none; border:1px solid var(--line); background:var(--bg); color:var(--ink-soft); font:inherit; font-size:13px; font-weight:700; padding:8px 15px; border-radius:999px; cursor:pointer; transition:background .15s ease, color .15s ease, border-color .15s ease; }
   .comp-tier-pill[aria-pressed="true"]{ background:var(--navy); border-color:var(--navy); color:#fff; }
   .comp-tier-pill.is-popular[aria-pressed="true"]{ background:var(--gold); border-color:var(--gold); color:var(--navy); }
@@ -390,10 +391,12 @@
   .comp-table td.comp-pop-col{ background:rgba(252,189,2,.045); }
   .comp-table .tick{ display:inline-flex; align-items:center; justify-content:center; width:21px; height:21px; border-radius:999px; background:var(--gold); color:var(--navy); font-size:11px; line-height:1; }
   .comp-table .dash{ display:inline-block; color:var(--line); font-size:16px; font-weight:700; }
-  .comp-cat-row td{ background:var(--bg-soft); padding:12px 16px 12px 22px; border-bottom:1px solid var(--line); text-align:left; }
+  .comp-cat-row td{ background:var(--bg-soft); padding:14px 16px 14px 22px; border-bottom:1px solid var(--line); text-align:left; }
   .comp-cat-row:first-child td{ border-top:none; }
-  .comp-cat-label{ display:flex; align-items:center; gap:10px; font-size:13px; font-weight:800; color:var(--navy); text-transform:uppercase; letter-spacing:.04em; }
-  .comp-cat-row svg{ width:18px; height:18px; flex:none; color:var(--gold); filter:brightness(.85); }
+  .comp-cat-head{ display:flex; align-items:center; gap:12px; }
+  .comp-cat-head svg.ring{ width:30px; height:30px; flex:none; }
+  .comp-cat-head b{ display:block; font-size:14.5px; color:var(--navy); }
+  .comp-cat-head small{ display:block; font-size:11.5px; color:var(--ink-soft); font-weight:600; margin-top:1px; }
   .comp-table-note{ font-size:13px; color:var(--ink-soft); text-align:center; margin-top:18px; max-width:62ch; margin-inline:auto; line-height:1.6; }
   .comp-table-note a{ color:var(--navy); font-weight:700; text-decoration:underline; text-underline-offset:2px; }
 
@@ -435,7 +438,7 @@
     .comp-select{ font-size:12px; padding:7px 24px 7px 11px; }
     .comp-select-wrap svg{ right:10px; }
     .comp-tier-switch{ gap:6px; flex:1; flex-wrap:nowrap; }
-    .comp-tier-pill{ flex:1; padding:7px 4px; font-size:12px; text-align:center; }
+    .comp-tier-pill, .comp-tier-switch .comp-pillar-pill-all{ flex:1; padding:7px 4px; font-size:12px; text-align:center; }
   }
 
   /* ---------- bolt-ons ---------- */
@@ -536,6 +539,7 @@
   .foot-legal-info{ display:flex; flex-direction:column; gap:3px; }
   .foot-legal-info span{ font-size:11px; color:#6E7286; line-height:1.6; }
   .foot-legal-info .foot-legal-name{ color:#9A9EB0; font-weight:700; }
+  @media (max-width:560px){ .foot-addr-part{ display:block; } }
 
   /* ---------- scroll reveal ---------- */
   .reveal{ opacity:0; transform:translateY(18px); transition:opacity .5s ease, transform .5s ease; }
@@ -694,6 +698,12 @@
   .pf-result p{ font-size:14px; color:var(--ink-soft); line-height:1.6; margin-top:10px; }
   .pf-result-price{ font-size:26px; font-weight:800; color:var(--ink); margin-top:16px; font-variant-numeric:tabular-nums; }
   .pf-result-price span{ font-size:13px; font-weight:600; color:var(--ink-soft); margin-left:2px; }
+  .pf-result-prices{ display:flex; gap:10px; justify-content:center; margin-top:16px; }
+  .pf-result-price-col{ flex:1; max-width:170px; background:var(--bg-soft); border:1px solid var(--line); border-radius:12px; padding:12px 14px; }
+  .pf-result-price-label{ display:block; font-size:10.5px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; color:var(--ink-soft); margin-bottom:4px; }
+  .pf-result-price-value{ display:block; font-size:19px; font-weight:800; color:var(--ink); font-variant-numeric:tabular-nums; }
+  .pf-result-price-value span{ font-size:11px; font-weight:600; color:var(--ink-soft); margin-left:2px; }
+  @media (max-width:420px){ .pf-result-price-col{ padding:10px 10px; } .pf-result-price-value{ font-size:17px; } }
   .pf-result-cta{ width:100%; justify-content:center; margin-top:18px; }
   .pf-restart{ display:block; margin:14px auto 0; background:none; border:none; font-size:13px; font-weight:700; color:var(--ink-soft); cursor:pointer; font-family:inherit; }
   @media (hover:hover) and (pointer:fine){ .pf-restart:hover{ color:var(--ink); } }
@@ -1006,7 +1016,6 @@
 
     <div class="comp-controls">
       <div class="comp-pillar-switch" role="group" aria-label="Filter by pillar">
-        <button type="button" class="comp-pillar-pill" data-pillar="all" aria-pressed="true">All pillars</button>
         <button type="button" class="comp-pillar-pill" data-pillar="marketing" aria-pressed="false">Marketing</button>
         <button type="button" class="comp-pillar-pill" data-pillar="leads" aria-pressed="false">Leads</button>
         <button type="button" class="comp-pillar-pill" data-pillar="sales" aria-pressed="false">Sales</button>
@@ -1014,7 +1023,8 @@
         <button type="button" class="comp-pillar-pill" data-pillar="accounts" aria-pressed="false">Accounts</button>
         <button type="button" class="comp-pillar-pill" data-pillar="people" aria-pressed="false">People</button>
       </div>
-      <div class="comp-tier-switch" role="group" aria-label="Choose a plan to compare">
+      <div class="comp-tier-switch" role="group" aria-label="Choose a plan to compare, or reset the pillar filter">
+        <button type="button" class="comp-pillar-pill comp-pillar-pill-all" data-pillar="all" aria-pressed="true">All pillars</button>
         <button type="button" class="comp-tier-pill" data-tier="foundation" aria-pressed="false">Foundation</button>
         <button type="button" class="comp-tier-pill is-popular" data-tier="growth" aria-pressed="true">Growth</button>
         <button type="button" class="comp-tier-pill" data-tier="pro" aria-pressed="false">Pro</button>
@@ -1048,7 +1058,7 @@
         </thead>
         <tbody>
           <tr class="comp-cat-row" data-pillar="marketing">
-            <td colspan="5"><span class="comp-cat-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10v4a1 1 0 0 0 1 1h2l5 4V5L6 9H4a1 1 0 0 0-1 1Z"/><path d="M15 8a4 4 0 0 1 0 8"/><path d="M18 5a8 8 0 0 1 0 14"/></svg>Marketing</span></td>
+            <td colspan="5"><span class="comp-cat-head"><svg class="ring" viewBox="0 0 40 40"><path fill="#FCBD02" d="M 12.11 3.82 A 18 18 0 0 1 27.89 3.82 L 24.82 10.11 A 11 11 0 0 0 15.18 10.11 Z"/><path fill="#FCE7B0" d="M 30.07 5.08 A 18 18 0 0 1 37.96 18.74 L 30.97 19.23 A 11 11 0 0 0 26.15 10.88 Z"/><path fill="#FCE7B0" d="M 37.96 21.26 A 18 18 0 0 1 30.07 34.92 L 26.15 29.12 A 11 11 0 0 0 30.97 20.77 Z"/><path fill="#FCE7B0" d="M 27.89 36.18 A 18 18 0 0 1 12.11 36.18 L 15.18 29.89 A 11 11 0 0 0 24.82 29.89 Z"/><path fill="#FCE7B0" d="M 9.93 34.92 A 18 18 0 0 1 2.04 21.26 L 9.03 20.77 A 11 11 0 0 0 13.85 29.12 Z"/><path fill="#FCE7B0" d="M 2.04 18.74 A 18 18 0 0 1 9.93 5.08 L 13.85 10.88 A 11 11 0 0 0 9.03 19.23 Z"/></svg><span><b>Marketing</b><small>Attract. Nurture. Convert.</small></span></span></td>
           </tr>
           <tr data-pillar="marketing">
             <td class="comp-feature-col">Lead Capture</td>
@@ -1093,7 +1103,7 @@
             <td class="comp-yes"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
           </tr>
           <tr class="comp-cat-row" data-pillar="leads">
-            <td colspan="5"><span class="comp-cat-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16l-6 8v6l-4 2v-8L4 4Z"/></svg>Leads</span></td>
+            <td colspan="5"><span class="comp-cat-head"><svg class="ring" viewBox="0 0 40 40"><path fill="#FCBD02" d="M 12.11 3.82 A 18 18 0 0 1 27.89 3.82 L 24.82 10.11 A 11 11 0 0 0 15.18 10.11 Z"/><path fill="#FDCB3C" d="M 30.07 5.08 A 18 18 0 0 1 37.96 18.74 L 30.97 19.23 A 11 11 0 0 0 26.15 10.88 Z"/><path fill="#FCE7B0" d="M 37.96 21.26 A 18 18 0 0 1 30.07 34.92 L 26.15 29.12 A 11 11 0 0 0 30.97 20.77 Z"/><path fill="#FCE7B0" d="M 27.89 36.18 A 18 18 0 0 1 12.11 36.18 L 15.18 29.89 A 11 11 0 0 0 24.82 29.89 Z"/><path fill="#FCE7B0" d="M 9.93 34.92 A 18 18 0 0 1 2.04 21.26 L 9.03 20.77 A 11 11 0 0 0 13.85 29.12 Z"/><path fill="#FCE7B0" d="M 2.04 18.74 A 18 18 0 0 1 9.93 5.08 L 13.85 10.88 A 11 11 0 0 0 9.03 19.23 Z"/></svg><span><b>Leads</b><small>Capture. Qualify. Prioritise.</small></span></span></td>
           </tr>
           <tr data-pillar="leads">
             <td class="comp-feature-col">Centralised Inbox</td>
@@ -1138,7 +1148,7 @@
             <td class="comp-yes"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
           </tr>
           <tr class="comp-cat-row" data-pillar="sales">
-            <td colspan="5"><span class="comp-cat-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12.5 3.5 20.5 11.5 11.5 20.5 3.5 12.5V3.5h9Z"/><circle cx="8" cy="8" r="1.3" fill="currentColor" stroke="none"/></svg>Sales</span></td>
+            <td colspan="5"><span class="comp-cat-head"><svg class="ring" viewBox="0 0 40 40"><path fill="#FCBD02" d="M 12.11 3.82 A 18 18 0 0 1 27.89 3.82 L 24.82 10.11 A 11 11 0 0 0 15.18 10.11 Z"/><path fill="#FDCB3C" d="M 30.07 5.08 A 18 18 0 0 1 37.96 18.74 L 30.97 19.23 A 11 11 0 0 0 26.15 10.88 Z"/><path fill="#FCBD02" d="M 37.96 21.26 A 18 18 0 0 1 30.07 34.92 L 26.15 29.12 A 11 11 0 0 0 30.97 20.77 Z"/><path fill="#FCE7B0" d="M 27.89 36.18 A 18 18 0 0 1 12.11 36.18 L 15.18 29.89 A 11 11 0 0 0 24.82 29.89 Z"/><path fill="#FCE7B0" d="M 9.93 34.92 A 18 18 0 0 1 2.04 21.26 L 9.03 20.77 A 11 11 0 0 0 13.85 29.12 Z"/><path fill="#FCE7B0" d="M 2.04 18.74 A 18 18 0 0 1 9.93 5.08 L 13.85 10.88 A 11 11 0 0 0 9.03 19.23 Z"/></svg><span><b>Sales</b><small>Quote. Present. Win.</small></span></span></td>
           </tr>
           <tr data-pillar="sales">
             <td class="comp-feature-col">AI Quote Builder</td>
@@ -1197,7 +1207,7 @@
             <td class="comp-yes"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
           </tr>
           <tr class="comp-cat-row" data-pillar="projects">
-            <td colspan="5"><span class="comp-cat-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 3h6v3H9z"/><path d="M8 11h8M8 15h5"/></svg>Projects</span></td>
+            <td colspan="5"><span class="comp-cat-head"><svg class="ring" viewBox="0 0 40 40"><path fill="#FCBD02" d="M 12.11 3.82 A 18 18 0 0 1 27.89 3.82 L 24.82 10.11 A 11 11 0 0 0 15.18 10.11 Z"/><path fill="#FDCB3C" d="M 30.07 5.08 A 18 18 0 0 1 37.96 18.74 L 30.97 19.23 A 11 11 0 0 0 26.15 10.88 Z"/><path fill="#FCBD02" d="M 37.96 21.26 A 18 18 0 0 1 30.07 34.92 L 26.15 29.12 A 11 11 0 0 0 30.97 20.77 Z"/><path fill="#FDCB3C" d="M 27.89 36.18 A 18 18 0 0 1 12.11 36.18 L 15.18 29.89 A 11 11 0 0 0 24.82 29.89 Z"/><path fill="#FCE7B0" d="M 9.93 34.92 A 18 18 0 0 1 2.04 21.26 L 9.03 20.77 A 11 11 0 0 0 13.85 29.12 Z"/><path fill="#FCE7B0" d="M 2.04 18.74 A 18 18 0 0 1 9.93 5.08 L 13.85 10.88 A 11 11 0 0 0 9.03 19.23 Z"/></svg><span><b>Projects</b><small>Plan. Schedule. Deliver.</small></span></span></td>
           </tr>
           <tr data-pillar="projects">
             <td class="comp-feature-col">Order Management</td>
@@ -1256,7 +1266,7 @@
             <td class="comp-yes"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
           </tr>
           <tr class="comp-cat-row" data-pillar="accounts">
-            <td colspan="5"><span class="comp-cat-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12v18l-2.5-1.5L13 21l-2.5-1.5L8 21l-2-1.5V3Z"/><path d="M9 8h6M9 12h6M9 16h3"/></svg>Accounts</span></td>
+            <td colspan="5"><span class="comp-cat-head"><svg class="ring" viewBox="0 0 40 40"><path fill="#FCBD02" d="M 12.11 3.82 A 18 18 0 0 1 27.89 3.82 L 24.82 10.11 A 11 11 0 0 0 15.18 10.11 Z"/><path fill="#FDCB3C" d="M 30.07 5.08 A 18 18 0 0 1 37.96 18.74 L 30.97 19.23 A 11 11 0 0 0 26.15 10.88 Z"/><path fill="#FCBD02" d="M 37.96 21.26 A 18 18 0 0 1 30.07 34.92 L 26.15 29.12 A 11 11 0 0 0 30.97 20.77 Z"/><path fill="#FDCB3C" d="M 27.89 36.18 A 18 18 0 0 1 12.11 36.18 L 15.18 29.89 A 11 11 0 0 0 24.82 29.89 Z"/><path fill="#FCBD02" d="M 9.93 34.92 A 18 18 0 0 1 2.04 21.26 L 9.03 20.77 A 11 11 0 0 0 13.85 29.12 Z"/><path fill="#FCE7B0" d="M 2.04 18.74 A 18 18 0 0 1 9.93 5.08 L 13.85 10.88 A 11 11 0 0 0 9.03 19.23 Z"/></svg><span><b>Accounts</b><small>Track. Report. Profit.</small></span></span></td>
           </tr>
           <tr data-pillar="accounts">
             <td class="comp-feature-col">Flexible Invoicing</td>
@@ -1322,7 +1332,7 @@
             <td class="comp-yes"><span class="tick" aria-hidden="true">&#10003;</span><span class="sr-only">Included</span></td>
           </tr>
           <tr class="comp-cat-row" data-pillar="people">
-            <td colspan="5"><span class="comp-cat-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><path d="M3.5 20a5.5 5.5 0 0 1 11 0"/><circle cx="17" cy="9" r="2.4"/><path d="M15.5 20a4.3 4.3 0 0 1 6.3-3.8"/></svg>People</span></td>
+            <td colspan="5"><span class="comp-cat-head"><svg class="ring" viewBox="0 0 40 40"><path fill="#FCBD02" d="M 12.11 3.82 A 18 18 0 0 1 27.89 3.82 L 24.82 10.11 A 11 11 0 0 0 15.18 10.11 Z"/><path fill="#FDCB3C" d="M 30.07 5.08 A 18 18 0 0 1 37.96 18.74 L 30.97 19.23 A 11 11 0 0 0 26.15 10.88 Z"/><path fill="#FCBD02" d="M 37.96 21.26 A 18 18 0 0 1 30.07 34.92 L 26.15 29.12 A 11 11 0 0 0 30.97 20.77 Z"/><path fill="#FDCB3C" d="M 27.89 36.18 A 18 18 0 0 1 12.11 36.18 L 15.18 29.89 A 11 11 0 0 0 24.82 29.89 Z"/><path fill="#FCBD02" d="M 9.93 34.92 A 18 18 0 0 1 2.04 21.26 L 9.03 20.77 A 11 11 0 0 0 13.85 29.12 Z"/><path fill="#FDCB3C" d="M 2.04 18.74 A 18 18 0 0 1 9.93 5.08 L 13.85 10.88 A 11 11 0 0 0 9.03 19.23 Z"/></svg><span><b>People</b><small>Schedule. Perform. Reward.</small></span></span></td>
           </tr>
           <tr data-pillar="people">
             <td class="comp-feature-col">Field Timesheets</td>
@@ -1535,7 +1545,7 @@
     <div class="wrap">
       <div class="foot-legal-info">
         <span class="foot-legal-name">Trade 360 Limited &nbsp;&middot;&nbsp; Company No. 17565529</span>
-        <span>Registered office: The Old T A Centre, Territorial Street, Middlesbrough, England, TS3 8DR</span>
+        <span>Registered office: <span class="foot-addr"><span class="foot-addr-part">The Old T A Centre,</span> <span class="foot-addr-part">Territorial Street,</span> <span class="foot-addr-part">Middlesbrough,</span> <span class="foot-addr-part">England,</span> <span class="foot-addr-part">TS3 8DR</span></span></span>
       </div>
     </div>
   </div>
@@ -1607,7 +1617,17 @@
       <span class="pf-result-badge" id="pfResultBadge"></span>
       <h3 id="pfResultName">Growth</h3>
       <p id="pfResultReason"></p>
-      <div class="pf-result-price" id="pfResultPrice"></div>
+      <div class="pf-result-prices" id="pfResultPrices">
+        <div class="pf-result-price-col">
+          <span class="pf-result-price-label">Monthly</span>
+          <span class="pf-result-price-value" id="pfResultPriceMonthly"></span>
+        </div>
+        <div class="pf-result-price-col">
+          <span class="pf-result-price-label">Annual</span>
+          <span class="pf-result-price-value" id="pfResultPriceAnnual"></span>
+        </div>
+      </div>
+      <div class="pf-result-price" id="pfResultPrice" hidden></div>
       <button type="button" class="btn btn-gold pf-result-cta" id="pfResultCta">View this plan</button>
       <button type="button" class="pf-restart" id="pfRestart">Start again</button>
     </div>
@@ -1744,9 +1764,9 @@
       }
     });
   }
-  var compPillarSwitch = document.querySelector('.comp-pillar-switch');
+  var compControlsWrap = document.querySelector('.comp-controls');
   var compPillarSelectDesktop = document.getElementById('compPillarSelectDesktop');
-  var compPillarPills = compPillarSwitch ? compPillarSwitch.querySelectorAll('.comp-pillar-pill') : [];
+  var compPillarPills = compControlsWrap ? compControlsWrap.querySelectorAll('.comp-pillar-pill') : [];
   function setActivePillar(val){
     if (val === 'all'){
       compTableWrap.removeAttribute('data-active-pillar');
@@ -1758,8 +1778,8 @@
     }
     if (compPillarSelectDesktop) compPillarSelectDesktop.value = val;
   }
-  if (compPillarSwitch && compTableWrap){
-    compPillarSwitch.addEventListener('click', function(e){
+  if (compControlsWrap && compTableWrap){
+    compControlsWrap.addEventListener('click', function(e){
       var btn = e.target.closest('.comp-pillar-pill');
       if (!btn) return;
       setActivePillar(btn.getAttribute('data-pillar'));
@@ -2118,6 +2138,7 @@
   var pfProgressLabel = document.getElementById('pfProgressLabel');
   var pfProgressWrap = document.getElementById('pfProgressWrap');
   if (!pfModal || !pfOpenBtn || !pfQuestionStep) return;
+  var pfGbp = function(n){ return '£' + Number(n).toLocaleString('en-GB', { minimumFractionDigits:2, maximumFractionDigits:2 }); };
 
   // Each question contributes a 0-2 "tier pressure" score (Foundation/Growth/Pro).
   // Two questions can also set forceEnterprise: true on their top option, because
@@ -2263,25 +2284,23 @@
     var tier = TIERS[idx];
     var cards = document.querySelectorAll('.tier-grid .tier-card');
     var card = cards[tier.cardIndex];
-    var priceText = '', unitText = '';
-    if (card){
-      var priceEl = card.querySelector('.tier-price');
-      var unitEl = card.querySelector('.tier-price-unit');
-      var poaEl = card.querySelector('.tier-price-poa');
-      if (priceEl){
-        priceText = priceEl.textContent;
-        unitText = unitEl ? unitEl.textContent : '';
-      } else if (poaEl){
-        priceText = poaEl.textContent;
-      }
-    }
     pfModal.querySelector('#pfResultName').textContent = tier.name;
     pfModal.querySelector('#pfResultReason').textContent = tier.reason;
+    var pricesEl = pfModal.querySelector('#pfResultPrices');
     var priceDisplayEl = pfModal.querySelector('#pfResultPrice');
-    if (unitText){
-      priceDisplayEl.innerHTML = priceText + '<span>' + unitText + '</span>';
+    var hasMonthly = card && card.hasAttribute('data-monthly');
+    if (hasMonthly){
+      var monthlyRateResult = Number(card.getAttribute('data-monthly'));
+      var annualRateResult = Number(card.getAttribute('data-annual'));
+      pfModal.querySelector('#pfResultPriceMonthly').innerHTML = pfGbp(monthlyRateResult) + '<span>/month</span>';
+      pfModal.querySelector('#pfResultPriceAnnual').innerHTML = pfGbp(annualRateResult) + '<span>/month</span>';
+      pricesEl.hidden = false;
+      priceDisplayEl.hidden = true;
     } else {
-      priceDisplayEl.textContent = priceText;
+      var poaEl = card ? card.querySelector('.tier-price-poa') : null;
+      priceDisplayEl.textContent = poaEl ? poaEl.textContent : 'Price on application';
+      priceDisplayEl.hidden = false;
+      pricesEl.hidden = true;
     }
     var badgeEl = pfModal.querySelector('#pfResultBadge');
     if (tier.badge){
