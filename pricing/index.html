@@ -273,15 +273,29 @@
   .tier-badge{ position:absolute; top:-13px; left:24px; background:var(--gold); color:var(--navy); font-size:11px; font-weight:800; letter-spacing:.04em; text-transform:uppercase; padding:5px 12px; border-radius:999px; }
   .tier-name{ font-size:19px; font-weight:800; }
   .tier-tagline{ font-size:13.5px; color:var(--ink-soft); margin-top:5px; line-height:1.5; min-height:40.5px; }
-  .tier-price-row{ margin-top:18px; display:flex; align-items:baseline; gap:6px; min-height:44px; }
+  .tier-price-row{ margin-top:18px; display:flex; flex-direction:column; gap:5px; }
+  .tier-price-eyebrow{ font-size:10.5px; font-weight:800; letter-spacing:.05em; text-transform:uppercase; color:var(--ink-soft); }
+  .tier-price-line{ display:flex; align-items:baseline; gap:6px; }
   .tier-price-poa-spacer{ font-size:clamp(30px,4vw,36px); font-weight:800; width:0; overflow:hidden; visibility:hidden; }
   .tier-price{ font-size:clamp(30px,4vw,36px); font-weight:800; color:var(--ink); font-variant-numeric:tabular-nums; }
   .tier-price-unit{ font-size:13px; color:var(--ink-soft); font-weight:600; }
   .tier-price-poa{ font-size:clamp(15px,1.5vw,19px); font-weight:800; color:var(--ink); white-space:nowrap; }
-  .tier-billed-note{ font-size:12px; color:var(--ink-soft); margin-top:5px; min-height:32px; font-weight:600; }
-  .tier-billed-note.offer{ display:inline-flex; align-items:center; color:#fff; background:var(--sale); font-weight:800; font-size:11.5px; line-height:1.3; padding:5px 11px; border-radius:999px; }
+  .tier-billed-note{ font-size:12px; color:var(--ink-soft); margin-top:10px; min-height:0; font-weight:600; }
+  .tier-billed-note.offer{
+    display:flex; align-items:center; justify-content:space-between; gap:10px;
+    background:rgba(225,52,46,.08); border:1px solid rgba(225,52,46,.22); border-radius:10px; padding:9px 12px;
+  }
+  .tier-fm-text{ display:flex; flex-direction:column; gap:1px; }
+  .tier-fm-label{ font-size:10.5px; font-weight:700; color:var(--ink-soft); text-transform:uppercase; letter-spacing:.03em; }
+  .tier-fm-price{ font-size:15px; font-weight:800; color:var(--sale); font-variant-numeric:tabular-nums; }
+  .tier-fm-badge{ flex-shrink:0; background:var(--sale); color:#fff; font-size:10.5px; font-weight:800; padding:4px 9px; border-radius:999px; white-space:nowrap; }
   .tier-billed-note .tier-savings{ color:var(--good); }
-  .tier-onboarding{ font-size:13.5px; color:var(--ink); line-height:1.5; margin-top:12px; padding-top:12px; border-top:1px dashed var(--line); font-weight:600; }
+  .tier-onboarding{ display:flex; align-items:center; justify-content:space-between; gap:8px; font-size:13.5px; color:var(--ink); line-height:1.5; margin-top:12px; padding-top:12px; border-top:1px dashed var(--line); font-weight:600; }
+  .tier-onboarding-right{ display:flex; align-items:center; gap:6px; }
+  .tier-onboarding-price{ font-variant-numeric:tabular-nums; font-weight:800; }
+  .tier-info-btn{ width:20px; height:20px; border-radius:999px; border:1px solid var(--line); background:var(--bg-soft); color:var(--ink-soft); font-size:11px; font-weight:800; font-family:inherit; display:flex; align-items:center; justify-content:center; cursor:pointer; flex-shrink:0; padding:0; line-height:1; transition:border-color .15s ease, color .15s ease; }
+  @media (hover:hover) and (pointer:fine){ .tier-info-btn:hover{ border-color:var(--gold); color:var(--ink); } }
+  .tier-info-btn:active{ border-color:var(--gold); color:var(--ink); }
   .tier-stats{ margin-top:16px; display:flex; flex-direction:column; gap:8px; }
   .tier-stat{ display:flex; align-items:center; justify-content:space-between; font-size:12.5px; }
   .tier-stat span:first-child{ color:var(--ink-soft); }
@@ -291,8 +305,9 @@
   @media (max-width:560px){
     .tier-card{ padding:21px 18px; }
     .tier-tagline{ margin-top:4px; min-height:0; }
-    .tier-price-row{ margin-top:13px; min-height:0; }
-    .tier-billed-note{ margin-top:4px; min-height:0; }
+    .tier-price-row{ margin-top:13px; }
+    .tier-billed-note{ margin-top:8px; }
+    .tier-billed-note.offer{ padding:8px 10px; }
     .tier-onboarding{ margin-top:9px; padding-top:9px; }
     .tier-stats{ margin-top:12px; gap:6px; }
     .tier-note{ margin-top:9px; }
@@ -644,6 +659,51 @@
   .tier-card.pf-highlight{ animation:pfHighlightPulse .9s ease-in-out 2; }
   @media (max-width:520px){ .pf-modal-inner{ padding:26px 22px; } }
   @media (prefers-reduced-motion: reduce){ .pf-modal, .pf-modal-inner{ transition:none; } .tier-card.pf-highlight{ animation:none; } }
+
+  /* ---------- payment breakdown modal ---------- */
+  .pb-modal{
+    position:fixed; inset:0; z-index:1650; display:flex; align-items:center; justify-content:center; padding:20px;
+    background:rgba(11,12,16,.72); backdrop-filter:blur(4px); -webkit-backdrop-filter:blur(4px);
+    opacity:0; visibility:hidden; transition:opacity .25s ease, visibility .25s;
+  }
+  .pb-modal.open{ opacity:1; visibility:visible; }
+  .pb-modal-inner{
+    position:relative; width:100%; max-width:380px; max-height:90vh; overflow-y:auto; background:#fff; border-radius:18px;
+    box-shadow:0 30px 70px rgba(0,0,0,.45); transform:scale(.96) translateY(8px); transition:transform .25s ease;
+    padding:28px;
+  }
+  .pb-modal.open .pb-modal-inner{ transform:scale(1) translateY(0); }
+  .pb-modal-close{
+    position:absolute; top:14px; right:14px; width:32px; height:32px; border-radius:999px;
+    background:rgba(28,33,48,.06); border:none; color:var(--ink);
+    display:flex; align-items:center; justify-content:center; cursor:pointer; z-index:2; transition:background .15s ease;
+  }
+  @media (hover:hover) and (pointer:fine){ .pb-modal-close:hover{ background:rgba(28,33,48,.12); } }
+  .pb-modal-close:active{ background:rgba(28,33,48,.12); }
+  .pb-modal-close svg{ width:12px; height:12px; }
+  #pbModalHeading{ font-size:18.5px; font-weight:800; color:var(--navy); padding-right:16px; }
+  .pb-modal-plan{ font-size:13px; font-weight:700; color:var(--ink-soft); margin-top:4px; }
+  .pb-section{ margin-top:20px; }
+  .pb-section-label{ font-size:11px; font-weight:800; text-transform:uppercase; letter-spacing:.04em; color:var(--ink-soft); margin-bottom:10px; }
+  .pb-row{ display:flex; align-items:baseline; justify-content:space-between; gap:10px; font-size:14px; color:var(--ink); padding:7px 0; }
+  .pb-row span{ color:var(--ink-soft); font-weight:600; }
+  .pb-row b{ font-weight:800; font-variant-numeric:tabular-nums; white-space:nowrap; }
+  .pb-total{
+    display:flex; align-items:center; justify-content:space-between; gap:10px; margin-top:14px; padding:14px 16px;
+    background:var(--navy); border-radius:12px; color:#fff; font-size:14.5px; font-weight:700;
+  }
+  .pb-total b{ font-size:19px; font-weight:800; font-variant-numeric:tabular-nums; }
+  .pb-next{ border-top:1px dashed var(--line); padding-top:16px; }
+  .pb-note{ font-size:12px; color:var(--ink-soft); line-height:1.5; margin-top:6px; }
+  @media (max-width:640px){
+    .pb-modal{ align-items:flex-end; padding:0; }
+    .pb-modal-inner{
+      max-width:100%; border-radius:20px 20px 0 0; max-height:85vh; padding:24px 20px 28px;
+      transform:translateY(100%); transition:transform .28s ease;
+    }
+    .pb-modal.open .pb-modal-inner{ transform:translateY(0); }
+  }
+  @media (prefers-reduced-motion: reduce){ .pb-modal, .pb-modal-inner{ transition:none; } }
 </style>
 
 <!-- ================= PROMO BANNER ================= -->
@@ -790,12 +850,12 @@
     </button>
 
     <div class="tier-grid">
-      <div class="tier-card" data-monthly="99" data-annual="83" data-billed="990">
+      <div class="tier-card" data-monthly="99" data-annual="83" data-billed="990" data-onboarding="199">
         <div class="tier-name">Foundation</div>
         <div class="tier-tagline">For sole traders who want quoting and invoicing sorted.</div>
-        <div class="tier-price-row"><span class="tier-price">£99</span><span class="tier-price-unit">/month</span></div>
-        <div class="tier-billed-note offer">First month £49.50 — 50% off</div>
-        <div class="tier-onboarding">Plus £199 one-off onboarding, charged at signup.</div>
+        <div class="tier-price-row"><div class="tier-price-eyebrow">Standard price</div><div class="tier-price-line"><span class="tier-price">£99</span><span class="tier-price-unit">/month</span></div></div>
+        <div class="tier-billed-note offer"><div class="tier-fm-text"><span class="tier-fm-label">First month</span><span class="tier-fm-price">£49.50</span></div><span class="tier-fm-badge">Save 50%</span></div>
+        <div class="tier-onboarding"><span>+ One-off onboarding</span><span class="tier-onboarding-right"><b class="tier-onboarding-price">£199</b><button type="button" class="tier-info-btn" data-breakdown-trigger aria-label="See payment breakdown for Foundation">i</button></span></div>
         <div class="tier-stats">
           <div class="tier-stat"><span>Users included</span><b>1</b></div>
           <div class="tier-stat"><span>AI credits / month</span><b>100</b></div>
@@ -805,13 +865,13 @@
         <p class="tier-note">About 20 AI quotes a month.</p>
       </div>
 
-      <div class="tier-card featured" data-monthly="249" data-annual="208" data-billed="2490">
+      <div class="tier-card featured" data-monthly="249" data-annual="208" data-billed="2490" data-onboarding="499">
         <div class="tier-badge">Most popular</div>
         <div class="tier-name">Growth</div>
         <div class="tier-tagline">For growing teams that need more capacity and automation.</div>
-        <div class="tier-price-row"><span class="tier-price">£249</span><span class="tier-price-unit">/month</span></div>
-        <div class="tier-billed-note offer">First month £124.50 — 50% off</div>
-        <div class="tier-onboarding">Plus £499 one-off onboarding, charged at signup.</div>
+        <div class="tier-price-row"><div class="tier-price-eyebrow">Standard price</div><div class="tier-price-line"><span class="tier-price">£249</span><span class="tier-price-unit">/month</span></div></div>
+        <div class="tier-billed-note offer"><div class="tier-fm-text"><span class="tier-fm-label">First month</span><span class="tier-fm-price">£124.50</span></div><span class="tier-fm-badge">Save 50%</span></div>
+        <div class="tier-onboarding"><span>+ One-off onboarding</span><span class="tier-onboarding-right"><b class="tier-onboarding-price">£499</b><button type="button" class="tier-info-btn" data-breakdown-trigger aria-label="See payment breakdown for Growth">i</button></span></div>
         <div class="tier-stats">
           <div class="tier-stat"><span>Users included</span><b>5</b></div>
           <div class="tier-stat"><span>AI credits / month</span><b>350</b></div>
@@ -821,12 +881,12 @@
         <p class="tier-note">About 70 AI quotes a month.</p>
       </div>
 
-      <div class="tier-card" data-monthly="499" data-annual="416" data-billed="4990">
+      <div class="tier-card" data-monthly="499" data-annual="416" data-billed="4990" data-onboarding="999">
         <div class="tier-name">Pro</div>
         <div class="tier-tagline">For established crews running multiple jobs at full capacity.</div>
-        <div class="tier-price-row"><span class="tier-price">£499</span><span class="tier-price-unit">/month</span></div>
-        <div class="tier-billed-note offer">First month £249.50 — 50% off</div>
-        <div class="tier-onboarding">Plus £999 one-off onboarding, charged at signup.</div>
+        <div class="tier-price-row"><div class="tier-price-eyebrow">Standard price</div><div class="tier-price-line"><span class="tier-price">£499</span><span class="tier-price-unit">/month</span></div></div>
+        <div class="tier-billed-note offer"><div class="tier-fm-text"><span class="tier-fm-label">First month</span><span class="tier-fm-price">£249.50</span></div><span class="tier-fm-badge">Save 50%</span></div>
+        <div class="tier-onboarding"><span>+ One-off onboarding</span><span class="tier-onboarding-right"><b class="tier-onboarding-price">£999</b><button type="button" class="tier-info-btn" data-breakdown-trigger aria-label="See payment breakdown for Pro">i</button></span></div>
         <div class="tier-stats">
           <div class="tier-stat"><span>Users included</span><b>8</b></div>
           <div class="tier-stat"><span>AI credits / month</span><b>700</b></div>
@@ -839,7 +899,7 @@
       <div class="tier-card">
         <div class="tier-name">Enterprise</div>
         <div class="tier-tagline">For multi-branch and franchise operations, built around you.</div>
-        <div class="tier-price-row"><span class="tier-price-poa">Price on application</span><span class="tier-price-poa-spacer" aria-hidden="true">0</span></div>
+        <div class="tier-price-row"><div class="tier-price-eyebrow">Custom pricing</div><div class="tier-price-line"><span class="tier-price-poa">Price on application</span><span class="tier-price-poa-spacer" aria-hidden="true">0</span></div></div>
         <div class="tier-billed-note"></div>
         <div class="tier-onboarding">Tailored rollout and onboarding, quoted for your business.</div>
         <div class="tier-stats">
@@ -1479,6 +1539,35 @@
   </div>
 </div>
 
+<!-- ================= PAYMENT BREAKDOWN MODAL ================= -->
+<div class="pb-modal" id="pbModal" role="dialog" aria-modal="true" aria-labelledby="pbModalHeading">
+  <div class="pb-modal-inner">
+    <button class="pb-modal-close" id="pbModalClose" type="button" aria-label="Close">
+      <svg viewBox="0 0 16 16" fill="none"><path d="M3 3l10 10M13 3 3 13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+    </button>
+
+    <h3 id="pbModalHeading">Your payment breakdown</h3>
+    <p class="pb-modal-plan" id="pbPlanName"></p>
+
+    <div class="pb-section">
+      <div class="pb-section-label" id="pbFirstLabel">First payment</div>
+      <div class="pb-row"><span id="pbRow1Label">Month 1 subscription</span><b id="pbRow1Value"></b></div>
+      <div class="pb-row"><span>One-off onboarding</span><b id="pbOnboardingValue"></b></div>
+    </div>
+
+    <div class="pb-total">
+      <span>Total to pay today</span>
+      <b id="pbTotalValue"></b>
+    </div>
+
+    <div class="pb-section pb-next">
+      <div class="pb-section-label" id="pbNextLabel">From month 2 onwards</div>
+      <div class="pb-row"><span id="pbRow2Label">Monthly subscription</span><b id="pbRow2Value"></b></div>
+      <p class="pb-note" id="pbNote">Your subscription returns to the standard monthly price.</p>
+    </div>
+  </div>
+</div>
+
 <!-- ================= VIDEO TEASER + LIGHTBOX ================= -->
 <div class="video-teaser" id="videoTeaser">
   <button class="vt-close" id="videoTeaserClose" type="button" aria-label="Dismiss video">
@@ -1659,7 +1748,7 @@
       } else {
         var monthly = Number(card.getAttribute('data-monthly'));
         priceEl.textContent = gbp(monthly);
-        noteEl.textContent = 'First month ' + gbp2(monthly / 2) + ' — 50% off';
+        noteEl.innerHTML = '<div class="tier-fm-text"><span class="tier-fm-label">First month</span><span class="tier-fm-price">' + gbp2(monthly / 2) + '</span></div><span class="tier-fm-badge">Save 50%</span>';
         noteEl.classList.add('offer');
       }
     });
@@ -2151,6 +2240,94 @@
       targetCard.classList.add('pf-highlight');
       setTimeout(function(){ targetCard.classList.remove('pf-highlight'); }, 1800);
     }
+  });
+})();
+
+// ---- payment breakdown modal ----
+(function(){
+  var pbModal = document.getElementById('pbModal');
+  var pbClose = document.getElementById('pbModalClose');
+  var pbPlanName = document.getElementById('pbPlanName');
+  var pbFirstLabel = document.getElementById('pbFirstLabel');
+  var pbRow1Label = document.getElementById('pbRow1Label');
+  var pbRow1Value = document.getElementById('pbRow1Value');
+  var pbOnboardingValue = document.getElementById('pbOnboardingValue');
+  var pbTotalValue = document.getElementById('pbTotalValue');
+  var pbNextLabel = document.getElementById('pbNextLabel');
+  var pbRow2Label = document.getElementById('pbRow2Label');
+  var pbRow2Value = document.getElementById('pbRow2Value');
+  var pbNote = document.getElementById('pbNote');
+  var billingSwitchEl = document.getElementById('billingSwitch');
+  if (!pbModal) return;
+
+  var gbp = function(n){ return '£' + Number(n).toLocaleString('en-GB'); };
+  var gbp2 = function(n){ return '£' + Number(n).toFixed(2); };
+
+  var pbOpen = false;
+  var pbLastFocused = null;
+
+  function populateBreakdown(card){
+    var planName = card.querySelector('.tier-name');
+    var monthly = Number(card.getAttribute('data-monthly'));
+    var annualRate = Number(card.getAttribute('data-annual'));
+    var billedTotal = Number(card.getAttribute('data-billed'));
+    var onboarding = Number(card.getAttribute('data-onboarding'));
+    var isAnnual = !!(billingSwitchEl && billingSwitchEl.classList.contains('on'));
+
+    pbPlanName.textContent = (planName ? planName.textContent : '') + ' plan';
+
+    if (isAnnual){
+      pbFirstLabel.textContent = 'First payment';
+      pbRow1Label.textContent = 'Year 1 subscription (billed annually)';
+      pbRow1Value.textContent = gbp(billedTotal);
+      pbOnboardingValue.textContent = gbp(onboarding);
+      pbTotalValue.textContent = gbp(billedTotal + onboarding);
+      pbNextLabel.textContent = 'From year 2 onwards';
+      pbRow2Label.textContent = 'Annual subscription';
+      pbRow2Value.textContent = gbp(billedTotal) + '/year';
+      pbNote.textContent = 'Billed annually at the same rate each year, for as long as you stay on this plan.';
+    } else {
+      var firstMonth = monthly / 2;
+      pbFirstLabel.textContent = 'First payment';
+      pbRow1Label.textContent = 'Month 1 subscription';
+      pbRow1Value.textContent = gbp2(firstMonth);
+      pbOnboardingValue.textContent = gbp(onboarding);
+      pbTotalValue.textContent = gbp2(firstMonth + onboarding);
+      pbNextLabel.textContent = 'From month 2 onwards';
+      pbRow2Label.textContent = 'Monthly subscription';
+      pbRow2Value.textContent = gbp(monthly) + '/month';
+      pbNote.textContent = 'Your subscription returns to the standard monthly price.';
+    }
+  }
+
+  function openBreakdown(card){
+    if (pbOpen) return;
+    pbOpen = true;
+    populateBreakdown(card);
+    pbLastFocused = document.activeElement;
+    pbModal.classList.add('open');
+    document.addEventListener('keydown', onPbKeydown);
+    if (pbClose) pbClose.focus();
+  }
+  function closeBreakdown(){
+    if (!pbOpen) return;
+    pbOpen = false;
+    pbModal.classList.remove('open');
+    document.removeEventListener('keydown', onPbKeydown);
+    if (pbLastFocused && typeof pbLastFocused.focus === 'function') pbLastFocused.focus();
+  }
+  function onPbKeydown(e){ if (e.key === 'Escape') closeBreakdown(); }
+
+  document.querySelectorAll('[data-breakdown-trigger]').forEach(function(btn){
+    btn.addEventListener('click', function(e){
+      e.preventDefault();
+      var card = btn.closest('.tier-card');
+      if (card) openBreakdown(card);
+    });
+  });
+  if (pbClose) pbClose.addEventListener('click', closeBreakdown);
+  pbModal.addEventListener('click', function(e){
+    if (e.target === pbModal) closeBreakdown();
   });
 })();
 </script>
