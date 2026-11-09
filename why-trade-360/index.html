@@ -263,7 +263,7 @@
     .wheel-pillar.p4, .wheel-pillar.p5{ left:-18px; }
   }
   .name-strap{
-    margin-top:48px; padding-top:28px; border-top:1px solid var(--line);
+    margin-top:28px; padding-top:20px; border-top:1px solid var(--line);
     text-align:center; font-size:clamp(19px,2.6vw,25px); font-weight:800;
     color:var(--navy); letter-spacing:-.01em;
   }
@@ -296,7 +296,8 @@
     .who-item:first-child{ border-top:none; }
   }
   .who-item svg{ width:30px; height:30px; color:var(--gold); }
-  .who-item b{ display:block; font-size:26px; font-weight:800; color:var(--navy); }
+  .who-item b{ display:block; font-size:26px; font-weight:800; color:var(--navy); line-height:1.25; }
+  @media (min-width:761px){ .who-item b{ min-height:65px; } }
   .who-item span{ font-size:13.5px; color:var(--ink-soft); line-height:1.55; margin-top:2px; }
 
   /* ---------- born from running businesses (split) ---------- */
@@ -327,7 +328,7 @@
   .hac-copy{ display:flex; flex-direction:column; gap:4px; min-width:0; }
   .hac-card b{ font-size:15.5px; font-weight:800; color:var(--navy); }
   .hac-card span{ font-size:13.5px; color:var(--ink-soft); line-height:1.55; }
-  .human-ai-line{ text-align:center; max-width:54ch; margin:40px auto 0; font-size:16.5px; color:var(--ink); line-height:1.6; }
+  .human-ai-line{ text-align:center; max-width:40ch; margin:40px auto 0; font-size:16.5px; color:var(--ink); line-height:1.6; }
   .human-ai-line b{ font-weight:800; color:var(--navy); }
 
   /* ---------- the details statement ---------- */
@@ -553,7 +554,7 @@
   </div>
   <div class="origin-text">
     <div class="eyebrow">Where it came from</div>
-    <h2>Born from businesses, not boardrooms.</h2>
+    <h2>Born from businesses,<br>not boardrooms.</h2>
     <p>This solution is actually born from businesses — not dreamed up by people who've never had to chase a late payment or fit in a quote between jobs.</p>
     <p>It came from listening to companies' struggles, and understanding where emerging technology could genuinely help, not just add noise. That's how we ended up with a first of its kind system — one built around how trades businesses really work, not how software usually assumes they do.</p>
   </div>
@@ -586,7 +587,7 @@
         </div>
       </div>
     </div>
-    <p class="human-ai-line reveal"><b>AI will never run your business.</b> But it will support you, and help you thrive.</p>
+    <p class="human-ai-line reveal"><b>AI will never run your business.</b><br>But it will support you, and help you thrive.</p>
   </div>
 </section>
 

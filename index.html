@@ -577,6 +577,7 @@
   .cta-band .wrap{ display:flex; align-items:center; justify-content:space-between; gap:24px; padding-block:40px; flex-wrap:wrap; }
   .cta-band h2{ font-size:clamp(20px,3.2vw,30px); color:var(--navy); font-weight:800; white-space:nowrap; }
   @media (max-width:640px){ .cta-band h2{ white-space:normal; } }
+  .cta-band-actions{ display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
 
   /* ---------- demo / call request modal ---------- */
   .demo-modal{
@@ -1743,9 +1744,14 @@
 <section class="cta-band" id="demo">
   <div class="wrap">
     <h2>Lead to Profit. See the whole picture.</h2>
-    <a class="btn btn-navy js-book-demo" href="/book-demo/">Book a demo
-      <svg viewBox="0 0 16 16" fill="none" width="14" height="14"><path d="M4 12 12 4M12 4H6M12 4v6" stroke="#F6F6F8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    </a>
+    <div class="cta-band-actions">
+      <a class="btn btn-navy" href="https://admin.trade360.ai/signup">Get started
+        <svg viewBox="0 0 16 16" fill="none" width="14" height="14"><path d="M4 12 12 4M12 4H6M12 4v6" stroke="#F6F6F8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <a class="btn btn-navy js-book-demo" href="/book-demo/">Book a demo
+        <svg viewBox="0 0 16 16" fill="none" width="14" height="14"><path d="M4 12 12 4M12 4H6M12 4v6" stroke="#F6F6F8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
   </div>
 </section>
 

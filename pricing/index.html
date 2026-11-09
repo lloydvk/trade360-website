@@ -1934,8 +1934,24 @@
       billingSwitch.classList.toggle('on', annual);
       billingSwitch.setAttribute('aria-checked', annual ? 'true' : 'false');
       applyBilling(annual);
+      updateSignupLinks(annual);
     });
   }
+
+  // ---- "Get started" sign-up links: each tier card's Get started button
+  // points at the real admin sign-up flow, carrying the plan key and the
+  // currently selected billing cycle. Enterprise keeps its "Book a demo"
+  // link untouched. ----
+  function updateSignupLinks(annual){
+    var cycle = annual ? 'annual' : 'monthly';
+    tierCards.forEach(function(card){
+      var planKey = card.getAttribute('data-t360-plan');
+      if (!planKey) return;
+      var cta = card.querySelector('a[data-breakdown-trigger]');
+      if (cta) cta.href = 'https://admin.trade360.ai/signup?plan=' + planKey + '&cycle=' + cycle;
+    });
+  }
+  updateSignupLinks(!!(billingSwitch && billingSwitch.classList.contains('on')));
 
   // ---- live pricing refresh: once admin.trade360.ai's pricing.js has
   // updated each [data-t360-plan] card's data-monthly/data-annual/data-billed
@@ -1943,7 +1959,9 @@
   // (monthly/annual) is currently showing so the toggle's own numbers catch
   // up immediately instead of waiting for the next click ----
   document.addEventListener('t360:pricing', function(){
-    applyBilling(!!(billingSwitch && billingSwitch.classList.contains('on')));
+    var isAnnualNow = !!(billingSwitch && billingSwitch.classList.contains('on'));
+    applyBilling(isAnnualNow);
+    updateSignupLinks(isAnnualNow);
   });
 
   // ---- video teaser + lightbox ----
@@ -2433,6 +2451,7 @@
   var pbRow2Label = document.getElementById('pbRow2Label');
   var pbRow2Value = document.getElementById('pbRow2Value');
   var pbNote = document.getElementById('pbNote');
+  var pbPayCta = document.getElementById('pbPayCta');
   var billingSwitchEl = document.getElementById('billingSwitch');
   if (!pbModal) return;
 
@@ -2449,6 +2468,10 @@
     var billedTotal = Number(card.getAttribute('data-billed'));
     var onboarding = Number(card.getAttribute('data-onboarding'));
     var isAnnual = !!(billingSwitchEl && billingSwitchEl.classList.contains('on'));
+    var planKey = card.getAttribute('data-t360-plan');
+    if (pbPayCta && planKey){
+      pbPayCta.href = 'https://admin.trade360.ai/signup?plan=' + planKey + '&cycle=' + (isAnnual ? 'annual' : 'monthly');
+    }
 
     pbPlanName.textContent = (planName ? planName.textContent : '') + ' plan';
 
