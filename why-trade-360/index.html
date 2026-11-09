@@ -339,9 +339,9 @@
       repeating-linear-gradient(90deg, rgba(255,255,255,.02) 0 1px, transparent 1px 64px);
       animation:driftGlow 16s ease-in-out infinite alternate; }
   @media (prefers-reduced-motion: reduce){ .details-statement::before{ animation:none; } }
-  .details-statement .wrap{ max-width:46ch; position:relative; z-index:1; }
+  .details-statement .wrap{ max-width:620px; position:relative; z-index:1; }
   .details-statement h2{ font-size:clamp(24px,3.6vw,34px); color:#fff; }
-  .details-statement p{ font-size:15.5px; color:#A9AEC0; line-height:1.6; margin-top:14px; }
+  .details-statement p{ font-size:15.5px; color:#A9AEC0; line-height:1.6; margin-top:14px; max-width:46ch; margin-inline:auto; }
   .details-statement .btn{ margin-top:26px; }
   .btn-outline-light{ background:transparent; color:#fff; border-color:rgba(255,255,255,.28); }
   .btn-outline-light:hover{ border-color:#fff; transform:translateY(-2px); }
@@ -593,7 +593,7 @@
 <!-- ================= DETAILS STATEMENT ================= -->
 <section class="details-statement">
   <div class="wrap reveal">
-    <h2>We obsess over the details, so you don't have to.</h2>
+    <h2>We obsess over the details,<br>so you don't have to.</h2>
     <p>So you can focus on what you do best — your trade.</p>
     <a class="btn btn-outline-light" href="/solutions/">See our Solutions
       <svg viewBox="0 0 16 16" fill="none" width="14" height="14"><path d="M4 12 12 4M12 4H6M12 4v6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
