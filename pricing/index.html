@@ -474,7 +474,7 @@
   .bolton-rows{ margin-top:16px; display:flex; flex-direction:column; gap:2px; }
   .bolton-row{ display:flex; align-items:center; justify-content:space-between; padding-block:10px; border-top:1px solid var(--line); font-size:13px; }
   .bolton-row:first-child{ border-top:none; }
-  .bolton-row span{ color:var(--ink-soft); }
+  .bolton-row > span{ color:var(--ink-soft); }
   .bolton-row b{ color:var(--ink); font-weight:700; font-variant-numeric:tabular-nums; }
 
   /* ---------- policy strip ---------- */
@@ -523,7 +523,7 @@
   .bespoke-list{ display:flex; flex-direction:column; gap:14px; }
   .bespoke-list-item{ background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.12); border-radius:12px; padding:14px 16px; }
   .bespoke-list-item b{ display:block; font-size:13.5px; color:#fff; }
-  .bespoke-list-item span{ display:block; font-size:12px; color:#A9AEC0; margin-top:3px; }
+  .bespoke-list-item .bespoke-list-desc{ display:block; font-size:12px; color:#A9AEC0; margin-top:3px; }
 
   /* ---------- cta band ---------- */
   .cta-band{
@@ -776,12 +776,11 @@
   .pb-cta{
     display:flex; align-items:center; justify-content:space-between; gap:10px; width:100%;
     margin-top:22px; padding:16px 20px; background:var(--gold); border-radius:12px; border:none;
-    color:var(--navy); font-size:15px; font-weight:800; font-family:inherit; text-decoration:none;
-    cursor:pointer; box-sizing:border-box; transition:background .15s ease, transform .1s ease;
+    color:var(--navy); font-size:15px; font-weight:800; font-family:inherit;
+    box-sizing:border-box;
   }
-  @media (hover:hover) and (pointer:fine){ .pb-cta:hover{ background:var(--gold-2); } }
-  .pb-cta:active{ transform:scale(.99); }
   .pb-cta b{ font-size:19px; font-weight:800; font-variant-numeric:tabular-nums; }
+  .pb-signup-cta{ margin-top:10px; width:100%; }
   .pb-legal{ margin-top:12px; text-align:right; }
   .pb-legal span{ display:block; font-size:11.5px; color:var(--ink-soft); line-height:1.6; }
   .pb-legal a{ display:block; font-size:11.5px; color:var(--ink-soft); line-height:1.6; text-decoration:underline; text-underline-offset:2px; }
@@ -1512,8 +1511,8 @@
           <p>If your business needs an integration, workflow or report that isn't in the standard platform, we scope and price it separately — on top of whichever plan you're on.</p>
         </div>
         <div class="bespoke-list">
-          <div class="bespoke-list-item"><b>Custom integrations &amp; workflow builds</b><span>From £750.00, scoped after a short discovery call.</span></div>
-          <div class="bespoke-list-item"><b>White-label &amp; custom domain branding</b><span>+<span data-t360="addons.white_label.monthly" data-t360-format="money2">£100.00</span>/month, Growth, Pro and Enterprise.</span></div>
+          <div class="bespoke-list-item"><b>Custom integrations &amp; workflow builds</b><span class="bespoke-list-desc">From £750.00, scoped after a short discovery call.</span></div>
+          <div class="bespoke-list-item"><b>White-label &amp; custom domain branding</b><span class="bespoke-list-desc">+<span data-t360="addons.white_label.monthly" data-t360-format="money2">£100.00</span>/month, Growth, Pro and Enterprise.</span></div>
         </div>
       </div>
     </div>
@@ -1681,9 +1680,12 @@
       <div class="pb-row"><span>One-off onboarding</span><b id="pbOnboardingValue"></b></div>
     </div>
 
-    <a class="pb-cta" id="pbPayCta" href="#demo">
+    <div class="pb-cta" id="pbPayCta">
       <span>Full price to get started</span>
       <b id="pbTotalValue"></b>
+    </div>
+    <a class="btn btn-navy btn-block pb-signup-cta" id="pbSignupCta" href="https://admin.trade360.ai/signup" target="_blank" rel="noopener">Get started today
+      <svg viewBox="0 0 16 16" fill="none" width="14" height="14"><path d="M4 12 12 4M12 4H6M12 4v6" stroke="#F6F6F8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </a>
     <div class="pb-legal">
       <span>All prices include VAT</span>
@@ -2451,7 +2453,7 @@
   var pbRow2Label = document.getElementById('pbRow2Label');
   var pbRow2Value = document.getElementById('pbRow2Value');
   var pbNote = document.getElementById('pbNote');
-  var pbPayCta = document.getElementById('pbPayCta');
+  var pbSignupCta = document.getElementById('pbSignupCta');
   var billingSwitchEl = document.getElementById('billingSwitch');
   if (!pbModal) return;
 
@@ -2469,8 +2471,8 @@
     var onboarding = Number(card.getAttribute('data-onboarding'));
     var isAnnual = !!(billingSwitchEl && billingSwitchEl.classList.contains('on'));
     var planKey = card.getAttribute('data-t360-plan');
-    if (pbPayCta && planKey){
-      pbPayCta.href = 'https://admin.trade360.ai/signup?plan=' + planKey + '&cycle=' + (isAnnual ? 'annual' : 'monthly');
+    if (pbSignupCta && planKey){
+      pbSignupCta.href = 'https://admin.trade360.ai/signup?plan=' + planKey + '&cycle=' + (isAnnual ? 'annual' : 'monthly');
     }
 
     pbPlanName.textContent = (planName ? planName.textContent : '') + ' plan';
