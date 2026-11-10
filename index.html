@@ -209,11 +209,9 @@
   .hero h1{ font-size:clamp(30px,4.3vw,45px); color:#fff; font-weight:800; line-height:1.12; }
   .hero h1 .accent{ color:var(--gold); }
   .hero .lede-1{ font-size:15.5px; font-weight:600; color:#F1F1F4; margin-top:18px; }
-  .hero-points{ display:flex; flex-direction:column; gap:14px; margin-top:22px; max-width:46ch; }
-  .hero-point{ display:flex; align-items:flex-start; gap:12px; }
-  .hero-point svg{ width:20px; height:20px; flex:none; color:var(--gold); margin-top:2px; }
-  .hero-point b{ display:block; font-size:14px; font-weight:700; color:#fff; }
-  .hero-point span{ display:block; font-size:13px; line-height:1.5; color:#A9AEC0; margin-top:2px; font-weight:400; }
+  .hero-tags{ display:flex; flex-wrap:wrap; gap:10px; margin-top:22px; }
+  .hero-tag{ display:flex; align-items:center; gap:7px; font-size:12.5px; font-weight:600; color:#EDEEF3; background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.14); padding:7px 13px; border-radius:999px; }
+  .hero-tag svg{ width:13px; height:13px; color:var(--gold); flex:none; }
   .hero-cta{ display:flex; flex-wrap:wrap; gap:14px; margin-top:26px; }
 
   /* hero photo — full-bleed: fills the hero's full height, flush to the right edge */
@@ -1187,19 +1185,10 @@
       <div class="eyebrow">Built for the trade. <span class="eyebrow-accent">Powered by AI.</span></div>
       <h1>More leads.<br>More sales.<br><span class="accent">Higher profits.</span></h1>
       <p class="lede-1">The AI-powered, all-in-one platform for the trade.</p>
-      <div class="hero-points">
-        <div class="hero-point">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 7-8M20 7h-5M20 7v5"/></svg>
-          <div><b>Increase conversions</b><span>More sales from every lead you already get, with AI-drafted quotes that go out in minutes.</span></div>
-        </div>
-        <div class="hero-point">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11.5V5a2 2 0 0 1 2-2h6.5L20 11.5a2 2 0 0 1 0 2.8l-5.7 5.7a2 2 0 0 1-2.8 0L3 11.5Z"/><circle cx="7.5" cy="7.5" r="1.2" fill="currentColor" stroke="none"/></svg>
-          <div><b>Reduce costs</b><span>One system instead of five tools, so you spend less and waste less admin time.</span></div>
-        </div>
-        <div class="hero-point">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V4h5M4 4l6 6M20 9V4h-5M20 4l-6 6M4 15v5h5M4 20l6-6M20 15v5h-5M20 20l-6-6"/></svg>
-          <div><b>Scalability</b><span>Scale your business without the growing pains — Trade 360 grows with you.</span></div>
-        </div>
+      <div class="hero-tags">
+        <span class="hero-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 7-8M20 7h-5M20 7v5"/></svg>Increase conversions</span>
+        <span class="hero-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11.5V5a2 2 0 0 1 2-2h6.5L20 11.5a2 2 0 0 1 0 2.8l-5.7 5.7a2 2 0 0 1-2.8 0L3 11.5Z"/><circle cx="7.5" cy="7.5" r="1.2" fill="currentColor" stroke="none"/></svg>Reduce costs</span>
+        <span class="hero-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V4h5M4 4l6 6M20 9V4h-5M20 4l-6 6M4 15v5h5M4 20l6-6M20 15v5h-5M20 20l-6-6"/></svg>Scalability</span>
       </div>
       <div class="hero-cta">
         <a class="btn btn-gold js-book-demo" href="/book-demo/">Book a demo
